@@ -66,8 +66,9 @@ const tag: Record<string,string> = {
   orange:  'bg-orange-50 dark:bg-orange-500/10 border-orange-200 dark:border-orange-500/25 text-orange-700 dark:text-orange-300',
 };
 ---
-<section id="projects" class="px-8 lg:px-12 py-14 border-b border-slate-100 dark:border-slate-800/50 transition-colors duration-300 bg-white dark:bg-[#0a0f1e]">
-  <div class="max-w-3xl mb-8">
+<section id="projects" class="px-8 lg:px-12 py-14 border-b border-slate-100 dark:border-slate-800/50 transition-colors duration-300 bg-white dark:bg-[#0a0f1e] min-h-screen">
+  <div data-animate>
+    <div class="max-w-3xl mb-8">
     <h2 class="section-heading text-3xl sm:text-4xl text-slate-900 dark:text-white">Projects Delivered</h2>
     <p class="mt-2.5 text-slate-500 dark:text-slate-400 text-[15px]">12 end-to-end projects led as architect and delivery lead across enterprise environments.</p>
   </div>
@@ -91,5 +92,6 @@ const tag: Record<string,string> = {
         </div>
       </div>
     ))}
+  </div>
   </div>
 </section>

@@ -36,7 +36,7 @@ const {
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <style>
       :root {
-        --sidebar-w: 17rem;
+        --sidebar-w: 18rem;
         --accent: #2563eb;
         --accent-dim: rgba(37,99,235,0.08);
         --accent-glow: rgba(37,99,235,0.2);
@@ -48,9 +48,7 @@ const {
       }
       * { box-sizing: border-box; }
 
-      body {
-        font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
-      }
+      body { font-family: 'Plus Jakarta Sans', system-ui, sans-serif; }
 
       .section-heading {
         font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
@@ -59,56 +57,87 @@ const {
         letter-spacing: -0.02em;
       }
 
-      .section-num {
-        font-family: 'IBM Plex Mono', monospace;
-        font-size: 0.68rem;
-        font-weight: 500;
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
-        color: var(--accent);
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        margin-bottom: 0.6rem;
+      /* Scroll-snap: right panel sections snap to viewport top */
+      #content-panel {
+        scroll-snap-type: y proximity;
+        scroll-behavior: smooth;
       }
-      .section-num::before {
-        content: '';
-        display: inline-block;
-        width: 1.25rem;
-        height: 1px;
-        background: var(--accent);
-        opacity: 0.5;
-        flex-shrink: 0;
+      #content-panel > section {
+        scroll-snap-align: start;
+        scroll-snap-stop: normal;
       }
 
+      /* ── Animations ── */
+
+      /* Sidebar entrance */
+      @keyframes sidebar-in {
+        from { opacity: 0; transform: translateX(-14px); }
+        to   { opacity: 1; transform: translateX(0); }
+      }
+      #sidebar { animation: sidebar-in 0.45s cubic-bezier(0.22, 1, 0.36, 1) both; }
+
+      /* Mobile top bar entrance */
+      @keyframes topbar-in {
+        from { opacity: 0; transform: translateY(-8px); }
+        to   { opacity: 1; transform: translateY(0); }
+      }
+      header { animation: topbar-in 0.35s ease-out both; }
+
+      /* Section content fade-up */
+      @keyframes fade-up {
+        from { opacity: 0; transform: translateY(22px); }
+        to   { opacity: 1; transform: translateY(0); }
+      }
+      [data-animate] {
+        opacity: 0;
+        transform: translateY(22px);
+        transition: opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+                    transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+      [data-animate].in-view {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      /* Staggered cards inside animated containers */
+      [data-animate].in-view > *:nth-child(1)  { transition-delay: 0.00s; }
+      [data-animate].in-view > *:nth-child(2)  { transition-delay: 0.06s; }
+      [data-animate].in-view > *:nth-child(3)  { transition-delay: 0.12s; }
+      [data-animate].in-view > *:nth-child(4)  { transition-delay: 0.18s; }
+      [data-animate].in-view > *:nth-child(5)  { transition-delay: 0.24s; }
+      [data-animate].in-view > *:nth-child(6)  { transition-delay: 0.30s; }
+      [data-animate].in-view > *:nth-child(7)  { transition-delay: 0.36s; }
+      [data-animate].in-view > *:nth-child(8)  { transition-delay: 0.40s; }
+
+      /* Sidebar profile stagger */
+      @keyframes fade-up-sm {
+        from { opacity: 0; transform: translateY(8px); }
+        to   { opacity: 1; transform: translateY(0); }
+      }
+      .sb-1 { animation: fade-up-sm 0.4s ease-out 0.15s both; }
+      .sb-2 { animation: fade-up-sm 0.4s ease-out 0.25s both; }
+      .sb-3 { animation: fade-up-sm 0.4s ease-out 0.35s both; }
+      .sb-4 { animation: fade-up-sm 0.4s ease-out 0.45s both; }
+      .sb-5 { animation: fade-up-sm 0.4s ease-out 0.55s both; }
+
+      /* Utilities */
       .sidebar-texture {
         background-image: radial-gradient(circle, rgba(59,130,246,0.1) 1px, transparent 1px);
         background-size: 18px 18px;
       }
-
       .nav-active {
         color: var(--accent) !important;
         background: var(--accent-dim) !important;
         border-left-color: var(--accent) !important;
         font-weight: 600 !important;
       }
-
       .chip {
-        display: inline-flex;
-        align-items: center;
-        padding: 0.18rem 0.6rem;
-        border-radius: 9999px;
-        font-size: 0.7rem;
-        font-weight: 500;
+        display: inline-flex; align-items: center;
+        padding: 0.18rem 0.6rem; border-radius: 9999px;
+        font-size: 0.7rem; font-weight: 500;
         font-family: 'IBM Plex Mono', monospace;
-        border: 1px solid;
-        white-space: nowrap;
-        line-height: 1.4;
+        border: 1px solid; white-space: nowrap; line-height: 1.4;
       }
-
-      .card-lift {
-        transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
-      }
+      .card-lift { transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease; }
       .card-lift:hover { transform: translateY(-2px); }
 
       ::-webkit-scrollbar { width: 3px; }
@@ -116,21 +145,36 @@ const {
       ::-webkit-scrollbar-thumb { background: rgba(37,99,235,0.25); border-radius: 2px; }
 
       @media (prefers-reduced-motion: reduce) {
-        *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+        *, *::before, *::after {
+          animation-duration: 0.01ms !important;
+          transition-duration: 0.01ms !important;
+        }
       }
     </style>
     <script is:inline>
-      /* Light theme is default — only switch to dark if user explicitly chose it */
       (function () {
-        try {
-          if (localStorage.getItem('theme') === 'dark') {
-            document.documentElement.classList.add('dark');
-          }
-        } catch (e) {}
+        try { if (localStorage.getItem('theme') === 'dark') document.documentElement.classList.add('dark'); } catch (e) {}
       })();
     </script>
   </head>
-  <body class="bg-slate-50 dark:bg-[#0a0f1e] text-slate-800 dark:text-slate-200 antialiased">
+  <body class="bg-slate-50 dark:bg-[#0a0f1e] text-slate-800 dark:text-slate-200 antialiased overflow-hidden h-screen">
     <slot />
+    <script is:inline>
+      /* Section fade-up observer */
+      (function () {
+        var els = document.querySelectorAll('[data-animate]');
+        if (!('IntersectionObserver' in window)) {
+          els.forEach(function(el) { el.classList.add('in-view'); });
+          return;
+        }
+        els.forEach(function(el) {
+          new IntersectionObserver(function(entries) {
+            if (entries[0].isIntersecting) {
+              el.classList.add('in-view');
+            }
+          }, { threshold: 0.08, root: document.getElementById('content-panel') }).observe(el);
+        });
+      })();
+    </script>
   </body>
 </html>

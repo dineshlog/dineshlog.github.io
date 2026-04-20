@@ -12,7 +12,11 @@ import Footer from '../components/Footer.astro';
 ---
 <Layout>
   <Sidebar />
-  <main class="lg:ml-[17rem] min-h-screen pt-14 lg:pt-0">
+  <!-- Content panel: fixed to viewport, independent scroll, snap-enabled -->
+  <main id="content-panel"
+    class="fixed top-0 bottom-0 right-0 overflow-y-auto
+           left-0 lg:left-72
+           pt-14 lg:pt-0">
     <About />
     <Skills />
     <Experience />
