@@ -1,26 +1,63 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Nav from '../components/Nav.astro';
-import Footer from '../components/Footer.astro';
 ---
-<Layout title="404 – Page Not Found | Dinesh Loganathan">
-  <Nav />
-  <main class="min-h-screen flex items-center justify-center px-4 bg-gray-50 dark:bg-navy-900 pt-16 transition-colors duration-300">
-    <div class="text-center max-w-lg">
-      <div class="text-8xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-indigo-500 mb-4">404</div>
-      <h1 class="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white mb-3">Page not found</h1>
-      <p class="text-gray-500 dark:text-slate-400 mb-8 leading-relaxed">
-        The page you're looking for doesn't exist or has been moved. Head back to the portfolio to explore my work.
+<Layout title="404 | Dinesh Loganathan Portfolio" description="Page not found.">
+  <main class="not-found-wrap">
+    <div class="container-shell not-found-card card reveal">
+      <p class="eyebrow">404</p>
+      <h1>That page is not available</h1>
+      <p>
+        The link may have changed or the page may have been removed during the redesign.
+        Use the options below to continue browsing the portfolio.
       </p>
-      <div class="flex flex-wrap justify-center gap-3">
-        <a href="/" class="px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-xl transition-colors">
-          Back to Portfolio
-        </a>
-        <a href="/#contact" class="px-6 py-3 border border-gray-300 dark:border-slate-600 text-gray-700 dark:text-slate-300 hover:border-blue-400 dark:hover:border-blue-400 font-semibold rounded-xl transition-colors">
-          Get In Touch
-        </a>
+      <div class="not-found-actions">
+        <a href="/" class="action-primary">Back to Home</a>
+        <a href="/#contact" class="action-secondary">Go to Contact</a>
       </div>
     </div>
   </main>
-  <Footer />
+
+  <style>
+    .not-found-wrap {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 34px 0;
+    }
+
+    .not-found-card {
+      width: min(680px, 92vw);
+      padding: 26px;
+    }
+
+    .not-found-card h1 {
+      margin: 12px 0 10px;
+      font-family: 'Fraunces', serif;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      line-height: 1.12;
+    }
+
+    .not-found-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    .not-found-actions {
+      margin-top: 22px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    @media (max-width: 640px) {
+      .not-found-actions {
+        flex-direction: column;
+      }
+
+      .not-found-actions a {
+        width: 100%;
+      }
+    }
+  </style>
 </Layout>

@@ -1,29 +1,978 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Sidebar from '../components/Sidebar.astro';
-import About from '../components/About.astro';
-import Skills from '../components/Skills.astro';
-import Experience from '../components/Experience.astro';
-import Certifications from '../components/Certifications.astro';
-import Projects from '../components/Projects.astro';
-import Education from '../components/Education.astro';
-import Contact from '../components/Contact.astro';
-import Footer from '../components/Footer.astro';
+
+const navLinks = [
+  { id: 'profile', label: 'Profile' },
+  { id: 'expertise', label: 'Expertise' },
+  { id: 'experience', label: 'Experience' },
+  { id: 'projects', label: 'Projects' },
+  { id: 'credentials', label: 'Credentials' },
+  { id: 'contact', label: 'Contact' },
+];
+
+const keyMetrics = [
+  { value: '10+', label: 'Years in IT, security, and modern workplace delivery' },
+  { value: '35-60%', label: 'Secure Score uplift delivered in transformation programs' },
+  { value: '25-30%', label: 'Operational cost reduction through platform consolidation' },
+  { value: '1,500+', label: 'International users supported across enterprise operations' },
+];
+
+const expertiseAreas = [
+  {
+    title: 'Microsoft 365 & Endpoint Engineering',
+    summary:
+      'Architecture and administration of Intune, Exchange Online, Teams, SharePoint, OneDrive, and M365 platform governance.',
+    points: ['Intune MDM lifecycle', 'Exchange hybrid + cloud', 'Teams and SharePoint governance', 'Endpoint compliance at scale'],
+  },
+  {
+    title: 'Identity, Access, and Zero Trust',
+    summary:
+      'Identity-first security controls with Entra ID, Conditional Access, MFA/SSPR, and federation hardening for distributed teams.',
+    points: ['Conditional Access strategy', 'SSO and federation', 'Least privilege and access reviews', 'Global Secure Access rollout'],
+  },
+  {
+    title: 'Security Operations & Compliance',
+    summary:
+      'Defender XDR and Purview implementations aligned to practical risk reduction, compliance readiness, and incident response maturity.',
+    points: ['Defender XDR implementation', 'Data protection and DLP', 'Vendor security and audits', 'Risk remediation planning'],
+  },
+  {
+    title: 'Automation & Service Reliability',
+    summary:
+      'Process redesign with PowerShell and Azure automation to reduce manual work, accelerate response, and improve consistency.',
+    points: ['PowerShell orchestration', 'Runbooks and reporting', 'ITSM and change discipline', 'Knowledge transfer and mentoring'],
+  },
+];
+
+const timeline = [
+  {
+    period: '2026 - Present',
+    title: 'Information Security Coordinator',
+    company: 'ESMT GmbH, Berlin',
+    detail:
+      'Coordinate ISMS activities, security reviews, access governance, vendor risk assessments, and awareness initiatives across the organization.',
+  },
+  {
+    period: '2023 - Present',
+    title: 'Microsoft Systems Administrator',
+    company: 'ESMT GmbH, Berlin',
+    detail:
+      'Led multiple M365 and security programs including Global Secure Access, Defender stack expansion, and cross-platform endpoint governance.',
+  },
+  {
+    period: '2022 - 2023',
+    title: 'IT Systems Administrator',
+    company: 'INFARM, Berlin',
+    detail:
+      'Managed identity, endpoint, and SaaS operations for a global workforce and improved provisioning, SSO, and compliance workflows.',
+  },
+  {
+    period: '2018 - 2022',
+    title: 'Senior Consultant - IT Systems',
+    company: 'MicroChannel (Australia/APAC)',
+    detail:
+      'Delivered enterprise Microsoft, Azure, Exchange, virtualization, and infrastructure programs for MSP clients at regional scale.',
+  },
+  {
+    period: '2016 - 2018',
+    title: 'System Support Engineer L2/L3',
+    company: 'Involve 360 / Inbay (UK NOC)',
+    detail:
+      'Provided 24/7 remote support for MSP environments covering migrations, security remediation, and infrastructure operations.',
+  },
+];
+
+const projects = [
+  {
+    name: 'Global Secure Access Program',
+    result: 'Legacy VPN replaced with identity-centric secure access and policy-driven controls.',
+    stack: 'Entra ID, Conditional Access, Zero Trust',
+  },
+  {
+    name: 'Defender XDR Security Consolidation',
+    result: 'Unified endpoint, identity, and cloud signals into one incident response workflow.',
+    stack: 'Defender for Endpoint, Identity, Cloud Apps',
+  },
+  {
+    name: 'Purview Information Protection',
+    result: 'Rolled out classification, retention, and DLP governance for regulated collaboration.',
+    stack: 'Purview, Sensitivity Labels, Compliance',
+  },
+  {
+    name: 'VMware to Proxmox Migration',
+    result: 'Completed platform migration without service interruption while reducing licensing cost.',
+    stack: 'VMware ESXi, Proxmox VE, Infrastructure Ops',
+  },
+  {
+    name: 'Enterprise Intune MDM Rollout',
+    result: 'Standardized secure endpoint lifecycle across Windows, macOS, iOS, and Android.',
+    stack: 'Microsoft Intune, Baselines, App Deployment',
+  },
+  {
+    name: 'Automation and Reporting Framework',
+    result: 'Reduced repetitive admin effort through scripted provisioning and compliance reporting.',
+    stack: 'PowerShell, Azure Automation, Log Analytics',
+  },
+];
+
+const certifications = [
+  { label: 'Security, Compliance, and Identity Fundamentals', image: '/badges/security-compliance-and-identity-fundamentals-600x600.png' },
+  { label: 'MCSE Productivity', image: '/badges/MCSE-Productivity-2018.png' },
+  { label: 'MCSE Mobility', image: '/badges/MCSE-Mobility-2019.png' },
+  { label: 'MCSE Cloud Platform and Infrastructure', image: '/badges/MCSE-Cloud-Platform-Infrastructure-2018.png' },
+  { label: 'MCSA Windows Server 2016', image: '/badges/MCSA-Windows-Server-2016-2018.png' },
+  { label: 'MCSA Windows Server 2012', image: '/badges/MCSA-Windows-Server-2012-2018.png' },
+  { label: 'MCSA Windows 10', image: '/badges/MCSA-Windows-10-2018.png' },
+  { label: 'MCSA Office 365', image: '/badges/MCSA-Office-365-2018.png' },
+];
+
+const contactLinks = [
+  { label: 'Email', value: 'logan-dinesh@outlook.com', href: 'mailto:logan-dinesh@outlook.com' },
+  { label: 'Phone', value: '+49 151 19496953', href: 'tel:+4915119496953' },
+  { label: 'LinkedIn', value: 'linkedin.com/in/loganathan-dinesh', href: 'https://www.linkedin.com/in/loganathan-dinesh' },
+  { label: 'GitHub', value: 'github.com/dineshlog', href: 'https://github.com/dineshlog' },
+  { label: 'Credly', value: 'credly.com/users/loganathan-dinesh', href: 'https://credly.com/users/loganathan-dinesh/badges' },
+];
+
+const currentYear = new Date().getFullYear();
 ---
 <Layout>
-  <Sidebar />
-  <!-- Content panel: fixed to viewport, independent scroll, snap-enabled -->
-  <main id="content-panel"
-    class="fixed top-0 bottom-0 right-0 overflow-y-auto
-           left-0 lg:left-72
-           pt-14 lg:pt-0">
-    <About />
-    <Skills />
-    <Experience />
-    <Certifications />
-    <Projects />
-    <Education />
-    <Contact />
-    <Footer />
+  <header class="top-nav">
+    <div class="container-shell top-nav-inner">
+      <a href="#top" class="brand-mark">
+        <span class="brand-badge">DL</span>
+        <span>
+          <strong>Dinesh Loganathan</strong>
+          <small>Information Security and M365 Architect</small>
+        </span>
+      </a>
+
+      <button id="menu-toggle" class="menu-toggle" aria-expanded="false" aria-controls="primary-nav">
+        Menu
+      </button>
+
+      <nav id="primary-nav" class="primary-nav">
+        {navLinks.map((link) => (
+          <a href={`#${link.id}`}>{link.label}</a>
+        ))}
+        <a href="/Dinesh_Loganathan_Resume.pdf" download class="primary-cta">Resume</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="section-block hero-shell">
+      <div class="container-shell hero-grid">
+        <div class="reveal">
+          <span class="eyebrow">Portfolio 2026</span>
+          <h1 class="section-title hero-title">
+            Building secure, scalable
+            <span>digital workplace systems</span>
+          </h1>
+          <p class="section-copy">
+            I help organizations modernize Microsoft ecosystems while raising security posture, improving operational clarity,
+            and reducing unnecessary tooling overhead. My work combines architecture depth, delivery ownership, and clear communication.
+          </p>
+
+          <div class="hero-actions">
+            <a href="#projects" class="action-primary">View Selected Programs</a>
+            <a href="#contact" class="action-secondary">Start a Conversation</a>
+          </div>
+
+          <div class="hero-tags" aria-label="Key expertise tags">
+            <span class="pill">Microsoft 365</span>
+            <span class="pill">Intune</span>
+            <span class="pill">Defender XDR</span>
+            <span class="pill">Zero Trust</span>
+            <span class="pill">PowerShell</span>
+            <span class="pill">Cloud Security</span>
+          </div>
+        </div>
+
+        <aside class="card profile-panel reveal">
+          <img src="/ProfilePicture.jpg" alt="Portrait of Dinesh Loganathan" />
+          <div>
+            <p class="panel-kicker">Based in Cottbus, Germany</p>
+            <h2>Dinesh Loganathan</h2>
+            <p class="panel-meta">BEng (Hons) - Computer Network and Cloud Security</p>
+          </div>
+          <dl>
+            <div>
+              <dt>Current focus</dt>
+              <dd>Information Security Coordination, M365 Architecture, and Governance</dd>
+            </div>
+            <div>
+              <dt>Work style</dt>
+              <dd>Consultative, outcome-driven, and security-by-design</dd>
+            </div>
+            <div>
+              <dt>Availability</dt>
+              <dd>Open to consulting and full-time opportunities (remote/hybrid)</dd>
+            </div>
+          </dl>
+        </aside>
+      </div>
+    </section>
+
+    <section id="profile" class="section-block">
+      <div class="container-shell">
+        <span class="eyebrow">Profile Snapshot</span>
+        <h2 class="section-title">Impact-oriented delivery, not just platform administration</h2>
+        <p class="section-copy">
+          Across MSP, enterprise, and consulting environments, I have delivered complex Microsoft and security programs with a focus
+          on risk reduction, reliability, and measurable business outcomes.
+        </p>
+
+        <div class="metric-grid">
+          {keyMetrics.map((metric) => (
+            <article class="card metric-card reveal">
+              <p>{metric.value}</p>
+              <h3>{metric.label}</h3>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section id="expertise" class="section-block tint-section">
+      <div class="container-shell">
+        <span class="eyebrow">Expertise</span>
+        <h2 class="section-title">Structured capability across platform, security, and operations</h2>
+
+        <div class="expertise-grid">
+          {expertiseAreas.map((area) => (
+            <article class="card expertise-card reveal">
+              <h3>{area.title}</h3>
+              <p>{area.summary}</p>
+              <ul>
+                {area.points.map((point) => (
+                  <li>{point}</li>
+                ))}
+              </ul>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section id="experience" class="section-block">
+      <div class="container-shell">
+        <span class="eyebrow">Experience</span>
+        <h2 class="section-title">Career progression across enterprise and managed services</h2>
+
+        <div class="timeline reveal">
+          {timeline.map((item) => (
+            <article class="timeline-item">
+              <p class="timeline-period">{item.period}</p>
+              <h3>{item.title}</h3>
+              <h4>{item.company}</h4>
+              <p>{item.detail}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" class="section-block tint-section">
+      <div class="container-shell">
+        <span class="eyebrow">Selected Programs</span>
+        <h2 class="section-title">Programs delivered from architecture to implementation</h2>
+
+        <div class="project-grid">
+          {projects.map((project) => (
+            <article class="card project-card reveal">
+              <h3>{project.name}</h3>
+              <p>{project.result}</p>
+              <span>{project.stack}</span>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section id="credentials" class="section-block">
+      <div class="container-shell">
+        <span class="eyebrow">Credentials</span>
+        <h2 class="section-title">Microsoft certification track with security and cloud depth</h2>
+        <p class="section-copy">
+          Additional active and transcript-backed credentials are available through Microsoft Learn and Credly.
+        </p>
+
+        <div class="cred-links reveal">
+          <a href="https://learn.microsoft.com/en-us/users/logan-dinesh/transcript" target="_blank" rel="noopener noreferrer">Microsoft Learn Transcript</a>
+          <a href="https://credly.com/users/loganathan-dinesh/badges" target="_blank" rel="noopener noreferrer">Credly Badge Profile</a>
+        </div>
+
+        <div class="badge-grid">
+          {certifications.map((cert) => (
+            <article class="card badge-card reveal">
+              <img src={cert.image} alt={cert.label} loading="lazy" />
+              <p>{cert.label}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section-block tint-section">
+      <div class="container-shell contact-grid">
+        <div class="reveal">
+          <span class="eyebrow">Contact</span>
+          <h2 class="section-title">Open for collaboration and security-first modernization projects</h2>
+          <p class="section-copy">
+            Available for consulting engagements and full-time opportunities focused on Microsoft 365, information security,
+            endpoint strategy, and cloud operations.
+          </p>
+          <div class="hero-actions">
+            <a href="/Dinesh_Loganathan_Resume.pdf" download class="action-primary">Download Resume</a>
+            <a href="mailto:logan-dinesh@outlook.com" class="action-secondary">Email Directly</a>
+          </div>
+        </div>
+
+        <div class="contact-list reveal">
+          {contactLinks.map((link) => (
+            <a href={link.href} target={link.href.startsWith('http') ? '_blank' : '_self'} rel="noopener noreferrer" class="card contact-item">
+              <h3>{link.label}</h3>
+              <p>{link.value}</p>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
   </main>
+
+  <footer class="site-footer">
+    <div class="container-shell footer-inner">
+      <p>© {currentYear} Dinesh Loganathan</p>
+      <p>Built with Astro for GitHub Pages</p>
+    </div>
+  </footer>
+
+  <script is:inline>
+    (function () {
+      var toggle = document.getElementById('menu-toggle');
+      var nav = document.getElementById('primary-nav');
+
+      if (!toggle || !nav) return;
+
+      toggle.addEventListener('click', function () {
+        var open = nav.classList.toggle('is-open');
+        toggle.setAttribute('aria-expanded', String(open));
+      });
+
+      nav.querySelectorAll('a').forEach(function (link) {
+        link.addEventListener('click', function () {
+          nav.classList.remove('is-open');
+          toggle.setAttribute('aria-expanded', 'false');
+        });
+      });
+    })();
+  </script>
+
+  <style>
+    .top-nav {
+      position: sticky;
+      top: 0;
+      z-index: 60;
+      backdrop-filter: blur(10px);
+      background: rgba(246, 247, 243, 0.86);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .top-nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      min-height: 74px;
+    }
+
+    .brand-mark {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      min-width: 0;
+    }
+
+    .brand-mark span strong {
+      display: block;
+      font-size: 0.94rem;
+      line-height: 1.1;
+    }
+
+    .brand-mark span small {
+      display: block;
+      color: var(--muted);
+      font-size: 0.74rem;
+      letter-spacing: 0.02em;
+      margin-top: 2px;
+    }
+
+    .brand-badge {
+      width: 40px;
+      height: 40px;
+      border-radius: 13px;
+      display: grid;
+      place-items: center;
+      color: white;
+      background: linear-gradient(140deg, var(--brand), var(--brand-strong));
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      flex-shrink: 0;
+    }
+
+    .primary-nav {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .primary-nav a {
+      text-decoration: none;
+      color: var(--muted);
+      font-weight: 600;
+      font-size: 0.89rem;
+      padding: 8px 11px;
+      border-radius: 999px;
+      transition: color 0.2s ease, background-color 0.2s ease;
+    }
+
+    .primary-nav a:hover {
+      color: var(--brand-strong);
+      background: rgba(31, 111, 120, 0.11);
+    }
+
+    .primary-nav .primary-cta {
+      background: var(--brand-strong);
+      color: white;
+      padding-inline: 15px;
+    }
+
+    .primary-nav .primary-cta:hover {
+      background: #0b3a40;
+      color: white;
+    }
+
+    .menu-toggle {
+      display: none;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      color: var(--text);
+      font-weight: 700;
+      border-radius: 10px;
+      padding: 8px 12px;
+      font-size: 0.83rem;
+    }
+
+    .hero-shell {
+      padding-top: 42px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 34px;
+      align-items: start;
+    }
+
+    .hero-title span {
+      color: var(--brand-strong);
+      display: block;
+    }
+
+    .hero-actions {
+      margin-top: 28px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .action-primary,
+    .action-secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      border-radius: 999px;
+      padding: 11px 18px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      transition: transform 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+    }
+
+    .action-primary {
+      background: var(--brand-strong);
+      border: 1px solid var(--brand-strong);
+      color: #fff;
+    }
+
+    .action-primary:hover {
+      transform: translateY(-1px);
+      background: #0b3a40;
+    }
+
+    .action-secondary {
+      background: transparent;
+      border: 1px solid rgba(16, 72, 79, 0.35);
+      color: var(--brand-strong);
+    }
+
+    .action-secondary:hover {
+      transform: translateY(-1px);
+      background: rgba(31, 111, 120, 0.09);
+    }
+
+    .hero-tags {
+      margin-top: 22px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .profile-panel {
+      padding: 18px;
+      display: grid;
+      gap: 14px;
+    }
+
+    .profile-panel img {
+      width: 100%;
+      max-height: 310px;
+      object-fit: contain;
+      background: linear-gradient(180deg, #f9fbf7, #edf2ea);
+      border: 1px solid #e2e8df;
+      border-radius: 14px;
+      display: block;
+    }
+
+    .panel-kicker {
+      margin: 0;
+      color: var(--brand-strong);
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .profile-panel h2 {
+      margin: 3px 0 4px;
+      font-family: 'Fraunces', serif;
+      font-size: 1.55rem;
+      line-height: 1.2;
+    }
+
+    .panel-meta {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .profile-panel dl {
+      margin: 2px 0 0;
+      display: grid;
+      gap: 10px;
+    }
+
+    .profile-panel dt {
+      color: var(--brand-strong);
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .profile-panel dd {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    .metric-grid {
+      display: grid;
+      gap: 16px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      margin-top: 26px;
+    }
+
+    .metric-card {
+      padding: 20px 18px;
+    }
+
+    .metric-card p {
+      margin: 0;
+      font-family: 'Fraunces', serif;
+      font-size: clamp(1.75rem, 5vw, 2.5rem);
+      color: var(--brand-strong);
+      line-height: 1;
+    }
+
+    .metric-card h3 {
+      margin: 8px 0 0;
+      font-size: 0.96rem;
+      line-height: 1.45;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .tint-section {
+      background: linear-gradient(180deg, transparent, rgba(31, 111, 120, 0.06) 20%, rgba(31, 111, 120, 0.04));
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .expertise-grid {
+      display: grid;
+      gap: 16px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      margin-top: 24px;
+    }
+
+    .expertise-card {
+      padding: 22px;
+    }
+
+    .expertise-card h3 {
+      margin: 0;
+      font-size: 1.13rem;
+      line-height: 1.35;
+    }
+
+    .expertise-card p {
+      margin: 8px 0 0;
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .expertise-card ul {
+      margin: 14px 0 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 8px;
+    }
+
+    .expertise-card li {
+      position: relative;
+      padding-left: 15px;
+      color: #213140;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .expertise-card li::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: var(--accent);
+      position: absolute;
+      left: 0;
+      top: 0.53rem;
+    }
+
+    .timeline {
+      position: relative;
+      margin-top: 25px;
+      padding-left: 22px;
+      display: grid;
+      gap: 14px;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 5px;
+      top: 4px;
+      bottom: 4px;
+      width: 2px;
+      background: rgba(16, 72, 79, 0.2);
+    }
+
+    .timeline-item {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 16px;
+      box-shadow: var(--shadow-soft);
+      position: relative;
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -21px;
+      top: 20px;
+      width: 12px;
+      height: 12px;
+      border-radius: 999px;
+      border: 2px solid var(--brand-strong);
+      background: var(--bg);
+    }
+
+    .timeline-period {
+      margin: 0;
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--brand-strong);
+      font-weight: 700;
+    }
+
+    .timeline-item h3 {
+      margin: 4px 0 0;
+      font-size: 1.06rem;
+      line-height: 1.3;
+    }
+
+    .timeline-item h4 {
+      margin: 4px 0 0;
+      color: var(--muted);
+      font-size: 0.91rem;
+      font-weight: 700;
+    }
+
+    .timeline-item p {
+      margin: 8px 0 0;
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.55;
+    }
+
+    .project-grid {
+      display: grid;
+      gap: 16px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      margin-top: 24px;
+    }
+
+    .project-card {
+      padding: 20px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .project-card h3 {
+      margin: 0;
+      font-size: 1.05rem;
+      line-height: 1.3;
+    }
+
+    .project-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.55;
+    }
+
+    .project-card span {
+      display: inline-flex;
+      width: fit-content;
+      font-size: 0.74rem;
+      border-radius: 999px;
+      background: rgba(16, 72, 79, 0.09);
+      color: var(--brand-strong);
+      border: 1px solid rgba(16, 72, 79, 0.2);
+      padding: 0.28rem 0.66rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+    }
+
+    .cred-links {
+      margin-top: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .cred-links a {
+      text-decoration: none;
+      border: 1px solid rgba(16, 72, 79, 0.3);
+      color: var(--brand-strong);
+      font-size: 0.84rem;
+      font-weight: 700;
+      border-radius: 999px;
+      padding: 0.5rem 0.9rem;
+      background: rgba(31, 111, 120, 0.08);
+    }
+
+    .badge-grid {
+      margin-top: 22px;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .badge-card {
+      padding: 12px;
+      text-align: center;
+    }
+
+    .badge-card img {
+      width: 84px;
+      height: 84px;
+      object-fit: contain;
+      margin: 0 auto 9px;
+      display: block;
+    }
+
+    .badge-card p {
+      margin: 0;
+      font-size: 0.82rem;
+      line-height: 1.35;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      align-items: start;
+    }
+
+    .contact-list {
+      display: grid;
+      gap: 11px;
+    }
+
+    .contact-item {
+      text-decoration: none;
+      display: block;
+      padding: 14px 16px;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .contact-item:hover {
+      transform: translateY(-2px);
+      border-color: rgba(16, 72, 79, 0.35);
+    }
+
+    .contact-item h3 {
+      margin: 0;
+      color: var(--brand-strong);
+      font-size: 0.76rem;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+    }
+
+    .contact-item p {
+      margin: 5px 0 0;
+      color: var(--text);
+      font-size: 0.94rem;
+      word-break: break-word;
+      font-weight: 700;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .footer-inner p {
+      margin: 0;
+    }
+
+    @media (max-width: 1060px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .profile-panel img {
+        max-height: 280px;
+      }
+
+      .project-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .badge-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 900px) {
+      .menu-toggle {
+        display: inline-flex;
+      }
+
+      .primary-nav {
+        position: absolute;
+        top: calc(100% + 8px);
+        right: 4vw;
+        left: 4vw;
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.97);
+        box-shadow: var(--shadow-soft);
+        border-radius: 14px;
+        padding: 10px;
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .primary-nav.is-open {
+        display: flex;
+      }
+
+      .primary-nav a {
+        border-radius: 10px;
+      }
+
+      .primary-nav .primary-cta {
+        text-align: center;
+        margin-top: 2px;
+      }
+
+      .metric-grid,
+      .expertise-grid,
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .badge-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 640px) {
+      .top-nav-inner {
+        min-height: 68px;
+      }
+
+      .brand-mark span small {
+        display: none;
+      }
+
+      .hero-shell {
+        padding-top: 28px;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+      }
+
+      .action-primary,
+      .action-secondary {
+        width: 100%;
+      }
+
+      .project-grid,
+      .badge-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .timeline {
+        padding-left: 18px;
+      }
+
+      .timeline-item::before {
+        left: -17px;
+      }
+    }
+  </style>
 </Layout>
