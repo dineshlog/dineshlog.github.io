@@ -21,9 +21,10 @@ desktop.ini
 *.log
 npm-debug.log*
 
-# Editor
+# Editor & tools
 .vscode/
 .idea/
+.claude/
 *.suo
 *.user
 
