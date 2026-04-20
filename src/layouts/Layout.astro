@@ -9,7 +9,7 @@ const {
 } = Astro.props;
 ---
 <!doctype html>
-<html lang="en" class="scroll-smooth dark">
+<html lang="en" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -36,20 +36,26 @@ const {
     <meta name="theme-color" content="#0a0f1e" media="(prefers-color-scheme: dark)" />
     <meta name="theme-color" content="#f9fafb" media="(prefers-color-scheme: light)" />
     <style>
-      /* Scroll-spy active nav link — works in both light and dark mode (fix #001) */
-      .nav-active { color: #2563eb; }
-      .dark .nav-active { color: #60a5fa; }
+      /* Scroll-spy active nav link — simple class, no dark: prefix needed */
+      .nav-active { color: #2563eb !important; }
+      .dark .nav-active { color: #60a5fa !important; }
       @media (prefers-reduced-motion: reduce) {
         *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
       }
     </style>
     <script is:inline>
+      /* Theme init — runs synchronously before first paint to prevent flash */
       (function () {
-        const stored = localStorage.getItem('theme');
-        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        if (stored === 'light' || (!stored && !prefersDark)) {
-          document.documentElement.classList.remove('dark');
-        } else {
+        try {
+          var stored = localStorage.getItem('theme');
+          var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var useDark = stored === 'dark' || (!stored && prefersDark) || (!stored && !prefersDark);
+          if (stored === 'light') {
+            document.documentElement.classList.remove('dark');
+          } else {
+            document.documentElement.classList.add('dark');
+          }
+        } catch (e) {
           document.documentElement.classList.add('dark');
         }
       })();
