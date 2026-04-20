@@ -1,118 +1,90 @@
 ---
 const active = [
-  { name: 'Information Security Administrator Associate', code: 'SC-401', issued: 'Jul 2025', expires: 'Jul 2026', badge: '/badges/sc-401.png' },
-  { name: 'Microsoft 365 Administrator Expert',          code: 'MS-100/101', issued: 'Jul 2021', expires: 'Jul 2026', badge: '/badges/m365-admin-expert.png' },
-  { name: 'Endpoint Administrator Associate',            code: 'MD-102',  issued: 'Jun 2019', expires: 'Dec 2026', badge: '/badges/endpoint-admin.png' },
-  { name: 'Identity and Access Administrator Associate', code: 'SC-300',  issued: 'Jan 2026', expires: 'Jan 2027', badge: '/badges/sc-300.png' },
+  { name: 'Information Security Administrator Associate', code: 'SC-401',      issued: 'Jul 2025', expires: 'Jul 2026', badge: '/badges/sc-401.png' },
+  { name: 'Microsoft 365 Administrator Expert',          code: 'MS-100/101',  issued: 'Jul 2021', expires: 'Jul 2026', badge: '/badges/m365-admin-expert.png' },
+  { name: 'Endpoint Administrator Associate',            code: 'MD-102',      issued: 'Jun 2019', expires: 'Dec 2026', badge: '/badges/endpoint-admin.png' },
+  { name: 'Identity and Access Administrator Associate', code: 'SC-300',      issued: 'Jan 2026', expires: 'Jan 2027', badge: '/badges/sc-300.png' },
   { name: 'Windows Server Hybrid Administrator Associate', code: 'AZ-800/801', issued: 'Feb 2025', expires: 'Feb 2027', badge: '/badges/ws-hybrid.png' },
-  { name: 'Copilot & Agent Administration Fundamentals', code: 'AB-900',  issued: 'Jan 2026', expires: '—', badge: '/badges/copilot-admin.png' },
-  { name: 'Security, Compliance & Identity Fundamentals', code: 'SC-900', issued: 'Aug 2021', expires: '—', badge: '/badges/security-compliance-and-identity-fundamentals-600x600.png' },
-  { name: 'ISC2 Certified in Cybersecurity',             code: 'CC',      issued: '2023',    expires: '—', badge: '/badges/isc2-cc.png' },
+  { name: 'Copilot & Agent Administration Fundamentals', code: 'AB-900',      issued: 'Jan 2026', expires: '—',        badge: '/badges/copilot-admin.png' },
+  { name: 'Security, Compliance & Identity Fundamentals', code: 'SC-900',     issued: 'Aug 2021', expires: '—',        badge: '/badges/security-compliance-and-identity-fundamentals-600x600.png' },
+  { name: 'ISC2 Certified in Cybersecurity',             code: 'CC',          issued: '2023',     expires: '—',        badge: '/badges/isc2-cc.png' },
+  { name: 'AWS Certified Solutions Architect – Associate', code: 'SAA-C03',   issued: 'Mar 2020', expires: '—',        badge: '/badges/aws-saa.png' },
+  { name: 'Messaging Administrator Associate',           code: 'MS-202',      issued: 'Jun 2019', expires: '—',        badge: '/badges/messaging-admin.png' },
+  { name: 'Microsoft Certified Trainer',                 code: 'MCT',         issued: '2018–2025', expires: '—',       badge: '/badges/mct.png' },
+  { name: 'MCSE: Cloud Platform & Infrastructure',       code: 'MCSE',        issued: 'Dec 2018', expires: '—',        badge: '/badges/MCSE-Cloud-Platform-Infrastructure-2018.png' },
+  { name: 'MCSE: Productivity Solutions Expert',         code: 'MCSE',        issued: 'Jun 2018', expires: '—',        badge: '/badges/MCSE-Productivity-2018.png' },
+  { name: 'MCSE: Mobility',                              code: 'MCSE',        issued: 'Mar 2019', expires: '—',        badge: '/badges/MCSE-Mobility-2019.png' },
+  { name: 'MCSA: Windows Server 2016',                   code: 'MCSA',        issued: 'Aug 2018', expires: '—',        badge: '/badges/MCSA-Windows-Server-2016-2018.png' },
+  { name: 'MCSA: Windows Server 2012',                   code: 'MCSA',        issued: 'Jun 2018', expires: '—',        badge: '/badges/MCSA-Windows-Server-2012-2018.png' },
+  { name: 'MCSA: Office 365',                            code: 'MCSA',        issued: 'May 2018', expires: '—',        badge: '/badges/MCSA-Office-365-2018.png' },
+  { name: 'MCSA: Windows 10',                            code: 'MCSA',        issued: 'Sep 2018', expires: '—',        badge: '/badges/MCSA-Windows-10-2018.png' },
+  { name: 'Microsoft Certified Professional',            code: 'MCP',         issued: 'Apr 2018', expires: '—',        badge: '/badges/mcp.png' },
 ];
-const aws = [
-  { name: 'AWS Certified Solutions Architect – Associate', code: 'SAA-C03', issued: 'Mar 2020', badge: '/badges/aws-saa.png' },
-];
+
 const applied = [
   { name: 'Defend Against Cyberthreats with Microsoft Defender XDR', issued: 'Nov 2025', badge: '/badges/applied-xdr.png' },
-  { name: 'Information Protection & DLP with Microsoft Purview', issued: 'Oct 2025', badge: '/badges/applied-purview.png' },
-  { name: 'Administer Active Directory Domain Services', issued: 'Nov 2024', badge: '/badges/applied-adds.png' },
-];
-const historical = [
-  'Messaging Administrator Associate · MS-202 · Jun 2019',
-  'Microsoft Certified Trainer · MCT · 2018–2025',
-  'MCSE: Cloud Platform & Infrastructure · Dec 2018',
-  'MCSE: Productivity Solutions Expert · Jun 2018',
-  'MCSE: Mobility · Mar 2019',
-  'MCSA: Windows Server 2016 · Aug 2018',
-  'MCSA: Windows Server 2012 · Jun 2018',
-  'MCSA: Office 365 · May 2018',
-  'MCSA: Windows 10 · Sep 2018',
-  'Microsoft Certified Professional · Apr 2018',
+  { name: 'Information Protection & DLP with Microsoft Purview',     issued: 'Oct 2025', badge: '/badges/applied-purview.png' },
+  { name: 'Administer Active Directory Domain Services',             issued: 'Nov 2024', badge: '/badges/applied-adds.png' },
 ];
 ---
 <section id="certifications" class="px-8 lg:px-12 py-14 border-b border-slate-100 dark:border-slate-800/50 transition-colors duration-300 bg-slate-50 dark:bg-[#0c1220] min-h-screen">
   <div data-animate>
     <div class="max-w-3xl mb-8">
-    <h2 class="section-heading text-3xl sm:text-4xl text-slate-900 dark:text-white">Certifications & Badges</h2>
-    <p class="mt-2.5 text-slate-500 dark:text-slate-400 text-[15px] text-justify">15 active Microsoft certifications, AWS Solutions Architect, ISC2 Certified in Cybersecurity, and 3 Applied Skills — fully verified on Microsoft Learn and Credly.</p>
-    <div class="flex flex-wrap gap-2 mt-4">
-      <a href="https://credly.com/users/loganathan-dinesh/badges" target="_blank" rel="noopener noreferrer"
-        class="chip bg-orange-50 dark:bg-orange-500/10 border-orange-200 dark:border-orange-500/30 text-orange-700 dark:text-orange-400 hover:opacity-75 transition-opacity">View Credly Badges →</a>
-      <a href="https://learn.microsoft.com/en-us/users/logan-dinesh/transcript" target="_blank" rel="noopener noreferrer"
-        class="chip bg-blue-50 dark:bg-blue-500/10 border-blue-200 dark:border-blue-500/30 text-blue-700 dark:text-blue-400 hover:opacity-75 transition-opacity">MS Learn Transcript →</a>
+      <h2 class="section-heading text-3xl sm:text-4xl text-slate-900 dark:text-white">Certifications & Badges</h2>
+      <p class="mt-2.5 text-slate-500 dark:text-slate-400 text-[15px] text-justify">Microsoft certified across enterprise admin, security, identity, endpoint management, and cloud — plus AWS, ISC2, and Applied Skills. Verified on Microsoft Learn and Credly.</p>
+      <div class="flex flex-wrap gap-2 mt-4">
+        <a href="https://credly.com/users/loganathan-dinesh/badges" target="_blank" rel="noopener noreferrer"
+          class="chip bg-orange-50 dark:bg-orange-500/10 border-orange-200 dark:border-orange-500/30 text-orange-700 dark:text-orange-400 hover:opacity-75 transition-opacity">View Credly Badges →</a>
+        <a href="https://learn.microsoft.com/en-us/users/logan-dinesh/transcript" target="_blank" rel="noopener noreferrer"
+          class="chip bg-blue-50 dark:bg-blue-500/10 border-blue-200 dark:border-blue-500/30 text-blue-700 dark:text-blue-400 hover:opacity-75 transition-opacity">MS Learn Transcript →</a>
+      </div>
     </div>
-  </div>
 
-  <div class="mb-7">
-    <h3 class="text-[10px] font-semibold tracking-widest uppercase text-slate-500 dark:text-slate-400 mb-4 flex items-center gap-2" style="font-family:'IBM Plex Mono',monospace">
-      <span class="w-2 h-2 bg-emerald-400 rounded-full"></span> Active Certifications
-    </h3>
-    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
-      {active.map(c => (
-        <div class="group flex flex-col items-center text-center p-4 rounded-2xl bg-white dark:bg-slate-800/40 border border-emerald-200 dark:border-emerald-500/20 hover:border-emerald-400 dark:hover:border-emerald-500/50 card-lift shadow-sm dark:shadow-none">
-          <div class="w-20 h-20 mb-3 rounded-xl bg-slate-100 dark:bg-slate-700/50 flex items-center justify-center overflow-hidden border border-slate-200 dark:border-slate-600/50">
-            <img src={c.badge} alt={c.name} width="80" height="80" class="w-full h-full object-contain p-1"
-              onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
-            <div class="hidden w-full h-full items-center justify-center text-xl">🏅</div>
+    <!-- All certifications as cards -->
+    <div class="mb-8">
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3">
+        {active.map(c => (
+          <div class="group flex flex-col items-center text-center p-4 rounded-2xl bg-white dark:bg-slate-800/40
+                      border border-slate-200 dark:border-slate-700/40
+                      hover:border-blue-300 dark:hover:border-blue-500/50
+                      card-lift shadow-sm dark:shadow-none">
+            <div class="w-20 h-20 mb-3 rounded-xl bg-slate-50 dark:bg-slate-700/50 flex items-center justify-center overflow-hidden border border-slate-100 dark:border-slate-600/40">
+              <img src={c.badge} alt={c.name} width="80" height="80" class="w-full h-full object-contain p-1"
+                onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+              <div class="hidden w-full h-full items-center justify-center text-2xl">🏅</div>
+            </div>
+            <span class="text-[10px] font-semibold text-blue-600 dark:text-blue-400 mb-1" style="font-family:'IBM Plex Mono',monospace">{c.code}</span>
+            <p class="text-[11px] text-slate-700 dark:text-slate-300 leading-tight font-semibold mb-1.5">{c.name}</p>
+            <span class="text-[10px] text-slate-400 dark:text-slate-500" style="font-family:'IBM Plex Mono',monospace">Issued {c.issued}</span>
+            {c.expires !== '—' && <span class="text-[10px] text-emerald-600 dark:text-emerald-500 font-medium" style="font-family:'IBM Plex Mono',monospace">Exp {c.expires}</span>}
           </div>
-          <span class="text-[10px] font-semibold text-emerald-600 dark:text-emerald-400 mb-1" style="font-family:'IBM Plex Mono',monospace">{c.code}</span>
-          <p class="text-[11.5px] text-slate-700 dark:text-slate-300 leading-tight font-semibold mb-1.5">{c.name}</p>
-          <span class="text-[10px] text-slate-400 dark:text-slate-500" style="font-family:'IBM Plex Mono',monospace">Issued {c.issued}</span>
-          {c.expires !== '—' && <span class="text-[10px] text-slate-300 dark:text-slate-600" style="font-family:'IBM Plex Mono',monospace">Exp {c.expires}</span>}
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
-  </div>
 
-  <div class="mb-7">
-    <h3 class="text-[10px] font-semibold tracking-widest uppercase text-slate-500 dark:text-slate-400 mb-4 flex items-center gap-2" style="font-family:'IBM Plex Mono',monospace">
-      <span class="w-2 h-2 bg-orange-400 rounded-full"></span> Cloud Platform — AWS
-    </h3>
-    <div class="inline-flex gap-3">
-      {aws.map(c => (
-        <div class="flex flex-col items-center text-center p-4 rounded-2xl bg-white dark:bg-slate-800/40 border border-orange-200 dark:border-orange-500/20 hover:border-orange-400 dark:hover:border-orange-500/50 card-lift shadow-sm dark:shadow-none w-44">
-          <div class="w-20 h-20 mb-3 rounded-xl bg-slate-100 dark:bg-slate-700/50 flex items-center justify-center overflow-hidden border border-slate-200 dark:border-slate-600/50">
-            <img src={c.badge} alt={c.name} width="80" height="80" class="w-full h-full object-contain p-1"
-              onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
-            <div class="hidden w-full h-full items-center justify-center text-xl">🏅</div>
+    <!-- Applied Skills -->
+    <div>
+      <h3 class="text-[10px] font-semibold tracking-widest uppercase text-slate-500 dark:text-slate-400 mb-4 flex items-center gap-2" style="font-family:'IBM Plex Mono',monospace">
+        <span class="w-2 h-2 bg-violet-400 rounded-full"></span> Applied Skills
+      </h3>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 max-w-3xl">
+        {applied.map(s => (
+          <div class="flex items-center gap-4 p-4 rounded-2xl bg-white dark:bg-slate-800/40
+                      border border-slate-200 dark:border-slate-700/40
+                      hover:border-violet-300 dark:hover:border-violet-500/50
+                      card-lift shadow-sm dark:shadow-none">
+            <div class="w-16 h-16 shrink-0 rounded-xl bg-slate-50 dark:bg-slate-700/50 flex items-center justify-center overflow-hidden border border-slate-100 dark:border-slate-600/40">
+              <img src={s.badge} alt={s.name} width="64" height="64" class="w-full h-full object-contain p-1"
+                onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+              <div class="hidden w-full h-full items-center justify-center text-lg">🎯</div>
+            </div>
+            <div>
+              <p class="text-[12.5px] font-semibold text-slate-700 dark:text-slate-300 leading-snug mb-1">{s.name}</p>
+              <span class="text-[10px] text-slate-400 dark:text-slate-500" style="font-family:'IBM Plex Mono',monospace">Earned {s.issued}</span>
+            </div>
           </div>
-          <span class="text-[10px] font-semibold text-orange-600 dark:text-orange-400 mb-1" style="font-family:'IBM Plex Mono',monospace">{c.code}</span>
-          <p class="text-[11.5px] text-slate-700 dark:text-slate-300 leading-tight font-semibold">{c.name}</p>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
-  </div>
-
-  <div class="mb-7">
-    <h3 class="text-[10px] font-semibold tracking-widest uppercase text-slate-500 dark:text-slate-400 mb-4 flex items-center gap-2" style="font-family:'IBM Plex Mono',monospace">
-      <span class="w-2 h-2 bg-violet-400 rounded-full"></span> Applied Skills
-    </h3>
-    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 max-w-3xl">
-      {applied.map(s => (
-        <div class="flex items-center gap-4 p-4 rounded-2xl bg-white dark:bg-slate-800/40 border border-violet-200 dark:border-violet-500/20 hover:border-violet-400 dark:hover:border-violet-500/50 card-lift shadow-sm dark:shadow-none">
-          <div class="w-16 h-16 shrink-0 rounded-xl bg-slate-100 dark:bg-slate-700/50 flex items-center justify-center overflow-hidden border border-slate-200 dark:border-slate-600/50">
-            <img src={s.badge} alt={s.name} width="64" height="64" class="w-full h-full object-contain p-1"
-              onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
-            <div class="hidden w-full h-full items-center justify-center text-lg">🎯</div>
-          </div>
-          <div>
-            <p class="text-[12.5px] font-semibold text-slate-700 dark:text-slate-300 leading-snug mb-1">{s.name}</p>
-            <span class="text-[10px] text-slate-400 dark:text-slate-500" style="font-family:'IBM Plex Mono',monospace">Earned {s.issued}</span>
-          </div>
-        </div>
-      ))}
-    </div>
-  </div>
-
-  <div>
-    <h3 class="text-[10px] font-semibold tracking-widest uppercase text-slate-500 dark:text-slate-400 mb-3 flex items-center gap-2" style="font-family:'IBM Plex Mono',monospace">
-      <span class="w-2 h-2 bg-slate-400 rounded-full"></span> Historical Certifications
-    </h3>
-    <div class="flex flex-wrap gap-2">
-      {historical.map(c => (
-        <span class="chip bg-white dark:bg-slate-800/40 border-slate-200 dark:border-slate-700/50 text-slate-500 dark:text-slate-400 opacity-70 hover:opacity-100 transition-opacity">{c}</span>
-      ))}
-    </div>
-  </div>
   </div>
 </section>
