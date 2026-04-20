@@ -1,0 +1,51 @@
+---
+export interface Props {
+  title?: string;
+  description?: string;
+}
+const {
+  title = 'Dinesh Loganathan | Microsoft 365 Expert & InfoSec Consultant',
+  description = 'Security and privacy focused AI solutions and Modern Workspace consultant with 10+ years experience. Microsoft 365 Expert, InfoSec Specialist, Certified Trainer.',
+} = Astro.props;
+---
+<!doctype html>
+<html lang="en" class="scroll-smooth dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta name="author" content="Dinesh Loganathan" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://dineshlog.github.io" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://dineshlog.github.io" />
+    <meta property="og:image" content="https://dineshlog.github.io/og-image.svg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
+    <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()" />
+    <title>{title}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <script is:inline>
+      (function () {
+        const stored = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (stored === 'light' || (!stored && !prefersDark)) {
+          document.documentElement.classList.remove('dark');
+        } else {
+          document.documentElement.classList.add('dark');
+        }
+      })();
+    </script>
+  </head>
+  <body class="bg-gray-50 dark:bg-navy-900 text-gray-900 dark:text-slate-100 font-sans antialiased transition-colors duration-300">
+    <slot />
+  </body>
+</html>

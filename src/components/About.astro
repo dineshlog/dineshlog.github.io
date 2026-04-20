@@ -1,0 +1,50 @@
+---
+---
+<section id="about" class="py-20 px-4 sm:px-6 bg-white dark:bg-navy-900 transition-colors duration-300">
+  <div class="max-w-7xl mx-auto">
+    <div class="grid lg:grid-cols-2 gap-12 items-center">
+      <div>
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 dark:bg-blue-500/10 border border-blue-200 dark:border-blue-500/20 text-blue-600 dark:text-blue-400 text-sm font-medium mb-4">About Me</div>
+        <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-6">Security by design.<br/><span class="text-blue-600 dark:text-blue-400">Productivity by default.</span></h2>
+        <div class="space-y-4 text-gray-600 dark:text-slate-400 leading-relaxed">
+          <p>I'm a security and privacy focused AI solutions and Modern Workspace consultant with over 10 years of experience aligning technical and security expertise with business needs. I specialise in Microsoft 365 ecosystems — Intune, Exchange Online, Teams, SharePoint, OneDrive, and Microsoft Defender XDR.</p>
+          <p>Throughout my career I've enabled organisations to increase their Secure Score by <span class="text-blue-600 dark:text-blue-400 font-semibold">35–60%</span> while reducing operational costs by <span class="text-blue-600 dark:text-blue-400 font-semibold">25–30%</span> through consultation and implementation of cost-efficient solutions.</p>
+          <p>I hold a German Permanent Residence permit and am based in Cottbus, Germany — fluent in English, working in German, and Tamil as my native language.</p>
+        </div>
+        <div class="mt-6 flex flex-wrap gap-3">
+          {[
+            { lang: 'English', level: 'C1 — Fluent' },
+            { lang: 'German',  level: 'A2 → B1 in progress' },
+            { lang: 'Tamil',   level: 'Native' },
+          ].map(l => (
+            <div class="px-3 py-2 rounded-lg bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700">
+              <div class="text-sm font-semibold text-gray-800 dark:text-slate-200">{l.lang}</div>
+              <div class="text-xs text-gray-500 dark:text-slate-400">{l.level}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        {[
+          { icon: '📍', label: 'Location',       value: 'Cottbus, Germany',                              href: null },
+          { icon: '🪪', label: 'Residence',      value: 'German Permanent Resident',                     href: null },
+          { icon: '🎓', label: 'Education',      value: 'BEng (Hons) — London Metropolitan University',  href: null },
+          { icon: '📧', label: 'Email',          value: 'logan-dinesh@outlook.com',                      href: 'mailto:logan-dinesh@outlook.com' },
+          { icon: '🏅', label: 'Certifications', value: '15 Active Microsoft + AWS Certs',               href: null },
+          { icon: '🔗', label: 'LinkedIn',       value: 'linkedin.com/in/loganathan-dinesh',             href: 'https://www.linkedin.com/in/loganathan-dinesh' },
+        ].map(item => (
+          <div class="bg-gray-50 dark:bg-slate-800/60 border border-gray-200 dark:border-slate-700/60 rounded-xl p-4 hover:border-blue-400 dark:hover:border-blue-500/30 transition-colors">
+            <div class="text-2xl mb-2">{item.icon}</div>
+            <div class="text-xs text-gray-400 dark:text-slate-500 uppercase tracking-wider mb-1">{item.label}</div>
+            {item.href ? (
+              <a href={item.href} target={item.href.startsWith('http') ? '_blank' : '_self'} rel="noopener noreferrer"
+                class="text-sm text-blue-600 dark:text-blue-400 font-medium hover:underline break-all">{item.value}</a>
+            ) : (
+              <div class="text-sm text-gray-800 dark:text-slate-200 font-medium">{item.value}</div>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

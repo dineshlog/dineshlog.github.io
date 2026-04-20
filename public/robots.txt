@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://dineshlog.github.io/sitemap.xml

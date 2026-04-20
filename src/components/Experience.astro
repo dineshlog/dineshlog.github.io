@@ -1,0 +1,148 @@
+---
+const jobs = [
+  {
+    company: 'ESMT Berlin',
+    companyFull: 'ESMT GmbH — European School of Management and Technology',
+    location: 'Berlin, Germany',
+    period: 'Jul 2023 – Present',
+    current: true,
+    roles: [
+      {
+        title: 'Information Security Coordinator',
+        period: 'Jan 2026 – Present',
+        highlights: [
+          'Advising and coordinating the Information Security Management team',
+          'Conducting access control reviews, security audits, and incident response planning',
+          'Managing vendor security reviews and data protection assessments',
+          'Supporting risk assessments, vulnerability mitigation, and security policy development',
+          'Coordinating awareness training and compliance reporting',
+        ],
+      },
+      {
+        title: 'Microsoft Systems Administrator',
+        period: 'Jul 2023 – Present',
+        highlights: [
+          'Delivered 7 major IT and security projects over 3 years, significantly improving security posture',
+          'Managed full M365 suite: Intune, Exchange Online, Teams, SharePoint, OneDrive, Defender XDR',
+          'Owned MDM lifecycle for Windows, macOS, iOS, and Android with Zero Trust and Conditional Access',
+          'Improved system health and security posture by 50%; produced management reports',
+          'Led ADFS, Global Secure Access (VPN replacement), Defender XDR, and CASB implementation projects',
+          'Mentored junior team members and built a certification-driven learning culture',
+        ],
+      },
+    ],
+  },
+  {
+    company: 'INFARM',
+    companyFull: 'INFARM — Indoor Urban Farming GmbH',
+    location: 'Berlin, Germany',
+    period: 'Jul 2022 – Jun 2023',
+    current: false,
+    roles: [
+      {
+        title: 'IT Systems Administrator',
+        period: 'Jul 2022 – Jun 2023',
+        highlights: [
+          'Administered IT systems for 1,500+ local and international users',
+          'Managed Azure AD, Google Workspace, and Intune MDM for 1,200+ devices',
+          'Evaluated IAM, security, and compliance; documented and implemented improvements',
+          'Implemented user auto-provisioning and SSO across Azure AD, Google Workspace, Atlassian, and BambooHR',
+          'Contributed to ERP project validation and managed documentation via SharePoint',
+        ],
+      },
+    ],
+  },
+  {
+    company: 'MicroChannel',
+    companyFull: 'MicroChannel Private Limited — Managed Service Provider',
+    location: 'Australia (remote from Sri Lanka)',
+    period: 'Oct 2018 – Jun 2022',
+    current: false,
+    roles: [
+      {
+        title: 'Senior Consultant — IT Systems',
+        period: 'Oct 2018 – Jun 2022',
+        highlights: [
+          'Served 300+ users across 7 offices in Australia and APAC, supporting 1,400+ clients',
+          'Delivered Microsoft 365, Azure, Intune MDM, and hybrid Exchange projects end-to-end',
+          'Deployed DNS, DHCP, ADFS, RRAS, NPS, and Fiber Channel SAN infrastructure',
+          'Led VMware ESXi patching, Exchange 2010→2016 migration, and cloud transition projects',
+          'Mentored junior engineers; maintained knowledge base, network diagrams, and change logs',
+        ],
+      },
+    ],
+  },
+  {
+    company: 'Involve 360 / Inbay',
+    companyFull: 'Involve 360 (Pvt) Ltd — supporting Inbay Ltd, UK',
+    location: 'Sri Lanka (remote NOC)',
+    period: 'Aug 2016 – Oct 2018',
+    current: false,
+    roles: [
+      {
+        title: 'System Support Engineer — L2/L3',
+        period: 'Aug 2016 – Oct 2018',
+        highlights: [
+          'Remote infrastructure support for 250+ UK-based MSP clients (200+ users each)',
+          '24/7 NOC — proactive monitoring, maintenance, and incident management',
+          'Administered M365, Azure, ADDS, DNS, DHCP, RRAS, and File Servers',
+          'Executed Office 365 migrations, Azure MFA rollout, and DNS hijacking remediation',
+          'Contributed to Intel Spectre/Meltdown VMware ESXi vulnerability remediation project',
+        ],
+      },
+    ],
+  },
+];
+---
+<section id="experience" class="py-20 px-4 sm:px-6 bg-white dark:bg-navy-900 transition-colors duration-300">
+  <div class="max-w-5xl mx-auto">
+    <div class="text-center mb-12">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 dark:bg-blue-500/10 border border-blue-200 dark:border-blue-500/20 text-blue-600 dark:text-blue-400 text-sm font-medium mb-4">Career</div>
+      <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white">Work Experience</h2>
+      <p class="text-gray-500 dark:text-slate-400 mt-3">10+ years across MSP, enterprise, and consulting environments in EMEA and APAC.</p>
+    </div>
+    <div class="relative">
+      <div class="absolute left-4 sm:left-6 top-0 bottom-0 w-px bg-gradient-to-b from-blue-500 via-blue-400/30 to-transparent"></div>
+      <div class="space-y-10">
+        {jobs.map((job) => (
+          <div class="relative pl-12 sm:pl-16">
+            <div class={`absolute left-2 sm:left-4 top-1.5 w-5 h-5 rounded-full border-2 ${job.current ? 'bg-blue-500 border-blue-400 shadow-lg shadow-blue-500/40' : 'bg-white dark:bg-slate-800 border-gray-300 dark:border-slate-600'} flex items-center justify-center`}>
+              {job.current && <span class="w-2 h-2 bg-white rounded-full"></span>}
+            </div>
+            <div class="bg-white dark:bg-slate-800/60 border border-gray-200 dark:border-slate-700/60 rounded-xl p-5 hover:border-blue-400 dark:hover:border-blue-500/30 transition-colors shadow-sm dark:shadow-none">
+              <div class="flex flex-wrap items-start justify-between gap-2 mb-4">
+                <div>
+                  <h3 class="text-lg font-bold text-gray-900 dark:text-white">{job.company}</h3>
+                  <p class="text-sm text-gray-500 dark:text-slate-400">{job.companyFull}</p>
+                  <div class="flex flex-wrap gap-3 mt-1.5">
+                    <span class="text-xs text-gray-400 dark:text-slate-500">📍 {job.location}</span>
+                    <span class="text-xs text-gray-400 dark:text-slate-500">🗓 {job.period}</span>
+                  </div>
+                </div>
+                {job.current && (
+                  <span class="px-2.5 py-1 text-xs bg-green-50 dark:bg-green-500/10 border border-green-300 dark:border-green-500/30 text-green-600 dark:text-green-400 rounded-full font-medium">Current</span>
+                )}
+              </div>
+              {job.roles.map((role) => (
+                <div class="mb-4 last:mb-0">
+                  <div class="flex flex-wrap items-center gap-3 mb-2">
+                    <h4 class="text-sm font-semibold text-blue-600 dark:text-blue-300">{role.title}</h4>
+                    <span class="text-xs text-gray-400 dark:text-slate-500">{role.period}</span>
+                  </div>
+                  <ul class="space-y-1.5">
+                    {role.highlights.map(h => (
+                      <li class="flex items-start gap-2 text-sm text-gray-600 dark:text-slate-400">
+                        <span class="text-blue-500 mt-1 shrink-0">›</span>
+                        <span>{h}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

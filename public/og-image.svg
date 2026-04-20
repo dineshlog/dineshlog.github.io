@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#0a0f1e"/>
+  <rect width="1200" height="630" fill="url(#grad)" opacity="0.6"/>
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1e3a8a;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#0a0f1e;stop-opacity:1"/>
+    </linearGradient>
+  </defs>
+  <circle cx="100" cy="100" r="200" fill="#3b82f6" opacity="0.08"/>
+  <circle cx="1100" cy="530" r="250" fill="#6366f1" opacity="0.08"/>
+  <circle cx="120" cy="120" r="80" fill="none" stroke="#3b82f6" stroke-width="1" opacity="0.15"/>
+  <text x="600" y="200" font-family="Inter,Arial,sans-serif" font-size="96" font-weight="800" fill="white" text-anchor="middle" dominant-baseline="middle">DL</text>
+  <text x="600" y="310" font-family="Inter,Arial,sans-serif" font-size="52" font-weight="700" fill="white" text-anchor="middle">Dinesh Loganathan</text>
+  <text x="600" y="385" font-family="Inter,Arial,sans-serif" font-size="28" font-weight="400" fill="#93c5fd" text-anchor="middle">Microsoft 365 Expert · InfoSec Specialist · Certified Trainer</text>
+  <rect x="400" y="440" width="400" height="2" fill="#3b82f6" opacity="0.4" rx="1"/>
+  <text x="600" y="510" font-family="Inter,Arial,sans-serif" font-size="22" fill="#64748b" text-anchor="middle">10+ Years · 15 Active Certs · EMEA &amp; APAC · Cottbus, Germany</text>
+</svg>
