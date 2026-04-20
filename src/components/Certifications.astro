@@ -1,114 +1,141 @@
 ---
-const activeCerts = [
-  { name: 'Information Security Administrator Associate', code: 'SC-401', issued: 'Jul 2025', expires: 'Jul 2026', badge: '/badges/sc-401.png', number: 'CC913B-N9E340' },
-  { name: 'Microsoft 365 Administrator Expert',          code: 'MS-100/101', issued: 'Jul 2021', expires: 'Jul 2026', badge: '/badges/m365-admin-expert.png', number: 'B2Y368-037AD5' },
-  { name: 'Endpoint Administrator Associate',            code: 'MD-102', issued: 'Jun 2019', expires: 'Dec 2026', badge: '/badges/endpoint-admin.png', number: '0F3FT4-CB4800' },
-  { name: 'Identity and Access Administrator Associate', code: 'SC-300', issued: 'Jan 2026', expires: 'Jan 2027', badge: '/badges/sc-300.png', number: 'CD4FB5-B20C3B' },
-  { name: 'Windows Server Hybrid Administrator Associate', code: 'AZ-800/801', issued: 'Feb 2025', expires: 'Feb 2027', badge: '/badges/ws-hybrid.png', number: '7BW5D4-436B34' },
-  { name: 'Copilot & Agent Administration Fundamentals', code: 'AB-900', issued: 'Jan 2026', expires: 'N/A', badge: '/badges/copilot-admin.png', number: 'A639A4-4N937D' },
-  { name: 'Security, Compliance & Identity Fundamentals', code: 'SC-900', issued: 'Aug 2021', expires: 'N/A', badge: '/badges/sc-900.png', number: 'CF9CF2-G5E34A' },
-  { name: 'ISC2 Certified in Cybersecurity', code: 'CC', issued: '2023', expires: 'N/A', badge: '/badges/isc2-cc.png', number: 'N/A' },
+const active = [
+  { name: 'Information Security Administrator Associate', code: 'SC-401', issued: 'Jul 2025', expires: 'Jul 2026', badge: '/badges/sc-401.png' },
+  { name: 'Microsoft 365 Administrator Expert',          code: 'MS-100/101', issued: 'Jul 2021', expires: 'Jul 2026', badge: '/badges/m365-admin-expert.png' },
+  { name: 'Endpoint Administrator Associate',            code: 'MD-102', issued: 'Jun 2019', expires: 'Dec 2026', badge: '/badges/endpoint-admin.png' },
+  { name: 'Identity and Access Administrator Associate', code: 'SC-300', issued: 'Jan 2026', expires: 'Jan 2027', badge: '/badges/sc-300.png' },
+  { name: 'Windows Server Hybrid Administrator Associate', code: 'AZ-800/801', issued: 'Feb 2025', expires: 'Feb 2027', badge: '/badges/ws-hybrid.png' },
+  { name: 'Copilot & Agent Administration Fundamentals', code: 'AB-900', issued: 'Jan 2026', expires: '—', badge: '/badges/copilot-admin.png' },
+  { name: 'Security, Compliance & Identity Fundamentals', code: 'SC-900', issued: 'Aug 2021', expires: '—', badge: '/badges/sc-900.png' },
+  { name: 'ISC2 Certified in Cybersecurity',             code: 'CC', issued: '2023', expires: '—', badge: '/badges/isc2-cc.png' },
 ];
-const historicalCerts = [
-  { name: 'Azure Administrator Associate',         code: 'AZ-103',  issued: 'Sep 2018', badge: '/badges/azure-admin.png' },
-  { name: 'Messaging Administrator Associate',     code: 'MS-202',  issued: 'Jun 2019', badge: '/badges/messaging-admin.png' },
-  { name: 'Modern Desktop Administrator Associate',code: 'MD-101',  issued: 'Jun 2019', badge: '/badges/modern-desktop.png' },
-  { name: 'Microsoft Certified Trainer',           code: 'MCT',     issued: '2018–2023', badge: '/badges/mct.png' },
-  { name: 'MCSE: Cloud Platform & Infrastructure', code: 'MCSE',    issued: 'Dec 2018', badge: '/badges/mcse-cloud.png' },
-  { name: 'MCSE: Productivity Solutions Expert',   code: 'MCSE',    issued: 'Jun 2018', badge: '/badges/mcse-productivity.png' },
-  { name: 'MCSE: Mobility',                        code: 'MCSE',    issued: 'Mar 2019', badge: '/badges/mcse-mobility.png' },
-  { name: 'MCSA: Windows Server 2016',             code: 'MCSA',    issued: 'Aug 2018', badge: '/badges/mcsa-ws2016.png' },
-  { name: 'MCSA: Windows Server 2012',             code: 'MCSA',    issued: 'Jun 2018', badge: '/badges/mcsa-ws2012.png' },
-  { name: 'MCSA: Office 365',                      code: 'MCSA',    issued: 'May 2018', badge: '/badges/mcsa-o365.png' },
-  { name: 'MCSA: Windows 10',                      code: 'MCSA',    issued: 'Sep 2018', badge: '/badges/mcsa-w10.png' },
-  { name: 'Microsoft Certified Professional',      code: 'MCP',     issued: 'Apr 2018', badge: '/badges/mcp.png' },
+const aws = [
+  { name: 'AWS Certified Solutions Architect – Associate', code: 'SAA-C03', issued: 'Mar 2020', badge: '/badges/aws-saa.png' },
 ];
-const appliedSkills = [
+const applied = [
   { name: 'Defend Against Cyberthreats with Microsoft Defender XDR', issued: 'Nov 2025', badge: '/badges/applied-xdr.png' },
-  { name: 'Information Protection & DLP with Microsoft Purview',     issued: 'Oct 2025', badge: '/badges/applied-purview.png' },
-  { name: 'Administer Active Directory Domain Services',             issued: 'Nov 2024', badge: '/badges/applied-adds.png' },
+  { name: 'Information Protection & DLP with Microsoft Purview', issued: 'Oct 2025', badge: '/badges/applied-purview.png' },
+  { name: 'Administer Active Directory Domain Services', issued: 'Nov 2024', badge: '/badges/applied-adds.png' },
 ];
-const awsCerts = [
-  { name: 'AWS Certified Solutions Architect – Associate', issued: 'Mar 2020', badge: '/badges/aws-saa.png', number: '0J41EZK2MFBE14GY' },
+const historical = [
+  { name: 'Azure Administrator Associate', code: 'AZ-103', issued: 'Sep 2018' },
+  { name: 'Messaging Administrator Associate', code: 'MS-202', issued: 'Jun 2019' },
+  { name: 'Microsoft Certified Trainer', code: 'MCT', issued: '2018–2023' },
+  { name: 'MCSE: Cloud Platform & Infrastructure', code: 'MCSE', issued: 'Dec 2018' },
+  { name: 'MCSE: Productivity Solutions Expert', code: 'MCSE', issued: 'Jun 2018' },
+  { name: 'MCSE: Mobility', code: 'MCSE', issued: 'Mar 2019' },
+  { name: 'MCSA: Windows Server 2016', code: 'MCSA', issued: 'Aug 2018' },
+  { name: 'MCSA: Windows Server 2012', code: 'MCSA', issued: 'Jun 2018' },
+  { name: 'MCSA: Office 365', code: 'MCSA', issued: 'May 2018' },
+  { name: 'MCSA: Windows 10', code: 'MCSA', issued: 'Sep 2018' },
+  { name: 'Microsoft Certified Professional', code: 'MCP', issued: 'Apr 2018' },
 ];
 ---
-<section id="certifications" class="py-20 px-4 sm:px-6 bg-gray-50 dark:bg-navy-800 transition-colors duration-300">
-  <div class="max-w-7xl mx-auto">
-    <div class="text-center mb-12">
-      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 dark:bg-blue-500/10 border border-blue-200 dark:border-blue-500/20 text-blue-600 dark:text-blue-400 text-sm font-medium mb-4">Credentials</div>
-      <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white">Certifications & Badges</h2>
-      <p class="text-gray-500 dark:text-slate-400 mt-3">15 active Microsoft certifications, AWS, Applied Skills, and ISC2 — verified on Microsoft Learn & Credly.</p>
+<section id="certifications" class="px-8 lg:px-12 py-16 border-b border-slate-100 dark:border-slate-800/50
+                                    bg-slate-50 dark:bg-[#0c1220] transition-colors duration-300">
+  <div class="max-w-3xl mb-8">
+    <p class="section-num">04 — Credentials</p>
+    <h2 class="section-heading text-4xl text-slate-900 dark:text-white">Certifications & Badges</h2>
+    <p class="mt-3 text-slate-500 dark:text-slate-400">15 active Microsoft certs, AWS Solutions Architect, ISC2 CC, and 3 Applied Skills — verified on Microsoft Learn & Credly.</p>
+    <div class="flex flex-wrap gap-3 mt-4">
       <a href="https://credly.com/users/loganathan-dinesh/badges" target="_blank" rel="noopener noreferrer"
-        class="inline-flex items-center gap-1.5 mt-3 text-sm text-blue-600 dark:text-blue-400 hover:text-blue-500 dark:hover:text-blue-300 transition-colors">
-        View all on Credly →
+        class="chip bg-orange-50 dark:bg-orange-500/10 border-orange-200 dark:border-orange-500/30 text-orange-700 dark:text-orange-400 hover:opacity-80 transition-opacity">
+        View Credly Badges →
+      </a>
+      <a href="https://learn.microsoft.com/en-us/users/logan-dinesh/transcript" target="_blank" rel="noopener noreferrer"
+        class="chip bg-blue-50 dark:bg-blue-500/10 border-blue-200 dark:border-blue-500/30 text-blue-700 dark:text-blue-400 hover:opacity-80 transition-opacity">
+        Microsoft Learn Transcript →
       </a>
     </div>
+  </div>
 
-    <h3 class="text-base font-semibold text-gray-700 dark:text-slate-200 mb-4 flex items-center gap-2">
-      <span class="w-2 h-2 bg-green-400 rounded-full"></span> Active Certifications
+  <!-- Active -->
+  <div class="mb-8">
+    <h3 class="text-xs font-semibold tracking-widest uppercase text-slate-500 dark:text-slate-400 mb-4 flex items-center gap-2" style="font-family:'JetBrains Mono',monospace">
+      <span class="w-2 h-2 bg-emerald-400 rounded-full"></span> Active Certifications
     </h3>
-    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 mb-10">
-      {activeCerts.map(cert => (
-        <div class="bg-white dark:bg-slate-800/60 border border-green-200 dark:border-green-500/20 rounded-xl p-4 flex flex-col items-center text-center hover:border-green-400 dark:hover:border-green-500/40 hover:shadow-md transition-all group">
-          <div class="w-20 h-20 mb-3 rounded-lg bg-gray-100 dark:bg-slate-700/50 border border-gray-200 dark:border-slate-600/50 flex items-center justify-center overflow-hidden">
-            <img src={cert.badge} alt={cert.name} width="80" height="80" class="w-full h-full object-contain p-1" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
+      {active.map(c => (
+        <div class="group flex flex-col items-center text-center p-4 rounded-2xl
+                    bg-white dark:bg-slate-800/40
+                    border border-emerald-200 dark:border-emerald-500/20
+                    hover:border-emerald-400 dark:hover:border-emerald-500/50
+                    card-lift shadow-sm dark:shadow-none">
+          <div class="w-16 h-16 mb-3 rounded-xl bg-slate-100 dark:bg-slate-700/50 flex items-center justify-center overflow-hidden border border-slate-200 dark:border-slate-600/50">
+            <img src={c.badge} alt={c.name} width="64" height="64" class="w-full h-full object-contain p-1"
+              onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
             <div class="hidden w-full h-full items-center justify-center text-2xl">🏅</div>
           </div>
-          <span class="text-xs font-bold text-green-600 dark:text-green-400 mb-1">{cert.code}</span>
-          <p class="text-xs text-gray-700 dark:text-slate-300 font-medium leading-tight mb-2">{cert.name}</p>
-          <span class="text-xs text-gray-400 dark:text-slate-500">Issued: {cert.issued}</span>
-          {cert.expires !== 'N/A' && <span class="text-xs text-gray-300 dark:text-slate-600">Exp: {cert.expires}</span>}
+          <span class="text-xs font-mono font-semibold text-emerald-600 dark:text-emerald-400 mb-1" style="font-family:'JetBrains Mono',monospace">{c.code}</span>
+          <p class="text-xs text-slate-700 dark:text-slate-300 leading-tight font-medium mb-1.5">{c.name}</p>
+          <span class="text-xs text-slate-400 dark:text-slate-500">Issued {c.issued}</span>
+          {c.expires !== '—' && <span class="text-xs text-slate-300 dark:text-slate-600">Exp {c.expires}</span>}
         </div>
       ))}
     </div>
+  </div>
 
-    <h3 class="text-base font-semibold text-gray-700 dark:text-slate-200 mb-4 flex items-center gap-2">
+  <!-- AWS -->
+  <div class="mb-8">
+    <h3 class="text-xs font-semibold tracking-widest uppercase text-slate-500 dark:text-slate-400 mb-4 flex items-center gap-2" style="font-family:'JetBrains Mono',monospace">
       <span class="w-2 h-2 bg-orange-400 rounded-full"></span> Cloud — AWS
     </h3>
-    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 mb-10">
-      {awsCerts.map(cert => (
-        <div class="bg-white dark:bg-slate-800/60 border border-orange-200 dark:border-orange-500/20 rounded-xl p-4 flex flex-col items-center text-center hover:border-orange-400 dark:hover:border-orange-500/40 transition-all">
-          <div class="w-20 h-20 mb-3 rounded-lg bg-gray-100 dark:bg-slate-700/50 border border-gray-200 dark:border-slate-600/50 flex items-center justify-center overflow-hidden">
-            <img src={cert.badge} alt={cert.name} width="80" height="80" class="w-full h-full object-contain p-1" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+    <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 max-w-sm">
+      {aws.map(c => (
+        <div class="flex flex-col items-center text-center p-4 rounded-2xl
+                    bg-white dark:bg-slate-800/40
+                    border border-orange-200 dark:border-orange-500/20
+                    hover:border-orange-400 dark:hover:border-orange-500/50
+                    card-lift shadow-sm dark:shadow-none">
+          <div class="w-16 h-16 mb-3 rounded-xl bg-slate-100 dark:bg-slate-700/50 flex items-center justify-center overflow-hidden border border-slate-200 dark:border-slate-600/50">
+            <img src={c.badge} alt={c.name} width="64" height="64" class="w-full h-full object-contain p-1"
+              onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
             <div class="hidden w-full h-full items-center justify-center text-2xl">🏅</div>
           </div>
-          <p class="text-xs text-gray-700 dark:text-slate-300 font-medium leading-tight mb-2">{cert.name}</p>
-          <span class="text-xs text-gray-400 dark:text-slate-500">Issued: {cert.issued}</span>
+          <span class="text-xs font-mono font-semibold text-orange-600 dark:text-orange-400 mb-1">{c.code}</span>
+          <p class="text-xs text-slate-700 dark:text-slate-300 leading-tight font-medium">{c.name}</p>
         </div>
       ))}
     </div>
+  </div>
 
-    <h3 class="text-base font-semibold text-gray-700 dark:text-slate-200 mb-4 flex items-center gap-2">
-      <span class="w-2 h-2 bg-purple-400 rounded-full"></span> Applied Skills
+  <!-- Applied Skills -->
+  <div class="mb-8">
+    <h3 class="text-xs font-semibold tracking-widest uppercase text-slate-500 dark:text-slate-400 mb-4 flex items-center gap-2" style="font-family:'JetBrains Mono',monospace">
+      <span class="w-2 h-2 bg-violet-400 rounded-full"></span> Applied Skills
     </h3>
-    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-10">
-      {appliedSkills.map(skill => (
-        <div class="bg-white dark:bg-slate-800/60 border border-purple-200 dark:border-purple-500/20 rounded-xl p-4 flex items-center gap-4 hover:border-purple-400 dark:hover:border-purple-500/40 transition-all">
-          <div class="w-16 h-16 shrink-0 rounded-lg bg-gray-100 dark:bg-slate-700/50 border border-gray-200 dark:border-slate-600/50 flex items-center justify-center overflow-hidden">
-            <img src={skill.badge} alt={skill.name} width="64" height="64" class="w-full h-full object-contain p-1" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+      {applied.map(s => (
+        <div class="flex items-center gap-4 p-4 rounded-2xl
+                    bg-white dark:bg-slate-800/40
+                    border border-violet-200 dark:border-violet-500/20
+                    hover:border-violet-400 dark:hover:border-violet-500/50
+                    card-lift shadow-sm dark:shadow-none">
+          <div class="w-14 h-14 shrink-0 rounded-xl bg-slate-100 dark:bg-slate-700/50 flex items-center justify-center overflow-hidden border border-slate-200 dark:border-slate-600/50">
+            <img src={s.badge} alt={s.name} width="56" height="56" class="w-full h-full object-contain p-1"
+              onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
             <div class="hidden w-full h-full items-center justify-center text-xl">🎯</div>
           </div>
           <div>
-            <p class="text-sm text-gray-700 dark:text-slate-300 font-medium leading-tight mb-1">{skill.name}</p>
-            <span class="text-xs text-gray-400 dark:text-slate-500">Earned: {skill.issued}</span>
+            <p class="text-sm font-medium text-slate-700 dark:text-slate-300 leading-snug mb-1">{s.name}</p>
+            <span class="text-xs font-mono text-slate-400 dark:text-slate-500">Earned {s.issued}</span>
           </div>
         </div>
       ))}
     </div>
+  </div>
 
-    <h3 class="text-base font-semibold text-gray-700 dark:text-slate-200 mb-4 flex items-center gap-2">
-      <span class="w-2 h-2 bg-gray-400 rounded-full"></span> Historical Certifications
+  <!-- Historical -->
+  <div>
+    <h3 class="text-xs font-semibold tracking-widest uppercase text-slate-500 dark:text-slate-400 mb-4 flex items-center gap-2" style="font-family:'JetBrains Mono',monospace">
+      <span class="w-2 h-2 bg-slate-400 rounded-full"></span> Historical Certifications
     </h3>
-    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-3">
-      {historicalCerts.map(cert => (
-        <div class="bg-white/60 dark:bg-slate-800/40 border border-gray-200 dark:border-slate-700/40 rounded-xl p-3 flex flex-col items-center text-center hover:border-gray-300 dark:hover:border-slate-600/60 transition-all opacity-70 hover:opacity-100">
-          <div class="w-14 h-14 mb-2 rounded-lg bg-gray-100 dark:bg-slate-700/50 border border-gray-200 dark:border-slate-600/50 flex items-center justify-center overflow-hidden">
-            <img src={cert.badge} alt={cert.name} width="56" height="56" class="w-full h-full object-contain p-1" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
-            <div class="hidden w-full h-full items-center justify-center text-lg">🎖</div>
-          </div>
-          <span class="text-xs font-bold text-gray-400 dark:text-slate-500 mb-1">{cert.code}</span>
-          <p class="text-xs text-gray-500 dark:text-slate-400 leading-tight">{cert.name}</p>
-          <span class="text-xs text-gray-300 dark:text-slate-600 mt-1">{cert.issued}</span>
+    <div class="flex flex-wrap gap-2">
+      {historical.map(c => (
+        <div class="chip bg-white dark:bg-slate-800/40 border-slate-200 dark:border-slate-700/50 text-slate-600 dark:text-slate-400 opacity-70 hover:opacity-100 transition-opacity">
+          <span class="font-semibold text-slate-400 dark:text-slate-500 mr-1">{c.code}</span>
+          {c.name.replace('MCSA: ','').replace('MCSE: ','')}
+          <span class="ml-1 text-slate-300 dark:text-slate-600">{c.issued}</span>
         </div>
       ))}
     </div>
