@@ -28,107 +28,105 @@ const {
     <meta http-equiv="X-Content-Type-Options" content="nosniff" />
     <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
     <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()" />
-    <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)" />
-    <meta name="theme-color" content="#f8fafc" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#f8fafc" />
     <title>{title}</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Figtree:ital,wght@0,300;0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <style>
       :root {
-        --sidebar-w: 18rem;
+        --sidebar-w: 17rem;
+        --accent: #2563eb;
+        --accent-dim: rgba(37,99,235,0.08);
+        --accent-glow: rgba(37,99,235,0.2);
+      }
+      .dark {
         --accent: #3b82f6;
-        --accent-dim: rgba(59,130,246,0.15);
+        --accent-dim: rgba(59,130,246,0.12);
         --accent-glow: rgba(59,130,246,0.25);
       }
       * { box-sizing: border-box; }
 
-      /* Nav active state */
-      .nav-active {
-        color: var(--accent) !important;
-        background: var(--accent-dim) !important;
-        border-left-color: var(--accent) !important;
+      body {
+        font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
       }
 
-      /* Dot-grid sidebar texture (dark mode only) */
-      .sidebar-texture {
-        background-image: radial-gradient(circle, rgba(59,130,246,0.12) 1px, transparent 1px);
-        background-size: 20px 20px;
+      .section-heading {
+        font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+        font-weight: 700;
+        line-height: 1.15;
+        letter-spacing: -0.02em;
       }
 
-      /* Section number labels */
       .section-num {
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 0.7rem;
+        font-family: 'IBM Plex Mono', monospace;
+        font-size: 0.68rem;
         font-weight: 500;
-        letter-spacing: 0.15em;
+        letter-spacing: 0.12em;
         text-transform: uppercase;
         color: var(--accent);
         display: flex;
         align-items: center;
         gap: 0.5rem;
-        margin-bottom: 0.5rem;
+        margin-bottom: 0.6rem;
       }
       .section-num::before {
         content: '';
         display: inline-block;
-        width: 1.5rem;
+        width: 1.25rem;
         height: 1px;
         background: var(--accent);
-        opacity: 0.6;
+        opacity: 0.5;
+        flex-shrink: 0;
       }
 
-      /* Consistent typography */
-      .section-heading {
-        font-family: 'Syne', sans-serif;
-        font-weight: 700;
-        line-height: 1.1;
+      .sidebar-texture {
+        background-image: radial-gradient(circle, rgba(59,130,246,0.1) 1px, transparent 1px);
+        background-size: 18px 18px;
       }
-      body { font-family: 'Figtree', sans-serif; }
 
-      /* Scrollbar styling */
-      ::-webkit-scrollbar { width: 4px; }
-      ::-webkit-scrollbar-track { background: transparent; }
-      ::-webkit-scrollbar-thumb { background: rgba(59,130,246,0.3); border-radius: 2px; }
+      .nav-active {
+        color: var(--accent) !important;
+        background: var(--accent-dim) !important;
+        border-left-color: var(--accent) !important;
+        font-weight: 600 !important;
+      }
 
-      /* Tag chips */
       .chip {
         display: inline-flex;
         align-items: center;
-        padding: 0.2rem 0.65rem;
+        padding: 0.18rem 0.6rem;
         border-radius: 9999px;
-        font-size: 0.72rem;
+        font-size: 0.7rem;
         font-weight: 500;
-        font-family: 'JetBrains Mono', monospace;
+        font-family: 'IBM Plex Mono', monospace;
         border: 1px solid;
         white-space: nowrap;
+        line-height: 1.4;
       }
 
-      /* Card hover lift */
       .card-lift {
-        transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+        transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
       }
-      .card-lift:hover {
-        transform: translateY(-2px);
-      }
+      .card-lift:hover { transform: translateY(-2px); }
+
+      ::-webkit-scrollbar { width: 3px; }
+      ::-webkit-scrollbar-track { background: transparent; }
+      ::-webkit-scrollbar-thumb { background: rgba(37,99,235,0.25); border-radius: 2px; }
 
       @media (prefers-reduced-motion: reduce) {
         *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
       }
     </style>
     <script is:inline>
+      /* Light theme is default — only switch to dark if user explicitly chose it */
       (function () {
         try {
-          var stored = localStorage.getItem('theme');
-          if (stored === 'light') {
-            document.documentElement.classList.remove('dark');
-          } else {
+          if (localStorage.getItem('theme') === 'dark') {
             document.documentElement.classList.add('dark');
           }
-        } catch (e) {
-          document.documentElement.classList.add('dark');
-        }
+        } catch (e) {}
       })();
     </script>
   </head>

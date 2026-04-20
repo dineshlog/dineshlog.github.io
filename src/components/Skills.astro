@@ -13,15 +13,15 @@ const groups = [
   { n: 'ITSM & Methodology', color: 'orange',
     skills: ['ITIL Framework','Change Management','Incident & Problem Mgmt','Jira Service Desk','Vulnerability Management','Mentoring & Training','Stakeholder Engagement','Knowledge Base Mgmt'] },
 ];
-const card: Record<string,string> = {
-  blue:    'border-blue-200   dark:border-blue-500/20   bg-blue-50/60   dark:bg-blue-500/5',
-  indigo:  'border-indigo-200 dark:border-indigo-500/20 bg-indigo-50/60 dark:bg-indigo-500/5',
-  violet:  'border-violet-200 dark:border-violet-500/20 bg-violet-50/60 dark:bg-violet-500/5',
-  cyan:    'border-cyan-200   dark:border-cyan-500/20   bg-cyan-50/60   dark:bg-cyan-500/5',
-  emerald: 'border-emerald-200 dark:border-emerald-500/20 bg-emerald-50/60 dark:bg-emerald-500/5',
-  orange:  'border-orange-200 dark:border-orange-500/20 bg-orange-50/60 dark:bg-orange-500/5',
+const cardCls: Record<string,string> = {
+  blue:    'border-blue-200   dark:border-blue-500/20   bg-blue-50/50   dark:bg-blue-500/5   hover:border-blue-300   dark:hover:border-blue-500/40',
+  indigo:  'border-indigo-200 dark:border-indigo-500/20 bg-indigo-50/50 dark:bg-indigo-500/5 hover:border-indigo-300 dark:hover:border-indigo-500/40',
+  violet:  'border-violet-200 dark:border-violet-500/20 bg-violet-50/50 dark:bg-violet-500/5 hover:border-violet-300 dark:hover:border-violet-500/40',
+  cyan:    'border-cyan-200   dark:border-cyan-500/20   bg-cyan-50/50   dark:bg-cyan-500/5   hover:border-cyan-300   dark:hover:border-cyan-500/40',
+  emerald: 'border-emerald-200 dark:border-emerald-500/20 bg-emerald-50/50 dark:bg-emerald-500/5 hover:border-emerald-300 dark:hover:border-emerald-500/40',
+  orange:  'border-orange-200 dark:border-orange-500/20 bg-orange-50/50 dark:bg-orange-500/5 hover:border-orange-300 dark:hover:border-orange-500/40',
 };
-const pill: Record<string,string> = {
+const pillCls: Record<string,string> = {
   blue:    'bg-blue-100/80   dark:bg-blue-500/15   border-blue-200   dark:border-blue-500/25   text-blue-800   dark:text-blue-300',
   indigo:  'bg-indigo-100/80 dark:bg-indigo-500/15 border-indigo-200 dark:border-indigo-500/25 text-indigo-800 dark:text-indigo-300',
   violet:  'bg-violet-100/80 dark:bg-violet-500/15 border-violet-200 dark:border-violet-500/25 text-violet-800 dark:text-violet-300',
@@ -30,21 +30,18 @@ const pill: Record<string,string> = {
   orange:  'bg-orange-100/80 dark:bg-orange-500/15 border-orange-200 dark:border-orange-500/25 text-orange-800 dark:text-orange-300',
 };
 ---
-<section id="skills" class="px-8 lg:px-12 py-16 border-b border-slate-100 dark:border-slate-800/50
-                             bg-slate-50 dark:bg-[#0c1220] transition-colors duration-300">
-  <div class="max-w-3xl mb-10">
+<section id="skills" class="px-8 lg:px-12 py-14 border-b border-slate-100 dark:border-slate-800/50 transition-colors duration-300 bg-slate-50 dark:bg-[#0c1220]">
+  <div class="max-w-3xl mb-8">
     <p class="section-num">02 — Expertise</p>
-    <h2 class="section-heading text-4xl text-slate-900 dark:text-white">Competencies & Skills</h2>
-    <p class="mt-3 text-slate-500 dark:text-slate-400">A decade of hands-on expertise across Microsoft enterprise technologies, security, and cloud infrastructure.</p>
+    <h2 class="section-heading text-3xl sm:text-4xl text-slate-900 dark:text-white">Competencies & Skills</h2>
+    <p class="mt-2.5 text-slate-500 dark:text-slate-400 text-[15px]">A decade of hands-on expertise across Microsoft enterprise technologies, security, and cloud infrastructure.</p>
   </div>
   <div class="grid sm:grid-cols-2 xl:grid-cols-3 gap-4 max-w-5xl">
     {groups.map(g => (
-      <div class={`rounded-2xl border p-5 card-lift ${card[g.color]}`}>
-        <h3 class="text-xs font-semibold tracking-widest uppercase text-slate-600 dark:text-slate-300 mb-3" style="font-family:'JetBrains Mono',monospace">{g.n}</h3>
+      <div class={`rounded-2xl border p-5 card-lift transition-colors ${cardCls[g.color]}`}>
+        <h3 class="text-[10px] font-semibold tracking-widest uppercase text-slate-600 dark:text-slate-300 mb-3" style="font-family:'IBM Plex Mono',monospace">{g.n}</h3>
         <div class="flex flex-wrap gap-1.5">
-          {g.skills.map(s => (
-            <span class={`chip ${pill[g.color]}`}>{s}</span>
-          ))}
+          {g.skills.map(s => <span class={`chip ${pillCls[g.color]}`}>{s}</span>)}
         </div>
       </div>
     ))}

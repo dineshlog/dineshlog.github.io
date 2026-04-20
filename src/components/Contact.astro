@@ -1,44 +1,33 @@
 ---
 ---
-<section id="contact" class="px-8 lg:px-12 py-16 border-b border-slate-100 dark:border-slate-800/50
-                              bg-slate-50 dark:bg-[#0c1220] transition-colors duration-300">
-  <div class="max-w-2xl">
-    <p class="section-num">08 — Get in touch</p>
-    <h2 class="section-heading text-4xl text-slate-900 dark:text-white mb-3">Let's Connect</h2>
-    <p class="text-slate-500 dark:text-slate-400 mb-8 leading-relaxed">
-      Open to consulting engagements, full-time roles, and collaborations in Microsoft 365, Security, and Modern Workplace.
+<section id="contact" class="px-8 lg:px-12 py-14 border-b border-slate-100 dark:border-slate-800/50 transition-colors duration-300 bg-white dark:bg-[#0a0f1e]">
+  <div class="max-w-3xl">
+    <p class="section-num">07 — Get in touch</p>
+    <h2 class="section-heading text-3xl sm:text-4xl text-slate-900 dark:text-white mb-2.5">Let's Connect</h2>
+    <p class="text-slate-500 dark:text-slate-400 mb-8 leading-relaxed text-[15px] text-justify max-w-2xl">
+      Open to consulting engagements, full-time roles, and collaborations in Microsoft 365, Security, and Modern Workplace. German Permanent Resident — available for roles in Hamburg, Berlin, remote, and hybrid.
     </p>
-    <div class="grid sm:grid-cols-2 gap-3 mb-8">
+    <div class="grid sm:grid-cols-2 gap-3">
       {[
-        { icon: '📧', label: 'Email',    value: 'logan-dinesh@outlook.com',          href: 'mailto:logan-dinesh@outlook.com',                         cta: 'Send email' },
-        { icon: '📞', label: 'Phone',    value: '+49 151 19496953',                   href: 'tel:+4915119496953',                                       cta: 'Call' },
-        { icon: '💼', label: 'LinkedIn', value: 'linkedin.com/in/loganathan-dinesh',  href: 'https://www.linkedin.com/in/loganathan-dinesh',            cta: 'Connect' },
-        { icon: '🏅', label: 'Credly',   value: 'credly.com/users/loganathan-dinesh', href: 'https://credly.com/users/loganathan-dinesh/badges',       cta: 'View badges' },
-        { icon: '💻', label: 'GitHub',   value: 'github.com/dineshlog',               href: 'https://github.com/dineshlog',                            cta: 'View GitHub' },
-        { icon: '📄', label: 'Resume',   value: 'Download PDF',                       href: '/Dinesh_Loganathan_Resume.pdf',                           cta: 'Download' },
+        { icon: '📧', label: 'Email',    value: 'logan-dinesh@outlook.com',           href: 'mailto:logan-dinesh@outlook.com',                     cta: 'Send email' },
+        { icon: '📞', label: 'Phone',    value: '+49 151 19496953',                    href: 'tel:+4915119496953',                                   cta: 'Call' },
+        { icon: '💼', label: 'LinkedIn', value: 'linkedin.com/in/loganathan-dinesh',   href: 'https://www.linkedin.com/in/loganathan-dinesh',        cta: 'Connect' },
+        { icon: '🏅', label: 'Credly',   value: 'credly.com/users/loganathan-dinesh',  href: 'https://credly.com/users/loganathan-dinesh/badges',   cta: 'View badges' },
+        { icon: '💻', label: 'GitHub',   value: 'github.com/dineshlog',                href: 'https://github.com/dineshlog',                        cta: 'View GitHub' },
+        { icon: '📄', label: 'Resume',   value: 'Download PDF',                        href: '/Dinesh_Loganathan_Resume.pdf',                       cta: 'Download' },
       ].map(item => (
         <a href={item.href}
           target={item.href.startsWith('mailto') || item.href.startsWith('tel') || item.href.startsWith('/') ? '_self' : '_blank'}
           rel="noopener noreferrer"
-          class="group flex items-center gap-4 p-4 rounded-2xl
-                 bg-white dark:bg-slate-800/40
-                 border border-slate-200 dark:border-slate-700/50
-                 hover:border-blue-300 dark:hover:border-blue-500/40
-                 card-lift shadow-sm dark:shadow-none">
-          <span class="text-2xl shrink-0">{item.icon}</span>
+          class="group flex items-center gap-4 p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-700/50 hover:border-blue-300 dark:hover:border-blue-500/40 card-lift shadow-sm dark:shadow-none">
+          <span class="text-xl shrink-0">{item.icon}</span>
           <div class="flex-1 min-w-0">
-            <p class="text-xs font-mono text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-0.5" style="font-family:'JetBrains Mono',monospace">{item.label}</p>
-            <p class="text-sm font-medium text-slate-800 dark:text-slate-200 truncate">{item.value}</p>
+            <p class="text-[10px] font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-0.5" style="font-family:'IBM Plex Mono',monospace">{item.label}</p>
+            <p class="text-[13px] font-semibold text-slate-800 dark:text-slate-200 truncate">{item.value}</p>
           </div>
-          <span class="text-xs font-medium text-blue-500 dark:text-blue-400 shrink-0 group-hover:text-blue-600 dark:group-hover:text-blue-300 transition-colors">{item.cta} →</span>
+          <span class="text-[11px] font-semibold text-blue-500 dark:text-blue-400 shrink-0 group-hover:text-blue-600 dark:group-hover:text-blue-300 transition-colors">{item.cta} →</span>
         </a>
       ))}
-    </div>
-    <div class="rounded-2xl bg-blue-50 dark:bg-blue-500/5 border border-blue-200 dark:border-blue-500/20 p-5 text-center">
-      <p class="text-sm text-slate-700 dark:text-slate-300">
-        📍 Based in <strong class="text-slate-900 dark:text-white">Cottbus, Germany</strong> · German Permanent Resident ·
-        Available for roles in <span class="text-blue-600 dark:text-blue-400 font-medium">Hamburg, Berlin, remote & hybrid</span>
-      </p>
     </div>
   </div>
 </section>

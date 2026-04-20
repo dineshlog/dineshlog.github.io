@@ -1,52 +1,52 @@
 ---
 const projects = [
   { title: 'Microsoft Global Secure Access', sub: 'VPN Replacement', role: 'Lead Architect',
-    desc: 'Designed and implemented Microsoft Entra Global Secure Access to replace legacy VPN infrastructure. Enforced Zero Trust principles with MFA, Conditional Access, and identity-based access control.',
-    tags: ['Entra ID','Zero Trust','Conditional Access','MFA','Network Security'], color: 'blue',
+    desc: 'Designed and implemented Microsoft Entra Global Secure Access to replace legacy VPN infrastructure, enforcing Zero Trust principles with MFA and Conditional Access policy across all users.',
+    tags: ['Entra ID','Zero Trust','Conditional Access','MFA'], color: 'blue',
     outcome: 'VPN fully decommissioned; secure remote access now identity-driven' },
   { title: 'ESET → Defender for Endpoint', sub: 'Antivirus Migration', role: 'Lead & Architect',
-    desc: 'Led the full lifecycle migration from ESET Antivirus to Microsoft Defender for Endpoint across all managed devices. Configured policies, onboarded endpoints, and validated coverage across the fleet.',
+    desc: 'Led the full lifecycle migration from ESET Antivirus to Microsoft Defender for Endpoint across all managed devices, configuring policies and validating endpoint coverage.',
     tags: ['Defender for Endpoint','Intune','Endpoint Security'], color: 'emerald',
     outcome: 'Consolidated security stack; eliminated third-party AV licensing costs' },
   { title: 'XDR Implementation', sub: 'Microsoft Defender Family', role: 'Lead Architect',
-    desc: 'End-to-end implementation of Microsoft Defender XDR covering Defender for Endpoint, Office 365, Identity, and Cloud Apps — creating a unified threat detection and response platform.',
-    tags: ['Defender XDR','Defender for Identity','SIEM','Threat Detection'], color: 'violet',
+    desc: 'End-to-end implementation of Microsoft Defender XDR covering Defender for Endpoint, Office 365, Identity, and Cloud Apps, creating a unified threat detection and response platform.',
+    tags: ['Defender XDR','Defender for Identity','SIEM'], color: 'violet',
     outcome: '50% improvement in security posture; unified incident management' },
   { title: 'Microsoft Purview', sub: 'Information Protection & Compliance', role: 'Lead Architect',
     desc: 'Implemented Microsoft Purview for data classification, sensitivity labels, DLP policies, retention management, and insider risk management across Microsoft 365 and endpoints.',
     tags: ['Purview','DLP','Sensitivity Labels','Compliance'], color: 'indigo',
     outcome: 'Full data lifecycle governance; compliance requirements met' },
-  { title: 'Defender for Cloud Apps', sub: 'CASB Implementation', role: 'Lead Architect',
-    desc: 'Deployed Microsoft Defender for Cloud Apps as a CASB to strengthen cloud application visibility, enforce application policies, and control shadow IT across the organisation.',
-    tags: ['CASB','Cloud Governance','Shadow IT','App Policies'], color: 'cyan',
+  { title: 'Defender for Cloud Apps', sub: 'CASB Deployment', role: 'Lead Architect',
+    desc: 'Deployed Microsoft Defender for Cloud Apps as a CASB to provide cloud application visibility, enforce application policies, and eliminate shadow IT across the organisation.',
+    tags: ['CASB','Cloud Governance','Shadow IT'], color: 'cyan',
     outcome: 'Full cloud app visibility; approved app catalogue enforced' },
   { title: 'MDM Platform', sub: 'Multi-platform Endpoint Management', role: 'Lead & Architect',
-    desc: 'Designed and deployed comprehensive Mobile Device Management using Microsoft Intune for Windows, macOS, iOS, and Android with compliance policies, security baselines, and app deployment.',
+    desc: 'Designed and deployed Microsoft Intune MDM for Windows, macOS, iOS, and Android with compliance policies, security baselines, app deployment, and Conditional Access integration.',
     tags: ['Intune','MDM','Windows','macOS','iOS','Android'], color: 'blue',
-    outcome: 'Full device lifecycle management; Zero Trust enforced across all platforms' },
+    outcome: 'Full device lifecycle management across all platforms; Zero Trust enforced' },
   { title: 'Zero Trust Hardening', sub: 'Security Posture Transformation', role: 'Lead Architect',
-    desc: 'Comprehensive Zero Trust assessment across identity, endpoints, apps, data, and network layers. Delivered remediation roadmap and implemented priority security hardening controls.',
-    tags: ['Zero Trust','Security Hardening','Entra ID','Defender'], color: 'orange',
-    outcome: 'Secure Score increased by 50%; Zero Trust embedded across all layers' },
+    desc: 'Comprehensive Zero Trust assessment across identity, endpoints, apps, data, and network. Delivered a remediation roadmap and implemented priority hardening controls.',
+    tags: ['Zero Trust','Security Hardening','Entra ID'], color: 'orange',
+    outcome: 'Secure Score increased 50%; Zero Trust embedded across all layers' },
   { title: 'VMware → Proxmox', sub: 'Virtualisation Migration', role: 'Lead',
-    desc: 'Led full migration from VMware ESXi to Proxmox VE including workload assessment, VM migration, network reconfiguration, and post-migration validation ensuring business continuity.',
-    tags: ['Proxmox','VMware ESXi','Virtualisation','Cost Optimisation'], color: 'emerald',
+    desc: 'Led full migration from VMware ESXi to Proxmox VE including workload assessment, VM migration, network reconfiguration, and post-migration validation ensuring full business continuity.',
+    tags: ['Proxmox','VMware ESXi','Virtualisation'], color: 'emerald',
     outcome: 'Eliminated VMware licensing costs; 100% uptime during migration' },
-  { title: 'ADFS Implementation', sub: 'Federation Services', role: 'Lead Architect',
+  { title: 'ADFS Implementation', sub: 'Federation & SSO', role: 'Lead Architect',
     desc: 'Designed and implemented ADFS for federated identity management enabling seamless SSO across enterprise applications with claims-based authentication and Azure AD hybrid identity.',
     tags: ['ADFS','SSO','Federation','Hybrid Identity'], color: 'orange',
     outcome: 'Single Sign-On across all applications; improved security and UX' },
   { title: 'Exchange Server Migration', sub: 'On-premises to Hybrid', role: 'Lead',
-    desc: 'Planned and executed Exchange Server 2010 to 2016 migration and hybrid deployment. Configured mail flow, certificates, connectors, and coexistence between on-premises and Exchange Online.',
+    desc: 'Planned and executed Exchange Server 2010 to 2016 migration and hybrid deployment, configuring mail flow, certificates, connectors, and coexistence between on-premises and Exchange Online.',
     tags: ['Exchange Server','Hybrid Exchange','Mail Migration'], color: 'indigo',
     outcome: 'Zero email downtime; seamless transition to hybrid messaging' },
   { title: 'BitLocker Deployment', sub: 'Data at Rest Encryption', role: 'Lead',
     desc: 'Enterprise-wide BitLocker deployment for data-at-rest encryption across all managed Windows endpoints with key management via Intune and automated recovery key escrow.',
     tags: ['BitLocker','Encryption','Intune','Compliance'], color: 'violet',
-    outcome: 'Full disk encryption on all endpoints; compliance requirements met' },
+    outcome: 'Full disk encryption across all endpoints; compliance requirements met' },
   { title: 'Process Automation', sub: 'PowerShell & Azure Automation', role: 'Lead Developer',
-    desc: 'Redesigned manual IT processes using PowerShell scripting and Azure Automation runbooks. Automated user provisioning, device compliance reporting, license management, and security alerts.',
-    tags: ['PowerShell','Azure Automation','Runbooks','ITSM'], color: 'cyan',
+    desc: 'Redesigned manual IT processes using PowerShell scripting and Azure Automation runbooks — automating user provisioning, device compliance reporting, license management, and security alerts.',
+    tags: ['PowerShell','Azure Automation','Runbooks'], color: 'cyan',
     outcome: '30%+ reduction in manual overhead; consistent process execution' },
 ];
 const border: Record<string,string> = {
@@ -66,29 +66,26 @@ const tag: Record<string,string> = {
   orange:  'bg-orange-50 dark:bg-orange-500/10 border-orange-200 dark:border-orange-500/25 text-orange-700 dark:text-orange-300',
 };
 ---
-<section id="projects" class="px-8 lg:px-12 py-16 border-b border-slate-100 dark:border-slate-800/50
-                               bg-white dark:bg-[#0a0f1e] transition-colors duration-300">
-  <div class="max-w-3xl mb-10">
+<section id="projects" class="px-8 lg:px-12 py-14 border-b border-slate-100 dark:border-slate-800/50 transition-colors duration-300 bg-white dark:bg-[#0a0f1e]">
+  <div class="max-w-3xl mb-8">
     <p class="section-num">05 — Portfolio</p>
-    <h2 class="section-heading text-4xl text-slate-900 dark:text-white">Projects Delivered</h2>
-    <p class="mt-3 text-slate-500 dark:text-slate-400">12 end-to-end projects led as architect and delivery lead across enterprise environments.</p>
+    <h2 class="section-heading text-3xl sm:text-4xl text-slate-900 dark:text-white">Projects Delivered</h2>
+    <p class="mt-2.5 text-slate-500 dark:text-slate-400 text-[15px]">12 end-to-end projects led as architect and delivery lead across enterprise environments.</p>
   </div>
   <div class="grid sm:grid-cols-2 xl:grid-cols-3 gap-4 max-w-5xl">
     {projects.map(p => (
-      <div class={`group flex flex-col rounded-2xl border p-5 card-lift
-                   bg-white dark:bg-slate-800/40
-                   shadow-sm dark:shadow-none ${border[p.color]}`}>
+      <div class={`flex flex-col rounded-2xl border p-5 card-lift bg-white dark:bg-slate-800/40 shadow-sm dark:shadow-none ${border[p.color]}`}>
         <div class="flex items-start justify-between mb-3">
           <div>
-            <h3 class="font-bold text-slate-900 dark:text-white text-base leading-snug" style="font-family:'Syne',sans-serif">{p.title}</h3>
-            <p class="text-xs text-slate-400 dark:text-slate-500 mt-0.5">{p.sub}</p>
+            <h3 class="font-bold text-slate-900 dark:text-white text-[14px] leading-snug tracking-tight">{p.title}</h3>
+            <p class="text-[11px] text-slate-400 dark:text-slate-500 mt-0.5">{p.sub}</p>
           </div>
-          <span class="chip bg-slate-100 dark:bg-slate-700/50 border-slate-200 dark:border-slate-600/50 text-slate-500 dark:text-slate-400 ml-2 shrink-0">{p.role}</span>
+          <span class="chip bg-slate-100 dark:bg-slate-700/50 border-slate-200 dark:border-slate-600/50 text-slate-500 dark:text-slate-400 ml-2 shrink-0 text-[10px]">{p.role}</span>
         </div>
-        <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed text-justify mb-4 flex-1">{p.desc}</p>
+        <p class="text-[13px] text-slate-600 dark:text-slate-400 leading-relaxed text-justify mb-4 flex-1">{p.desc}</p>
         <div class="bg-slate-50 dark:bg-slate-900/50 rounded-xl p-3 mb-3 border border-slate-100 dark:border-slate-700/30">
-          <p class="text-xs font-mono text-slate-400 dark:text-slate-500 mb-0.5 uppercase tracking-wider" style="font-family:'JetBrains Mono',monospace">Outcome</p>
-          <p class="text-xs text-slate-700 dark:text-slate-300 font-medium">{p.outcome}</p>
+          <p class="text-[10px] font-semibold text-slate-400 dark:text-slate-500 mb-0.5 uppercase tracking-wider" style="font-family:'IBM Plex Mono',monospace">Outcome</p>
+          <p class="text-[12px] text-slate-700 dark:text-slate-300 font-semibold leading-snug">{p.outcome}</p>
         </div>
         <div class="flex flex-wrap gap-1">
           {p.tags.map(t => <span class={`chip ${tag[p.color]}`}>{t}</span>)}
