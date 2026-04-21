@@ -12,73 +12,64 @@ const navLinks = [
 
 const keyMetrics = [
   { value: '10+', label: 'Years in IT, security, and modern workplace delivery' },
-  { value: '35-60%', label: 'Secure Score uplift delivered in transformation programs' },
-  { value: '25-30%', label: 'Operational cost reduction through platform consolidation' },
+  { value: '35–60%', label: 'Secure Score uplift delivered in transformation programs' },
+  { value: '25–30%', label: 'Operational cost reduction through platform consolidation' },
   { value: '1,500+', label: 'International users supported across enterprise operations' },
 ];
 
 const expertiseAreas = [
   {
     title: 'Microsoft 365 & Endpoint Engineering',
-    summary:
-      'Architecture and administration of Intune, Exchange Online, Teams, SharePoint, OneDrive, and M365 platform governance.',
+    summary: 'Architecture and administration of Intune, Exchange Online, Teams, SharePoint, OneDrive, and M365 platform governance.',
     points: ['Intune MDM lifecycle', 'Exchange hybrid + cloud', 'Teams and SharePoint governance', 'Endpoint compliance at scale'],
   },
   {
-    title: 'Identity, Access, and Zero Trust',
-    summary:
-      'Identity-first security controls with Entra ID, Conditional Access, MFA/SSPR, and federation hardening for distributed teams.',
+    title: 'Identity, Access & Zero Trust',
+    summary: 'Identity-first security controls with Entra ID, Conditional Access, MFA/SSPR, and federation hardening for distributed teams.',
     points: ['Conditional Access strategy', 'SSO and federation', 'Least privilege and access reviews', 'Global Secure Access rollout'],
   },
   {
     title: 'Security Operations & Compliance',
-    summary:
-      'Defender XDR and Purview implementations aligned to practical risk reduction, compliance readiness, and incident response maturity.',
+    summary: 'Defender XDR and Purview implementations aligned to practical risk reduction, compliance readiness, and incident response maturity.',
     points: ['Defender XDR implementation', 'Data protection and DLP', 'Vendor security and audits', 'Risk remediation planning'],
   },
   {
     title: 'Automation & Service Reliability',
-    summary:
-      'Process redesign with PowerShell and Azure automation to reduce manual work, accelerate response, and improve consistency.',
+    summary: 'Process redesign with PowerShell and Azure automation to reduce manual work, accelerate response, and improve consistency.',
     points: ['PowerShell orchestration', 'Runbooks and reporting', 'ITSM and change discipline', 'Knowledge transfer and mentoring'],
   },
 ];
 
 const timeline = [
   {
-    period: '2026 - Present',
+    period: '2026 – Present',
     title: 'Information Security Coordinator',
     company: 'ESMT GmbH, Berlin',
-    detail:
-      'Coordinate ISMS activities, security reviews, access governance, vendor risk assessments, and awareness initiatives across the organization.',
+    detail: 'Coordinate ISMS activities, security reviews, access governance, vendor risk assessments, and awareness initiatives across the organization.',
   },
   {
-    period: '2023 - Present',
+    period: '2023 – Present',
     title: 'Microsoft Systems Administrator',
     company: 'ESMT GmbH, Berlin',
-    detail:
-      'Led multiple M365 and security programs including Global Secure Access, Defender stack expansion, and cross-platform endpoint governance.',
+    detail: 'Led multiple M365 and security programs including Global Secure Access, Defender stack expansion, and cross-platform endpoint governance.',
   },
   {
-    period: '2022 - 2023',
+    period: '2022 – 2023',
     title: 'IT Systems Administrator',
     company: 'INFARM, Berlin',
-    detail:
-      'Managed identity, endpoint, and SaaS operations for a global workforce and improved provisioning, SSO, and compliance workflows.',
+    detail: 'Managed identity, endpoint, and SaaS operations for a global workforce and improved provisioning, SSO, and compliance workflows.',
   },
   {
-    period: '2018 - 2022',
-    title: 'Senior Consultant - IT Systems',
-    company: 'MicroChannel (Australia/APAC)',
-    detail:
-      'Delivered enterprise Microsoft, Azure, Exchange, virtualization, and infrastructure programs for MSP clients at regional scale.',
+    period: '2018 – 2022',
+    title: 'Senior Consultant – IT Systems',
+    company: 'MicroChannel (Australia / APAC)',
+    detail: 'Delivered enterprise Microsoft, Azure, Exchange, virtualization, and infrastructure programs for MSP clients at regional scale.',
   },
   {
-    period: '2016 - 2018',
+    period: '2016 – 2018',
     title: 'System Support Engineer L2/L3',
     company: 'Involve 360 / Inbay (UK NOC)',
-    detail:
-      'Provided 24/7 remote support for MSP environments covering migrations, security remediation, and infrastructure operations.',
+    detail: 'Provided 24/7 remote support for MSP environments covering migrations, security remediation, and infrastructure operations.',
   },
 ];
 
@@ -86,32 +77,32 @@ const projects = [
   {
     name: 'Global Secure Access Program',
     result: 'Legacy VPN replaced with identity-centric secure access and policy-driven controls.',
-    stack: 'Entra ID, Conditional Access, Zero Trust',
+    stack: 'Entra ID · Conditional Access · Zero Trust',
   },
   {
     name: 'Defender XDR Security Consolidation',
     result: 'Unified endpoint, identity, and cloud signals into one incident response workflow.',
-    stack: 'Defender for Endpoint, Identity, Cloud Apps',
+    stack: 'Defender for Endpoint · Identity · Cloud Apps',
   },
   {
     name: 'Purview Information Protection',
     result: 'Rolled out classification, retention, and DLP governance for regulated collaboration.',
-    stack: 'Purview, Sensitivity Labels, Compliance',
+    stack: 'Purview · Sensitivity Labels · Compliance',
   },
   {
     name: 'VMware to Proxmox Migration',
     result: 'Completed platform migration without service interruption while reducing licensing cost.',
-    stack: 'VMware ESXi, Proxmox VE, Infrastructure Ops',
+    stack: 'VMware ESXi · Proxmox VE · Infrastructure Ops',
   },
   {
     name: 'Enterprise Intune MDM Rollout',
     result: 'Standardized secure endpoint lifecycle across Windows, macOS, iOS, and Android.',
-    stack: 'Microsoft Intune, Baselines, App Deployment',
+    stack: 'Microsoft Intune · Baselines · App Deployment',
   },
   {
-    name: 'Automation and Reporting Framework',
+    name: 'Automation & Reporting Framework',
     result: 'Reduced repetitive admin effort through scripted provisioning and compliance reporting.',
-    stack: 'PowerShell, Azure Automation, Log Analytics',
+    stack: 'PowerShell · Azure Automation · Log Analytics',
   },
 ];
 
@@ -136,50 +127,64 @@ const contactLinks = [
 
 const currentYear = new Date().getFullYear();
 ---
+
 <Layout>
+  <!-- ── Navigation ── -->
   <header class="top-nav">
     <div class="container-shell top-nav-inner">
       <a href="#top" class="brand-mark">
         <span class="brand-badge">DL</span>
-        <span>
+        <span class="brand-text">
           <strong>Dinesh Loganathan</strong>
-          <small>Information Security and M365 Architect</small>
+          <small>Information Security &amp; M365 Architect</small>
         </span>
       </a>
 
       <button id="menu-toggle" class="menu-toggle" aria-expanded="false" aria-controls="primary-nav">
-        Menu
+        <span></span><span></span><span></span>
       </button>
 
       <nav id="primary-nav" class="primary-nav">
         {navLinks.map((link) => (
           <a href={`#${link.id}`}>{link.label}</a>
         ))}
-        <a href="/Dinesh_Loganathan_Resume.pdf" download class="primary-cta">Resume</a>
+        <a href="/Dinesh_Loganathan_Resume.pdf" download class="nav-cta">Resume ↓</a>
       </nav>
     </div>
   </header>
 
   <main id="top">
-    <section class="section-block hero-shell">
-      <div class="container-shell hero-grid">
-        <div class="reveal">
-          <span class="eyebrow">Portfolio 2026</span>
-          <h1 class="section-title hero-title">
-            Building secure, scalable
-            <span>digital workplace systems</span>
+
+    <!-- ── Hero ── -->
+    <section class="hero-section">
+      <div class="hero-bg" aria-hidden="true">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+      </div>
+
+      <div class="container-shell hero-inner">
+        <div class="hero-content">
+          <span class="eyebrow hero-anim" style="animation-delay:0.05s">Portfolio 2026</span>
+
+          <h1 class="hero-h1">
+            <span class="h1-line hero-anim" style="animation-delay:0.18s">Building secure,</span>
+            <span class="h1-line hero-anim" style="animation-delay:0.32s">scalable digital</span>
+            <span class="h1-line h1-accent hero-anim" style="animation-delay:0.46s"><em>workplace systems.</em></span>
           </h1>
-          <p class="section-copy">
-            I help organizations modernize Microsoft ecosystems while raising security posture, improving operational clarity,
-            and reducing unnecessary tooling overhead. My work combines architecture depth, delivery ownership, and clear communication.
+
+          <p class="hero-desc hero-anim" style="animation-delay:0.62s">
+            I help organizations modernize Microsoft ecosystems while raising security posture,
+            improving operational clarity, and reducing unnecessary tooling overhead.
+            My work combines architecture depth, delivery ownership, and clear communication.
           </p>
 
-          <div class="hero-actions">
+          <div class="hero-actions hero-anim" style="animation-delay:0.76s">
             <a href="#projects" class="action-primary">View Selected Programs</a>
             <a href="#contact" class="action-secondary">Start a Conversation</a>
           </div>
 
-          <div class="hero-tags" aria-label="Key expertise tags">
+          <div class="hero-tags hero-anim" style="animation-delay:0.9s" aria-label="Key expertise">
             <span class="pill">Microsoft 365</span>
             <span class="pill">Intune</span>
             <span class="pill">Defender XDR</span>
@@ -189,17 +194,19 @@ const currentYear = new Date().getFullYear();
           </div>
         </div>
 
-        <aside class="card profile-panel reveal">
-          <img src="/ProfilePicture.jpg" alt="Portrait of Dinesh Loganathan" />
-          <div>
-            <p class="panel-kicker">Based in Cottbus, Germany</p>
-            <h2>Dinesh Loganathan</h2>
-            <p class="panel-meta">BEng (Hons) - Computer Network and Cloud Security</p>
+        <aside class="profile-card hero-anim" style="animation-delay:0.3s">
+          <div class="profile-photo-wrap">
+            <img src="/ProfilePicture.jpg" alt="Portrait of Dinesh Loganathan" />
           </div>
-          <dl>
+          <div class="profile-info">
+            <p class="profile-location">Based in Cottbus, Germany</p>
+            <h2 class="profile-name">Dinesh Loganathan</h2>
+            <p class="profile-degree">BEng (Hons) – Computer Network &amp; Cloud Security</p>
+          </div>
+          <dl class="profile-dl">
             <div>
               <dt>Current focus</dt>
-              <dd>Information Security Coordination, M365 Architecture, and Governance</dd>
+              <dd>Information Security Coordination, M365 Architecture &amp; Governance</dd>
             </div>
             <div>
               <dt>Work style</dt>
@@ -207,42 +214,56 @@ const currentYear = new Date().getFullYear();
             </div>
             <div>
               <dt>Availability</dt>
-              <dd>Open to consulting and full-time opportunities (remote/hybrid)</dd>
+              <dd>Open to consulting and full-time opportunities (remote / hybrid)</dd>
             </div>
           </dl>
         </aside>
       </div>
+
+      <div class="hero-scroll-hint" aria-hidden="true">
+        <span>Scroll</span>
+        <div class="scroll-line"></div>
+      </div>
     </section>
 
-    <section id="profile" class="section-block">
+    <!-- ── Profile / Metrics ── -->
+    <section id="profile" class="section-block metrics-section">
       <div class="container-shell">
-        <span class="eyebrow">Profile Snapshot</span>
-        <h2 class="section-title">Impact-oriented delivery, not just platform administration</h2>
-        <p class="section-copy">
-          Across MSP, enterprise, and consulting environments, I have delivered complex Microsoft and security programs with a focus
-          on risk reduction, reliability, and measurable business outcomes.
-        </p>
+        <div class="metrics-head reveal">
+          <span class="eyebrow">Profile Snapshot</span>
+          <h2 class="section-title">Impact-oriented delivery, not just platform administration</h2>
+          <p class="section-copy">
+            Across MSP, enterprise, and consulting environments, I have delivered complex Microsoft and security
+            programs with a focus on risk reduction, reliability, and measurable business outcomes.
+          </p>
+        </div>
 
         <div class="metric-grid">
-          {keyMetrics.map((metric) => (
-            <article class="card metric-card reveal">
-              <p>{metric.value}</p>
-              <h3>{metric.label}</h3>
+          {keyMetrics.map((metric, i) => (
+            <article class="metric-card reveal" style={`transition-delay:${i * 0.1}s`}>
+              <p class="metric-value">{metric.value}</p>
+              <p class="metric-label">{metric.label}</p>
             </article>
           ))}
         </div>
       </div>
     </section>
 
-    <section id="expertise" class="section-block tint-section">
+    <!-- ── Expertise ── -->
+    <section id="expertise" class="section-block expertise-section">
       <div class="container-shell">
-        <span class="eyebrow">Expertise</span>
-        <h2 class="section-title">Structured capability across platform, security, and operations</h2>
+        <div class="reveal">
+          <span class="eyebrow">Expertise</span>
+          <h2 class="section-title">Structured capability across platform, security, and operations</h2>
+        </div>
 
         <div class="expertise-grid">
-          {expertiseAreas.map((area) => (
-            <article class="card expertise-card reveal">
-              <h3>{area.title}</h3>
+          {expertiseAreas.map((area, i) => (
+            <article class="expertise-card reveal" style={`transition-delay:${i * 0.1}s`}>
+              <div class="expertise-card-top">
+                <span class="expertise-num">0{i + 1}</span>
+                <h3>{area.title}</h3>
+              </div>
               <p>{area.summary}</p>
               <ul>
                 {area.points.map((point) => (
@@ -255,85 +276,114 @@ const currentYear = new Date().getFullYear();
       </div>
     </section>
 
-    <section id="experience" class="section-block">
+    <!-- ── Experience ── -->
+    <section id="experience" class="section-block experience-section">
       <div class="container-shell">
-        <span class="eyebrow">Experience</span>
-        <h2 class="section-title">Career progression across enterprise and managed services</h2>
+        <div class="reveal">
+          <span class="eyebrow">Experience</span>
+          <h2 class="section-title">Career progression across enterprise and managed services</h2>
+        </div>
 
-        <div class="timeline reveal">
-          {timeline.map((item) => (
-            <article class="timeline-item">
-              <p class="timeline-period">{item.period}</p>
-              <h3>{item.title}</h3>
-              <h4>{item.company}</h4>
-              <p>{item.detail}</p>
+        <div class="timeline">
+          {timeline.map((item, i) => (
+            <article class="timeline-item reveal" style={`transition-delay:${i * 0.08}s`}>
+              <div class="timeline-dot" aria-hidden="true"></div>
+              <div class="timeline-body">
+                <p class="timeline-period">{item.period}</p>
+                <h3 class="timeline-title">{item.title}</h3>
+                <p class="timeline-company">{item.company}</p>
+                <p class="timeline-detail">{item.detail}</p>
+              </div>
             </article>
           ))}
         </div>
       </div>
     </section>
 
-    <section id="projects" class="section-block tint-section">
+    <!-- ── Projects ── -->
+    <section id="projects" class="section-block projects-section">
       <div class="container-shell">
-        <span class="eyebrow">Selected Programs</span>
-        <h2 class="section-title">Programs delivered from architecture to implementation</h2>
+        <div class="reveal">
+          <span class="eyebrow">Selected Programs</span>
+          <h2 class="section-title">Programs delivered from architecture to implementation</h2>
+        </div>
 
         <div class="project-grid">
-          {projects.map((project) => (
-            <article class="card project-card reveal">
-              <h3>{project.name}</h3>
-              <p>{project.result}</p>
-              <span>{project.stack}</span>
+          {projects.map((project, i) => (
+            <article class="project-card reveal" style={`transition-delay:${i * 0.08}s`}>
+              <div class="project-card-inner">
+                <h3>{project.name}</h3>
+                <p>{project.result}</p>
+                <div class="project-stack">{project.stack}</div>
+              </div>
             </article>
           ))}
         </div>
       </div>
     </section>
 
-    <section id="credentials" class="section-block">
+    <!-- ── Credentials ── -->
+    <section id="credentials" class="section-block credentials-section">
       <div class="container-shell">
-        <span class="eyebrow">Credentials</span>
-        <h2 class="section-title">Microsoft certification track with security and cloud depth</h2>
-        <p class="section-copy">
-          Additional active and transcript-backed credentials are available through Microsoft Learn and Credly.
-        </p>
+        <div class="reveal">
+          <span class="eyebrow">Credentials</span>
+          <h2 class="section-title">Microsoft certification track with security and cloud depth</h2>
+          <p class="section-copy">
+            Additional active and transcript-backed credentials available through Microsoft Learn and Credly.
+          </p>
+        </div>
 
         <div class="cred-links reveal">
-          <a href="https://learn.microsoft.com/en-us/users/logan-dinesh/transcript" target="_blank" rel="noopener noreferrer">Microsoft Learn Transcript</a>
-          <a href="https://credly.com/users/loganathan-dinesh/badges" target="_blank" rel="noopener noreferrer">Credly Badge Profile</a>
+          <a href="https://learn.microsoft.com/en-us/users/logan-dinesh/transcript" target="_blank" rel="noopener noreferrer" class="cred-link-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Microsoft Learn Transcript
+          </a>
+          <a href="https://credly.com/users/loganathan-dinesh/badges" target="_blank" rel="noopener noreferrer" class="cred-link-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
+            Credly Badge Profile
+          </a>
         </div>
 
         <div class="badge-grid">
-          {certifications.map((cert) => (
-            <article class="card badge-card reveal">
-              <img src={cert.image} alt={cert.label} loading="lazy" />
-              <p>{cert.label}</p>
+          {certifications.map((cert, i) => (
+            <article class="badge-card reveal" style={`transition-delay:${i * 0.07}s`}>
+              <div class="badge-img-wrap">
+                <img src={cert.image} alt={cert.label} loading="lazy" />
+              </div>
+              <p class="badge-label">{cert.label}</p>
             </article>
           ))}
         </div>
       </div>
     </section>
 
-    <section id="contact" class="section-block tint-section">
+    <!-- ── Contact ── -->
+    <section id="contact" class="section-block contact-section">
       <div class="container-shell contact-grid">
-        <div class="reveal">
+        <div class="contact-left reveal">
           <span class="eyebrow">Contact</span>
           <h2 class="section-title">Open for collaboration and security-first modernization projects</h2>
           <p class="section-copy">
-            Available for consulting engagements and full-time opportunities focused on Microsoft 365, information security,
-            endpoint strategy, and cloud operations.
+            Available for consulting engagements and full-time opportunities focused on Microsoft 365,
+            information security, endpoint strategy, and cloud operations.
           </p>
-          <div class="hero-actions">
+          <div class="hero-actions" style="margin-top:32px">
             <a href="/Dinesh_Loganathan_Resume.pdf" download class="action-primary">Download Resume</a>
             <a href="mailto:logan-dinesh@outlook.com" class="action-secondary">Email Directly</a>
           </div>
         </div>
 
-        <div class="contact-list reveal">
+        <div class="contact-right reveal" style="transition-delay:0.1s">
           {contactLinks.map((link) => (
-            <a href={link.href} target={link.href.startsWith('http') ? '_blank' : '_self'} rel="noopener noreferrer" class="card contact-item">
-              <h3>{link.label}</h3>
-              <p>{link.value}</p>
+            <a
+              href={link.href}
+              target={link.href.startsWith('http') ? '_blank' : '_self'}
+              rel="noopener noreferrer"
+              class="contact-item"
+            >
+              <span class="contact-label">{link.label}</span>
+              <span class="contact-value">{link.value}</span>
+              <span class="contact-arrow" aria-hidden="true">→</span>
             </a>
           ))}
         </div>
@@ -344,47 +394,75 @@ const currentYear = new Date().getFullYear();
   <footer class="site-footer">
     <div class="container-shell footer-inner">
       <p>© {currentYear} Dinesh Loganathan</p>
-      <p>Built with Astro for GitHub Pages</p>
+      <p>Built with Astro · Deployed on GitHub Pages</p>
     </div>
   </footer>
 
+  <!-- ── Mobile nav toggle ── -->
   <script is:inline>
     (function () {
       var toggle = document.getElementById('menu-toggle');
       var nav = document.getElementById('primary-nav');
-
       if (!toggle || !nav) return;
-
       toggle.addEventListener('click', function () {
         var open = nav.classList.toggle('is-open');
         toggle.setAttribute('aria-expanded', String(open));
+        toggle.classList.toggle('is-open', open);
       });
-
       nav.querySelectorAll('a').forEach(function (link) {
         link.addEventListener('click', function () {
           nav.classList.remove('is-open');
           toggle.setAttribute('aria-expanded', 'false');
+          toggle.classList.remove('is-open');
         });
       });
     })();
   </script>
 
   <style>
+    /* ─── Keyframes ─── */
+    @keyframes hero-in {
+      from { opacity: 0; transform: translateY(32px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes drift1 {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      50%       { transform: translate(-50px, 70px) scale(1.08); }
+    }
+
+    @keyframes drift2 {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      50%       { transform: translate(70px, -50px) scale(0.94); }
+    }
+
+    @keyframes drift3 {
+      0%, 100% { transform: translate(-50%, -50%) scale(1); }
+      50%       { transform: translate(-50%, -50%) scale(1.35); }
+    }
+
+    @keyframes scroll-pulse {
+      0%, 100% { transform: scaleY(1); opacity: 0.5; }
+      50%       { transform: scaleY(0.4); opacity: 1; }
+    }
+
+    /* ─── NAV ─── */
     .top-nav {
       position: sticky;
       top: 0;
       z-index: 60;
-      backdrop-filter: blur(10px);
-      background: rgba(246, 247, 243, 0.86);
-      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(16px) saturate(180%);
+      -webkit-backdrop-filter: blur(16px) saturate(180%);
+      background: rgba(8, 12, 24, 0.82);
+      border-bottom: 1px solid rgba(201, 169, 110, 0.08);
     }
 
     .top-nav-inner {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 14px;
-      min-height: 74px;
+      gap: 16px;
+      min-height: 72px;
     }
 
     .brand-mark {
@@ -392,97 +470,207 @@ const currentYear = new Date().getFullYear();
       align-items: center;
       gap: 12px;
       text-decoration: none;
-      min-width: 0;
-    }
-
-    .brand-mark span strong {
-      display: block;
-      font-size: 0.94rem;
-      line-height: 1.1;
-    }
-
-    .brand-mark span small {
-      display: block;
-      color: var(--muted);
-      font-size: 0.74rem;
-      letter-spacing: 0.02em;
-      margin-top: 2px;
     }
 
     .brand-badge {
-      width: 40px;
-      height: 40px;
-      border-radius: 13px;
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
       display: grid;
       place-items: center;
-      color: white;
-      background: linear-gradient(140deg, var(--brand), var(--brand-strong));
-      font-weight: 800;
-      letter-spacing: 0.04em;
+      background: linear-gradient(135deg, rgba(201,169,110,0.2), rgba(201,169,110,0.08));
+      border: 1px solid rgba(201, 169, 110, 0.25);
+      color: var(--brand);
+      font-weight: 700;
+      font-size: 0.88rem;
+      letter-spacing: 0.05em;
       flex-shrink: 0;
+    }
+
+    .brand-text strong {
+      display: block;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.1;
+    }
+
+    .brand-text small {
+      display: block;
+      font-size: 0.7rem;
+      color: var(--muted);
+      letter-spacing: 0.02em;
+      margin-top: 2px;
     }
 
     .primary-nav {
       display: flex;
       align-items: center;
-      gap: 7px;
+      gap: 4px;
     }
 
     .primary-nav a {
       text-decoration: none;
       color: var(--muted);
-      font-weight: 600;
-      font-size: 0.89rem;
-      padding: 8px 11px;
-      border-radius: 999px;
-      transition: color 0.2s ease, background-color 0.2s ease;
+      font-weight: 500;
+      font-size: 0.84rem;
+      padding: 7px 12px;
+      border-radius: 8px;
+      letter-spacing: 0.01em;
+      transition: color 0.2s, background 0.2s;
     }
 
     .primary-nav a:hover {
-      color: var(--brand-strong);
-      background: rgba(31, 111, 120, 0.11);
+      color: var(--brand);
+      background: rgba(201, 169, 110, 0.07);
     }
 
-    .primary-nav .primary-cta {
-      background: var(--brand-strong);
-      color: white;
-      padding-inline: 15px;
+    .nav-cta {
+      background: rgba(201, 169, 110, 0.1) !important;
+      border: 1px solid rgba(201, 169, 110, 0.25) !important;
+      color: var(--brand) !important;
+      font-weight: 600 !important;
+      margin-left: 6px;
+      letter-spacing: 0.03em !important;
     }
 
-    .primary-nav .primary-cta:hover {
-      background: #0b3a40;
-      color: white;
+    .nav-cta:hover {
+      background: rgba(201, 169, 110, 0.18) !important;
+      border-color: rgba(201, 169, 110, 0.45) !important;
     }
 
     .menu-toggle {
       display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
       border: 1px solid var(--line);
-      background: var(--surface);
-      color: var(--text);
-      font-weight: 700;
-      border-radius: 10px;
-      padding: 8px 12px;
-      font-size: 0.83rem;
+      border-radius: 8px;
+      padding: 9px 10px;
+      cursor: pointer;
     }
 
-    .hero-shell {
-      padding-top: 42px;
+    .menu-toggle span {
+      display: block;
+      width: 18px;
+      height: 1.5px;
+      background: var(--muted);
+      border-radius: 1px;
+      transition: transform 0.25s ease, opacity 0.25s ease;
     }
 
-    .hero-grid {
+    .menu-toggle.is-open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .menu-toggle.is-open span:nth-child(2) { opacity: 0; }
+    .menu-toggle.is-open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+    /* ─── HERO ─── */
+    .hero-section {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      overflow: hidden;
+      padding: 140px 0 100px;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .hero-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(201, 169, 110, 0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(201, 169, 110, 0.025) 1px, transparent 1px);
+      background-size: 72px 72px;
+    }
+
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(90px);
+      pointer-events: none;
+    }
+
+    .orb-1 {
+      width: 800px;
+      height: 800px;
+      background: radial-gradient(circle at center, rgba(201, 169, 110, 0.13), transparent 65%);
+      top: -300px;
+      right: -200px;
+      animation: drift1 14s ease-in-out infinite;
+    }
+
+    .orb-2 {
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle at center, rgba(77, 155, 191, 0.1), transparent 65%);
+      bottom: -200px;
+      left: -150px;
+      animation: drift2 18s ease-in-out infinite;
+    }
+
+    .orb-3 {
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle at center, rgba(201, 169, 110, 0.07), transparent 65%);
+      top: 50%;
+      left: 38%;
+      animation: drift3 11s ease-in-out infinite;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
       display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: 34px;
-      align-items: start;
+      grid-template-columns: 1.25fr 0.9fr;
+      gap: 64px;
+      align-items: center;
     }
 
-    .hero-title span {
-      color: var(--brand-strong);
+    .hero-anim {
+      opacity: 0;
+      animation: hero-in 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+
+    .hero-h1 {
+      margin: 20px 0 0;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3rem, 6.5vw, 5.8rem);
+      font-weight: 600;
+      line-height: 1.03;
+      letter-spacing: -0.02em;
+      color: var(--text);
+    }
+
+    .h1-line {
       display: block;
     }
 
+    .h1-accent {
+      color: var(--brand);
+    }
+
+    .h1-accent em {
+      font-style: italic;
+    }
+
+    .hero-desc {
+      margin: 24px 0 0;
+      max-width: 54ch;
+      color: var(--muted);
+      font-size: 1.04rem;
+      line-height: 1.8;
+      font-weight: 400;
+    }
+
     .hero-actions {
-      margin-top: 28px;
+      margin-top: 34px;
       display: flex;
       flex-wrap: wrap;
       gap: 12px;
@@ -492,380 +680,671 @@ const currentYear = new Date().getFullYear();
     .action-secondary {
       display: inline-flex;
       align-items: center;
-      justify-content: center;
       text-decoration: none;
       border-radius: 999px;
-      padding: 11px 18px;
-      font-weight: 700;
-      font-size: 0.9rem;
-      transition: transform 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+      padding: 13px 26px;
+      font-weight: 600;
+      font-size: 0.88rem;
+      letter-spacing: 0.03em;
+      transition: transform 0.22s ease, box-shadow 0.22s ease, background 0.22s ease, border-color 0.22s ease;
     }
 
     .action-primary {
-      background: var(--brand-strong);
-      border: 1px solid var(--brand-strong);
-      color: #fff;
+      background: var(--brand);
+      color: #080c18;
+      border: 1px solid var(--brand);
     }
 
     .action-primary:hover {
-      transform: translateY(-1px);
-      background: #0b3a40;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 36px rgba(201, 169, 110, 0.35);
+      background: var(--brand-strong);
+      border-color: var(--brand-strong);
     }
 
     .action-secondary {
       background: transparent;
-      border: 1px solid rgba(16, 72, 79, 0.35);
-      color: var(--brand-strong);
+      color: var(--brand);
+      border: 1px solid rgba(201, 169, 110, 0.28);
     }
 
     .action-secondary:hover {
-      transform: translateY(-1px);
-      background: rgba(31, 111, 120, 0.09);
+      transform: translateY(-2px);
+      background: rgba(201, 169, 110, 0.08);
+      border-color: rgba(201, 169, 110, 0.5);
     }
 
     .hero-tags {
-      margin-top: 22px;
+      margin-top: 28px;
       display: flex;
       flex-wrap: wrap;
-      gap: 10px;
+      gap: 8px;
     }
 
-    .profile-panel {
-      padding: 18px;
+    /* Profile card */
+    .profile-card {
+      background: var(--surface);
+      border: 1px solid rgba(201, 169, 110, 0.14);
+      border-radius: 20px;
+      padding: 22px;
+      box-shadow: var(--shadow), var(--shadow-gold);
       display: grid;
-      gap: 14px;
+      gap: 18px;
     }
 
-    .profile-panel img {
+    .profile-photo-wrap {
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      background: linear-gradient(135deg, rgba(201,169,110,0.1), rgba(77,155,191,0.05));
+    }
+
+    .profile-photo-wrap::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 12px;
+      background: linear-gradient(to bottom, transparent 55%, rgba(8,12,24,0.5));
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .profile-card img {
       width: 100%;
-      max-height: 310px;
-      object-fit: contain;
-      background: linear-gradient(180deg, #f9fbf7, #edf2ea);
-      border: 1px solid #e2e8df;
-      border-radius: 14px;
+      max-height: 300px;
+      object-fit: cover;
+      object-position: top center;
+      border-radius: 12px;
       display: block;
     }
 
-    .panel-kicker {
-      margin: 0;
-      color: var(--brand-strong);
-      font-size: 0.78rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-    }
-
-    .profile-panel h2 {
-      margin: 3px 0 4px;
-      font-family: 'Fraunces', serif;
-      font-size: 1.55rem;
-      line-height: 1.2;
-    }
-
-    .panel-meta {
-      margin: 0;
-      color: var(--muted);
-      font-size: 0.94rem;
-    }
-
-    .profile-panel dl {
-      margin: 2px 0 0;
+    .profile-info {
       display: grid;
-      gap: 10px;
+      gap: 4px;
     }
 
-    .profile-panel dt {
-      color: var(--brand-strong);
-      font-size: 0.75rem;
-      letter-spacing: 0.08em;
+    .profile-location {
+      margin: 0;
+      font-size: 0.68rem;
       text-transform: uppercase;
-      font-weight: 700;
-      margin-bottom: 4px;
+      letter-spacing: 0.18em;
+      font-weight: 600;
+      color: var(--brand);
     }
 
-    .profile-panel dd {
+    .profile-name {
+      margin: 4px 0 0;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem;
+      font-weight: 600;
+      line-height: 1.15;
+      color: var(--text);
+    }
+
+    .profile-degree {
+      margin: 2px 0 0;
+      color: var(--muted);
+      font-size: 0.84rem;
+      line-height: 1.45;
+    }
+
+    .profile-dl {
+      margin: 0;
+      display: grid;
+      gap: 12px;
+      border-top: 1px solid var(--line-subtle);
+      padding-top: 16px;
+    }
+
+    .profile-dl dt {
+      font-size: 0.64rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--brand);
+      font-weight: 600;
+      margin-bottom: 3px;
+    }
+
+    .profile-dl dd {
       margin: 0;
       color: var(--muted);
-      font-size: 0.9rem;
-      line-height: 1.5;
+      font-size: 0.86rem;
+      line-height: 1.55;
+    }
+
+    .hero-scroll-hint {
+      position: absolute;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 0.66rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      opacity: 0.5;
+      z-index: 1;
+    }
+
+    .scroll-line {
+      width: 1px;
+      height: 36px;
+      background: var(--brand);
+      transform-origin: top center;
+      animation: scroll-pulse 2s ease-in-out infinite;
+    }
+
+    /* ─── METRICS ─── */
+    .metrics-section {
+      border-top: 1px solid var(--line-subtle);
+    }
+
+    .metrics-head {
+      margin-bottom: 48px;
     }
 
     .metric-grid {
       display: grid;
+      grid-template-columns: repeat(4, 1fr);
       gap: 16px;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      margin-top: 26px;
     }
 
     .metric-card {
-      padding: 20px 18px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 28px 24px;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
     }
 
-    .metric-card p {
+    .metric-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--brand), transparent);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .metric-card:hover {
+      border-color: rgba(201, 169, 110, 0.25);
+      box-shadow: var(--glow-hover);
+      transform: translateY(-3px);
+    }
+
+    .metric-card:hover::before {
+      opacity: 1;
+    }
+
+    .metric-value {
       margin: 0;
-      font-family: 'Fraunces', serif;
-      font-size: clamp(1.75rem, 5vw, 2.5rem);
-      color: var(--brand-strong);
-      line-height: 1;
-    }
-
-    .metric-card h3 {
-      margin: 8px 0 0;
-      font-size: 0.96rem;
-      line-height: 1.45;
-      color: var(--muted);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.4rem, 4.5vw, 3.2rem);
       font-weight: 600;
+      color: var(--brand);
+      line-height: 1;
+      letter-spacing: -0.02em;
     }
 
-    .tint-section {
-      background: linear-gradient(180deg, transparent, rgba(31, 111, 120, 0.06) 20%, rgba(31, 111, 120, 0.04));
-      border-top: 1px solid var(--line);
-      border-bottom: 1px solid var(--line);
+    .metric-label {
+      margin: 10px 0 0;
+      color: var(--muted);
+      font-size: 0.86rem;
+      line-height: 1.55;
+      font-weight: 400;
+    }
+
+    /* ─── EXPERTISE ─── */
+    .expertise-section {
+      background: linear-gradient(180deg, transparent, rgba(201, 169, 110, 0.025) 30%, rgba(201, 169, 110, 0.015) 100%);
+      border-top: 1px solid var(--line-subtle);
+      border-bottom: 1px solid var(--line-subtle);
     }
 
     .expertise-grid {
       display: grid;
+      grid-template-columns: repeat(2, 1fr);
       gap: 16px;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      margin-top: 24px;
+      margin-top: 40px;
     }
 
     .expertise-card {
-      padding: 22px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 28px;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .expertise-card:hover {
+      border-color: rgba(201, 169, 110, 0.2);
+      box-shadow: var(--glow-hover);
+      transform: translateY(-3px);
+    }
+
+    .expertise-card-top {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .expertise-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.4rem;
+      font-weight: 400;
+      color: rgba(201, 169, 110, 0.2);
+      line-height: 1;
+      flex-shrink: 0;
+      margin-top: -4px;
     }
 
     .expertise-card h3 {
       margin: 0;
-      font-size: 1.13rem;
-      line-height: 1.35;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem;
+      font-weight: 600;
+      line-height: 1.25;
+      color: var(--text);
     }
 
-    .expertise-card p {
-      margin: 8px 0 0;
+    .expertise-card > p {
+      margin: 0;
       color: var(--muted);
-      font-size: 0.94rem;
+      font-size: 0.9rem;
+      line-height: 1.7;
     }
 
     .expertise-card ul {
-      margin: 14px 0 0;
+      margin: 18px 0 0;
       padding: 0;
       list-style: none;
       display: grid;
-      gap: 8px;
+      gap: 9px;
+      border-top: 1px solid var(--line-subtle);
+      padding-top: 16px;
     }
 
     .expertise-card li {
       position: relative;
-      padding-left: 15px;
-      color: #213140;
-      font-size: 0.9rem;
-      font-weight: 600;
+      padding-left: 16px;
+      color: var(--muted-lt);
+      font-size: 0.87rem;
+      font-weight: 500;
     }
 
     .expertise-card li::before {
       content: '';
-      width: 6px;
-      height: 6px;
-      border-radius: 999px;
-      background: var(--accent);
       position: absolute;
       left: 0;
-      top: 0.53rem;
+      top: 0.52rem;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--brand);
+      opacity: 0.6;
+    }
+
+    /* ─── EXPERIENCE ─── */
+    .experience-section {
+      border-top: 1px solid var(--line-subtle);
     }
 
     .timeline {
+      margin-top: 48px;
       position: relative;
-      margin-top: 25px;
-      padding-left: 22px;
       display: grid;
-      gap: 14px;
+      gap: 0;
+      padding-left: 32px;
     }
 
     .timeline::before {
       content: '';
       position: absolute;
-      left: 5px;
-      top: 4px;
-      bottom: 4px;
-      width: 2px;
-      background: rgba(16, 72, 79, 0.2);
+      left: 7px;
+      top: 12px;
+      bottom: 12px;
+      width: 1px;
+      background: linear-gradient(to bottom, var(--brand), rgba(201, 169, 110, 0.1));
     }
 
     .timeline-item {
+      position: relative;
+      display: flex;
+      gap: 24px;
+      padding-bottom: 32px;
+    }
+
+    .timeline-item:last-child {
+      padding-bottom: 0;
+    }
+
+    .timeline-dot {
+      position: absolute;
+      left: -27px;
+      top: 14px;
+      width: 13px;
+      height: 13px;
+      border-radius: 50%;
+      border: 2px solid var(--brand);
+      background: var(--bg);
+      flex-shrink: 0;
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .timeline-item:hover .timeline-dot {
+      background: var(--brand);
+      box-shadow: 0 0 14px rgba(201, 169, 110, 0.4);
+    }
+
+    .timeline-body {
       background: var(--surface);
       border: 1px solid var(--line);
       border-radius: 14px;
-      padding: 16px;
-      box-shadow: var(--shadow-soft);
-      position: relative;
+      padding: 20px 22px;
+      width: 100%;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
     }
 
-    .timeline-item::before {
-      content: '';
-      position: absolute;
-      left: -21px;
-      top: 20px;
-      width: 12px;
-      height: 12px;
-      border-radius: 999px;
-      border: 2px solid var(--brand-strong);
-      background: var(--bg);
+    .timeline-item:hover .timeline-body {
+      border-color: rgba(201, 169, 110, 0.2);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
     }
 
     .timeline-period {
       margin: 0;
-      font-size: 0.75rem;
-      letter-spacing: 0.08em;
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: var(--brand-strong);
-      font-weight: 700;
+      color: var(--brand);
+      font-weight: 600;
     }
 
-    .timeline-item h3 {
+    .timeline-title {
+      margin: 6px 0 0;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem;
+      font-weight: 600;
+      line-height: 1.25;
+      color: var(--text);
+    }
+
+    .timeline-company {
       margin: 4px 0 0;
-      font-size: 1.06rem;
-      line-height: 1.3;
+      color: var(--muted-lt);
+      font-size: 0.85rem;
+      font-weight: 500;
     }
 
-    .timeline-item h4 {
-      margin: 4px 0 0;
+    .timeline-detail {
+      margin: 10px 0 0;
       color: var(--muted);
-      font-size: 0.91rem;
-      font-weight: 700;
+      font-size: 0.88rem;
+      line-height: 1.7;
     }
 
-    .timeline-item p {
-      margin: 8px 0 0;
-      color: var(--muted);
-      font-size: 0.92rem;
-      line-height: 1.55;
+    /* ─── PROJECTS ─── */
+    .projects-section {
+      background: linear-gradient(180deg, transparent, rgba(77, 155, 191, 0.03) 40%, transparent);
+      border-top: 1px solid var(--line-subtle);
+      border-bottom: 1px solid var(--line-subtle);
     }
 
     .project-grid {
       display: grid;
+      grid-template-columns: repeat(3, 1fr);
       gap: 16px;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      margin-top: 24px;
+      margin-top: 40px;
     }
 
     .project-card {
-      padding: 20px;
-      display: grid;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+      position: relative;
+    }
+
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--brand), transparent);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .project-card:hover {
+      border-color: rgba(201, 169, 110, 0.22);
+      box-shadow: var(--glow-hover);
+      transform: translateY(-4px);
+    }
+
+    .project-card:hover::before {
+      opacity: 1;
+    }
+
+    .project-card-inner {
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
       gap: 10px;
+      height: 100%;
     }
 
     .project-card h3 {
       margin: 0;
-      font-size: 1.05rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      font-weight: 600;
       line-height: 1.3;
+      color: var(--text);
     }
 
     .project-card p {
       margin: 0;
       color: var(--muted);
-      font-size: 0.92rem;
-      line-height: 1.55;
+      font-size: 0.87rem;
+      line-height: 1.65;
+      flex: 1;
     }
 
-    .project-card span {
-      display: inline-flex;
-      width: fit-content;
-      font-size: 0.74rem;
-      border-radius: 999px;
-      background: rgba(16, 72, 79, 0.09);
-      color: var(--brand-strong);
-      border: 1px solid rgba(16, 72, 79, 0.2);
-      padding: 0.28rem 0.66rem;
-      font-weight: 700;
+    .project-stack {
+      margin-top: 4px;
+      font-size: 0.72rem;
+      color: var(--brand);
+      font-weight: 600;
       letter-spacing: 0.03em;
+      padding: 6px 12px;
+      background: rgba(201, 169, 110, 0.06);
+      border: 1px solid rgba(201, 169, 110, 0.14);
+      border-radius: 999px;
+      display: inline-block;
+      width: fit-content;
+    }
+
+    /* ─── CREDENTIALS ─── */
+    .credentials-section {
+      border-top: 1px solid var(--line-subtle);
     }
 
     .cred-links {
-      margin-top: 20px;
       display: flex;
       flex-wrap: wrap;
-      gap: 10px;
+      gap: 12px;
+      margin-top: 28px;
     }
 
-    .cred-links a {
+    .cred-link-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
       text-decoration: none;
-      border: 1px solid rgba(16, 72, 79, 0.3);
-      color: var(--brand-strong);
+      border: 1px solid rgba(201, 169, 110, 0.22);
+      color: var(--brand);
       font-size: 0.84rem;
-      font-weight: 700;
+      font-weight: 600;
       border-radius: 999px;
-      padding: 0.5rem 0.9rem;
-      background: rgba(31, 111, 120, 0.08);
+      padding: 10px 18px;
+      background: rgba(201, 169, 110, 0.05);
+      letter-spacing: 0.02em;
+      transition: background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+    }
+
+    .cred-link-btn:hover {
+      background: rgba(201, 169, 110, 0.1);
+      border-color: rgba(201, 169, 110, 0.4);
+      box-shadow: 0 4px 20px rgba(201, 169, 110, 0.12);
+      transform: translateY(-1px);
     }
 
     .badge-grid {
-      margin-top: 22px;
       display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
+      grid-template-columns: repeat(4, 1fr);
       gap: 14px;
+      margin-top: 36px;
     }
 
     .badge-card {
-      padding: 12px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(201, 169, 110, 0.1);
+      border-radius: 16px;
+      padding: 28px 16px 22px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
       text-align: center;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease, background 0.3s ease;
+      cursor: default;
+    }
+
+    .badge-card:hover {
+      border-color: rgba(201, 169, 110, 0.32);
+      box-shadow: 0 0 0 1px rgba(201, 169, 110, 0.08), 0 20px 50px rgba(0, 0, 0, 0.35);
+      transform: translateY(-5px);
+      background: rgba(201, 169, 110, 0.04);
+    }
+
+    .badge-img-wrap {
+      width: 90px;
+      height: 90px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .badge-card img {
-      width: 84px;
-      height: 84px;
+      width: 90px;
+      height: 90px;
       object-fit: contain;
-      margin: 0 auto 9px;
-      display: block;
+      filter: drop-shadow(0 4px 16px rgba(0, 0, 0, 0.4));
+      transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.35s ease;
     }
 
-    .badge-card p {
+    .badge-card:hover img {
+      transform: scale(1.1) translateY(-2px);
+      filter: drop-shadow(0 10px 24px rgba(201, 169, 110, 0.25));
+    }
+
+    .badge-label {
       margin: 0;
-      font-size: 0.82rem;
-      line-height: 1.35;
+      font-size: 0.78rem;
+      line-height: 1.45;
       color: var(--muted);
-      font-weight: 700;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    .badge-card:hover .badge-label {
+      color: var(--brand);
+    }
+
+    /* ─── CONTACT ─── */
+    .contact-section {
+      border-top: 1px solid var(--line-subtle);
+      background: linear-gradient(180deg, transparent, rgba(201, 169, 110, 0.025) 50%, transparent);
     }
 
     .contact-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 24px;
+      gap: 60px;
       align-items: start;
     }
 
-    .contact-list {
+    .contact-right {
       display: grid;
-      gap: 11px;
+      gap: 10px;
     }
 
     .contact-item {
+      display: grid;
+      grid-template-columns: 1fr auto auto;
+      align-items: center;
+      gap: 12px;
       text-decoration: none;
-      display: block;
-      padding: 14px 16px;
-      transition: transform 0.2s ease, border-color 0.2s ease;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 16px 18px;
+      transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease, background 0.25s ease;
     }
 
     .contact-item:hover {
-      transform: translateY(-2px);
-      border-color: rgba(16, 72, 79, 0.35);
+      border-color: rgba(201, 169, 110, 0.25);
+      box-shadow: var(--glow-hover);
+      transform: translateX(4px);
+      background: var(--surface-hover);
     }
 
-    .contact-item h3 {
-      margin: 0;
-      color: var(--brand-strong);
-      font-size: 0.76rem;
-      letter-spacing: 0.07em;
+    .contact-label {
+      display: block;
+      font-size: 0.62rem;
       text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--brand);
+      font-weight: 600;
+      line-height: 1;
+      margin-bottom: 4px;
     }
 
-    .contact-item p {
-      margin: 5px 0 0;
+    .contact-value {
+      display: block;
+      font-size: 0.9rem;
+      font-weight: 600;
       color: var(--text);
-      font-size: 0.94rem;
       word-break: break-word;
-      font-weight: 700;
+      line-height: 1.3;
     }
 
+    .contact-arrow {
+      color: var(--brand);
+      opacity: 0.4;
+      font-size: 1rem;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+
+    .contact-item:hover .contact-arrow {
+      opacity: 0.9;
+      transform: translateX(3px);
+    }
+
+    /* ─── FOOTER ─── */
     .footer-inner {
       display: flex;
       justify-content: space-between;
@@ -877,42 +1356,68 @@ const currentYear = new Date().getFullYear();
       margin: 0;
     }
 
-    @media (max-width: 1060px) {
-      .hero-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .profile-panel img {
-        max-height: 280px;
-      }
-
-      .project-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .badge-grid {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 1100px) {
+      .metric-grid {
+        grid-template-columns: repeat(2, 1fr);
       }
     }
 
-    @media (max-width: 900px) {
+    @media (max-width: 1020px) {
+      .hero-inner {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+
+      .hero-h1 {
+        font-size: clamp(2.8rem, 6vw, 4.5rem);
+      }
+
+      .profile-card {
+        display: grid;
+        grid-template-columns: 200px 1fr;
+        gap: 20px;
+      }
+
+      .profile-photo-wrap {
+        grid-row: 1 / 3;
+      }
+
+      .profile-dl {
+        grid-column: 1 / -1;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        padding-top: 12px;
+      }
+
+      .project-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .badge-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (max-width: 860px) {
       .menu-toggle {
-        display: inline-flex;
+        display: flex;
       }
 
       .primary-nav {
         position: absolute;
-        top: calc(100% + 8px);
+        top: calc(100% + 6px);
         right: 4vw;
         left: 4vw;
+        background: rgba(14, 20, 32, 0.97);
+        backdrop-filter: blur(20px);
         border: 1px solid var(--line);
-        background: rgba(255, 255, 255, 0.97);
-        box-shadow: var(--shadow-soft);
         border-radius: 14px;
         padding: 10px;
         display: none;
         flex-direction: column;
         align-items: stretch;
+        box-shadow: var(--shadow);
       }
 
       .primary-nav.is-open {
@@ -920,36 +1425,43 @@ const currentYear = new Date().getFullYear();
       }
 
       .primary-nav a {
-        border-radius: 10px;
+        border-radius: 8px;
+        padding: 10px 14px;
       }
 
-      .primary-nav .primary-cta {
+      .nav-cta {
         text-align: center;
-        margin-top: 2px;
+        margin-top: 4px;
+        margin-left: 0 !important;
       }
 
-      .metric-grid,
       .expertise-grid,
       .contact-grid {
         grid-template-columns: 1fr;
+        gap: 24px;
       }
 
       .badge-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .profile-card {
+        grid-template-columns: 1fr;
+      }
+
+      .profile-dl {
+        grid-template-columns: 1fr;
       }
     }
 
     @media (max-width: 640px) {
-      .top-nav-inner {
-        min-height: 68px;
+      .hero-section {
+        padding: 100px 0 80px;
+        min-height: auto;
       }
 
-      .brand-mark span small {
-        display: none;
-      }
-
-      .hero-shell {
-        padding-top: 28px;
+      .hero-h1 {
+        font-size: clamp(2.4rem, 9vw, 3.6rem);
       }
 
       .hero-actions {
@@ -959,6 +1471,7 @@ const currentYear = new Date().getFullYear();
       .action-primary,
       .action-secondary {
         width: 100%;
+        justify-content: center;
       }
 
       .project-grid,
@@ -966,12 +1479,24 @@ const currentYear = new Date().getFullYear();
         grid-template-columns: 1fr;
       }
 
-      .timeline {
-        padding-left: 18px;
+      .metric-grid {
+        grid-template-columns: 1fr;
       }
 
-      .timeline-item::before {
-        left: -17px;
+      .timeline {
+        padding-left: 24px;
+      }
+
+      .timeline-dot {
+        left: -21px;
+      }
+
+      .hero-scroll-hint {
+        display: none;
+      }
+
+      .contact-item {
+        grid-template-columns: 1fr auto;
       }
     }
   </style>

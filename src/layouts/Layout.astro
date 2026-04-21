@@ -17,7 +17,7 @@ const {
     <meta name="description" content={description} />
     <meta name="author" content="Dinesh Loganathan" />
     <meta name="robots" content="index,follow" />
-    <meta name="theme-color" content="#0d1b2a" />
+    <meta name="theme-color" content="#080c18" />
 
     <link rel="canonical" href="https://dineshlog.github.io" />
     <meta property="og:title" content={title} />
@@ -33,7 +33,7 @@ const {
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Fraunces:opsz,wght,SOFT@9..144,500..700,100&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600;1,700&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap"
       rel="stylesheet"
     />
 
@@ -41,26 +41,32 @@ const {
 
     <style is:global>
       :root {
-        --bg: #f6f7f3;
-        --surface: #ffffff;
-        --surface-alt: #eef2ec;
-        --text: #16212e;
-        --muted: #4b5c6a;
-        --line: #d5dcd2;
-        --brand: #1f6f78;
-        --brand-strong: #10484f;
-        --accent: #d97745;
-        --radius-lg: 24px;
-        --radius-md: 16px;
-        --shadow-soft: 0 18px 45px rgba(17, 31, 45, 0.08);
+        --bg: #080c18;
+        --surface: #0e1420;
+        --surface-alt: #131928;
+        --surface-hover: #192030;
+        --text: #e2e8f2;
+        --muted: #7a869e;
+        --muted-lt: #9aa3b8;
+        --line: rgba(201, 169, 110, 0.1);
+        --line-subtle: rgba(255, 255, 255, 0.05);
+        --brand: #c9a96e;
+        --brand-strong: #d4af7a;
+        --brand-dim: rgba(201, 169, 110, 0.07);
+        --accent: #4d9bbf;
+        --radius-lg: 22px;
+        --radius-md: 14px;
+        --radius-sm: 8px;
+        --shadow: 0 24px 64px rgba(0, 0, 0, 0.5);
+        --shadow-gold: 0 0 60px rgba(201, 169, 110, 0.06);
+        --glow-hover: 0 0 0 1px rgba(201, 169, 110, 0.25), 0 12px 40px rgba(201, 169, 110, 0.1);
       }
 
-      * {
+      *, *::before, *::after {
         box-sizing: border-box;
       }
 
-      html,
-      body {
+      html, body {
         margin: 0;
         padding: 0;
       }
@@ -70,14 +76,13 @@ const {
       }
 
       body {
-        font-family: 'Manrope', sans-serif;
-        background:
-          radial-gradient(circle at 12% 15%, rgba(31, 111, 120, 0.12), transparent 36%),
-          radial-gradient(circle at 85% 8%, rgba(217, 119, 69, 0.11), transparent 35%),
-          var(--bg);
+        font-family: 'DM Sans', sans-serif;
+        background: var(--bg);
         color: var(--text);
-        line-height: 1.6;
+        line-height: 1.65;
         min-height: 100vh;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
       }
 
       a {
@@ -85,72 +90,78 @@ const {
       }
 
       .container-shell {
-        width: min(1120px, 92vw);
+        width: min(1160px, 92vw);
         margin: 0 auto;
       }
 
       .section-block {
-        padding: 84px 0;
+        padding: 110px 0;
       }
 
       .eyebrow {
         display: inline-flex;
         align-items: center;
-        gap: 10px;
-        font-size: 0.75rem;
+        gap: 12px;
+        font-family: 'DM Sans', sans-serif;
+        font-size: 0.68rem;
         text-transform: uppercase;
-        letter-spacing: 0.16em;
-        font-weight: 700;
-        color: var(--brand-strong);
+        letter-spacing: 0.24em;
+        font-weight: 600;
+        color: var(--brand);
       }
 
       .eyebrow::before {
         content: '';
-        width: 32px;
+        width: 24px;
         height: 1px;
-        background: rgba(16, 72, 79, 0.35);
+        background: var(--brand);
+        opacity: 0.6;
       }
 
       .section-title {
-        margin: 14px 0 14px;
-        font-family: 'Fraunces', serif;
+        margin: 16px 0 18px;
+        font-family: 'Cormorant Garamond', serif;
         font-weight: 600;
         letter-spacing: -0.01em;
-        font-size: clamp(2rem, 4.5vw, 3.2rem);
-        line-height: 1.08;
+        font-size: clamp(2.2rem, 4vw, 3.4rem);
+        line-height: 1.1;
+        color: var(--text);
       }
 
       .section-copy {
         margin: 0;
-        max-width: 68ch;
+        max-width: 60ch;
         color: var(--muted);
-        font-size: clamp(0.96rem, 1.4vw, 1.08rem);
+        font-size: clamp(0.94rem, 1.3vw, 1.04rem);
+        line-height: 1.8;
+        font-weight: 400;
       }
 
       .card {
         background: var(--surface);
         border: 1px solid var(--line);
         border-radius: var(--radius-md);
-        box-shadow: var(--shadow-soft);
+        box-shadow: var(--shadow);
       }
 
       .pill {
         display: inline-flex;
         align-items: center;
-        border: 1px solid rgba(16, 72, 79, 0.22);
-        color: var(--brand-strong);
-        background: rgba(31, 111, 120, 0.08);
+        border: 1px solid rgba(201, 169, 110, 0.18);
+        color: var(--brand);
+        background: rgba(201, 169, 110, 0.06);
         border-radius: 999px;
-        padding: 0.28rem 0.76rem;
-        font-size: 0.76rem;
-        font-weight: 700;
-        letter-spacing: 0.03em;
+        padding: 0.28rem 0.75rem;
+        font-size: 0.72rem;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        font-family: 'DM Sans', sans-serif;
       }
 
       .reveal {
         opacity: 0;
-        transform: translateY(18px);
-        transition: opacity 0.55s ease, transform 0.55s ease;
+        transform: translateY(26px);
+        transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
       }
 
       .reveal.in-view {
@@ -159,54 +170,35 @@ const {
       }
 
       .site-footer {
-        border-top: 1px solid var(--line);
-        padding: 24px 0 34px;
+        border-top: 1px solid var(--line-subtle);
+        padding: 28px 0 40px;
         color: var(--muted);
-        font-size: 0.9rem;
+        font-size: 0.84rem;
       }
 
       @media (max-width: 900px) {
-        .section-block {
-          padding: 72px 0;
-        }
+        .section-block { padding: 84px 0; }
       }
 
       @media (max-width: 640px) {
-        .container-shell {
-          width: min(1120px, 94vw);
-        }
-
-        .section-block {
-          padding: 58px 0;
-        }
+        .section-block { padding: 64px 0; }
       }
 
       @media (prefers-reduced-motion: reduce) {
-        html {
-          scroll-behavior: auto;
-        }
-
-        .reveal {
-          opacity: 1;
-          transform: none;
-          transition: none;
-        }
+        html { scroll-behavior: auto; }
+        .reveal { opacity: 1; transform: none; transition: none; }
       }
     </style>
   </head>
   <body>
     <slot />
-
     <script is:inline>
       (function () {
         var items = document.querySelectorAll('.reveal');
         if (!('IntersectionObserver' in window)) {
-          items.forEach(function (el) {
-            el.classList.add('in-view');
-          });
+          items.forEach(function (el) { el.classList.add('in-view'); });
           return;
         }
-
         var observer = new IntersectionObserver(
           function (entries) {
             entries.forEach(function (entry) {
@@ -216,12 +208,9 @@ const {
               }
             });
           },
-          { threshold: 0.12 }
+          { threshold: 0.1 }
         );
-
-        items.forEach(function (el) {
-          observer.observe(el);
-        });
+        items.forEach(function (el) { observer.observe(el); });
       })();
     </script>
   </body>
