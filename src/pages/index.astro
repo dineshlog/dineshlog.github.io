@@ -12,14 +12,13 @@ const navLinks = [
 ];
 
 const dotPanels = [
-  { id: 'top',            label: 'Home' },
-  { id: 'profile',        label: 'Profile' },
-  { id: 'expertise',      label: 'Expertise' },
-  { id: 'experience',     label: 'Experience' },
-  { id: 'projects',       label: 'Projects' },
-  { id: 'credentials',    label: 'Certifications I' },
-  { id: 'credentials-2',  label: 'Certifications II' },
-  { id: 'contact',        label: 'Contact' },
+  { id: 'top',         label: 'Home' },
+  { id: 'profile',     label: 'Profile' },
+  { id: 'expertise',   label: 'Expertise' },
+  { id: 'experience',  label: 'Experience' },
+  { id: 'projects',    label: 'Projects' },
+  { id: 'credentials', label: 'Credentials' },
+  { id: 'contact',     label: 'Contact' },
 ];
 
 const keyMetrics = [
@@ -124,6 +123,59 @@ const legacyCerts = [
   { label: 'MCSA: Windows Server 2012',                sub: 'Jun 2018', image: '/badges/MCSA-Windows-Server-2012-2018.png' },
   { label: 'MCSA: Windows 10',                         sub: 'Sep 2018', image: '/badges/MCSA-Windows-10-2018.png' },
   { label: 'MCSA: Office 365',                         sub: 'May 2018', image: '/badges/MCSA-Office-365-2018.png' },
+];
+
+const skillCategories = [
+  {
+    name: 'Security & Compliance',
+    icon: '🛡',
+    skills: [
+      { name: 'Information Security Administration', count: 3 },
+      { name: 'Security Operations & XDR',           count: 4 },
+      { name: 'Data Protection & DLP',               count: 3 },
+      { name: 'Risk & Vulnerability Management',     count: 2 },
+      { name: 'Compliance & Governance',             count: 4 },
+      { name: 'Zero Trust Architecture',             count: 5 },
+      { name: 'Incident Response',                   count: 2 },
+    ],
+  },
+  {
+    name: 'Identity & Access Management',
+    icon: '🔑',
+    skills: [
+      { name: 'Microsoft Entra ID',                  count: 6 },
+      { name: 'Conditional Access Policies',         count: 5 },
+      { name: 'SSO & Federation (ADFS)',             count: 3 },
+      { name: 'Identity Governance',                 count: 4 },
+      { name: 'Multi-Factor Authentication',         count: 4 },
+      { name: 'Privileged Identity Management',      count: 2 },
+    ],
+  },
+  {
+    name: 'Microsoft 365 & Endpoint',
+    icon: '💻',
+    skills: [
+      { name: 'Microsoft 365 Administration',        count: 7 },
+      { name: 'Microsoft Intune (MDM/MAM)',           count: 5 },
+      { name: 'Exchange Online & Hybrid',            count: 6 },
+      { name: 'Teams & SharePoint Governance',       count: 4 },
+      { name: 'Windows 10/11 Administration',        count: 3 },
+      { name: 'Microsoft Copilot & AI Agents',       count: 2 },
+      { name: 'Endpoint Compliance & Baselines',     count: 4 },
+    ],
+  },
+  {
+    name: 'Cloud & Infrastructure',
+    icon: '☁',
+    skills: [
+      { name: 'Microsoft Azure',                     count: 5 },
+      { name: 'AWS Cloud Architecture',              count: 1 },
+      { name: 'Windows Server Administration',       count: 4 },
+      { name: 'Active Directory (ADDS)',             count: 4 },
+      { name: 'PowerShell Automation',               count: 4 },
+      { name: 'Virtualisation (VMware / Proxmox)',   count: 2 },
+    ],
+  },
 ];
 
 const contactLinks = [
@@ -315,54 +367,87 @@ const currentYear = new Date().getFullYear();
       </div>
     </section>
 
-    <!-- 6. CREDENTIALS – Active -->
+    <!-- 6. CREDENTIALS — Tabbed Wallet -->
     <section class="snap-panel" id="credentials" data-panel="credentials">
       <div class="container-shell panel-shell">
+
         <header class="panel-head reveal">
-          <span class="eyebrow">Credentials · Active Certifications</span>
+          <span class="eyebrow">Credentials</span>
           <h2 class="section-title">Microsoft certification track with security and cloud depth</h2>
-          <div class="cred-links">
-            <a href="https://learn.microsoft.com/en-us/users/logan-dinesh/transcript" target="_blank" rel="noopener noreferrer" class="cred-btn">
-              MS Learn Transcript ↗
-            </a>
-            <a href="https://credly.com/users/loganathan-dinesh/badges" target="_blank" rel="noopener noreferrer" class="cred-btn">
-              Credly Badges ↗
-            </a>
+        </header>
+
+        <!-- Tab bar -->
+        <div class="wallet-tabbar reveal" style="transition-delay:0.08s">
+          <div class="wallet-tabs" role="tablist">
+            <button class="wallet-tab active" role="tab" id="tab-btn-badges" data-wallet="badges" aria-selected="true" aria-controls="wallet-badges">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
+              Badge Wallet
+              <span class="tab-count">{activeCerts.length + legacyCerts.length}</span>
+            </button>
+            <button class="wallet-tab" role="tab" id="tab-btn-skills" data-wallet="skills" aria-selected="false" aria-controls="wallet-skills">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+              Skill Wallet
+              <span class="tab-count">{skillCategories.reduce((acc, c) => acc + c.skills.length, 0)}</span>
+            </button>
           </div>
-        </header>
-        <div class="badge-grid badge-grid-3">
-          {activeCerts.map((cert, i) => (
-            <article class="badge-card reveal" style={`transition-delay:${0.04 + i*0.05}s`}>
-              <img src={cert.image} alt={cert.label} loading="lazy" />
-              <p class="badge-label">{cert.label}</p>
-              <p class="badge-sub">{cert.sub}</p>
-            </article>
-          ))}
+          <div class="wallet-ext-links">
+            <a href="https://learn.microsoft.com/en-us/users/logan-dinesh/transcript" target="_blank" rel="noopener noreferrer" class="cred-btn">MS Learn ↗</a>
+            <a href="https://credly.com/users/loganathan-dinesh/badges"               target="_blank" rel="noopener noreferrer" class="cred-btn">Credly ↗</a>
+          </div>
         </div>
+
+        <!-- Badge Wallet pane -->
+        <div class="wallet-pane active" id="wallet-badges" role="tabpanel" aria-labelledby="tab-btn-badges">
+          <div class="wallet-scroll">
+            <p class="wallet-group-label">Active Certifications <span>{activeCerts.length}</span></p>
+            <div class="badge-grid badge-grid-3">
+              {activeCerts.map((cert, i) => (
+                <article class="badge-card" style={`animation-delay:${0.04 + i*0.04}s`}>
+                  <img src={cert.image} alt={cert.label} loading="lazy" />
+                  <p class="badge-label">{cert.label}</p>
+                  <p class="badge-sub">{cert.sub}</p>
+                </article>
+              ))}
+            </div>
+            <p class="wallet-group-label" style="margin-top:clamp(12px,1.8dvh,20px)">MCSE / MCSA Legacy <span>{legacyCerts.length}</span></p>
+            <div class="badge-grid badge-grid-4">
+              {legacyCerts.map((cert, i) => (
+                <article class="badge-card" style={`animation-delay:${0.04 + i*0.05}s`}>
+                  <img src={cert.image} alt={cert.label} loading="lazy" />
+                  <p class="badge-label">{cert.label}</p>
+                  <p class="badge-sub">{cert.sub}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <!-- Skill Wallet pane -->
+        <div class="wallet-pane" id="wallet-skills" role="tabpanel" aria-labelledby="tab-btn-skills" aria-hidden="true">
+          <div class="wallet-scroll skill-scroll">
+            {skillCategories.map((cat) => (
+              <div class="skill-category">
+                <h3 class="skill-cat-name">
+                  <span class="skill-cat-icon" aria-hidden="true">{cat.icon}</span>
+                  {cat.name}
+                </h3>
+                <div class="skill-tags">
+                  {cat.skills.map((skill) => (
+                    <span class="skill-tag">
+                      {skill.name}
+                      <span class="skill-badge-count" title={`${skill.count} validating badge${skill.count > 1 ? 's' : ''}`}>{skill.count}</span>
+                    </span>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
       </div>
     </section>
 
-    <!-- 7. CREDENTIALS – Legacy (continuation panel) -->
-    <section class="snap-panel tint-panel" id="credentials-2" data-panel="credentials-2">
-      <div class="container-shell panel-shell">
-        <header class="panel-head reveal">
-          <span class="eyebrow">Credentials · Legacy Certifications</span>
-          <h2 class="section-title">MCSE &amp; MCSA certification history</h2>
-          <p class="section-copy">Foundational Microsoft certifications earned 2018–2019 across server, cloud, and productivity platforms.</p>
-        </header>
-        <div class="badge-grid badge-grid-4">
-          {legacyCerts.map((cert, i) => (
-            <article class="badge-card reveal" style={`transition-delay:${0.04 + i*0.06}s`}>
-              <img src={cert.image} alt={cert.label} loading="lazy" />
-              <p class="badge-label">{cert.label}</p>
-              <p class="badge-sub">{cert.sub}</p>
-            </article>
-          ))}
-        </div>
-      </div>
-    </section>
-
-    <!-- 8. CONTACT -->
+    <!-- 7. CONTACT -->
     <section class="snap-panel tint-panel" id="contact" data-panel="contact">
       <div class="container-shell contact-grid">
         <div class="contact-left reveal">
@@ -470,6 +555,27 @@ const currentYear = new Date().getFullYear();
 
     /* ── Set first dot active ── */
     if (dots[0]) dots[0].classList.add('active');
+
+    /* ── Wallet tab switching ── */
+    document.querySelectorAll('.wallet-tab').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var target = btn.getAttribute('data-wallet');
+
+        /* update tab buttons */
+        document.querySelectorAll('.wallet-tab').forEach(function (t) {
+          var isActive = t.getAttribute('data-wallet') === target;
+          t.classList.toggle('active', isActive);
+          t.setAttribute('aria-selected', String(isActive));
+        });
+
+        /* update panes */
+        document.querySelectorAll('.wallet-pane').forEach(function (pane) {
+          var show = pane.id === 'wallet-' + target;
+          pane.classList.toggle('active', show);
+          pane.setAttribute('aria-hidden', String(!show));
+        });
+      });
+    });
   })();
   </script>
 
@@ -1271,6 +1377,217 @@ const currentYear = new Date().getFullYear();
     }
 
     /* ═══════════════════════════════════════════
+       WALLET TABS
+    ═══════════════════════════════════════════ */
+    .wallet-tabbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: clamp(10px,1.4dvh,16px);
+      flex-shrink: 0;
+    }
+
+    .wallet-tabs {
+      display: flex;
+      gap: 4px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 4px;
+    }
+
+    .wallet-tab {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 8px 16px;
+      border-radius: 9px;
+      border: none;
+      background: transparent;
+      color: var(--muted);
+      font-family: 'DM Sans', sans-serif;
+      font-size: clamp(0.75rem,1vw,0.84rem);
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      cursor: pointer;
+      transition: color 0.25s, background 0.25s, box-shadow 0.25s;
+      position: relative;
+    }
+
+    .wallet-tab svg { flex-shrink: 0; opacity: 0.7; transition: opacity 0.25s; }
+
+    .wallet-tab.active {
+      background: rgba(201,169,110,0.12);
+      color: var(--brand);
+      box-shadow: 0 0 0 1px rgba(201,169,110,0.2) inset;
+    }
+
+    .wallet-tab.active svg { opacity: 1; }
+
+    .wallet-tab:not(.active):hover {
+      color: var(--muted-lt);
+      background: rgba(255,255,255,0.04);
+    }
+
+    .tab-count {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(201,169,110,0.12);
+      color: var(--brand);
+      border-radius: 999px;
+      font-size: 0.68rem;
+      font-weight: 700;
+      padding: 1px 7px;
+      min-width: 22px;
+      line-height: 1.6;
+      transition: background 0.25s;
+    }
+
+    .wallet-tab.active .tab-count {
+      background: rgba(201,169,110,0.22);
+    }
+
+    .wallet-ext-links {
+      display: flex;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    /* ── Wallet Panes ── */
+    .wallet-pane {
+      flex: 1;
+      min-height: 0;
+      display: none;
+      flex-direction: column;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.32s cubic-bezier(0.16,1,0.3,1), transform 0.32s cubic-bezier(0.16,1,0.3,1);
+      pointer-events: none;
+    }
+
+    .wallet-pane.active {
+      display: flex;
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .wallet-scroll {
+      flex: 1;
+      min-height: 0;
+      overflow-y: auto;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      padding-right: 4px;
+    }
+
+    .wallet-scroll::-webkit-scrollbar { display: none; }
+
+    .wallet-group-label {
+      margin: 0 0 clamp(8px,1dvh,12px);
+      font-size: 0.66rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      font-weight: 600;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .wallet-group-label span {
+      background: rgba(201,169,110,0.1);
+      color: var(--brand);
+      border-radius: 999px;
+      padding: 1px 8px;
+      font-size: 0.62rem;
+      font-weight: 700;
+    }
+
+    /* ── Skill Wallet ── */
+    .skill-scroll {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: clamp(10px,1.4dvh,18px);
+      align-content: start;
+    }
+
+    .skill-category {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: clamp(12px,1.6dvh,18px);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .skill-cat-name {
+      margin: 0;
+      font-family: 'DM Sans', sans-serif;
+      font-size: clamp(0.72rem,0.95vw,0.82rem);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--brand);
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .skill-cat-icon { font-size: 0.9rem; }
+
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .skill-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(201,169,110,0.14);
+      border-radius: 999px;
+      padding: clamp(4px,0.6dvh,6px) clamp(8px,1vw,12px);
+      font-size: clamp(0.68rem,0.88vw,0.78rem);
+      font-weight: 500;
+      color: var(--muted-lt);
+      cursor: default;
+      transition: background 0.2s, border-color 0.2s, color 0.2s, transform 0.2s;
+      white-space: nowrap;
+    }
+
+    .skill-tag:hover {
+      background: rgba(201,169,110,0.08);
+      border-color: rgba(201,169,110,0.3);
+      color: var(--text);
+      transform: translateY(-1px);
+    }
+
+    .skill-badge-count {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(201,169,110,0.15);
+      color: var(--brand);
+      border-radius: 999px;
+      font-size: 0.6rem;
+      font-weight: 700;
+      padding: 1px 6px;
+      min-width: 18px;
+      line-height: 1.5;
+      transition: background 0.2s;
+    }
+
+    .skill-tag:hover .skill-badge-count {
+      background: rgba(201,169,110,0.25);
+    }
+
+    /* ═══════════════════════════════════════════
        BADGE GRIDS
     ═══════════════════════════════════════════ */
     .cred-links {
@@ -1531,6 +1848,9 @@ const currentYear = new Date().getFullYear();
       .expertise-grid { grid-template-columns: 1fr; grid-template-rows: none; gap: 12px; }
       .project-grid { grid-template-columns: repeat(2, 1fr); grid-template-rows: none; }
       .badge-grid-3, .badge-grid-4 { grid-template-columns: repeat(2, 1fr); grid-template-rows: none; }
+      .skill-scroll { grid-template-columns: 1fr; }
+      .wallet-tabbar { flex-wrap: wrap; gap: 8px; }
+      .wallet-ext-links { width: 100%; }
       .contact-grid { grid-template-columns: 1fr; }
       .profile-card { grid-template-columns: 1fr; }
       .profile-dl { grid-template-columns: 1fr; }
