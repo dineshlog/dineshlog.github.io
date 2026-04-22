@@ -7,6 +7,7 @@ const navLinks = [
   { id: 'expertise',   label: 'Expertise' },
   { id: 'experience',  label: 'Experience' },
   { id: 'projects',    label: 'Projects' },
+  { id: 'solutions',   label: 'Solutions' },
   { id: 'credentials', label: 'Credentials' },
   { id: 'contact',     label: 'Contact' },
 ];
@@ -17,6 +18,7 @@ const dotPanels = [
   { id: 'expertise',   label: 'Expertise' },
   { id: 'experience',  label: 'Experience' },
   { id: 'projects',    label: 'Projects' },
+  { id: 'solutions',   label: 'Solutions' },
   { id: 'credentials', label: 'Credentials' },
   { id: 'contact',     label: 'Contact' },
 ];
@@ -174,6 +176,67 @@ const skillCategories = [
       { name: 'Active Directory (ADDS)',             count: 4 },
       { name: 'PowerShell Automation',               count: 4 },
       { name: 'Virtualisation (VMware / Proxmox)',   count: 2 },
+    ],
+  },
+];
+
+const solutionTabs = [
+  {
+    id: 'ai', label: 'AI',
+    items: [
+      { name: 'Copilot Governance Framework',    desc: 'Enterprise Copilot deployment with data classification, sensitivity labels, and usage policies aligned to the M365 security baseline.',           tags: ['Copilot Studio', 'Purview', 'Sensitivity Labels'] },
+      { name: 'AI Agent Admin Pipeline',         desc: 'Agent provisioning and policy enforcement framework for Copilot & Agent administration, built on AB-900 certified methodology.',                  tags: ['Copilot Agents', 'Power Automate', 'M365 Admin'] },
+      { name: 'KQL Threat Intelligence Engine',  desc: 'Automated threat detection queries surfacing AI-correlated signals across Defender XDR with suppression tuning and runbook escalation.',         tags: ['KQL', 'Defender XDR', 'Azure Sentinel'] },
+    ],
+  },
+  {
+    id: 'iso27001', label: 'ISO 27001',
+    items: [
+      { name: 'ISMS Documentation Suite',        desc: 'ISO 27001-aligned policy library covering asset management, access control, incident response, and supplier security governance.',                tags: ['ISO 27001', 'Policy Management', 'ISMS'] },
+      { name: 'Vendor Risk Assessment Framework',desc: 'Third-party risk evaluation with structured questionnaires, scoring matrix, and escalation workflows for supplier security decisions.',             tags: ['Vendor Risk', 'GRC', 'Data Protection'] },
+      { name: 'Security Awareness Program',      desc: 'Role-based awareness curriculum with phishing simulation tracking and compliance reporting dashboards for executive visibility.',                   tags: ['Security Awareness', 'Compliance', 'Reporting'] },
+    ],
+  },
+  {
+    id: 'app', label: 'App',
+    items: [
+      { name: 'Intune App Packaging Pipeline',   desc: 'Win32 app packaging and deployment workflow with detection rules, dependency mapping, and staged rollout via Intune assignment groups.',           tags: ['Intune', 'Win32', 'App Deployment'] },
+      { name: 'SharePoint Intranet Portal',      desc: 'Modern SharePoint Online intranet with news hub, IT service portal, document libraries, and integrated Teams channels for staff communications.',  tags: ['SharePoint Online', 'Teams', 'Power Apps'] },
+      { name: 'M365 Governance Toolkit',         desc: 'Teams lifecycle management, SharePoint provisioning templates, and group expiry policies enforcing naming conventions and data controls.',          tags: ['M365', 'Governance', 'Lifecycle'] },
+    ],
+  },
+  {
+    id: 'security', label: 'Security',
+    items: [
+      { name: 'Zero Trust Security Blueprint',   desc: 'End-to-end Zero Trust implementation: identity verification, device compliance, network micro-segmentation, and least-privilege access controls.', tags: ['Zero Trust', 'Conditional Access', 'Entra ID'] },
+      { name: 'Defender XDR Unified Stack',      desc: 'Consolidated Defender for Endpoint, Identity, Cloud Apps, and Office 365 into a single XDR incident response workflow with unified alerts.',      tags: ['Defender XDR', 'SOAR', 'Incident Response'] },
+      { name: 'Global Secure Access ZTNA',       desc: 'VPN replacement using Entra Private Access and Internet Access — eliminating legacy perimeter with identity-centric continuous verification.',      tags: ['Global Secure Access', 'ZTNA', 'Entra ID'] },
+      { name: 'BitLocker Enterprise Encryption', desc: 'Data-at-rest encryption across all Windows endpoints with Intune-managed key escrow and compliance posture reporting dashboards.',                  tags: ['BitLocker', 'Intune', 'Encryption'] },
+    ],
+  },
+  {
+    id: 'grc', label: 'GRC',
+    items: [
+      { name: 'Microsoft Purview DLP Framework', desc: 'Information protection and DLP: sensitivity labels, retention policies, communication compliance, and insider risk management at enterprise scale.', tags: ['Purview', 'DLP', 'Sensitivity Labels'] },
+      { name: 'Compliance Posture Dashboard',    desc: 'Executive-facing dashboard tracking Secure Score, policy compliance rates, and open risk items across the full Microsoft security stack.',            tags: ['Compliance Manager', 'Power BI', 'Secure Score'] },
+      { name: 'ISMS Audit Management System',    desc: 'Structured audit lifecycle: planning, evidence collection, non-conformance tracking, and corrective action management aligned to ISO 27001.',        tags: ['ISMS', 'ISO 27001', 'Audit'] },
+    ],
+  },
+  {
+    id: 'utility', label: 'Utility',
+    items: [
+      { name: 'IT Admin PowerShell Toolkit',     desc: 'Modular PowerShell library for user lifecycle, license management, group governance, and M365 health reporting across multiple tenant environments.', tags: ['PowerShell', 'M365', 'Admin'] },
+      { name: 'License Optimization Engine',     desc: 'Automated M365 license audit identifying unused and mismatched assignments — delivered 20–30% licensing cost reduction for MSP clients at scale.',    tags: ['License Management', 'PowerShell', 'Cost'] },
+      { name: 'Device Compliance Monitor',       desc: 'Real-time Intune compliance dashboard with stale device alerting, OS version tracking, and automated remediation trigger workflows.',                  tags: ['Intune', 'KQL', 'Compliance'] },
+    ],
+  },
+  {
+    id: 'automation', label: 'Automation',
+    items: [
+      { name: 'User Lifecycle Automation',       desc: 'End-to-end onboarding and offboarding: account creation, group assignment, license allocation, and deprovisioning across M365 and SaaS platforms.',  tags: ['Azure Automation', 'PowerShell', 'Entra ID'] },
+      { name: 'Azure Runbook Orchestration',     desc: 'Scheduled runbooks for backup validation, certificate expiry monitoring, storage cleanup, and compliance checks across Azure environments.',            tags: ['Azure Automation', 'Runbooks', 'Azure Monitor'] },
+      { name: 'SSO Auto-Provisioning Pipeline',  desc: 'SCIM-based identity sync between Entra ID and SaaS platforms (Google Workspace, Atlassian, BambooHR) for 1,500+ international users.',              tags: ['SCIM', 'SSO', 'Entra ID'] },
+      { name: 'Security Alert Automation',       desc: 'Automated incident triage with KQL-based alert correlation, Defender webhook triggers, and Teams notification routing for SOC team efficiency.',      tags: ['KQL', 'Defender XDR', 'Power Automate'] },
     ],
   },
 ];
@@ -420,7 +483,7 @@ const currentYear = new Date().getFullYear();
     <section class="snap-panel tint-panel" id="projects" data-panel="projects">
       <div class="container-shell panel-shell">
         <header class="panel-head reveal">
-          <span class="eyebrow">Selected Programs</span>
+          <span class="eyebrow">Projects Delivered</span>
           <h2 class="section-title">Programs delivered from architecture to implementation</h2>
         </header>
         <div class="project-grid">
@@ -435,7 +498,65 @@ const currentYear = new Date().getFullYear();
       </div>
     </section>
 
-    <!-- 6. CREDENTIALS — Tabbed Wallet -->
+    <!-- 6. SOLUTIONS & SYSTEMS BUILT -->
+    <section class="snap-panel" id="solutions" data-panel="solutions">
+      <div class="container-shell panel-shell">
+
+        <header class="panel-head reveal">
+          <span class="eyebrow">Portfolio</span>
+          <h2 class="section-title">Solutions &amp; Systems Built</h2>
+        </header>
+
+        <!-- Solution tab bar -->
+        <div class="sol-tabbar reveal" style="transition-delay:0.06s">
+          <div class="sol-tabs" role="tablist" aria-label="Solution categories">
+            {solutionTabs.map((tab, i) => (
+              <button
+                class={`sol-tab${i === 0 ? ' active' : ''}`}
+                role="tab"
+                data-sol={tab.id}
+                id={`sol-btn-${tab.id}`}
+                aria-selected={String(i === 0)}
+                aria-controls={`sol-pane-${tab.id}`}
+              >
+                {tab.label}
+                <span class="tab-count">{tab.items.length}</span>
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <!-- Solution panes -->
+        {solutionTabs.map((tab, i) => (
+          <div
+            class={`sol-pane${i === 0 ? ' active' : ''}`}
+            id={`sol-pane-${tab.id}`}
+            role="tabpanel"
+            aria-labelledby={`sol-btn-${tab.id}`}
+            aria-hidden={String(i !== 0)}
+          >
+            <div class="sol-scroll">
+              <div class={`sol-grid sol-cols-${tab.items.length <= 3 ? 3 : 2}`}>
+                {tab.items.map((item, j) => (
+                  <article class="sol-card" style={`animation-delay:${0.04 + j * 0.07}s`}>
+                    <h3 class="sol-name">{item.name}</h3>
+                    <p class="sol-desc">{item.desc}</p>
+                    <div class="sol-tags">
+                      {item.tags.map((tag) => (
+                        <span class="sol-tag">{tag}</span>
+                      ))}
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </div>
+          </div>
+        ))}
+
+      </div>
+    </section>
+
+    <!-- 7. CREDENTIALS — Tabbed Wallet -->
     <section class="snap-panel" id="credentials" data-panel="credentials">
       <div class="container-shell panel-shell">
 
@@ -690,6 +811,23 @@ const currentYear = new Date().getFullYear();
         /* update panes */
         document.querySelectorAll('.wallet-pane').forEach(function (pane) {
           var show = pane.id === 'wallet-' + target;
+          pane.classList.toggle('active', show);
+          pane.setAttribute('aria-hidden', String(!show));
+        });
+      });
+    });
+
+    /* ── Solution tab switching ── */
+    document.querySelectorAll('.sol-tab').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var target = btn.getAttribute('data-sol');
+        document.querySelectorAll('.sol-tab').forEach(function (t) {
+          var isActive = t.getAttribute('data-sol') === target;
+          t.classList.toggle('active', isActive);
+          t.setAttribute('aria-selected', String(isActive));
+        });
+        document.querySelectorAll('.sol-pane').forEach(function (pane) {
+          var show = pane.id === 'sol-pane-' + target;
           pane.classList.toggle('active', show);
           pane.setAttribute('aria-hidden', String(!show));
         });
@@ -1799,6 +1937,161 @@ const currentYear = new Date().getFullYear();
     }
 
     /* ═══════════════════════════════════════════
+       SOLUTIONS & SYSTEMS BUILT
+    ═══════════════════════════════════════════ */
+    .sol-tabbar {
+      flex-shrink: 0;
+      margin-bottom: clamp(10px,1.4dvh,16px);
+    }
+
+    .sol-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 4px;
+    }
+
+    .sol-tab {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 14px;
+      border-radius: 8px;
+      border: none;
+      background: transparent;
+      color: var(--muted);
+      font-family: 'DM Sans', sans-serif;
+      font-size: clamp(0.72rem,0.95vw,0.82rem);
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: color 0.22s, background 0.22s, box-shadow 0.22s;
+    }
+
+    .sol-tab.active {
+      background: rgba(201,169,110,0.12);
+      color: var(--brand);
+      box-shadow: 0 0 0 1px rgba(201,169,110,0.2) inset;
+    }
+
+    .sol-tab:not(.active):hover {
+      color: var(--muted-lt);
+      background: rgba(255,255,255,0.04);
+    }
+
+    /* Solution panes */
+    .sol-pane {
+      flex: 1;
+      min-height: 0;
+      display: none;
+      flex-direction: column;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.32s cubic-bezier(0.16,1,0.3,1), transform 0.32s cubic-bezier(0.16,1,0.3,1);
+      pointer-events: none;
+    }
+
+    .sol-pane.active {
+      display: flex;
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .sol-scroll {
+      flex: 1;
+      min-height: 0;
+      overflow-y: auto;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+
+    .sol-scroll::-webkit-scrollbar { display: none; }
+
+    .sol-grid {
+      display: grid;
+      gap: clamp(10px,1.3dvh,16px);
+      height: 100%;
+      align-content: start;
+    }
+
+    .sol-cols-3 { grid-template-columns: repeat(3, 1fr); }
+    .sol-cols-2 { grid-template-columns: repeat(2, 1fr); }
+
+    .sol-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: clamp(14px,1.8dvh,22px) clamp(14px,1.4vw,20px);
+      display: flex;
+      flex-direction: column;
+      gap: clamp(8px,1dvh,12px);
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
+    }
+
+    .sol-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--brand), transparent);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .sol-card:hover {
+      border-color: rgba(201,169,110,0.24);
+      box-shadow: var(--glow-hover);
+      transform: translateY(-3px);
+    }
+
+    .sol-card:hover::before { opacity: 1; }
+
+    .sol-name {
+      margin: 0;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(0.95rem,1.3vw,1.15rem);
+      font-weight: 600;
+      line-height: 1.2;
+      color: var(--text);
+    }
+
+    .sol-desc {
+      margin: 0;
+      color: var(--muted);
+      font-size: clamp(0.72rem,0.95vw,0.84rem);
+      line-height: 1.65;
+      flex: 1;
+    }
+
+    .sol-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      flex-shrink: 0;
+    }
+
+    .sol-tag {
+      display: inline-flex;
+      align-items: center;
+      background: rgba(201,169,110,0.06);
+      border: 1px solid rgba(201,169,110,0.16);
+      color: var(--brand);
+      border-radius: 999px;
+      padding: 2px 9px;
+      font-size: clamp(0.6rem,0.78vw,0.68rem);
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      white-space: nowrap;
+    }
+
+    /* ═══════════════════════════════════════════
        WALLET TABS
     ═══════════════════════════════════════════ */
     .wallet-tabbar {
@@ -2285,6 +2578,7 @@ const currentYear = new Date().getFullYear();
       .testim-stage { min-height: 160px; }
       .matrix-svg-wrap { min-height: 260px; }
       .wallet-tabs { flex-wrap: wrap; }
+      .sol-cols-3, .sol-cols-2 { grid-template-columns: 1fr; }
     }
 
     @media (max-width: 400px) {
