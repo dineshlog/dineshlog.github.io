@@ -178,6 +178,39 @@ const skillCategories = [
   },
 ];
 
+const matrixDomains = [
+  { id:'sec',   label:'Security & Compliance', abbr:'SECURITY', color:'#c9a96e', rgb:'201,169,110', rx:10,  ry:12,  rw:130, rh:36, cx:75,  cy:30  },
+  { id:'iam',   label:'Identity & Access',     abbr:'IDENTITY', color:'#4d9bbf', rgb:'77,155,191',  rx:480, ry:12,  rw:130, rh:36, cx:545, cy:30  },
+  { id:'m365',  label:'M365 & Endpoint',       abbr:'M365',     color:'#9b7dd4', rgb:'155,125,212', rx:10,  ry:372, rw:130, rh:36, cx:75,  cy:390 },
+  { id:'cloud', label:'Cloud & Infra',         abbr:'CLOUD',    color:'#5fad8e', rgb:'95,173,142',  rx:480, ry:372, rw:130, rh:36, cx:545, cy:390 },
+];
+
+const matrixCerts = [
+  { id:'sc401', label:'SC-401',  short:'Info Security',  cx:190, cy:115, doms:['sec','iam']   },
+  { id:'sc900', label:'SC-900',  short:'Fundamentals',   cx:310, cy:78,  doms:['sec','iam']   },
+  { id:'sc300', label:'SC-300',  short:'Identity',       cx:430, cy:115, doms:['iam']         },
+  { id:'m365e', label:'M365E',   short:'Admin Expert',   cx:310, cy:210, doms:['m365','iam']  },
+  { id:'md101', label:'MD-101',  short:'Endpoint',       cx:180, cy:305, doms:['m365']        },
+  { id:'ab900', label:'AB-900',  short:'Copilot & AI',   cx:250, cy:210, doms:['m365']        },
+  { id:'mct',   label:'MCT',     short:'Trainer',        cx:370, cy:210, doms:['sec','m365']  },
+  { id:'az800', label:'AZ-800',  short:'Server Hybrid',  cx:440, cy:305, doms:['cloud','iam'] },
+  { id:'aws',   label:'AWS SAA', short:'Solutions Arch', cx:310, cy:342, doms:['cloud']       },
+];
+
+const matrixConns: { certId:string; domId:string; path:string; color:string }[] = [];
+matrixCerts.forEach(function(cert) {
+  cert.doms.forEach(function(domId) {
+    const dom = matrixDomains.find(function(d) { return d.id === domId; });
+    if (!dom) return;
+    const dy = dom.cy - cert.cy;
+    const path = 'M' + cert.cx + ',' + cert.cy
+      + ' C' + cert.cx + ',' + (cert.cy + dy * 0.5)
+      + ' '  + dom.cx  + ',' + (dom.cy - dy * 0.5)
+      + ' '  + dom.cx  + ',' + dom.cy;
+    matrixConns.push({ certId: cert.id, domId, path, color: dom.color });
+  });
+});
+
 const contactLinks = [
   { label: 'Email',    value: 'logan-dinesh@outlook.com',             href: 'mailto:logan-dinesh@outlook.com' },
   { label: 'Phone',   value: '+49 151 19496953',                      href: 'tel:+4915119496953' },
@@ -298,6 +331,41 @@ const currentYear = new Date().getFullYear();
             </article>
           ))}
         </div>
+
+        <!-- Testimonials carousel -->
+        <div class="testimonials-block reveal" style="transition-delay:0.18s">
+          <div class="testim-head">
+            <span class="eyebrow" style="font-size:0.56rem; margin-bottom:3px">Testimonials</span>
+            <p class="testim-tagline">What colleagues say on LinkedIn</p>
+          </div>
+          <div class="testim-stage">
+            {[1,2,3].map((n, idx) => (
+              <div class={`testim-slide${idx === 0 ? ' active' : ''}`} data-slide={String(idx)}>
+                <img src={`/testimonials/testimonial-${n}.jpg`} alt={`LinkedIn testimonial ${n}`}
+                  onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+                <div class="testim-placeholder">
+                  <svg width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+                    <rect width="32" height="32" rx="7" fill="rgba(0,119,181,0.45)"/>
+                    <text x="16" y="23" text-anchor="middle" font-family="Arial,sans-serif" font-size="16" font-weight="700" fill="white">in</text>
+                  </svg>
+                  <p>LinkedIn Testimonial {n}</p>
+                  <small>Add screenshot → /public/testimonials/testimonial-{n}.jpg</small>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div class="testim-controls">
+            <div class="testim-dots">
+              {[0,1,2].map((idx) => (
+                <button class={`testim-dot${idx === 0 ? ' active' : ''}`} data-slide={String(idx)} aria-label={`Testimonial ${idx + 1}`}></button>
+              ))}
+            </div>
+            <div class="testim-nav">
+              <button class="testim-btn" id="testim-prev" aria-label="Previous testimonial">←</button>
+              <button class="testim-btn" id="testim-next" aria-label="Next testimonial">→</button>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -389,6 +457,11 @@ const currentYear = new Date().getFullYear();
               Skill Wallet
               <span class="tab-count">{skillCategories.reduce((acc, c) => acc + c.skills.length, 0)}</span>
             </button>
+            <button class="wallet-tab" role="tab" id="tab-btn-matrix" data-wallet="matrix" aria-selected="false" aria-controls="wallet-matrix">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="5" r="2"/><circle cx="5" cy="19" r="2"/><circle cx="19" cy="19" r="2"/><line x1="12" y1="7" x2="5" y2="17"/><line x1="12" y1="7" x2="19" y2="17"/><line x1="7" y1="19" x2="17" y2="19"/></svg>
+              Skill Matrix
+              <span class="tab-count">{matrixCerts.length}</span>
+            </button>
           </div>
           <div class="wallet-ext-links">
             <a href="https://learn.microsoft.com/en-us/users/logan-dinesh/transcript" target="_blank" rel="noopener noreferrer" class="cred-btn">MS Learn ↗</a>
@@ -441,6 +514,52 @@ const currentYear = new Date().getFullYear();
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+
+        <!-- Skill Matrix pane -->
+        <div class="wallet-pane" id="wallet-matrix" role="tabpanel" aria-labelledby="tab-btn-matrix" aria-hidden="true">
+          <div class="matrix-outer">
+            <div class="matrix-svg-wrap">
+              <svg class="matrix-svg" viewBox="0 0 620 420" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" aria-label="Skill and certification relationship diagram">
+                <!-- Connection curves -->
+                {matrixConns.map((conn) => (
+                  <path class="m-conn" data-cert={conn.certId} data-dom={conn.domId}
+                    d={conn.path} stroke={conn.color} stroke-width="1.5" fill="none" stroke-opacity="0.28" />
+                ))}
+                <!-- Domain corner nodes -->
+                {matrixDomains.map((dom) => (
+                  <g class="m-domain" data-dom={dom.id} role="img" aria-label={dom.label}>
+                    <rect x={dom.rx} y={dom.ry} width={dom.rw} height={dom.rh} rx="8" ry="8"
+                      fill={`rgba(${dom.rgb},0.1)`} stroke={dom.color} stroke-width="1.5" stroke-opacity="0.5" />
+                    <text x={dom.cx} y={dom.cy + 4}
+                      text-anchor="middle" font-family="DM Sans, sans-serif" font-size="9"
+                      font-weight="700" fill={dom.color} letter-spacing="0.1em">{dom.abbr}</text>
+                  </g>
+                ))}
+                <!-- Certification nodes -->
+                {matrixCerts.map((cert) => (
+                  <g class="m-cert" data-cert={cert.id}>
+                    <circle cx={cert.cx} cy={cert.cy} r="27"
+                      fill="rgba(14,20,32,0.96)" stroke="rgba(201,169,110,0.22)" stroke-width="1.5" />
+                    <text x={cert.cx} y={cert.cy - 5}
+                      text-anchor="middle" font-family="DM Sans, sans-serif" font-size="8.5"
+                      font-weight="700" fill="#c9a96e">{cert.label}</text>
+                    <text x={cert.cx} y={cert.cy + 8}
+                      text-anchor="middle" font-family="DM Sans, sans-serif" font-size="6.5"
+                      font-weight="400" fill="#7a869e">{cert.short}</text>
+                  </g>
+                ))}
+              </svg>
+            </div>
+            <div class="matrix-legend">
+              {matrixDomains.map((dom) => (
+                <div class="matrix-legend-item">
+                  <span class="matrix-legend-swatch" style={`background:${dom.color}`}></span>
+                  <span class="matrix-legend-label">{dom.label}</span>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
 
@@ -576,6 +695,109 @@ const currentYear = new Date().getFullYear();
         });
       });
     });
+
+    /* ── Skill Matrix hover interactions ── */
+    (function () {
+      var svg = document.querySelector('.matrix-svg');
+      if (!svg) return;
+      var certs   = Array.from(svg.querySelectorAll('.m-cert'));
+      var domains = Array.from(svg.querySelectorAll('.m-domain'));
+      var conns   = Array.from(svg.querySelectorAll('.m-conn'));
+
+      function clearHover() {
+        certs.forEach(function (el) { el.classList.remove('m-highlight', 'm-dim'); });
+        domains.forEach(function (el) { el.classList.remove('m-highlight', 'm-dim'); });
+        conns.forEach(function (el) { el.classList.remove('m-highlight', 'm-dim'); });
+      }
+
+      certs.forEach(function (cert) {
+        var certId = cert.getAttribute('data-cert');
+        cert.addEventListener('mouseenter', function () {
+          clearHover();
+          cert.classList.add('m-highlight');
+          var connectedDoms = new Set();
+          conns.forEach(function (conn) {
+            if (conn.getAttribute('data-cert') === certId) {
+              conn.classList.add('m-highlight');
+              connectedDoms.add(conn.getAttribute('data-dom'));
+            } else {
+              conn.classList.add('m-dim');
+            }
+          });
+          domains.forEach(function (d) {
+            if (connectedDoms.has(d.getAttribute('data-dom'))) {
+              d.classList.add('m-highlight');
+            } else {
+              d.classList.add('m-dim');
+            }
+          });
+          certs.forEach(function (c) { if (c !== cert) c.classList.add('m-dim'); });
+        });
+        cert.addEventListener('mouseleave', clearHover);
+      });
+
+      domains.forEach(function (dom) {
+        var domId = dom.getAttribute('data-dom');
+        dom.addEventListener('mouseenter', function () {
+          clearHover();
+          dom.classList.add('m-highlight');
+          var connectedCerts = new Set();
+          conns.forEach(function (conn) {
+            if (conn.getAttribute('data-dom') === domId) {
+              conn.classList.add('m-highlight');
+              connectedCerts.add(conn.getAttribute('data-cert'));
+            } else {
+              conn.classList.add('m-dim');
+            }
+          });
+          certs.forEach(function (c) {
+            if (connectedCerts.has(c.getAttribute('data-cert'))) {
+              c.classList.add('m-highlight');
+            } else {
+              c.classList.add('m-dim');
+            }
+          });
+          domains.forEach(function (d) { if (d !== dom) d.classList.add('m-dim'); });
+        });
+        dom.addEventListener('mouseleave', clearHover);
+      });
+    })();
+
+    /* ── Testimonials auto-carousel ── */
+    (function () {
+      var slides  = Array.from(document.querySelectorAll('.testim-slide'));
+      var dots    = Array.from(document.querySelectorAll('.testim-dot'));
+      var prevBtn = document.getElementById('testim-prev');
+      var nextBtn = document.getElementById('testim-next');
+      if (!slides.length) return;
+      var current = 0;
+      var timer;
+
+      function goTo(idx) {
+        slides[current].classList.remove('active');
+        if (dots[current]) dots[current].classList.remove('active');
+        current = ((idx % slides.length) + slides.length) % slides.length;
+        slides[current].classList.add('active');
+        if (dots[current]) dots[current].classList.add('active');
+      }
+
+      function startTimer() {
+        clearInterval(timer);
+        timer = setInterval(function () { goTo(current + 1); }, 5000);
+      }
+
+      dots.forEach(function (dot) {
+        dot.addEventListener('click', function () {
+          goTo(parseInt(dot.getAttribute('data-slide'), 10));
+          startTimer();
+        });
+      });
+
+      if (prevBtn) prevBtn.addEventListener('click', function () { goTo(current - 1); startTimer(); });
+      if (nextBtn) nextBtn.addEventListener('click', function () { goTo(current + 1); startTimer(); });
+
+      startTimer();
+    })();
   })();
   </script>
 
@@ -1064,17 +1286,16 @@ const currentYear = new Date().getFullYear();
     .metric-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: clamp(10px,1.2dvh,16px);
-      flex: 1;
-      min-height: 0;
-      align-content: stretch;
+      gap: clamp(8px,1dvh,12px);
+      flex-shrink: 0;
+      margin-bottom: clamp(10px,1.4dvh,16px);
     }
 
     .metric-card {
       background: var(--surface);
       border: 1px solid var(--line);
-      border-radius: 14px;
-      padding: clamp(16px,2dvh,26px) clamp(14px,1.5vw,22px);
+      border-radius: 12px;
+      padding: clamp(10px,1.4dvh,16px) clamp(12px,1.2vw,18px);
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -1099,7 +1320,7 @@ const currentYear = new Date().getFullYear();
     .metric-value {
       margin: 0;
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(2rem,4dvh,3.2rem);
+      font-size: clamp(1.5rem,2.5dvh,2.2rem);
       font-weight: 600;
       color: var(--brand);
       line-height: 1;
@@ -1107,10 +1328,211 @@ const currentYear = new Date().getFullYear();
     }
 
     .metric-label {
-      margin: clamp(6px,0.8dvh,10px) 0 0;
+      margin: clamp(3px,0.45dvh,6px) 0 0;
       color: var(--muted);
-      font-size: clamp(0.76rem,1vw,0.88rem);
+      font-size: clamp(0.66rem,0.88vw,0.76rem);
+      line-height: 1.45;
+    }
+
+    /* ═══════════════════════════════════════════
+       SKILL MATRIX
+    ═══════════════════════════════════════════ */
+    .matrix-outer {
+      flex: 1;
+      min-height: 0;
+      display: flex;
+      flex-direction: column;
+      gap: clamp(6px,0.9dvh,12px);
+    }
+
+    .matrix-svg-wrap {
+      flex: 1;
+      min-height: 0;
+      display: flex;
+      align-items: stretch;
+    }
+
+    .matrix-svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .m-cert, .m-domain {
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+
+    .m-cert circle {
+      transition: stroke 0.2s, stroke-width 0.2s, filter 0.2s;
+    }
+
+    .m-cert:hover > circle,
+    .m-cert.m-highlight > circle {
+      stroke: var(--brand);
+      stroke-width: 2.5;
+      filter: drop-shadow(0 0 6px rgba(201,169,110,0.5));
+    }
+
+    .m-cert.m-dim, .m-domain.m-dim { opacity: 0.12; }
+
+    .m-conn { transition: stroke-opacity 0.2s, stroke-width 0.2s; }
+    .m-conn.m-dim { stroke-opacity: 0.04 !important; }
+    .m-conn.m-highlight { stroke-opacity: 0.85 !important; stroke-width: 2.5 !important; }
+
+    .m-domain rect { transition: filter 0.2s, stroke-opacity 0.2s; }
+    .m-domain.m-highlight rect { stroke-opacity: 0.9; }
+
+    .matrix-legend {
+      flex-shrink: 0;
+      display: flex;
+      gap: clamp(10px,2vw,28px);
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .matrix-legend-item {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: clamp(0.66rem,0.88vw,0.74rem);
+      font-weight: 500;
+      color: var(--muted);
+    }
+
+    .matrix-legend-swatch {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      opacity: 0.75;
+    }
+
+    /* ═══════════════════════════════════════════
+       TESTIMONIALS
+    ═══════════════════════════════════════════ */
+    .testimonials-block {
+      flex: 1;
+      min-height: 0;
+      display: flex;
+      flex-direction: column;
+      gap: clamp(7px,0.9dvh,11px);
+    }
+
+    .testim-head { flex-shrink: 0; }
+
+    .testim-tagline {
+      margin: 2px 0 0;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(0.92rem,1.2vw,1.1rem);
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.2;
+    }
+
+    .testim-stage {
+      flex: 1;
+      min-height: 0;
+      position: relative;
+      border-radius: 13px;
+      overflow: hidden;
+      background: var(--surface);
+      border: 1px solid var(--line);
+    }
+
+    .testim-slide {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 0.65s cubic-bezier(0.16,1,0.3,1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .testim-slide.active { opacity: 1; }
+
+    .testim-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center top;
+      display: block;
+    }
+
+    .testim-placeholder {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 20px;
+      text-align: center;
+      width: 100%;
+      height: 100%;
+    }
+
+    .testim-placeholder p {
+      margin: 0;
+      font-size: clamp(0.78rem,1vw,0.88rem);
+      font-weight: 500;
+      color: var(--muted-lt);
+    }
+
+    .testim-placeholder small {
+      font-size: 0.66rem;
+      color: var(--muted);
+      opacity: 0.5;
       line-height: 1.5;
+    }
+
+    .testim-controls {
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .testim-dots { display: flex; align-items: center; gap: 6px; }
+
+    .testim-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 3px;
+      border: 1px solid rgba(201,169,110,0.3);
+      background: transparent;
+      cursor: pointer;
+      padding: 0;
+      transition: all 0.28s cubic-bezier(0.34,1.56,0.64,1);
+    }
+
+    .testim-dot.active {
+      width: 18px;
+      background: var(--brand);
+      border-color: var(--brand);
+    }
+
+    .testim-nav { display: flex; gap: 6px; }
+
+    .testim-btn {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      color: var(--muted);
+      cursor: pointer;
+      font-size: 0.8rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: color 0.2s, border-color 0.2s, background 0.2s, transform 0.2s;
+    }
+
+    .testim-btn:hover {
+      color: var(--brand);
+      border-color: rgba(201,169,110,0.38);
+      background: rgba(201,169,110,0.06);
+      transform: scale(1.1);
     }
 
     /* ═══════════════════════════════════════════
@@ -1859,6 +2281,10 @@ const currentYear = new Date().getFullYear();
       .action-primary, .action-secondary { width: 100%; justify-content: center; }
       .timeline { overflow-y: auto; }
       .tl-detail { -webkit-line-clamp: 3; }
+      .testimonials-block { flex: none; min-height: 220px; }
+      .testim-stage { min-height: 160px; }
+      .matrix-svg-wrap { min-height: 260px; }
+      .wallet-tabs { flex-wrap: wrap; }
     }
 
     @media (max-width: 400px) {
