@@ -62,31 +62,70 @@ const timeline = [
     period: '2026 – Present',
     title: 'Information Security Coordinator',
     company: 'ESMT GmbH, Berlin',
-    detail: 'Coordinate ISMS activities, security reviews, access governance, vendor risk assessments, and awareness initiatives.',
+    bullets: [
+      'Lead risk assessments and vulnerability mitigation programs across the organisation',
+      'Develop, review, and maintain security policies aligned to ISO 27001 and regulatory requirements',
+      'Conduct access control reviews and coordinate security audits across systems and processes',
+      'Design and manage incident response planning, tabletop exercises, and escalation workflows',
+      'Evaluate vendor security posture through structured assessments and data protection reviews',
+      'Coordinate security awareness training programs and deliver compliance reporting to leadership',
+    ],
   },
   {
     period: '2023 – Present',
     title: 'Microsoft Systems Administrator',
     company: 'ESMT GmbH, Berlin',
-    detail: 'Led multiple M365 and security programs: Global Secure Access, Defender stack expansion, cross-platform endpoint governance.',
+    bullets: [
+      'Administer full M365 suite: Intune, Exchange Online, Teams, SharePoint, OneDrive, and Defender XDR',
+      'Manage Windows Server infrastructure and Win 10/11 endpoints with security baselines and patch governance',
+      'Oversee cross-platform MDM lifecycle (Windows, macOS, iOS, Android) with Zero Trust and Conditional Access',
+      'Maintain hybrid identity: Active Directory + Entra ID, SSO, ADFS, and federation services',
+      'Administer DNS, DHCP, NPS, and RADIUS network infrastructure services',
+      'Improved organisational security posture by 50% through targeted hardening and remediation programs',
+      'Delivered 7 major IT and security projects as Lead Architect: XDR, Global Secure Access, Purview, and more',
+    ],
   },
   {
     period: '2022 – 2023',
     title: 'IT Systems Administrator',
-    company: 'INFARM, Berlin',
-    detail: 'Managed identity, endpoint, and SaaS operations for a global workforce; improved provisioning, SSO, and compliance.',
+    company: 'INFARM – Indoor Urban Farming, Berlin',
+    bullets: [
+      'Supported 1,000–1,500 local and international users across global sites',
+      'Managed Azure AD and Intune MDM for 1,200+ workstations with full device lifecycle coverage',
+      'Handled onboarding and offboarding workflows, hardware inventory, and software licensing at scale',
+      'Administered Azure cloud infrastructure: resources, security policies, integrations, and monitoring',
+      'Evaluated and documented IAM, security, and compliance improvements across the global M365 tenant',
+      'Automated SSO provisioning between Azure AD and Google Workspace, Atlassian, and BambooHR',
+      'Participated in ERP project validation and documentation using SharePoint as central knowledge base',
+    ],
   },
   {
     period: '2018 – 2022',
     title: 'Senior Consultant – IT Systems',
     company: 'MicroChannel (Australia / APAC)',
-    detail: 'Delivered enterprise Microsoft, Azure, Exchange, virtualization, and infrastructure programs for MSP clients at regional scale.',
+    bullets: [
+      'Delivered Tier 3 support across 300+ internal users, 1,400+ clients, and 7 offices in AU and APAC',
+      'Managed M365, Azure, Intune MDM, and hybrid Exchange projects for diverse enterprise MSP clients',
+      'Administered DNS, DHCP, ADFS, RRAS, NPS, and Fiber Channel SAN environments',
+      'Led Exchange Server 2010→2016 migration and hybrid coexistence across multi-site MSP environments',
+      'Maintained VMware ESXi and Hyper-V clustered virtualisation platforms with regular patching cycles',
+      'Mentored junior engineers and maintained knowledge base, network diagrams, and change management logs',
+      'Conducted ISMS audits, maintained procedures, and coordinated ISP and vendor relationships at scale',
+    ],
   },
   {
     period: '2016 – 2018',
     title: 'System Support Engineer L2/L3',
     company: 'Involve 360 / Inbay (UK NOC)',
-    detail: 'Provided 24/7 remote support for MSP environments covering migrations, security remediation, and infrastructure operations.',
+    bullets: [
+      'Provided 24/7 NOC remote support for 250+ UK MSP clients, each with 200+ end users',
+      'Delivered 2nd and 3rd level service desk support with proactive infrastructure maintenance',
+      'Managed M365, Azure AD, Active Directory, DNS, DHCP, RRAS, and File Server environments',
+      'Administered end-user accounts: permissions, access rights, storage quotas, and compliance controls',
+      'Performed server upgrades, maintenance windows, and vendor patch deployments',
+      'Managed incident, problem, and change lifecycle following ITIL-aligned processes',
+      'Implemented security, backup, and redundancy strategies for MSP client environments',
+    ],
   },
 ];
 
@@ -395,38 +434,39 @@ const currentYear = new Date().getFullYear();
           ))}
         </div>
 
-        <!-- Testimonials carousel -->
-        <div class="testimonials-block reveal" style="transition-delay:0.18s">
-          <div class="testim-head">
+        <!-- Testimonials — 3-card grid -->
+        <div class="testimonials-block">
+          <div class="testim-head reveal" style="transition-delay:0.1s">
             <span class="eyebrow" style="font-size:0.56rem; margin-bottom:3px">Testimonials</span>
             <p class="testim-tagline">What colleagues say on LinkedIn</p>
           </div>
-          <div class="testim-stage">
+          <div class="testim-cards">
             {[1,2,3].map((n, idx) => (
-              <div class={`testim-slide${idx === 0 ? ' active' : ''}`} data-slide={String(idx)}>
-                <img src={`/testimonials/testimonial-${n}.jpg`} alt={`LinkedIn testimonial ${n}`}
-                  onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
-                <div class="testim-placeholder">
-                  <svg width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true">
-                    <rect width="32" height="32" rx="7" fill="rgba(0,119,181,0.45)"/>
-                    <text x="16" y="23" text-anchor="middle" font-family="Arial,sans-serif" font-size="16" font-weight="700" fill="white">in</text>
-                  </svg>
-                  <p>LinkedIn Testimonial {n}</p>
-                  <small>Add screenshot → /public/testimonials/testimonial-{n}.jpg</small>
+              <article class="testim-card reveal" style={`transition-delay:${0.14 + idx * 0.11}s`}>
+                <div class="testim-frame">
+                  <img
+                    src={`/testimonials/testimonial-${n}.jpg`}
+                    alt={`LinkedIn recommendation ${n}`}
+                    onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
+                  />
+                  <div class="testim-ph">
+                    <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+                      <rect width="28" height="28" rx="6" fill="rgba(0,119,181,0.45)"/>
+                      <text x="14" y="20" text-anchor="middle" font-family="Arial,sans-serif" font-size="14" font-weight="700" fill="white">in</text>
+                    </svg>
+                    <p>LinkedIn Recommendation</p>
+                    <small>/public/testimonials/testimonial-{n}.jpg</small>
+                  </div>
                 </div>
-              </div>
+                <div class="testim-card-foot">
+                  <svg width="13" height="13" viewBox="0 0 26 26" fill="none" aria-hidden="true">
+                    <rect width="26" height="26" rx="5" fill="#0077B5"/>
+                    <text x="13" y="19" text-anchor="middle" font-family="Arial,sans-serif" font-size="14" font-weight="700" fill="white">in</text>
+                  </svg>
+                  <span>Recommendation {n}</span>
+                </div>
+              </article>
             ))}
-          </div>
-          <div class="testim-controls">
-            <div class="testim-dots">
-              {[0,1,2].map((idx) => (
-                <button class={`testim-dot${idx === 0 ? ' active' : ''}`} data-slide={String(idx)} aria-label={`Testimonial ${idx + 1}`}></button>
-              ))}
-            </div>
-            <div class="testim-nav">
-              <button class="testim-btn" id="testim-prev" aria-label="Previous testimonial">←</button>
-              <button class="testim-btn" id="testim-next" aria-label="Next testimonial">→</button>
-            </div>
           </div>
         </div>
       </div>
@@ -463,18 +503,51 @@ const currentYear = new Date().getFullYear();
           <span class="eyebrow">Experience</span>
           <h2 class="section-title">Career progression across enterprise and managed services</h2>
         </header>
-        <div class="timeline">
-          {timeline.map((item, i) => (
-            <article class="tl-item reveal" style={`transition-delay:${0.05 + i*0.07}s`}>
-              <div class="tl-dot" aria-hidden="true"></div>
-              <div class="tl-body">
-                <p class="tl-period">{item.period}</p>
-                <h3 class="tl-title">{item.title}</h3>
-                <p class="tl-company">{item.company}</p>
-                <p class="tl-detail">{item.detail}</p>
+        <div class="exp-layout reveal" style="transition-delay:0.08s">
+
+          <!-- Left: vertical tab list -->
+          <nav class="exp-tabs" role="tablist" aria-label="Career experience">
+            {timeline.map((item, i) => (
+              <button
+                class={`exp-tab${i === 0 ? ' active' : ''}`}
+                role="tab"
+                data-exp={String(i)}
+                id={`exp-tab-${i}`}
+                aria-selected={String(i === 0)}
+                aria-controls={`exp-panel-${i}`}
+              >
+                <span class="exp-tab-period">{item.period}</span>
+                <span class="exp-tab-title">{item.title}</span>
+                <span class="exp-tab-co">{item.company}</span>
+                <span class="exp-tab-arrow" aria-hidden="true">›</span>
+              </button>
+            ))}
+          </nav>
+
+          <!-- Right: detail panels -->
+          <div class="exp-detail" aria-live="polite">
+            {timeline.map((item, i) => (
+              <div
+                class={`exp-panel${i === 0 ? ' active' : ''}`}
+                id={`exp-panel-${i}`}
+                role="tabpanel"
+                aria-labelledby={`exp-tab-${i}`}
+                aria-hidden={String(i !== 0)}
+              >
+                <div class="exp-panel-inner">
+                  <header class="exp-panel-head">
+                    <span class="exp-panel-period">{item.period}</span>
+                    <h3 class="exp-panel-title">{item.title}</h3>
+                    <p class="exp-panel-co">{item.company}</p>
+                  </header>
+                  <ul class="exp-bullets">
+                    {item.bullets.map((b) => <li>{b}</li>)}
+                  </ul>
+                </div>
               </div>
-            </article>
-          ))}
+            ))}
+          </div>
+
         </div>
       </div>
     </section>
@@ -901,40 +974,26 @@ const currentYear = new Date().getFullYear();
       });
     })();
 
-    /* ── Testimonials auto-carousel ── */
+    /* ── Experience vertical tabs ── */
     (function () {
-      var slides  = Array.from(document.querySelectorAll('.testim-slide'));
-      var dots    = Array.from(document.querySelectorAll('.testim-dot'));
-      var prevBtn = document.getElementById('testim-prev');
-      var nextBtn = document.getElementById('testim-next');
-      if (!slides.length) return;
-      var current = 0;
-      var timer;
-
-      function goTo(idx) {
-        slides[current].classList.remove('active');
-        if (dots[current]) dots[current].classList.remove('active');
-        current = ((idx % slides.length) + slides.length) % slides.length;
-        slides[current].classList.add('active');
-        if (dots[current]) dots[current].classList.add('active');
-      }
-
-      function startTimer() {
-        clearInterval(timer);
-        timer = setInterval(function () { goTo(current + 1); }, 5000);
-      }
-
-      dots.forEach(function (dot) {
-        dot.addEventListener('click', function () {
-          goTo(parseInt(dot.getAttribute('data-slide'), 10));
-          startTimer();
+      var tabs = Array.from(document.querySelectorAll('.exp-tab'));
+      var panels = Array.from(document.querySelectorAll('.exp-panel'));
+      if (!tabs.length) return;
+      tabs.forEach(function (tab) {
+        tab.addEventListener('click', function () {
+          var idx = tab.getAttribute('data-exp');
+          tabs.forEach(function (t) {
+            var isActive = t.getAttribute('data-exp') === idx;
+            t.classList.toggle('active', isActive);
+            t.setAttribute('aria-selected', String(isActive));
+          });
+          panels.forEach(function (p) {
+            var show = p.id === 'exp-panel-' + idx;
+            p.classList.toggle('active', show);
+            p.setAttribute('aria-hidden', String(!show));
+          });
         });
       });
-
-      if (prevBtn) prevBtn.addEventListener('click', function () { goTo(current - 1); startTimer(); });
-      if (nextBtn) nextBtn.addEventListener('click', function () { goTo(current + 1); startTimer(); });
-
-      startTimer();
     })();
   })();
   </script>
@@ -1546,14 +1605,14 @@ const currentYear = new Date().getFullYear();
     }
 
     /* ═══════════════════════════════════════════
-       TESTIMONIALS
+       TESTIMONIALS — 3-card grid
     ═══════════════════════════════════════════ */
     .testimonials-block {
       flex: 1;
       min-height: 0;
       display: flex;
       flex-direction: column;
-      gap: clamp(7px,0.9dvh,11px);
+      gap: clamp(6px,0.8dvh,10px);
     }
 
     .testim-head { flex-shrink: 0; }
@@ -1561,116 +1620,93 @@ const currentYear = new Date().getFullYear();
     .testim-tagline {
       margin: 2px 0 0;
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(0.92rem,1.2vw,1.1rem);
+      font-size: clamp(0.88rem,1.1vw,1.05rem);
       font-weight: 600;
       color: var(--text);
       line-height: 1.2;
     }
 
-    .testim-stage {
+    .testim-cards {
+      flex: 1;
+      min-height: 0;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: clamp(8px,1.2dvh,14px);
+    }
+
+    .testim-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
+    }
+
+    .testim-card:hover {
+      border-color: rgba(201,169,110,0.28);
+      box-shadow: var(--glow-hover);
+      transform: translateY(-3px);
+    }
+
+    .testim-frame {
       flex: 1;
       min-height: 0;
       position: relative;
-      border-radius: 13px;
       overflow: hidden;
-      background: var(--surface);
-      border: 1px solid var(--line);
+      background: rgba(0,0,0,0.2);
     }
 
-    .testim-slide {
-      position: absolute;
-      inset: 0;
-      opacity: 0;
-      transition: opacity 0.65s cubic-bezier(0.16,1,0.3,1);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .testim-slide.active { opacity: 1; }
-
-    .testim-slide img {
+    .testim-frame img {
       width: 100%;
       height: 100%;
-      object-fit: contain;
-      object-position: center top;
+      object-fit: cover;
+      object-position: top center;
       display: block;
     }
 
-    .testim-placeholder {
+    .testim-ph {
       display: none;
+      position: absolute;
+      inset: 0;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 10px;
-      padding: 20px;
+      gap: 8px;
+      padding: 14px;
       text-align: center;
-      width: 100%;
-      height: 100%;
+      background: var(--surface);
     }
 
-    .testim-placeholder p {
+    .testim-ph p {
       margin: 0;
-      font-size: clamp(0.78rem,1vw,0.88rem);
+      font-size: clamp(0.7rem,0.9vw,0.8rem);
       font-weight: 500;
       color: var(--muted-lt);
     }
 
-    .testim-placeholder small {
-      font-size: 0.66rem;
+    .testim-ph small {
+      font-size: 0.58rem;
       color: var(--muted);
-      opacity: 0.5;
+      opacity: 0.45;
       line-height: 1.5;
     }
 
-    .testim-controls {
+    .testim-card-foot {
       flex-shrink: 0;
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      gap: 7px;
+      padding: clamp(6px,0.8dvh,9px) clamp(10px,1.1vw,14px);
+      border-top: 1px solid var(--line-subtle);
+      background: rgba(255,255,255,0.012);
     }
 
-    .testim-dots { display: flex; align-items: center; gap: 6px; }
-
-    .testim-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 3px;
-      border: 1px solid rgba(201,169,110,0.3);
-      background: transparent;
-      cursor: pointer;
-      padding: 0;
-      transition: all 0.28s cubic-bezier(0.34,1.56,0.64,1);
-    }
-
-    .testim-dot.active {
-      width: 18px;
-      background: var(--brand);
-      border-color: var(--brand);
-    }
-
-    .testim-nav { display: flex; gap: 6px; }
-
-    .testim-btn {
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      border: 1px solid var(--line);
-      background: var(--surface);
+    .testim-card-foot span {
+      font-size: clamp(0.62rem,0.8vw,0.7rem);
       color: var(--muted);
-      cursor: pointer;
-      font-size: 0.8rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: color 0.2s, border-color 0.2s, background 0.2s, transform 0.2s;
-    }
-
-    .testim-btn:hover {
-      color: var(--brand);
-      border-color: rgba(201,169,110,0.38);
-      background: rgba(201,169,110,0.06);
-      transform: scale(1.1);
+      font-weight: 500;
     }
 
     /* ═══════════════════════════════════════════
@@ -1768,101 +1804,181 @@ const currentYear = new Date().getFullYear();
     }
 
     /* ═══════════════════════════════════════════
-       TIMELINE
+       EXPERIENCE — Vertical Tabs Split Panel
     ═══════════════════════════════════════════ */
-    .timeline {
+    .exp-layout {
       flex: 1;
       min-height: 0;
+      display: grid;
+      grid-template-columns: clamp(200px,28%,300px) 1fr;
+      gap: 0;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .exp-tabs {
       display: flex;
       flex-direction: column;
-      gap: clamp(6px,0.8dvh,10px);
-      padding-left: 26px;
+      border-right: 1px solid var(--line);
+      overflow-y: auto;
+      scrollbar-width: none;
+      background: rgba(255,255,255,0.01);
+    }
+
+    .exp-tab {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      padding: clamp(12px,1.6dvh,18px) clamp(14px,1.5vw,20px);
+      border: none;
+      border-left: 3px solid transparent;
+      border-bottom: 1px solid var(--line-subtle);
+      background: transparent;
+      text-align: left;
+      cursor: pointer;
+      position: relative;
+      transition: background 0.22s, border-color 0.22s;
+    }
+
+    .exp-tab:last-child { border-bottom: none; }
+
+    .exp-tab:hover:not(.active) { background: rgba(201,169,110,0.04); }
+
+    .exp-tab.active {
+      background: rgba(201,169,110,0.07);
+      border-left-color: var(--brand);
+    }
+
+    .exp-tab-arrow {
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--brand);
+      opacity: 0;
+      font-size: 1rem;
+      transition: opacity 0.22s;
+    }
+
+    .exp-tab.active .exp-tab-arrow { opacity: 0.7; }
+
+    .exp-tab-period {
+      display: block;
+      font-size: clamp(0.56rem,0.72vw,0.62rem);
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      font-weight: 600;
+      color: var(--brand);
+      opacity: 0.8;
+    }
+
+    .exp-tab-title {
+      display: block;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(0.88rem,1.15vw,1.02rem);
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.2;
+      margin-top: 1px;
+    }
+
+    .exp-tab-co {
+      display: block;
+      font-size: clamp(0.62rem,0.82vw,0.72rem);
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    .exp-detail {
       position: relative;
       overflow: hidden;
     }
 
-    .timeline::before {
-      content: '';
+    .exp-panel {
       position: absolute;
-      left: 6px;
-      top: 8px; bottom: 8px;
-      width: 1px;
-      background: linear-gradient(to bottom, var(--brand), rgba(201,169,110,0.08));
+      inset: 0;
+      display: none;
+      opacity: 0;
+      transform: translateX(12px);
+      transition: opacity 0.32s cubic-bezier(0.16,1,0.3,1), transform 0.32s cubic-bezier(0.16,1,0.3,1);
+      overflow-y: auto;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(201,169,110,0.2) transparent;
     }
 
-    .tl-item {
-      display: flex;
-      gap: 0;
-      flex: 1;
-      min-height: 0;
-      position: relative;
+    .exp-panel.active {
+      display: block;
+      opacity: 1;
+      transform: translateX(0);
     }
 
-    .tl-dot {
-      position: absolute;
-      left: -21px;
-      top: clamp(12px,1.5dvh,16px);
-      width: 11px; height: 11px;
-      border-radius: 50%;
-      border: 2px solid var(--brand);
-      background: var(--bg);
-      flex-shrink: 0;
-      transition: background 0.3s, box-shadow 0.3s;
-    }
-
-    .tl-item:hover .tl-dot {
-      background: var(--brand);
-      box-shadow: 0 0 12px rgba(201,169,110,0.4);
-    }
-
-    .tl-body {
-      background: var(--surface);
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      padding: clamp(10px,1.3dvh,14px) clamp(14px,1.5vw,18px);
-      width: 100%;
+    .exp-panel-inner {
+      padding: clamp(20px,2.6dvh,32px) clamp(20px,2.4vw,32px);
+      height: 100%;
       display: flex;
       flex-direction: column;
-      justify-content: center;
-      transition: border-color 0.3s;
+      gap: clamp(14px,1.8dvh,22px);
     }
 
-    .tl-item:hover .tl-body { border-color: rgba(201,169,110,0.2); }
+    .exp-panel-head { flex-shrink: 0; }
 
-    .tl-period {
-      margin: 0;
-      font-size: clamp(0.58rem,0.8vw,0.65rem);
-      letter-spacing: 0.18em;
+    .exp-panel-period {
+      display: block;
+      font-size: clamp(0.58rem,0.75vw,0.65rem);
       text-transform: uppercase;
+      letter-spacing: 0.18em;
+      font-weight: 700;
       color: var(--brand);
-      font-weight: 600;
+      margin-bottom: 6px;
     }
 
-    .tl-title {
-      margin: 3px 0 0;
+    .exp-panel-title {
+      margin: 0;
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(0.95rem,1.4vw,1.15rem);
+      font-size: clamp(1.3rem,2.2vw,1.9rem);
       font-weight: 600;
-      line-height: 1.2;
+      line-height: 1.15;
       color: var(--text);
     }
 
-    .tl-company {
-      margin: 2px 0 0;
+    .exp-panel-co {
+      margin: 5px 0 0;
+      font-size: clamp(0.76rem,1vw,0.88rem);
       color: var(--muted-lt);
-      font-size: clamp(0.72rem,0.95vw,0.82rem);
       font-weight: 500;
     }
 
-    .tl-detail {
-      margin: 4px 0 0;
+    .exp-bullets {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: clamp(8px,1dvh,12px);
+      flex: 1;
+      border-top: 1px solid var(--line-subtle);
+      padding-top: clamp(14px,1.8dvh,20px);
+    }
+
+    .exp-bullets li {
+      position: relative;
+      padding-left: 18px;
       color: var(--muted);
-      font-size: clamp(0.72rem,0.95vw,0.82rem);
-      line-height: 1.55;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
+      font-size: clamp(0.76rem,1vw,0.88rem);
+      line-height: 1.6;
+    }
+
+    .exp-bullets li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.55rem;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--brand);
+      opacity: 0.6;
     }
 
     /* ═══════════════════════════════════════════
@@ -2572,10 +2688,11 @@ const currentYear = new Date().getFullYear();
       .hero-h1 { font-size: clamp(2.2rem,8vw,3.2rem); }
       .hero-actions { flex-direction: column; }
       .action-primary, .action-secondary { width: 100%; justify-content: center; }
-      .timeline { overflow-y: auto; }
-      .tl-detail { -webkit-line-clamp: 3; }
+      .exp-layout { grid-template-columns: 1fr; }
+      .exp-detail { position: relative; min-height: 320px; }
+      .exp-panel { position: relative; }
       .testimonials-block { flex: none; min-height: 220px; }
-      .testim-stage { min-height: 160px; }
+      .testim-cards { grid-template-columns: 1fr; }
       .matrix-svg-wrap { min-height: 260px; }
       .wallet-tabs { flex-wrap: wrap; }
       .sol-cols-3, .sol-cols-2 { grid-template-columns: 1fr; }
