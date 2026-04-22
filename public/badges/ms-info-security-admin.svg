@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0078d4"/>
+      <stop offset="100%" style="stop-color:#004e8c"/>
+    </linearGradient>
+    <linearGradient id="shield" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#50abf1"/>
+      <stop offset="100%" style="stop-color:#0078d4"/>
+    </linearGradient>
+  </defs>
+  <circle cx="100" cy="100" r="100" fill="url(#bg)"/>
+  <circle cx="100" cy="100" r="96" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="2"/>
+  <!-- Shield -->
+  <path d="M100 36 L138 52 L138 98 Q138 128 100 150 Q62 128 62 98 L62 52 Z" fill="url(#shield)" opacity="0.95"/>
+  <path d="M100 44 L132 58 L132 98 Q132 122 100 142 Q68 122 68 98 L68 58 Z" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+  <!-- Lock icon -->
+  <rect x="88" y="97" width="24" height="18" rx="3" fill="white" opacity="0.95"/>
+  <path d="M93 97 Q93 87 107 87 Q107 97 107 97" fill="none" stroke="white" stroke-width="4" stroke-linecap="round" opacity="0.95"/>
+  <circle cx="100" cy="106" r="3" fill="#0078d4"/>
+  <!-- Text -->
+  <text x="100" y="170" font-family="Segoe UI,Arial,sans-serif" font-size="10" font-weight="700" fill="white" text-anchor="middle" opacity="0.9">INFORMATION SECURITY</text>
+  <text x="100" y="182" font-family="Segoe UI,Arial,sans-serif" font-size="9" font-weight="600" fill="rgba(255,255,255,0.75)" text-anchor="middle">ADMINISTRATOR ASSOCIATE</text>
+</svg>

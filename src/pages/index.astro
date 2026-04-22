@@ -76,45 +76,93 @@ const timeline = [
 const projects = [
   {
     name: 'Global Secure Access Program',
-    result: 'Legacy VPN replaced with identity-centric secure access and policy-driven controls.',
+    result: 'Legacy VPN replaced with identity-centric secure access and policy-driven controls across the entire organization.',
     stack: 'Entra ID · Conditional Access · Zero Trust',
   },
   {
     name: 'Defender XDR Security Consolidation',
-    result: 'Unified endpoint, identity, and cloud signals into one incident response workflow.',
+    result: 'Unified endpoint, identity, and cloud signals into one incident response workflow, improving detection coverage.',
     stack: 'Defender for Endpoint · Identity · Cloud Apps',
   },
   {
+    name: 'ADFS Federation Implementation',
+    result: 'Architected and deployed Active Directory Federation Services for seamless SSO across hybrid identity environments.',
+    stack: 'ADFS · Entra ID · Hybrid Identity · SSO',
+  },
+  {
+    name: 'ESET → Microsoft Defender Migration',
+    result: 'Replaced third-party AV with native Defender stack, reducing licensing cost and unifying threat visibility.',
+    stack: 'Defender for Endpoint · MDE · Security Baselines',
+  },
+  {
     name: 'Purview Information Protection',
-    result: 'Rolled out classification, retention, and DLP governance for regulated collaboration.',
+    result: 'Rolled out classification, retention, and DLP governance for regulated collaboration and data lifecycle.',
     stack: 'Purview · Sensitivity Labels · Compliance',
   },
   {
-    name: 'VMware to Proxmox Migration',
-    result: 'Completed platform migration without service interruption while reducing licensing cost.',
-    stack: 'VMware ESXi · Proxmox VE · Infrastructure Ops',
+    name: 'BitLocker Encryption Program',
+    result: 'Deployed BitLocker data-at-rest encryption across all managed endpoints with compliance reporting via Intune.',
+    stack: 'BitLocker · Intune · Compliance Policies',
   },
   {
     name: 'Enterprise Intune MDM Rollout',
-    result: 'Standardized secure endpoint lifecycle across Windows, macOS, iOS, and Android.',
-    stack: 'Microsoft Intune · Baselines · App Deployment',
+    result: 'Standardized secure endpoint lifecycle across Windows, macOS, iOS, and Android with zero-touch provisioning.',
+    stack: 'Microsoft Intune · Autopilot · App Deployment',
+  },
+  {
+    name: 'VMware to Proxmox Migration',
+    result: 'Completed platform migration without service interruption while significantly reducing hypervisor licensing cost.',
+    stack: 'VMware ESXi · Proxmox VE · Infrastructure Ops',
+  },
+  {
+    name: 'Exchange 2010 → 2016 & Hybrid Migration',
+    result: 'Delivered on-premises Exchange upgrade and hybrid coexistence setup for a multi-site MSP client environment.',
+    stack: 'Exchange Server · Hybrid Config · M365',
+  },
+  {
+    name: 'Zero Trust Assessment & Hardening',
+    result: 'Conducted Zero Trust posture review and implemented layered controls achieving 50%+ Secure Score improvement.',
+    stack: 'Zero Trust · Conditional Access · Secure Score',
   },
   {
     name: 'Automation & Reporting Framework',
-    result: 'Reduced repetitive admin effort through scripted provisioning and compliance reporting.',
+    result: 'Reduced repetitive admin effort through scripted provisioning, compliance checks, and automated reporting pipelines.',
     stack: 'PowerShell · Azure Automation · Log Analytics',
+  },
+  {
+    name: 'Azure AD SSO Auto-Provisioning',
+    result: 'Automated identity provisioning and SSO between Azure AD and key SaaS platforms across a 1,500-user global workforce.',
+    stack: 'Entra ID · Google Workspace · Atlassian · BambooHR',
   },
 ];
 
-const certifications = [
-  { label: 'Security, Compliance, and Identity Fundamentals', image: '/badges/security-compliance-and-identity-fundamentals-600x600.png' },
-  { label: 'MCSE Productivity', image: '/badges/MCSE-Productivity-2018.png' },
-  { label: 'MCSE Mobility', image: '/badges/MCSE-Mobility-2019.png' },
-  { label: 'MCSE Cloud Platform and Infrastructure', image: '/badges/MCSE-Cloud-Platform-Infrastructure-2018.png' },
-  { label: 'MCSA Windows Server 2016', image: '/badges/MCSA-Windows-Server-2016-2018.png' },
-  { label: 'MCSA Windows Server 2012', image: '/badges/MCSA-Windows-Server-2012-2018.png' },
-  { label: 'MCSA Windows 10', image: '/badges/MCSA-Windows-10-2018.png' },
-  { label: 'MCSA Office 365', image: '/badges/MCSA-Office-365-2018.png' },
+const certGroups = [
+  {
+    heading: 'Active Certifications',
+    items: [
+      { label: 'MS Certified: Information Security Administrator Associate', sub: 'SC-401 · Expires Jul 2026', image: '/badges/ms-info-security-admin.svg' },
+      { label: 'Microsoft 365 Certified: Administrator Expert', sub: 'MS-100 + MS-101 · Expires Jul 2026', image: '/badges/m365-administrator-expert.png' },
+      { label: 'MS 365 Certified: Endpoint Administrator Associate', sub: 'MD-101 · Expires Dec 2026', image: '/badges/ms-endpoint-administrator.png' },
+      { label: 'MS Certified: Identity and Access Administrator Associate', sub: 'SC-300 · Expires Jan 2027', image: '/badges/ms-identity-access-admin.png' },
+      { label: 'MS Certified: Windows Server Hybrid Administrator Associate', sub: 'AZ-800 + AZ-801 · Expires Feb 2027', image: '/badges/ms-windows-server-hybrid-admin.png' },
+      { label: 'MS 365 Certified: Copilot and Agent Administration Fundamentals', sub: 'AB-900 · Jan 2026', image: '/badges/ms-copilot-agent-admin-fundamentals.svg' },
+      { label: 'MS Certified: Security, Compliance, and Identity Fundamentals', sub: 'SC-900 · Aug 2021', image: '/badges/security-compliance-and-identity-fundamentals-600x600.png' },
+      { label: 'Microsoft Certified Trainer', sub: 'MCT · 2018–2023', image: '/badges/microsoft-certified-trainer.png' },
+      { label: 'AWS Certified Solutions Architect – Associate', sub: 'SAA-C03', image: '/badges/aws-solutions-architect-associate.png' },
+    ],
+  },
+  {
+    heading: 'MCSE / MCSA Certifications',
+    items: [
+      { label: 'MCSE: Productivity Solutions Expert', sub: 'Mar 2019', image: '/badges/MCSE-Productivity-2018.png' },
+      { label: 'MCSE: Mobility', sub: 'Mar 2019', image: '/badges/MCSE-Mobility-2019.png' },
+      { label: 'MCSE: Cloud Platform and Infrastructure', sub: 'Dec 2018', image: '/badges/MCSE-Cloud-Platform-Infrastructure-2018.png' },
+      { label: 'MCSA: Windows Server 2016', sub: 'Aug 2018', image: '/badges/MCSA-Windows-Server-2016-2018.png' },
+      { label: 'MCSA: Windows Server 2012', sub: 'Jun 2018', image: '/badges/MCSA-Windows-Server-2012-2018.png' },
+      { label: 'MCSA: Windows 10', sub: 'Sep 2018', image: '/badges/MCSA-Windows-10-2018.png' },
+      { label: 'MCSA: Office 365', sub: 'May 2018', image: '/badges/MCSA-Office-365-2018.png' },
+    ],
+  },
 ];
 
 const contactLinks = [
@@ -344,16 +392,22 @@ const currentYear = new Date().getFullYear();
           </a>
         </div>
 
-        <div class="badge-grid">
-          {certifications.map((cert, i) => (
-            <article class="badge-card reveal" style={`transition-delay:${i * 0.07}s`}>
-              <div class="badge-img-wrap">
-                <img src={cert.image} alt={cert.label} loading="lazy" />
-              </div>
-              <p class="badge-label">{cert.label}</p>
-            </article>
-          ))}
-        </div>
+        {certGroups.map((group) => (
+          <div class="cert-group reveal">
+            <h3 class="cert-group-heading">{group.heading}</h3>
+            <div class="badge-grid">
+              {group.items.map((cert, i) => (
+                <article class="badge-card" style={`animation-delay:${i * 0.06}s`}>
+                  <div class="badge-img-wrap">
+                    <img src={cert.image} alt={cert.label} loading="lazy" />
+                  </div>
+                  <p class="badge-label">{cert.label}</p>
+                  {cert.sub && <p class="badge-sub">{cert.sub}</p>}
+                </article>
+              ))}
+            </div>
+          </div>
+        ))}
       </div>
     </section>
 
@@ -751,11 +805,12 @@ const currentYear = new Date().getFullYear();
 
     .profile-card img {
       width: 100%;
-      max-height: 300px;
-      object-fit: cover;
-      object-position: top center;
+      max-height: 320px;
+      object-fit: contain;
+      object-position: center top;
       border-radius: 12px;
       display: block;
+      background: linear-gradient(180deg, rgba(201,169,110,0.05), rgba(8,12,24,0.3));
     }
 
     .profile-info {
@@ -1212,11 +1267,30 @@ const currentYear = new Date().getFullYear();
       transform: translateY(-1px);
     }
 
+    .cert-group {
+      margin-top: 36px;
+    }
+
+    .cert-group + .cert-group {
+      margin-top: 48px;
+    }
+
+    .cert-group-heading {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      font-weight: 600;
+      color: var(--muted);
+      margin: 0 0 20px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--line-subtle);
+    }
+
     .badge-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 14px;
-      margin-top: 36px;
     }
 
     .badge-card {
@@ -1272,6 +1346,15 @@ const currentYear = new Date().getFullYear();
 
     .badge-card:hover .badge-label {
       color: var(--brand);
+    }
+
+    .badge-sub {
+      margin: 0;
+      font-size: 0.68rem;
+      color: var(--muted);
+      font-weight: 500;
+      opacity: 0.7;
+      letter-spacing: 0.02em;
     }
 
     /* ─── CONTACT ─── */
@@ -1375,12 +1458,13 @@ const currentYear = new Date().getFullYear();
 
       .profile-card {
         display: grid;
-        grid-template-columns: 200px 1fr;
+        grid-template-columns: 180px 1fr;
         gap: 20px;
       }
 
       .profile-photo-wrap {
         grid-row: 1 / 3;
+        align-self: start;
       }
 
       .profile-dl {

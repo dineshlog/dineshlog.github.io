@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <defs>
+    <linearGradient id="bg2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#7c3aed"/>
+      <stop offset="100%" style="stop-color:#4c1d95"/>
+    </linearGradient>
+    <linearGradient id="icon2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#c4b5fd"/>
+      <stop offset="100%" style="stop-color:#a78bfa"/>
+    </linearGradient>
+  </defs>
+  <circle cx="100" cy="100" r="100" fill="url(#bg2)"/>
+  <circle cx="100" cy="100" r="96" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="2"/>
+  <!-- Copilot sparkle icon -->
+  <circle cx="100" cy="88" r="26" fill="url(#icon2)" opacity="0.9"/>
+  <!-- Sparkle / AI symbol -->
+  <path d="M100 68 L102 82 L116 84 L102 86 L100 100 L98 86 L84 84 L98 82 Z" fill="white" opacity="0.95"/>
+  <!-- Small sparkles -->
+  <path d="M122 72 L123 78 L129 79 L123 80 L122 86 L121 80 L115 79 L121 78 Z" fill="white" opacity="0.7" transform="scale(0.7) translate(52,30)"/>
+  <!-- Agent circles -->
+  <circle cx="72" cy="116" r="10" fill="url(#icon2)" opacity="0.8"/>
+  <circle cx="100" cy="122" r="10" fill="url(#icon2)" opacity="0.85"/>
+  <circle cx="128" cy="116" r="10" fill="url(#icon2)" opacity="0.8"/>
+  <line x1="82" y1="116" x2="90" y2="122" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"/>
+  <line x1="110" y1="122" x2="118" y2="116" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"/>
+  <!-- Text -->
+  <text x="100" y="150" font-family="Segoe UI,Arial,sans-serif" font-size="9" font-weight="700" fill="white" text-anchor="middle" opacity="0.9">COPILOT &amp; AGENT ADMIN</text>
+  <text x="100" y="162" font-family="Segoe UI,Arial,sans-serif" font-size="9" font-weight="600" fill="rgba(255,255,255,0.75)" text-anchor="middle">FUNDAMENTALS</text>
+</svg>
