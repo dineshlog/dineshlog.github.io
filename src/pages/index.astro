@@ -2,41 +2,57 @@
 import Layout from '../layouts/Layout.astro';
 
 const navLinks = [
-  { id: 'profile', label: 'Profile' },
-  { id: 'expertise', label: 'Expertise' },
-  { id: 'experience', label: 'Experience' },
-  { id: 'projects', label: 'Projects' },
+  { id: 'top',         label: 'Home' },
+  { id: 'profile',     label: 'Profile' },
+  { id: 'expertise',   label: 'Expertise' },
+  { id: 'experience',  label: 'Experience' },
+  { id: 'projects',    label: 'Projects' },
   { id: 'credentials', label: 'Credentials' },
-  { id: 'contact', label: 'Contact' },
+  { id: 'contact',     label: 'Contact' },
+];
+
+const dotPanels = [
+  { id: 'top',            label: 'Home' },
+  { id: 'profile',        label: 'Profile' },
+  { id: 'expertise',      label: 'Expertise' },
+  { id: 'experience',     label: 'Experience' },
+  { id: 'projects',       label: 'Projects' },
+  { id: 'credentials',    label: 'Certifications I' },
+  { id: 'credentials-2',  label: 'Certifications II' },
+  { id: 'contact',        label: 'Contact' },
 ];
 
 const keyMetrics = [
-  { value: '10+', label: 'Years in IT, security, and modern workplace delivery' },
-  { value: '35–60%', label: 'Secure Score uplift delivered in transformation programs' },
-  { value: '25–30%', label: 'Operational cost reduction through platform consolidation' },
-  { value: '1,500+', label: 'International users supported across enterprise operations' },
+  { value: '10+',    label: 'Years in IT, security & modern workplace delivery' },
+  { value: '35–60%', label: 'Secure Score uplift in transformation programs' },
+  { value: '25–30%', label: 'Operational cost reduction via consolidation' },
+  { value: '1,500+', label: 'International users supported across enterprises' },
 ];
 
 const expertiseAreas = [
   {
+    num: '01',
     title: 'Microsoft 365 & Endpoint Engineering',
     summary: 'Architecture and administration of Intune, Exchange Online, Teams, SharePoint, OneDrive, and M365 platform governance.',
     points: ['Intune MDM lifecycle', 'Exchange hybrid + cloud', 'Teams and SharePoint governance', 'Endpoint compliance at scale'],
   },
   {
+    num: '02',
     title: 'Identity, Access & Zero Trust',
     summary: 'Identity-first security controls with Entra ID, Conditional Access, MFA/SSPR, and federation hardening for distributed teams.',
-    points: ['Conditional Access strategy', 'SSO and federation', 'Least privilege and access reviews', 'Global Secure Access rollout'],
+    points: ['Conditional Access strategy', 'SSO and federation', 'Least privilege & access reviews', 'Global Secure Access rollout'],
   },
   {
+    num: '03',
     title: 'Security Operations & Compliance',
-    summary: 'Defender XDR and Purview implementations aligned to practical risk reduction, compliance readiness, and incident response maturity.',
+    summary: 'Defender XDR and Purview implementations aligned to practical risk reduction, compliance readiness, and incident response.',
     points: ['Defender XDR implementation', 'Data protection and DLP', 'Vendor security and audits', 'Risk remediation planning'],
   },
   {
+    num: '04',
     title: 'Automation & Service Reliability',
     summary: 'Process redesign with PowerShell and Azure automation to reduce manual work, accelerate response, and improve consistency.',
-    points: ['PowerShell orchestration', 'Runbooks and reporting', 'ITSM and change discipline', 'Knowledge transfer and mentoring'],
+    points: ['PowerShell orchestration', 'Runbooks and reporting', 'ITSM and change discipline', 'Knowledge transfer & mentoring'],
   },
 ];
 
@@ -45,19 +61,19 @@ const timeline = [
     period: '2026 – Present',
     title: 'Information Security Coordinator',
     company: 'ESMT GmbH, Berlin',
-    detail: 'Coordinate ISMS activities, security reviews, access governance, vendor risk assessments, and awareness initiatives across the organization.',
+    detail: 'Coordinate ISMS activities, security reviews, access governance, vendor risk assessments, and awareness initiatives.',
   },
   {
     period: '2023 – Present',
     title: 'Microsoft Systems Administrator',
     company: 'ESMT GmbH, Berlin',
-    detail: 'Led multiple M365 and security programs including Global Secure Access, Defender stack expansion, and cross-platform endpoint governance.',
+    detail: 'Led multiple M365 and security programs: Global Secure Access, Defender stack expansion, cross-platform endpoint governance.',
   },
   {
     period: '2022 – 2023',
     title: 'IT Systems Administrator',
     company: 'INFARM, Berlin',
-    detail: 'Managed identity, endpoint, and SaaS operations for a global workforce and improved provisioning, SSO, and compliance workflows.',
+    detail: 'Managed identity, endpoint, and SaaS operations for a global workforce; improved provisioning, SSO, and compliance.',
   },
   {
     period: '2018 – 2022',
@@ -74,113 +90,59 @@ const timeline = [
 ];
 
 const projects = [
-  {
-    name: 'Global Secure Access Program',
-    result: 'Legacy VPN replaced with identity-centric secure access and policy-driven controls across the entire organization.',
-    stack: 'Entra ID · Conditional Access · Zero Trust',
-  },
-  {
-    name: 'Defender XDR Security Consolidation',
-    result: 'Unified endpoint, identity, and cloud signals into one incident response workflow, improving detection coverage.',
-    stack: 'Defender for Endpoint · Identity · Cloud Apps',
-  },
-  {
-    name: 'ADFS Federation Implementation',
-    result: 'Architected and deployed Active Directory Federation Services for seamless SSO across hybrid identity environments.',
-    stack: 'ADFS · Entra ID · Hybrid Identity · SSO',
-  },
-  {
-    name: 'ESET → Microsoft Defender Migration',
-    result: 'Replaced third-party AV with native Defender stack, reducing licensing cost and unifying threat visibility.',
-    stack: 'Defender for Endpoint · MDE · Security Baselines',
-  },
-  {
-    name: 'Purview Information Protection',
-    result: 'Rolled out classification, retention, and DLP governance for regulated collaboration and data lifecycle.',
-    stack: 'Purview · Sensitivity Labels · Compliance',
-  },
-  {
-    name: 'BitLocker Encryption Program',
-    result: 'Deployed BitLocker data-at-rest encryption across all managed endpoints with compliance reporting via Intune.',
-    stack: 'BitLocker · Intune · Compliance Policies',
-  },
-  {
-    name: 'Enterprise Intune MDM Rollout',
-    result: 'Standardized secure endpoint lifecycle across Windows, macOS, iOS, and Android with zero-touch provisioning.',
-    stack: 'Microsoft Intune · Autopilot · App Deployment',
-  },
-  {
-    name: 'VMware to Proxmox Migration',
-    result: 'Completed platform migration without service interruption while significantly reducing hypervisor licensing cost.',
-    stack: 'VMware ESXi · Proxmox VE · Infrastructure Ops',
-  },
-  {
-    name: 'Exchange 2010 → 2016 & Hybrid Migration',
-    result: 'Delivered on-premises Exchange upgrade and hybrid coexistence setup for a multi-site MSP client environment.',
-    stack: 'Exchange Server · Hybrid Config · M365',
-  },
-  {
-    name: 'Zero Trust Assessment & Hardening',
-    result: 'Conducted Zero Trust posture review and implemented layered controls achieving 50%+ Secure Score improvement.',
-    stack: 'Zero Trust · Conditional Access · Secure Score',
-  },
-  {
-    name: 'Automation & Reporting Framework',
-    result: 'Reduced repetitive admin effort through scripted provisioning, compliance checks, and automated reporting pipelines.',
-    stack: 'PowerShell · Azure Automation · Log Analytics',
-  },
-  {
-    name: 'Azure AD SSO Auto-Provisioning',
-    result: 'Automated identity provisioning and SSO between Azure AD and key SaaS platforms across a 1,500-user global workforce.',
-    stack: 'Entra ID · Google Workspace · Atlassian · BambooHR',
-  },
+  { name: 'Global Secure Access',           result: 'Legacy VPN replaced with identity-centric secure access and policy-driven controls.',            stack: 'Entra ID · Conditional Access · Zero Trust' },
+  { name: 'Defender XDR Consolidation',     result: 'Unified endpoint, identity, and cloud signals into one incident response workflow.',              stack: 'Defender for Endpoint · Identity · Cloud Apps' },
+  { name: 'ADFS Federation',                result: 'Deployed Active Directory Federation Services for seamless SSO across hybrid identity.',           stack: 'ADFS · Entra ID · Hybrid Identity · SSO' },
+  { name: 'ESET → Defender Migration',      result: 'Replaced third-party AV with Defender stack, reducing cost and unifying threat visibility.',       stack: 'Defender for Endpoint · MDE · Baselines' },
+  { name: 'Purview Information Protection', result: 'Rolled out classification, retention, and DLP for regulated data lifecycle management.',           stack: 'Purview · Sensitivity Labels · Compliance' },
+  { name: 'BitLocker Encryption Program',   result: 'Deployed data-at-rest encryption across all managed endpoints with compliance reporting.',          stack: 'BitLocker · Intune · Compliance Policies' },
+  { name: 'Enterprise Intune MDM Rollout',  result: 'Standardized endpoint lifecycle across Windows, macOS, iOS, and Android; zero-touch provisioning.', stack: 'Intune · Autopilot · App Deployment' },
+  { name: 'VMware → Proxmox Migration',     result: 'Platform migration without service interruption while significantly reducing licensing cost.',       stack: 'VMware ESXi · Proxmox VE · Infra Ops' },
+  { name: 'Exchange 2010→2016 & Hybrid',    result: 'On-premises upgrade and hybrid coexistence setup for a multi-site MSP client environment.',        stack: 'Exchange Server · Hybrid Config · M365' },
+  { name: 'Zero Trust Hardening',           result: 'Posture assessment and layered controls achieving 50%+ Secure Score improvement.',                  stack: 'Zero Trust · Conditional Access · Secure Score' },
+  { name: 'Automation & Reporting',         result: 'Scripted provisioning, compliance checks, and reporting pipelines reducing manual admin effort.',   stack: 'PowerShell · Azure Automation · Log Analytics' },
+  { name: 'Azure AD SSO Auto-Provisioning', result: 'Automated identity provisioning and SSO between Entra ID and SaaS for 1,500+ global users.',        stack: 'Entra ID · Google Workspace · Atlassian' },
 ];
 
-const certGroups = [
-  {
-    heading: 'Active Certifications',
-    items: [
-      { label: 'MS Certified: Information Security Administrator Associate', sub: 'SC-401 · Expires Jul 2026', image: '/badges/ms-info-security-admin.svg' },
-      { label: 'Microsoft 365 Certified: Administrator Expert', sub: 'MS-100 + MS-101 · Expires Jul 2026', image: '/badges/m365-administrator-expert.png' },
-      { label: 'MS 365 Certified: Endpoint Administrator Associate', sub: 'MD-101 · Expires Dec 2026', image: '/badges/ms-endpoint-administrator.png' },
-      { label: 'MS Certified: Identity and Access Administrator Associate', sub: 'SC-300 · Expires Jan 2027', image: '/badges/ms-identity-access-admin.png' },
-      { label: 'MS Certified: Windows Server Hybrid Administrator Associate', sub: 'AZ-800 + AZ-801 · Expires Feb 2027', image: '/badges/ms-windows-server-hybrid-admin.png' },
-      { label: 'MS 365 Certified: Copilot and Agent Administration Fundamentals', sub: 'AB-900 · Jan 2026', image: '/badges/ms-copilot-agent-admin-fundamentals.svg' },
-      { label: 'MS Certified: Security, Compliance, and Identity Fundamentals', sub: 'SC-900 · Aug 2021', image: '/badges/security-compliance-and-identity-fundamentals-600x600.png' },
-      { label: 'Microsoft Certified Trainer', sub: 'MCT · 2018–2023', image: '/badges/microsoft-certified-trainer.png' },
-      { label: 'AWS Certified Solutions Architect – Associate', sub: 'SAA-C03', image: '/badges/aws-solutions-architect-associate.png' },
-    ],
-  },
-  {
-    heading: 'MCSE / MCSA Certifications',
-    items: [
-      { label: 'MCSE: Productivity Solutions Expert', sub: 'Mar 2019', image: '/badges/MCSE-Productivity-2018.png' },
-      { label: 'MCSE: Mobility', sub: 'Mar 2019', image: '/badges/MCSE-Mobility-2019.png' },
-      { label: 'MCSE: Cloud Platform and Infrastructure', sub: 'Dec 2018', image: '/badges/MCSE-Cloud-Platform-Infrastructure-2018.png' },
-      { label: 'MCSA: Windows Server 2016', sub: 'Aug 2018', image: '/badges/MCSA-Windows-Server-2016-2018.png' },
-      { label: 'MCSA: Windows Server 2012', sub: 'Jun 2018', image: '/badges/MCSA-Windows-Server-2012-2018.png' },
-      { label: 'MCSA: Windows 10', sub: 'Sep 2018', image: '/badges/MCSA-Windows-10-2018.png' },
-      { label: 'MCSA: Office 365', sub: 'May 2018', image: '/badges/MCSA-Office-365-2018.png' },
-    ],
-  },
+const activeCerts = [
+  { label: 'MS Certified: Information Security Administrator Associate', sub: 'SC-401 · Expires Jul 2026', image: '/badges/ms-info-security-admin.svg' },
+  { label: 'Microsoft 365 Certified: Administrator Expert',              sub: 'MS-100 + MS-101 · Expires Jul 2026', image: '/badges/m365-administrator-expert.png' },
+  { label: 'MS 365 Certified: Endpoint Administrator Associate',         sub: 'MD-101 · Expires Dec 2026', image: '/badges/ms-endpoint-administrator.png' },
+  { label: 'MS Certified: Identity and Access Administrator Associate',  sub: 'SC-300 · Expires Jan 2027', image: '/badges/ms-identity-access-admin.png' },
+  { label: 'MS Certified: Windows Server Hybrid Admin Associate',        sub: 'AZ-800 + AZ-801 · Expires Feb 2027', image: '/badges/ms-windows-server-hybrid-admin.png' },
+  { label: 'MS 365 Certified: Copilot & Agent Administration Fundamentals', sub: 'AB-900 · Jan 2026', image: '/badges/ms-copilot-agent-admin-fundamentals.svg' },
+  { label: 'MS Certified: Security, Compliance & Identity Fundamentals', sub: 'SC-900 · Aug 2021', image: '/badges/security-compliance-and-identity-fundamentals-600x600.png' },
+  { label: 'Microsoft Certified Trainer',                                sub: 'MCT · 2018–2023', image: '/badges/microsoft-certified-trainer.png' },
+  { label: 'AWS Certified Solutions Architect – Associate',              sub: 'SAA-C03', image: '/badges/aws-solutions-architect-associate.png' },
+];
+
+const legacyCerts = [
+  { label: 'MCSE: Productivity Solutions Expert',      sub: 'Mar 2019', image: '/badges/MCSE-Productivity-2018.png' },
+  { label: 'MCSE: Mobility',                           sub: 'Mar 2019', image: '/badges/MCSE-Mobility-2019.png' },
+  { label: 'MCSE: Cloud Platform and Infrastructure',  sub: 'Dec 2018', image: '/badges/MCSE-Cloud-Platform-Infrastructure-2018.png' },
+  { label: 'MCSA: Windows Server 2016',                sub: 'Aug 2018', image: '/badges/MCSA-Windows-Server-2016-2018.png' },
+  { label: 'MCSA: Windows Server 2012',                sub: 'Jun 2018', image: '/badges/MCSA-Windows-Server-2012-2018.png' },
+  { label: 'MCSA: Windows 10',                         sub: 'Sep 2018', image: '/badges/MCSA-Windows-10-2018.png' },
+  { label: 'MCSA: Office 365',                         sub: 'May 2018', image: '/badges/MCSA-Office-365-2018.png' },
 ];
 
 const contactLinks = [
-  { label: 'Email', value: 'logan-dinesh@outlook.com', href: 'mailto:logan-dinesh@outlook.com' },
-  { label: 'Phone', value: '+49 151 19496953', href: 'tel:+4915119496953' },
-  { label: 'LinkedIn', value: 'linkedin.com/in/loganathan-dinesh', href: 'https://www.linkedin.com/in/loganathan-dinesh' },
-  { label: 'GitHub', value: 'github.com/dineshlog', href: 'https://github.com/dineshlog' },
-  { label: 'Credly', value: 'credly.com/users/loganathan-dinesh', href: 'https://credly.com/users/loganathan-dinesh/badges' },
+  { label: 'Email',    value: 'logan-dinesh@outlook.com',             href: 'mailto:logan-dinesh@outlook.com' },
+  { label: 'Phone',   value: '+49 151 19496953',                      href: 'tel:+4915119496953' },
+  { label: 'LinkedIn', value: 'linkedin.com/in/loganathan-dinesh',    href: 'https://www.linkedin.com/in/loganathan-dinesh' },
+  { label: 'GitHub',  value: 'github.com/dineshlog',                  href: 'https://github.com/dineshlog' },
+  { label: 'Credly',  value: 'credly.com/users/loganathan-dinesh',    href: 'https://credly.com/users/loganathan-dinesh/badges' },
 ];
 
 const currentYear = new Date().getFullYear();
 ---
 
 <Layout>
-  <!-- ── Navigation ── -->
-  <header class="top-nav">
+
+  <!-- ── Fixed Navigation ── -->
+  <header class="top-nav" role="banner">
     <div class="container-shell top-nav-inner">
-      <a href="#top" class="brand-mark">
+      <a href="#top" class="brand-mark" data-scroll="top">
         <span class="brand-badge">DL</span>
         <span class="brand-text">
           <strong>Dinesh Loganathan</strong>
@@ -188,23 +150,31 @@ const currentYear = new Date().getFullYear();
         </span>
       </a>
 
-      <button id="menu-toggle" class="menu-toggle" aria-expanded="false" aria-controls="primary-nav">
+      <button id="menu-toggle" class="menu-toggle" aria-expanded="false" aria-controls="primary-nav" aria-label="Toggle navigation">
         <span></span><span></span><span></span>
       </button>
 
-      <nav id="primary-nav" class="primary-nav">
+      <nav id="primary-nav" class="primary-nav" role="navigation" aria-label="Primary">
         {navLinks.map((link) => (
-          <a href={`#${link.id}`}>{link.label}</a>
+          <a href={`#${link.id}`} data-scroll={link.id}>{link.label}</a>
         ))}
         <a href="/Dinesh_Loganathan_Resume.pdf" download class="nav-cta">Resume ↓</a>
       </nav>
     </div>
   </header>
 
-  <main id="top">
+  <!-- ── Scroll Dots ── -->
+  <nav class="scroll-dots" aria-label="Page sections" role="navigation">
+    {dotPanels.map((panel) => (
+      <button class="scroll-dot" data-target={panel.id} aria-label={panel.label} title={panel.label}></button>
+    ))}
+  </nav>
 
-    <!-- ── Hero ── -->
-    <section class="hero-section">
+  <!-- ── Snap Container ── -->
+  <div class="page-scroll" id="page-scroll">
+
+    <!-- 1. HERO -->
+    <section class="snap-panel hero-panel" id="top" data-panel="top">
       <div class="hero-bg" aria-hidden="true">
         <div class="orb orb-1"></div>
         <div class="orb orb-2"></div>
@@ -214,25 +184,20 @@ const currentYear = new Date().getFullYear();
       <div class="container-shell hero-inner">
         <div class="hero-content">
           <span class="eyebrow hero-anim" style="animation-delay:0.05s">Portfolio 2026</span>
-
           <h1 class="hero-h1">
             <span class="h1-line hero-anim" style="animation-delay:0.18s">Building secure,</span>
-            <span class="h1-line hero-anim" style="animation-delay:0.32s">scalable digital</span>
-            <span class="h1-line h1-accent hero-anim" style="animation-delay:0.46s"><em>workplace systems.</em></span>
+            <span class="h1-line hero-anim" style="animation-delay:0.3s">scalable digital</span>
+            <span class="h1-line h1-accent hero-anim" style="animation-delay:0.44s"><em>workplace systems.</em></span>
           </h1>
-
-          <p class="hero-desc hero-anim" style="animation-delay:0.62s">
+          <p class="hero-desc hero-anim" style="animation-delay:0.58s">
             I help organizations modernize Microsoft ecosystems while raising security posture,
             improving operational clarity, and reducing unnecessary tooling overhead.
-            My work combines architecture depth, delivery ownership, and clear communication.
           </p>
-
-          <div class="hero-actions hero-anim" style="animation-delay:0.76s">
-            <a href="#projects" class="action-primary">View Selected Programs</a>
-            <a href="#contact" class="action-secondary">Start a Conversation</a>
+          <div class="hero-actions hero-anim" style="animation-delay:0.7s">
+            <a href="#projects" data-scroll="projects" class="action-primary">View Selected Programs</a>
+            <a href="#contact"  data-scroll="contact"  class="action-secondary">Start a Conversation</a>
           </div>
-
-          <div class="hero-tags hero-anim" style="animation-delay:0.9s" aria-label="Key expertise">
+          <div class="hero-tags hero-anim" style="animation-delay:0.84s" aria-label="Key expertise">
             <span class="pill">Microsoft 365</span>
             <span class="pill">Intune</span>
             <span class="pill">Defender XDR</span>
@@ -242,7 +207,7 @@ const currentYear = new Date().getFullYear();
           </div>
         </div>
 
-        <aside class="profile-card hero-anim" style="animation-delay:0.3s">
+        <aside class="profile-card hero-anim" style="animation-delay:0.28s">
           <div class="profile-photo-wrap">
             <img src="/ProfilePicture.jpg" alt="Portrait of Dinesh Loganathan" />
           </div>
@@ -252,71 +217,55 @@ const currentYear = new Date().getFullYear();
             <p class="profile-degree">BEng (Hons) – Computer Network &amp; Cloud Security</p>
           </div>
           <dl class="profile-dl">
-            <div>
-              <dt>Current focus</dt>
-              <dd>Information Security Coordination, M365 Architecture &amp; Governance</dd>
-            </div>
-            <div>
-              <dt>Work style</dt>
-              <dd>Consultative, outcome-driven, and security-by-design</dd>
-            </div>
-            <div>
-              <dt>Availability</dt>
-              <dd>Open to consulting and full-time opportunities (remote / hybrid)</dd>
-            </div>
+            <div><dt>Current focus</dt><dd>Information Security Coordination, M365 Architecture &amp; Governance</dd></div>
+            <div><dt>Work style</dt><dd>Consultative, outcome-driven, security-by-design</dd></div>
+            <div><dt>Availability</dt><dd>Open to consulting and full-time roles (remote / hybrid)</dd></div>
           </dl>
         </aside>
       </div>
 
-      <div class="hero-scroll-hint" aria-hidden="true">
+      <div class="scroll-hint" aria-hidden="true">
         <span>Scroll</span>
         <div class="scroll-line"></div>
       </div>
     </section>
 
-    <!-- ── Profile / Metrics ── -->
-    <section id="profile" class="section-block metrics-section">
-      <div class="container-shell">
-        <div class="metrics-head reveal">
+    <!-- 2. PROFILE / METRICS -->
+    <section class="snap-panel" id="profile" data-panel="profile">
+      <div class="container-shell panel-shell">
+        <header class="panel-head reveal">
           <span class="eyebrow">Profile Snapshot</span>
           <h2 class="section-title">Impact-oriented delivery, not just platform administration</h2>
-          <p class="section-copy">
-            Across MSP, enterprise, and consulting environments, I have delivered complex Microsoft and security
-            programs with a focus on risk reduction, reliability, and measurable business outcomes.
-          </p>
-        </div>
-
+          <p class="section-copy">Across MSP, enterprise, and consulting environments — complex programs with a focus on risk reduction, reliability, and measurable outcomes.</p>
+        </header>
         <div class="metric-grid">
-          {keyMetrics.map((metric, i) => (
-            <article class="metric-card reveal" style={`transition-delay:${i * 0.1}s`}>
-              <p class="metric-value">{metric.value}</p>
-              <p class="metric-label">{metric.label}</p>
+          {keyMetrics.map((m, i) => (
+            <article class="metric-card reveal" style={`transition-delay:${0.08 + i*0.08}s`}>
+              <p class="metric-value">{m.value}</p>
+              <p class="metric-label">{m.label}</p>
             </article>
           ))}
         </div>
       </div>
     </section>
 
-    <!-- ── Expertise ── -->
-    <section id="expertise" class="section-block expertise-section">
-      <div class="container-shell">
-        <div class="reveal">
+    <!-- 3. EXPERTISE -->
+    <section class="snap-panel tint-panel" id="expertise" data-panel="expertise">
+      <div class="container-shell panel-shell">
+        <header class="panel-head reveal">
           <span class="eyebrow">Expertise</span>
           <h2 class="section-title">Structured capability across platform, security, and operations</h2>
-        </div>
-
+        </header>
         <div class="expertise-grid">
           {expertiseAreas.map((area, i) => (
-            <article class="expertise-card reveal" style={`transition-delay:${i * 0.1}s`}>
-              <div class="expertise-card-top">
-                <span class="expertise-num">0{i + 1}</span>
+            <article class="expertise-card reveal" style={`transition-delay:${0.05 + i*0.08}s`}>
+              <div class="expertise-top">
+                <span class="expertise-num">{area.num}</span>
                 <h3>{area.title}</h3>
               </div>
               <p>{area.summary}</p>
               <ul>
-                {area.points.map((point) => (
-                  <li>{point}</li>
-                ))}
+                {area.points.map(p => <li>{p}</li>)}
               </ul>
             </article>
           ))}
@@ -324,23 +273,22 @@ const currentYear = new Date().getFullYear();
       </div>
     </section>
 
-    <!-- ── Experience ── -->
-    <section id="experience" class="section-block experience-section">
-      <div class="container-shell">
-        <div class="reveal">
+    <!-- 4. EXPERIENCE -->
+    <section class="snap-panel" id="experience" data-panel="experience">
+      <div class="container-shell panel-shell">
+        <header class="panel-head reveal">
           <span class="eyebrow">Experience</span>
           <h2 class="section-title">Career progression across enterprise and managed services</h2>
-        </div>
-
+        </header>
         <div class="timeline">
           {timeline.map((item, i) => (
-            <article class="timeline-item reveal" style={`transition-delay:${i * 0.08}s`}>
-              <div class="timeline-dot" aria-hidden="true"></div>
-              <div class="timeline-body">
-                <p class="timeline-period">{item.period}</p>
-                <h3 class="timeline-title">{item.title}</h3>
-                <p class="timeline-company">{item.company}</p>
-                <p class="timeline-detail">{item.detail}</p>
+            <article class="tl-item reveal" style={`transition-delay:${0.05 + i*0.07}s`}>
+              <div class="tl-dot" aria-hidden="true"></div>
+              <div class="tl-body">
+                <p class="tl-period">{item.period}</p>
+                <h3 class="tl-title">{item.title}</h3>
+                <p class="tl-company">{item.company}</p>
+                <p class="tl-detail">{item.detail}</p>
               </div>
             </article>
           ))}
@@ -348,167 +296,271 @@ const currentYear = new Date().getFullYear();
       </div>
     </section>
 
-    <!-- ── Projects ── -->
-    <section id="projects" class="section-block projects-section">
-      <div class="container-shell">
-        <div class="reveal">
+    <!-- 5. PROJECTS -->
+    <section class="snap-panel tint-panel" id="projects" data-panel="projects">
+      <div class="container-shell panel-shell">
+        <header class="panel-head reveal">
           <span class="eyebrow">Selected Programs</span>
           <h2 class="section-title">Programs delivered from architecture to implementation</h2>
-        </div>
-
+        </header>
         <div class="project-grid">
-          {projects.map((project, i) => (
-            <article class="project-card reveal" style={`transition-delay:${i * 0.08}s`}>
-              <div class="project-card-inner">
-                <h3>{project.name}</h3>
-                <p>{project.result}</p>
-                <div class="project-stack">{project.stack}</div>
-              </div>
+          {projects.map((p, i) => (
+            <article class="project-card reveal" style={`transition-delay:${0.03 + i*0.04}s`}>
+              <h3>{p.name}</h3>
+              <p>{p.result}</p>
+              <span class="project-stack">{p.stack}</span>
             </article>
           ))}
         </div>
       </div>
     </section>
 
-    <!-- ── Credentials ── -->
-    <section id="credentials" class="section-block credentials-section">
-      <div class="container-shell">
-        <div class="reveal">
-          <span class="eyebrow">Credentials</span>
+    <!-- 6. CREDENTIALS – Active -->
+    <section class="snap-panel" id="credentials" data-panel="credentials">
+      <div class="container-shell panel-shell">
+        <header class="panel-head reveal">
+          <span class="eyebrow">Credentials · Active Certifications</span>
           <h2 class="section-title">Microsoft certification track with security and cloud depth</h2>
-          <p class="section-copy">
-            Additional active and transcript-backed credentials available through Microsoft Learn and Credly.
-          </p>
-        </div>
-
-        <div class="cred-links reveal">
-          <a href="https://learn.microsoft.com/en-us/users/logan-dinesh/transcript" target="_blank" rel="noopener noreferrer" class="cred-link-btn">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            Microsoft Learn Transcript
-          </a>
-          <a href="https://credly.com/users/loganathan-dinesh/badges" target="_blank" rel="noopener noreferrer" class="cred-link-btn">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
-            Credly Badge Profile
-          </a>
-        </div>
-
-        {certGroups.map((group) => (
-          <div class="cert-group reveal">
-            <h3 class="cert-group-heading">{group.heading}</h3>
-            <div class="badge-grid">
-              {group.items.map((cert, i) => (
-                <article class="badge-card" style={`animation-delay:${i * 0.06}s`}>
-                  <div class="badge-img-wrap">
-                    <img src={cert.image} alt={cert.label} loading="lazy" />
-                  </div>
-                  <p class="badge-label">{cert.label}</p>
-                  {cert.sub && <p class="badge-sub">{cert.sub}</p>}
-                </article>
-              ))}
-            </div>
+          <div class="cred-links">
+            <a href="https://learn.microsoft.com/en-us/users/logan-dinesh/transcript" target="_blank" rel="noopener noreferrer" class="cred-btn">
+              MS Learn Transcript ↗
+            </a>
+            <a href="https://credly.com/users/loganathan-dinesh/badges" target="_blank" rel="noopener noreferrer" class="cred-btn">
+              Credly Badges ↗
+            </a>
           </div>
-        ))}
+        </header>
+        <div class="badge-grid badge-grid-3">
+          {activeCerts.map((cert, i) => (
+            <article class="badge-card reveal" style={`transition-delay:${0.04 + i*0.05}s`}>
+              <img src={cert.image} alt={cert.label} loading="lazy" />
+              <p class="badge-label">{cert.label}</p>
+              <p class="badge-sub">{cert.sub}</p>
+            </article>
+          ))}
+        </div>
       </div>
     </section>
 
-    <!-- ── Contact ── -->
-    <section id="contact" class="section-block contact-section">
+    <!-- 7. CREDENTIALS – Legacy (continuation panel) -->
+    <section class="snap-panel tint-panel" id="credentials-2" data-panel="credentials-2">
+      <div class="container-shell panel-shell">
+        <header class="panel-head reveal">
+          <span class="eyebrow">Credentials · Legacy Certifications</span>
+          <h2 class="section-title">MCSE &amp; MCSA certification history</h2>
+          <p class="section-copy">Foundational Microsoft certifications earned 2018–2019 across server, cloud, and productivity platforms.</p>
+        </header>
+        <div class="badge-grid badge-grid-4">
+          {legacyCerts.map((cert, i) => (
+            <article class="badge-card reveal" style={`transition-delay:${0.04 + i*0.06}s`}>
+              <img src={cert.image} alt={cert.label} loading="lazy" />
+              <p class="badge-label">{cert.label}</p>
+              <p class="badge-sub">{cert.sub}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. CONTACT -->
+    <section class="snap-panel tint-panel" id="contact" data-panel="contact">
       <div class="container-shell contact-grid">
         <div class="contact-left reveal">
           <span class="eyebrow">Contact</span>
-          <h2 class="section-title">Open for collaboration and security-first modernization projects</h2>
+          <h2 class="section-title">Open for collaboration and security-first modernization</h2>
           <p class="section-copy">
-            Available for consulting engagements and full-time opportunities focused on Microsoft 365,
-            information security, endpoint strategy, and cloud operations.
+            Available for consulting and full-time opportunities focused on Microsoft 365, information security, endpoint strategy, and cloud operations.
           </p>
-          <div class="hero-actions" style="margin-top:32px">
+          <div class="hero-actions" style="margin-top:clamp(16px,2.5vh,28px)">
             <a href="/Dinesh_Loganathan_Resume.pdf" download class="action-primary">Download Resume</a>
             <a href="mailto:logan-dinesh@outlook.com" class="action-secondary">Email Directly</a>
           </div>
         </div>
 
         <div class="contact-right reveal" style="transition-delay:0.1s">
-          {contactLinks.map((link) => (
-            <a
-              href={link.href}
-              target={link.href.startsWith('http') ? '_blank' : '_self'}
-              rel="noopener noreferrer"
-              class="contact-item"
-            >
+          {contactLinks.map(link => (
+            <a href={link.href} target={link.href.startsWith('http') ? '_blank' : '_self'} rel="noopener noreferrer" class="contact-item">
               <span class="contact-label">{link.label}</span>
               <span class="contact-value">{link.value}</span>
               <span class="contact-arrow" aria-hidden="true">→</span>
             </a>
           ))}
+          <p class="footer-line">© {currentYear} Dinesh Loganathan · Built with Astro · GitHub Pages</p>
         </div>
       </div>
     </section>
-  </main>
 
-  <footer class="site-footer">
-    <div class="container-shell footer-inner">
-      <p>© {currentYear} Dinesh Loganathan</p>
-      <p>Built with Astro · Deployed on GitHub Pages</p>
-    </div>
-  </footer>
+  </div><!-- /page-scroll -->
 
-  <!-- ── Mobile nav toggle ── -->
+  <!-- ── Scripts ── -->
   <script is:inline>
-    (function () {
-      var toggle = document.getElementById('menu-toggle');
-      var nav = document.getElementById('primary-nav');
-      if (!toggle || !nav) return;
+  (function () {
+    var scroll = document.getElementById('page-scroll');
+    var panels = Array.from(document.querySelectorAll('.snap-panel'));
+    var dots   = Array.from(document.querySelectorAll('.scroll-dot'));
+    var toggle = document.getElementById('menu-toggle');
+    var nav    = document.getElementById('primary-nav');
+
+    /* ── Scroll to panel by id ── */
+    function scrollTo(id) {
+      var el = document.getElementById(id);
+      if (el && scroll) {
+        scroll.scrollTo({ top: el.offsetTop, behavior: 'smooth' });
+      }
+    }
+
+    /* ── Nav link clicks ── */
+    document.querySelectorAll('[data-scroll]').forEach(function (el) {
+      el.addEventListener('click', function (e) {
+        var id = el.getAttribute('data-scroll');
+        if (id) {
+          e.preventDefault();
+          scrollTo(id);
+          if (nav) { nav.classList.remove('is-open'); toggle && toggle.classList.remove('is-open'); }
+        }
+      });
+    });
+
+    /* ── Scroll dot clicks ── */
+    dots.forEach(function (dot) {
+      dot.addEventListener('click', function () {
+        scrollTo(dot.getAttribute('data-target'));
+      });
+    });
+
+    /* ── Active dot tracking via IntersectionObserver on scroll container ── */
+    if ('IntersectionObserver' in window && scroll) {
+      var dotObs = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            var pid = entry.target.getAttribute('data-panel');
+            dots.forEach(function (d) {
+              d.classList.toggle('active', d.getAttribute('data-target') === pid);
+            });
+          }
+        });
+      }, { root: scroll, threshold: 0.5 });
+      panels.forEach(function (p) { dotObs.observe(p); });
+    }
+
+    /* ── Reveal animations via IntersectionObserver on scroll container ── */
+    var revealEls = document.querySelectorAll('.reveal');
+    if ('IntersectionObserver' in window && scroll) {
+      var revObs = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in-view');
+            revObs.unobserve(entry.target);
+          }
+        });
+      }, { root: scroll, threshold: 0.08 });
+      revealEls.forEach(function (el) { revObs.observe(el); });
+    } else {
+      revealEls.forEach(function (el) { el.classList.add('in-view'); });
+    }
+
+    /* ── Mobile menu toggle ── */
+    if (toggle && nav) {
       toggle.addEventListener('click', function () {
         var open = nav.classList.toggle('is-open');
         toggle.setAttribute('aria-expanded', String(open));
         toggle.classList.toggle('is-open', open);
       });
-      nav.querySelectorAll('a').forEach(function (link) {
-        link.addEventListener('click', function () {
-          nav.classList.remove('is-open');
-          toggle.setAttribute('aria-expanded', 'false');
-          toggle.classList.remove('is-open');
-        });
-      });
-    })();
+    }
+
+    /* ── Set first dot active ── */
+    if (dots[0]) dots[0].classList.add('active');
+  })();
   </script>
 
   <style>
-    /* ─── Keyframes ─── */
+    /* ═══════════════════════════════════════════
+       KEYFRAMES
+    ═══════════════════════════════════════════ */
     @keyframes hero-in {
-      from { opacity: 0; transform: translateY(32px); }
+      from { opacity: 0; transform: translateY(28px); }
       to   { opacity: 1; transform: translateY(0); }
     }
-
     @keyframes drift1 {
-      0%, 100% { transform: translate(0, 0) scale(1); }
-      50%       { transform: translate(-50px, 70px) scale(1.08); }
+      0%,100% { transform: translate(0,0) scale(1); }
+      50%     { transform: translate(-50px,70px) scale(1.08); }
     }
-
     @keyframes drift2 {
-      0%, 100% { transform: translate(0, 0) scale(1); }
-      50%       { transform: translate(70px, -50px) scale(0.94); }
+      0%,100% { transform: translate(0,0) scale(1); }
+      50%     { transform: translate(70px,-50px) scale(0.94); }
     }
-
     @keyframes drift3 {
-      0%, 100% { transform: translate(-50%, -50%) scale(1); }
-      50%       { transform: translate(-50%, -50%) scale(1.35); }
+      0%,100% { transform: translate(-50%,-50%) scale(1); }
+      50%     { transform: translate(-50%,-50%) scale(1.35); }
+    }
+    @keyframes pulse-line {
+      0%,100% { transform: scaleY(1); opacity:0.4; }
+      50%     { transform: scaleY(0.35); opacity:1; }
     }
 
-    @keyframes scroll-pulse {
-      0%, 100% { transform: scaleY(1); opacity: 0.5; }
-      50%       { transform: scaleY(0.4); opacity: 1; }
+    /* ═══════════════════════════════════════════
+       SNAP CONTAINER
+    ═══════════════════════════════════════════ */
+    .page-scroll {
+      height: 100dvh;
+      overflow-y: scroll;
+      scroll-snap-type: y mandatory;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+    .page-scroll::-webkit-scrollbar { display: none; }
+
+    /* ═══════════════════════════════════════════
+       SNAP PANELS — base
+    ═══════════════════════════════════════════ */
+    .snap-panel {
+      height: 100dvh;
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      /* top pad = nav height (72px) + breathing space */
+      padding: clamp(80px,9dvh,100px) 0 clamp(16px,2.5dvh,28px);
     }
 
-    /* ─── NAV ─── */
+    .tint-panel {
+      background: linear-gradient(180deg,
+        rgba(201,169,110,0.02) 0%,
+        rgba(201,169,110,0.04) 40%,
+        rgba(201,169,110,0.02) 100%);
+      border-top: 1px solid var(--line-subtle);
+      border-bottom: 1px solid var(--line-subtle);
+    }
+
+    /* Panel shell — flex column, fills snap-panel interior */
+    .panel-shell {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .panel-head {
+      flex-shrink: 0;
+      margin-bottom: clamp(10px,1.5dvh,18px);
+    }
+
+    /* ═══════════════════════════════════════════
+       FIXED NAV
+    ═══════════════════════════════════════════ */
     .top-nav {
-      position: sticky;
+      position: fixed;
       top: 0;
-      z-index: 60;
-      backdrop-filter: blur(16px) saturate(180%);
-      -webkit-backdrop-filter: blur(16px) saturate(180%);
-      background: rgba(8, 12, 24, 0.82);
-      border-bottom: 1px solid rgba(201, 169, 110, 0.08);
+      left: 0;
+      right: 0;
+      z-index: 200;
+      height: 72px;
+      backdrop-filter: blur(18px) saturate(180%);
+      -webkit-backdrop-filter: blur(18px) saturate(180%);
+      background: rgba(8,12,24,0.85);
+      border-bottom: 1px solid rgba(201,169,110,0.08);
     }
 
     .top-nav-inner {
@@ -516,34 +568,35 @@ const currentYear = new Date().getFullYear();
       align-items: center;
       justify-content: space-between;
       gap: 16px;
-      min-height: 72px;
+      height: 72px;
     }
 
     .brand-mark {
       display: inline-flex;
       align-items: center;
-      gap: 12px;
+      gap: 11px;
       text-decoration: none;
+      cursor: pointer;
     }
 
     .brand-badge {
-      width: 38px;
-      height: 38px;
-      border-radius: 10px;
+      width: 36px;
+      height: 36px;
+      border-radius: 9px;
       display: grid;
       place-items: center;
-      background: linear-gradient(135deg, rgba(201,169,110,0.2), rgba(201,169,110,0.08));
-      border: 1px solid rgba(201, 169, 110, 0.25);
+      background: linear-gradient(135deg, rgba(201,169,110,0.2), rgba(201,169,110,0.07));
+      border: 1px solid rgba(201,169,110,0.25);
       color: var(--brand);
       font-weight: 700;
-      font-size: 0.88rem;
+      font-size: 0.84rem;
       letter-spacing: 0.05em;
       flex-shrink: 0;
     }
 
     .brand-text strong {
       display: block;
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       font-weight: 600;
       color: var(--text);
       line-height: 1.1;
@@ -551,7 +604,7 @@ const currentYear = new Date().getFullYear();
 
     .brand-text small {
       display: block;
-      font-size: 0.7rem;
+      font-size: 0.68rem;
       color: var(--muted);
       letter-spacing: 0.02em;
       margin-top: 2px;
@@ -560,28 +613,29 @@ const currentYear = new Date().getFullYear();
     .primary-nav {
       display: flex;
       align-items: center;
-      gap: 4px;
+      gap: 3px;
     }
 
     .primary-nav a {
       text-decoration: none;
       color: var(--muted);
       font-weight: 500;
-      font-size: 0.84rem;
-      padding: 7px 12px;
-      border-radius: 8px;
+      font-size: 0.82rem;
+      padding: 6px 11px;
+      border-radius: 7px;
       letter-spacing: 0.01em;
       transition: color 0.2s, background 0.2s;
+      cursor: pointer;
     }
 
     .primary-nav a:hover {
       color: var(--brand);
-      background: rgba(201, 169, 110, 0.07);
+      background: rgba(201,169,110,0.07);
     }
 
     .nav-cta {
-      background: rgba(201, 169, 110, 0.1) !important;
-      border: 1px solid rgba(201, 169, 110, 0.25) !important;
+      background: rgba(201,169,110,0.1) !important;
+      border: 1px solid rgba(201,169,110,0.22) !important;
       color: var(--brand) !important;
       font-weight: 600 !important;
       margin-left: 6px;
@@ -589,8 +643,8 @@ const currentYear = new Date().getFullYear();
     }
 
     .nav-cta:hover {
-      background: rgba(201, 169, 110, 0.18) !important;
-      border-color: rgba(201, 169, 110, 0.45) !important;
+      background: rgba(201,169,110,0.18) !important;
+      border-color: rgba(201,169,110,0.42) !important;
     }
 
     .menu-toggle {
@@ -599,8 +653,8 @@ const currentYear = new Date().getFullYear();
       gap: 5px;
       background: none;
       border: 1px solid var(--line);
-      border-radius: 8px;
-      padding: 9px 10px;
+      border-radius: 7px;
+      padding: 8px 10px;
       cursor: pointer;
     }
 
@@ -610,22 +664,56 @@ const currentYear = new Date().getFullYear();
       height: 1.5px;
       background: var(--muted);
       border-radius: 1px;
-      transition: transform 0.25s ease, opacity 0.25s ease;
+      transition: transform 0.25s, opacity 0.25s;
     }
 
     .menu-toggle.is-open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
     .menu-toggle.is-open span:nth-child(2) { opacity: 0; }
     .menu-toggle.is-open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
 
-    /* ─── HERO ─── */
-    .hero-section {
-      position: relative;
-      min-height: 100vh;
+    /* ═══════════════════════════════════════════
+       SCROLL DOTS
+    ═══════════════════════════════════════════ */
+    .scroll-dots {
+      position: fixed;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
       display: flex;
       flex-direction: column;
+      gap: 9px;
+      z-index: 150;
+    }
+
+    .scroll-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: rgba(201,169,110,0.2);
+      border: 1px solid rgba(201,169,110,0.25);
+      cursor: pointer;
+      padding: 0;
+      transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1);
+    }
+
+    .scroll-dot.active {
+      background: var(--brand);
+      border-color: var(--brand);
+      box-shadow: 0 0 10px rgba(201,169,110,0.45);
+      transform: scale(1.5);
+    }
+
+    .scroll-dot:hover:not(.active) {
+      background: rgba(201,169,110,0.4);
+      transform: scale(1.25);
+    }
+
+    /* ═══════════════════════════════════════════
+       HERO PANEL
+    ═══════════════════════════════════════════ */
+    .hero-panel {
+      padding-top: 72px; /* exact nav height — hero is centered differently */
       justify-content: center;
-      overflow: hidden;
-      padding: 140px 0 100px;
     }
 
     .hero-bg {
@@ -639,8 +727,8 @@ const currentYear = new Date().getFullYear();
       position: absolute;
       inset: 0;
       background-image:
-        linear-gradient(rgba(201, 169, 110, 0.025) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(201, 169, 110, 0.025) 1px, transparent 1px);
+        linear-gradient(rgba(201,169,110,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(201,169,110,0.025) 1px, transparent 1px);
       background-size: 72px 72px;
     }
 
@@ -652,29 +740,23 @@ const currentYear = new Date().getFullYear();
     }
 
     .orb-1 {
-      width: 800px;
-      height: 800px;
-      background: radial-gradient(circle at center, rgba(201, 169, 110, 0.13), transparent 65%);
-      top: -300px;
-      right: -200px;
+      width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(201,169,110,0.13), transparent 65%);
+      top: -280px; right: -180px;
       animation: drift1 14s ease-in-out infinite;
     }
 
     .orb-2 {
-      width: 600px;
-      height: 600px;
-      background: radial-gradient(circle at center, rgba(77, 155, 191, 0.1), transparent 65%);
-      bottom: -200px;
-      left: -150px;
+      width: 550px; height: 550px;
+      background: radial-gradient(circle, rgba(77,155,191,0.1), transparent 65%);
+      bottom: -180px; left: -130px;
       animation: drift2 18s ease-in-out infinite;
     }
 
     .orb-3 {
-      width: 400px;
-      height: 400px;
-      background: radial-gradient(circle at center, rgba(201, 169, 110, 0.07), transparent 65%);
-      top: 50%;
-      left: 38%;
+      width: 380px; height: 380px;
+      background: radial-gradient(circle, rgba(201,169,110,0.07), transparent 65%);
+      top: 50%; left: 38%;
       animation: drift3 11s ease-in-out infinite;
     }
 
@@ -682,65 +764,56 @@ const currentYear = new Date().getFullYear();
       position: relative;
       z-index: 1;
       display: grid;
-      grid-template-columns: 1.25fr 0.9fr;
-      gap: 64px;
+      grid-template-columns: 1.3fr 0.85fr;
+      gap: clamp(32px,4vw,60px);
       align-items: center;
     }
 
     .hero-anim {
       opacity: 0;
-      animation: hero-in 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+      animation: hero-in 0.9s cubic-bezier(0.16,1,0.3,1) both;
     }
 
     .hero-h1 {
-      margin: 20px 0 0;
+      margin: clamp(14px,2dvh,20px) 0 0;
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(3rem, 6.5vw, 5.8rem);
+      font-size: clamp(2.6rem, 5.5vw, 5.4rem);
       font-weight: 600;
-      line-height: 1.03;
+      line-height: 1.04;
       letter-spacing: -0.02em;
       color: var(--text);
     }
 
-    .h1-line {
-      display: block;
-    }
-
-    .h1-accent {
-      color: var(--brand);
-    }
-
-    .h1-accent em {
-      font-style: italic;
-    }
+    .h1-line { display: block; }
+    .h1-accent { color: var(--brand); }
+    .h1-accent em { font-style: italic; }
 
     .hero-desc {
-      margin: 24px 0 0;
-      max-width: 54ch;
+      margin: clamp(14px,2dvh,20px) 0 0;
+      max-width: 50ch;
       color: var(--muted);
-      font-size: 1.04rem;
-      line-height: 1.8;
-      font-weight: 400;
+      font-size: clamp(0.88rem,1.2vw,1rem);
+      line-height: 1.75;
     }
 
     .hero-actions {
-      margin-top: 34px;
+      margin-top: clamp(16px,2dvh,28px);
       display: flex;
       flex-wrap: wrap;
-      gap: 12px;
+      gap: 10px;
     }
 
-    .action-primary,
-    .action-secondary {
+    .action-primary, .action-secondary {
       display: inline-flex;
       align-items: center;
       text-decoration: none;
       border-radius: 999px;
-      padding: 13px 26px;
+      padding: clamp(10px,1.3dvh,13px) clamp(18px,2vw,24px);
       font-weight: 600;
-      font-size: 0.88rem;
+      font-size: clamp(0.8rem,1vw,0.88rem);
       letter-spacing: 0.03em;
-      transition: transform 0.22s ease, box-shadow 0.22s ease, background 0.22s ease, border-color 0.22s ease;
+      transition: transform 0.2s, box-shadow 0.2s, background 0.2s, border-color 0.2s;
+      cursor: pointer;
     }
 
     .action-primary {
@@ -751,76 +824,62 @@ const currentYear = new Date().getFullYear();
 
     .action-primary:hover {
       transform: translateY(-2px);
-      box-shadow: 0 10px 36px rgba(201, 169, 110, 0.35);
+      box-shadow: 0 8px 28px rgba(201,169,110,0.35);
       background: var(--brand-strong);
-      border-color: var(--brand-strong);
     }
 
     .action-secondary {
       background: transparent;
       color: var(--brand);
-      border: 1px solid rgba(201, 169, 110, 0.28);
+      border: 1px solid rgba(201,169,110,0.28);
     }
 
     .action-secondary:hover {
       transform: translateY(-2px);
-      background: rgba(201, 169, 110, 0.08);
-      border-color: rgba(201, 169, 110, 0.5);
+      background: rgba(201,169,110,0.08);
+      border-color: rgba(201,169,110,0.5);
     }
 
     .hero-tags {
-      margin-top: 28px;
+      margin-top: clamp(14px,1.8dvh,22px);
       display: flex;
       flex-wrap: wrap;
-      gap: 8px;
+      gap: 7px;
     }
 
     /* Profile card */
     .profile-card {
       background: var(--surface);
-      border: 1px solid rgba(201, 169, 110, 0.14);
-      border-radius: 20px;
-      padding: 22px;
+      border: 1px solid rgba(201,169,110,0.14);
+      border-radius: 18px;
+      padding: clamp(14px,1.8dvh,20px);
       box-shadow: var(--shadow), var(--shadow-gold);
-      display: grid;
-      gap: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: clamp(10px,1.5dvh,16px);
+      max-height: calc(100dvh - 100px);
+      overflow: hidden;
     }
 
     .profile-photo-wrap {
-      position: relative;
-      border-radius: 12px;
+      border-radius: 11px;
       overflow: hidden;
-      background: linear-gradient(135deg, rgba(201,169,110,0.1), rgba(77,155,191,0.05));
-    }
-
-    .profile-photo-wrap::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      border-radius: 12px;
-      background: linear-gradient(to bottom, transparent 55%, rgba(8,12,24,0.5));
-      z-index: 1;
-      pointer-events: none;
+      background: linear-gradient(135deg, rgba(201,169,110,0.08), rgba(8,12,24,0.3));
+      flex-shrink: 0;
     }
 
     .profile-card img {
       width: 100%;
-      max-height: 320px;
+      height: clamp(160px,22dvh,250px);
       object-fit: contain;
       object-position: center top;
-      border-radius: 12px;
+      border-radius: 11px;
       display: block;
-      background: linear-gradient(180deg, rgba(201,169,110,0.05), rgba(8,12,24,0.3));
-    }
-
-    .profile-info {
-      display: grid;
-      gap: 4px;
     }
 
     .profile-location {
       margin: 0;
-      font-size: 0.68rem;
+      font-size: 0.65rem;
       text-transform: uppercase;
       letter-spacing: 0.18em;
       font-weight: 600;
@@ -828,9 +887,9 @@ const currentYear = new Date().getFullYear();
     }
 
     .profile-name {
-      margin: 4px 0 0;
+      margin: 3px 0 0;
       font-family: 'Cormorant Garamond', serif;
-      font-size: 1.6rem;
+      font-size: clamp(1.3rem,2vw,1.55rem);
       font-weight: 600;
       line-height: 1.15;
       color: var(--text);
@@ -839,110 +898,102 @@ const currentYear = new Date().getFullYear();
     .profile-degree {
       margin: 2px 0 0;
       color: var(--muted);
-      font-size: 0.84rem;
-      line-height: 1.45;
+      font-size: clamp(0.76rem,1vw,0.84rem);
+      line-height: 1.4;
     }
 
     .profile-dl {
       margin: 0;
-      display: grid;
-      gap: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
       border-top: 1px solid var(--line-subtle);
-      padding-top: 16px;
+      padding-top: clamp(10px,1.2dvh,14px);
     }
 
     .profile-dl dt {
-      font-size: 0.64rem;
+      font-size: 0.6rem;
       text-transform: uppercase;
       letter-spacing: 0.16em;
       color: var(--brand);
       font-weight: 600;
-      margin-bottom: 3px;
+      margin-bottom: 2px;
     }
 
     .profile-dl dd {
       margin: 0;
       color: var(--muted);
-      font-size: 0.86rem;
-      line-height: 1.55;
+      font-size: clamp(0.78rem,1vw,0.85rem);
+      line-height: 1.45;
     }
 
-    .hero-scroll-hint {
+    .scroll-hint {
       position: absolute;
-      bottom: 32px;
+      bottom: clamp(14px,2dvh,24px);
       left: 50%;
       transform: translateX(-50%);
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 8px;
+      gap: 7px;
       color: var(--muted);
-      font-size: 0.66rem;
+      font-size: 0.6rem;
       letter-spacing: 0.18em;
       text-transform: uppercase;
-      opacity: 0.5;
+      opacity: 0.4;
       z-index: 1;
     }
 
     .scroll-line {
       width: 1px;
-      height: 36px;
+      height: 30px;
       background: var(--brand);
-      transform-origin: top center;
-      animation: scroll-pulse 2s ease-in-out infinite;
+      transform-origin: top;
+      animation: pulse-line 2s ease-in-out infinite;
     }
 
-    /* ─── METRICS ─── */
-    .metrics-section {
-      border-top: 1px solid var(--line-subtle);
-    }
-
-    .metrics-head {
-      margin-bottom: 48px;
-    }
-
+    /* ═══════════════════════════════════════════
+       METRIC GRID
+    ═══════════════════════════════════════════ */
     .metric-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 16px;
+      gap: clamp(10px,1.2dvh,16px);
+      flex: 1;
+      min-height: 0;
+      align-content: stretch;
     }
 
     .metric-card {
       background: var(--surface);
       border: 1px solid var(--line);
-      border-radius: 16px;
-      padding: 28px 24px;
+      border-radius: 14px;
+      padding: clamp(16px,2dvh,26px) clamp(14px,1.5vw,22px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
       position: relative;
       overflow: hidden;
-      transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+      transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
     }
 
     .metric-card::before {
       content: '';
       position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
+      top: 0; left: 0; right: 0;
       height: 2px;
       background: linear-gradient(90deg, var(--brand), transparent);
       opacity: 0;
-      transition: opacity 0.3s ease;
+      transition: opacity 0.3s;
     }
 
-    .metric-card:hover {
-      border-color: rgba(201, 169, 110, 0.25);
-      box-shadow: var(--glow-hover);
-      transform: translateY(-3px);
-    }
-
-    .metric-card:hover::before {
-      opacity: 1;
-    }
+    .metric-card:hover { border-color: rgba(201,169,110,0.24); box-shadow: var(--glow-hover); transform: translateY(-3px); }
+    .metric-card:hover::before { opacity: 1; }
 
     .metric-value {
       margin: 0;
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(2.4rem, 4.5vw, 3.2rem);
+      font-size: clamp(2rem,4dvh,3.2rem);
       font-weight: 600;
       color: var(--brand);
       line-height: 1;
@@ -950,64 +1001,59 @@ const currentYear = new Date().getFullYear();
     }
 
     .metric-label {
-      margin: 10px 0 0;
+      margin: clamp(6px,0.8dvh,10px) 0 0;
       color: var(--muted);
-      font-size: 0.86rem;
-      line-height: 1.55;
-      font-weight: 400;
+      font-size: clamp(0.76rem,1vw,0.88rem);
+      line-height: 1.5;
     }
 
-    /* ─── EXPERTISE ─── */
-    .expertise-section {
-      background: linear-gradient(180deg, transparent, rgba(201, 169, 110, 0.025) 30%, rgba(201, 169, 110, 0.015) 100%);
-      border-top: 1px solid var(--line-subtle);
-      border-bottom: 1px solid var(--line-subtle);
-    }
-
+    /* ═══════════════════════════════════════════
+       EXPERTISE GRID
+    ═══════════════════════════════════════════ */
     .expertise-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 16px;
-      margin-top: 40px;
+      grid-template-rows: repeat(2, 1fr);
+      gap: clamp(10px,1.2dvh,14px);
+      flex: 1;
+      min-height: 0;
     }
 
     .expertise-card {
       background: var(--surface);
       border: 1px solid var(--line);
-      border-radius: 16px;
-      padding: 28px;
-      transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
-      position: relative;
+      border-radius: 14px;
+      padding: clamp(14px,1.8dvh,22px);
+      display: flex;
+      flex-direction: column;
       overflow: hidden;
+      transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
     }
 
-    .expertise-card:hover {
-      border-color: rgba(201, 169, 110, 0.2);
-      box-shadow: var(--glow-hover);
-      transform: translateY(-3px);
-    }
+    .expertise-card:hover { border-color: rgba(201,169,110,0.2); box-shadow: var(--glow-hover); transform: translateY(-2px); }
 
-    .expertise-card-top {
+    .expertise-top {
       display: flex;
       align-items: flex-start;
-      gap: 16px;
-      margin-bottom: 16px;
+      gap: 12px;
+      margin-bottom: clamp(8px,1dvh,14px);
+      flex-shrink: 0;
     }
 
     .expertise-num {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 2.4rem;
+      font-size: clamp(1.8rem,3dvh,2.4rem);
       font-weight: 400;
-      color: rgba(201, 169, 110, 0.2);
+      color: rgba(201,169,110,0.18);
       line-height: 1;
       flex-shrink: 0;
-      margin-top: -4px;
+      margin-top: -3px;
     }
 
     .expertise-card h3 {
       margin: 0;
       font-family: 'Cormorant Garamond', serif;
-      font-size: 1.3rem;
+      font-size: clamp(1rem,1.6vw,1.25rem);
       font-weight: 600;
       line-height: 1.25;
       color: var(--text);
@@ -1016,572 +1062,488 @@ const currentYear = new Date().getFullYear();
     .expertise-card > p {
       margin: 0;
       color: var(--muted);
-      font-size: 0.9rem;
-      line-height: 1.7;
+      font-size: clamp(0.78rem,1vw,0.88rem);
+      line-height: 1.6;
+      flex-shrink: 0;
     }
 
     .expertise-card ul {
-      margin: 18px 0 0;
+      margin: clamp(8px,1dvh,12px) 0 0;
       padding: 0;
       list-style: none;
       display: grid;
-      gap: 9px;
+      gap: 6px;
       border-top: 1px solid var(--line-subtle);
-      padding-top: 16px;
+      padding-top: clamp(8px,1dvh,12px);
+      flex: 1;
+      overflow: hidden;
     }
 
     .expertise-card li {
       position: relative;
-      padding-left: 16px;
+      padding-left: 14px;
       color: var(--muted-lt);
-      font-size: 0.87rem;
+      font-size: clamp(0.74rem,0.95vw,0.84rem);
       font-weight: 500;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .expertise-card li::before {
       content: '';
       position: absolute;
       left: 0;
-      top: 0.52rem;
-      width: 5px;
-      height: 5px;
+      top: 0.48rem;
+      width: 5px; height: 5px;
       border-radius: 50%;
       background: var(--brand);
-      opacity: 0.6;
+      opacity: 0.55;
     }
 
-    /* ─── EXPERIENCE ─── */
-    .experience-section {
-      border-top: 1px solid var(--line-subtle);
-    }
-
+    /* ═══════════════════════════════════════════
+       TIMELINE
+    ═══════════════════════════════════════════ */
     .timeline {
-      margin-top: 48px;
+      flex: 1;
+      min-height: 0;
+      display: flex;
+      flex-direction: column;
+      gap: clamp(6px,0.8dvh,10px);
+      padding-left: 26px;
       position: relative;
-      display: grid;
-      gap: 0;
-      padding-left: 32px;
+      overflow: hidden;
     }
 
     .timeline::before {
       content: '';
       position: absolute;
-      left: 7px;
-      top: 12px;
-      bottom: 12px;
+      left: 6px;
+      top: 8px; bottom: 8px;
       width: 1px;
-      background: linear-gradient(to bottom, var(--brand), rgba(201, 169, 110, 0.1));
+      background: linear-gradient(to bottom, var(--brand), rgba(201,169,110,0.08));
     }
 
-    .timeline-item {
-      position: relative;
+    .tl-item {
       display: flex;
-      gap: 24px;
-      padding-bottom: 32px;
+      gap: 0;
+      flex: 1;
+      min-height: 0;
+      position: relative;
     }
 
-    .timeline-item:last-child {
-      padding-bottom: 0;
-    }
-
-    .timeline-dot {
+    .tl-dot {
       position: absolute;
-      left: -27px;
-      top: 14px;
-      width: 13px;
-      height: 13px;
+      left: -21px;
+      top: clamp(12px,1.5dvh,16px);
+      width: 11px; height: 11px;
       border-radius: 50%;
       border: 2px solid var(--brand);
       background: var(--bg);
       flex-shrink: 0;
-      transition: background 0.3s ease, box-shadow 0.3s ease;
+      transition: background 0.3s, box-shadow 0.3s;
     }
 
-    .timeline-item:hover .timeline-dot {
+    .tl-item:hover .tl-dot {
       background: var(--brand);
-      box-shadow: 0 0 14px rgba(201, 169, 110, 0.4);
+      box-shadow: 0 0 12px rgba(201,169,110,0.4);
     }
 
-    .timeline-body {
+    .tl-body {
       background: var(--surface);
       border: 1px solid var(--line);
-      border-radius: 14px;
-      padding: 20px 22px;
+      border-radius: 12px;
+      padding: clamp(10px,1.3dvh,14px) clamp(14px,1.5vw,18px);
       width: 100%;
-      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      transition: border-color 0.3s;
     }
 
-    .timeline-item:hover .timeline-body {
-      border-color: rgba(201, 169, 110, 0.2);
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-    }
+    .tl-item:hover .tl-body { border-color: rgba(201,169,110,0.2); }
 
-    .timeline-period {
+    .tl-period {
       margin: 0;
-      font-size: 0.65rem;
+      font-size: clamp(0.58rem,0.8vw,0.65rem);
       letter-spacing: 0.18em;
       text-transform: uppercase;
       color: var(--brand);
       font-weight: 600;
     }
 
-    .timeline-title {
-      margin: 6px 0 0;
+    .tl-title {
+      margin: 3px 0 0;
       font-family: 'Cormorant Garamond', serif;
-      font-size: 1.25rem;
+      font-size: clamp(0.95rem,1.4vw,1.15rem);
       font-weight: 600;
-      line-height: 1.25;
+      line-height: 1.2;
       color: var(--text);
     }
 
-    .timeline-company {
-      margin: 4px 0 0;
+    .tl-company {
+      margin: 2px 0 0;
       color: var(--muted-lt);
-      font-size: 0.85rem;
+      font-size: clamp(0.72rem,0.95vw,0.82rem);
       font-weight: 500;
     }
 
-    .timeline-detail {
-      margin: 10px 0 0;
+    .tl-detail {
+      margin: 4px 0 0;
       color: var(--muted);
-      font-size: 0.88rem;
-      line-height: 1.7;
+      font-size: clamp(0.72rem,0.95vw,0.82rem);
+      line-height: 1.55;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
     }
 
-    /* ─── PROJECTS ─── */
-    .projects-section {
-      background: linear-gradient(180deg, transparent, rgba(77, 155, 191, 0.03) 40%, transparent);
-      border-top: 1px solid var(--line-subtle);
-      border-bottom: 1px solid var(--line-subtle);
-    }
-
+    /* ═══════════════════════════════════════════
+       PROJECT GRID
+    ═══════════════════════════════════════════ */
     .project-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-      margin-top: 40px;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: repeat(3, 1fr);
+      gap: clamp(8px,1dvh,12px);
+      flex: 1;
+      min-height: 0;
     }
 
     .project-card {
       background: var(--surface);
       border: 1px solid var(--line);
-      border-radius: 16px;
+      border-radius: 12px;
+      padding: clamp(12px,1.4dvh,16px);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
       overflow: hidden;
-      transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
       position: relative;
+      transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
     }
 
     .project-card::before {
       content: '';
       position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
+      top: 0; left: 0; right: 0;
       height: 1px;
       background: linear-gradient(90deg, transparent, var(--brand), transparent);
       opacity: 0;
-      transition: opacity 0.3s ease;
+      transition: opacity 0.3s;
     }
 
-    .project-card:hover {
-      border-color: rgba(201, 169, 110, 0.22);
-      box-shadow: var(--glow-hover);
-      transform: translateY(-4px);
-    }
-
-    .project-card:hover::before {
-      opacity: 1;
-    }
-
-    .project-card-inner {
-      padding: 24px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      height: 100%;
-    }
+    .project-card:hover { border-color: rgba(201,169,110,0.22); box-shadow: var(--glow-hover); transform: translateY(-3px); }
+    .project-card:hover::before { opacity: 1; }
 
     .project-card h3 {
       margin: 0;
       font-family: 'Cormorant Garamond', serif;
-      font-size: 1.2rem;
+      font-size: clamp(0.9rem,1.2vw,1.05rem);
       font-weight: 600;
-      line-height: 1.3;
+      line-height: 1.25;
       color: var(--text);
+      flex-shrink: 0;
     }
 
     .project-card p {
       margin: 0;
       color: var(--muted);
-      font-size: 0.87rem;
-      line-height: 1.65;
+      font-size: clamp(0.7rem,0.9vw,0.8rem);
+      line-height: 1.55;
       flex: 1;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
     }
 
     .project-stack {
-      margin-top: 4px;
-      font-size: 0.72rem;
+      font-size: clamp(0.62rem,0.8vw,0.7rem);
       color: var(--brand);
       font-weight: 600;
-      letter-spacing: 0.03em;
-      padding: 6px 12px;
-      background: rgba(201, 169, 110, 0.06);
-      border: 1px solid rgba(201, 169, 110, 0.14);
-      border-radius: 999px;
-      display: inline-block;
-      width: fit-content;
+      letter-spacing: 0.02em;
+      flex-shrink: 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
-    /* ─── CREDENTIALS ─── */
-    .credentials-section {
-      border-top: 1px solid var(--line-subtle);
-    }
-
+    /* ═══════════════════════════════════════════
+       BADGE GRIDS
+    ═══════════════════════════════════════════ */
     .cred-links {
       display: flex;
       flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 28px;
+      gap: 8px;
+      margin-top: 10px;
     }
 
-    .cred-link-btn {
+    .cred-btn {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
       text-decoration: none;
-      border: 1px solid rgba(201, 169, 110, 0.22);
+      border: 1px solid rgba(201,169,110,0.22);
       color: var(--brand);
-      font-size: 0.84rem;
+      font-size: 0.76rem;
       font-weight: 600;
       border-radius: 999px;
-      padding: 10px 18px;
-      background: rgba(201, 169, 110, 0.05);
+      padding: 6px 14px;
+      background: rgba(201,169,110,0.05);
       letter-spacing: 0.02em;
-      transition: background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+      transition: background 0.2s, border-color 0.2s, transform 0.2s;
     }
 
-    .cred-link-btn:hover {
-      background: rgba(201, 169, 110, 0.1);
-      border-color: rgba(201, 169, 110, 0.4);
-      box-shadow: 0 4px 20px rgba(201, 169, 110, 0.12);
-      transform: translateY(-1px);
-    }
-
-    .cert-group {
-      margin-top: 36px;
-    }
-
-    .cert-group + .cert-group {
-      margin-top: 48px;
-    }
-
-    .cert-group-heading {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 0.7rem;
-      text-transform: uppercase;
-      letter-spacing: 0.2em;
-      font-weight: 600;
-      color: var(--muted);
-      margin: 0 0 20px;
-      padding-bottom: 12px;
-      border-bottom: 1px solid var(--line-subtle);
-    }
+    .cred-btn:hover { background: rgba(201,169,110,0.1); border-color: rgba(201,169,110,0.38); transform: translateY(-1px); }
 
     .badge-grid {
+      flex: 1;
+      min-height: 0;
+      gap: clamp(8px,1dvh,12px);
       display: grid;
+    }
+
+    .badge-grid-3 {
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(3, 1fr);
+    }
+
+    .badge-grid-4 {
       grid-template-columns: repeat(4, 1fr);
-      gap: 14px;
+      grid-auto-rows: 1fr;
     }
 
     .badge-card {
-      background: rgba(255, 255, 255, 0.02);
-      border: 1px solid rgba(201, 169, 110, 0.1);
-      border-radius: 16px;
-      padding: 28px 16px 22px;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(201,169,110,0.1);
+      border-radius: 14px;
+      padding: clamp(10px,1.3dvh,16px) clamp(8px,1vw,12px) clamp(8px,1dvh,12px);
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 16px;
+      justify-content: center;
+      gap: clamp(6px,0.8dvh,10px);
       text-align: center;
-      transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease, background 0.3s ease;
-      cursor: default;
+      overflow: hidden;
+      transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s, background 0.3s;
     }
 
     .badge-card:hover {
-      border-color: rgba(201, 169, 110, 0.32);
-      box-shadow: 0 0 0 1px rgba(201, 169, 110, 0.08), 0 20px 50px rgba(0, 0, 0, 0.35);
-      transform: translateY(-5px);
-      background: rgba(201, 169, 110, 0.04);
-    }
-
-    .badge-img-wrap {
-      width: 90px;
-      height: 90px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      border-color: rgba(201,169,110,0.32);
+      box-shadow: 0 0 0 1px rgba(201,169,110,0.08), 0 16px 40px rgba(0,0,0,0.3);
+      transform: translateY(-4px);
+      background: rgba(201,169,110,0.04);
     }
 
     .badge-card img {
-      width: 90px;
-      height: 90px;
+      width: clamp(48px,6dvh,80px);
+      height: clamp(48px,6dvh,80px);
       object-fit: contain;
-      filter: drop-shadow(0 4px 16px rgba(0, 0, 0, 0.4));
-      transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.35s ease;
+      filter: drop-shadow(0 4px 12px rgba(0,0,0,0.4));
+      flex-shrink: 0;
+      transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1), filter 0.35s;
     }
 
     .badge-card:hover img {
       transform: scale(1.1) translateY(-2px);
-      filter: drop-shadow(0 10px 24px rgba(201, 169, 110, 0.25));
+      filter: drop-shadow(0 8px 20px rgba(201,169,110,0.25));
     }
 
     .badge-label {
       margin: 0;
-      font-size: 0.78rem;
-      line-height: 1.45;
+      font-size: clamp(0.64rem,0.85vw,0.76rem);
+      line-height: 1.35;
       color: var(--muted);
       font-weight: 500;
-      transition: color 0.3s ease;
+      transition: color 0.3s;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
     }
 
-    .badge-card:hover .badge-label {
-      color: var(--brand);
-    }
+    .badge-card:hover .badge-label { color: var(--brand); }
 
     .badge-sub {
       margin: 0;
-      font-size: 0.68rem;
+      font-size: clamp(0.56rem,0.75vw,0.66rem);
       color: var(--muted);
+      opacity: 0.6;
       font-weight: 500;
-      opacity: 0.7;
       letter-spacing: 0.02em;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 100%;
     }
 
-    /* ─── CONTACT ─── */
-    .contact-section {
-      border-top: 1px solid var(--line-subtle);
-      background: linear-gradient(180deg, transparent, rgba(201, 169, 110, 0.025) 50%, transparent);
-    }
-
+    /* ═══════════════════════════════════════════
+       CONTACT PANEL
+    ═══════════════════════════════════════════ */
     .contact-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 60px;
-      align-items: start;
+      gap: clamp(32px,5vw,64px);
+      align-items: center;
+      height: 100%;
     }
 
     .contact-right {
-      display: grid;
-      gap: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: clamp(8px,1dvh,12px);
     }
 
     .contact-item {
       display: grid;
-      grid-template-columns: 1fr auto auto;
-      align-items: center;
-      gap: 12px;
+      grid-template-columns: 1fr auto;
+      grid-template-rows: auto auto;
+      gap: 2px 12px;
       text-decoration: none;
       background: var(--surface);
       border: 1px solid var(--line);
-      border-radius: 12px;
-      padding: 16px 18px;
-      transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease, background 0.25s ease;
+      border-radius: 11px;
+      padding: clamp(10px,1.3dvh,14px) clamp(14px,1.5vw,18px);
+      transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s, background 0.25s;
     }
 
     .contact-item:hover {
-      border-color: rgba(201, 169, 110, 0.25);
+      border-color: rgba(201,169,110,0.25);
       box-shadow: var(--glow-hover);
       transform: translateX(4px);
       background: var(--surface-hover);
     }
 
     .contact-label {
-      display: block;
-      font-size: 0.62rem;
+      grid-column: 1; grid-row: 1;
+      font-size: 0.6rem;
       text-transform: uppercase;
       letter-spacing: 0.16em;
       color: var(--brand);
       font-weight: 600;
-      line-height: 1;
-      margin-bottom: 4px;
     }
 
     .contact-value {
-      display: block;
-      font-size: 0.9rem;
+      grid-column: 1; grid-row: 2;
+      font-size: clamp(0.8rem,1.1vw,0.9rem);
       font-weight: 600;
       color: var(--text);
       word-break: break-word;
-      line-height: 1.3;
     }
 
     .contact-arrow {
+      grid-column: 2; grid-row: 1 / 3;
+      align-self: center;
       color: var(--brand);
-      opacity: 0.4;
+      opacity: 0.35;
       font-size: 1rem;
       transition: opacity 0.2s, transform 0.2s;
     }
 
-    .contact-item:hover .contact-arrow {
-      opacity: 0.9;
-      transform: translateX(3px);
+    .contact-item:hover .contact-arrow { opacity: 0.9; transform: translateX(3px); }
+
+    .footer-line {
+      margin: clamp(6px,0.8dvh,10px) 0 0;
+      color: var(--muted);
+      font-size: 0.72rem;
+      opacity: 0.6;
+      text-align: center;
     }
 
-    /* ─── FOOTER ─── */
-    .footer-inner {
-      display: flex;
-      justify-content: space-between;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .footer-inner p {
-      margin: 0;
-    }
-
-    /* ─── RESPONSIVE ─── */
+    /* ═══════════════════════════════════════════
+       RESPONSIVE — tablet
+    ═══════════════════════════════════════════ */
     @media (max-width: 1100px) {
-      .metric-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
+      .metric-grid { grid-template-columns: repeat(2, 1fr); }
+      .project-grid { grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(4, 1fr); }
     }
 
-    @media (max-width: 1020px) {
-      .hero-inner {
-        grid-template-columns: 1fr;
-        gap: 48px;
-      }
-
-      .hero-h1 {
-        font-size: clamp(2.8rem, 6vw, 4.5rem);
-      }
-
-      .profile-card {
-        display: grid;
-        grid-template-columns: 180px 1fr;
-        gap: 20px;
-      }
-
-      .profile-photo-wrap {
-        grid-row: 1 / 3;
-        align-self: start;
-      }
-
-      .profile-dl {
-        grid-column: 1 / -1;
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        padding-top: 12px;
-      }
-
-      .project-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .badge-grid {
-        grid-template-columns: repeat(3, 1fr);
-      }
-    }
-
-    @media (max-width: 860px) {
-      .menu-toggle {
-        display: flex;
-      }
+    @media (max-width: 900px) {
+      .menu-toggle { display: flex; }
 
       .primary-nav {
         position: absolute;
         top: calc(100% + 6px);
-        right: 4vw;
-        left: 4vw;
-        background: rgba(14, 20, 32, 0.97);
+        right: 4vw; left: 4vw;
+        background: rgba(14,20,32,0.97);
         backdrop-filter: blur(20px);
         border: 1px solid var(--line);
-        border-radius: 14px;
+        border-radius: 13px;
         padding: 10px;
         display: none;
         flex-direction: column;
         align-items: stretch;
         box-shadow: var(--shadow);
+        z-index: 300;
       }
 
-      .primary-nav.is-open {
-        display: flex;
-      }
+      .primary-nav.is-open { display: flex; }
 
-      .primary-nav a {
-        border-radius: 8px;
-        padding: 10px 14px;
-      }
+      .primary-nav a { border-radius: 8px; padding: 10px 14px; }
+      .nav-cta { text-align: center; margin-top: 4px; margin-left: 0 !important; }
 
-      .nav-cta {
-        text-align: center;
-        margin-top: 4px;
-        margin-left: 0 !important;
-      }
-
-      .expertise-grid,
-      .contact-grid {
-        grid-template-columns: 1fr;
-        gap: 24px;
-      }
-
-      .badge-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .profile-card {
-        grid-template-columns: 1fr;
-      }
-
-      .profile-dl {
-        grid-template-columns: 1fr;
-      }
+      .expertise-grid { grid-template-columns: 1fr; grid-template-rows: repeat(4, 1fr); }
+      .badge-grid-3 { grid-template-columns: repeat(3, 1fr); }
+      .badge-grid-4 { grid-template-columns: repeat(4, 1fr); }
+      .contact-grid { grid-template-columns: 1fr; gap: 20px; }
+      .scroll-dots { display: none; }
     }
 
+    @media (max-width: 860px) {
+      .hero-inner { grid-template-columns: 1fr; gap: 20px; }
+      .profile-card {
+        display: grid;
+        grid-template-columns: 160px 1fr;
+        gap: 16px;
+        align-items: start;
+      }
+      .profile-photo-wrap { grid-row: 1 / 3; }
+      .profile-card img { height: clamp(140px,18dvh,200px); }
+      .profile-dl { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(3, 1fr); padding-top: 10px; }
+    }
+
+    /* ═══════════════════════════════════════════
+       RESPONSIVE — mobile: disable snap, normal scroll
+    ═══════════════════════════════════════════ */
     @media (max-width: 640px) {
-      .hero-section {
-        padding: 100px 0 80px;
-        min-height: auto;
+      html, body { height: auto; overflow: auto; }
+
+      .page-scroll {
+        height: auto;
+        overflow-y: visible;
+        scroll-snap-type: none;
       }
 
-      .hero-h1 {
-        font-size: clamp(2.4rem, 9vw, 3.6rem);
+      .snap-panel {
+        height: auto;
+        min-height: 100dvh;
+        scroll-snap-align: none;
+        scroll-snap-stop: normal;
+        padding: 80px 0 40px;
+        justify-content: flex-start;
       }
 
-      .hero-actions {
-        flex-direction: column;
-      }
+      .panel-shell { height: auto; }
 
-      .action-primary,
-      .action-secondary {
-        width: 100%;
-        justify-content: center;
-      }
+      .metric-grid { grid-template-columns: repeat(2, 1fr); }
+      .expertise-grid { grid-template-columns: 1fr; grid-template-rows: none; gap: 12px; }
+      .project-grid { grid-template-columns: repeat(2, 1fr); grid-template-rows: none; }
+      .badge-grid-3, .badge-grid-4 { grid-template-columns: repeat(2, 1fr); grid-template-rows: none; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .profile-card { grid-template-columns: 1fr; }
+      .profile-dl { grid-template-columns: 1fr; }
+      .hero-h1 { font-size: clamp(2.2rem,8vw,3.2rem); }
+      .hero-actions { flex-direction: column; }
+      .action-primary, .action-secondary { width: 100%; justify-content: center; }
+      .timeline { overflow-y: auto; }
+      .tl-detail { -webkit-line-clamp: 3; }
+    }
 
-      .project-grid,
-      .badge-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .metric-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .timeline {
-        padding-left: 24px;
-      }
-
-      .timeline-dot {
-        left: -21px;
-      }
-
-      .hero-scroll-hint {
-        display: none;
-      }
-
-      .contact-item {
-        grid-template-columns: 1fr auto;
-      }
+    @media (max-width: 400px) {
+      .badge-grid-3, .badge-grid-4 { grid-template-columns: 1fr; }
+      .project-grid { grid-template-columns: 1fr; }
     }
   </style>
 </Layout>

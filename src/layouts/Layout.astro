@@ -71,18 +71,20 @@ const {
         padding: 0;
       }
 
-      html {
-        scroll-behavior: smooth;
-      }
-
       body {
         font-family: 'DM Sans', sans-serif;
         background: var(--bg);
         color: var(--text);
         line-height: 1.65;
-        min-height: 100vh;
+        height: 100dvh;
+        overflow: hidden;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
+      }
+
+      html {
+        height: 100dvh;
+        overflow: hidden;
       }
 
       a {
@@ -185,7 +187,6 @@ const {
       }
 
       @media (prefers-reduced-motion: reduce) {
-        html { scroll-behavior: auto; }
         .reveal { opacity: 1; transform: none; transition: none; }
       }
     </style>
