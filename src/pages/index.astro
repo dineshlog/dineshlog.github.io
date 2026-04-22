@@ -988,8 +988,8 @@ const currentYear = new Date().getFullYear();
       justify-content: center;
       position: relative;
       overflow: hidden;
-      /* top pad = nav height (72px) + breathing space */
-      padding: clamp(80px,9dvh,100px) 0 clamp(16px,2.5dvh,28px);
+      /* top pad = nav height (86px) + breathing space */
+      padding: clamp(96px,9dvh,120px) 0 clamp(20px,2.5dvh,34px);
     }
 
     .tint-panel {
@@ -1022,7 +1022,7 @@ const currentYear = new Date().getFullYear();
       left: 0;
       right: 0;
       z-index: 200;
-      height: 72px;
+      height: 86px;
       backdrop-filter: blur(18px) saturate(180%);
       -webkit-backdrop-filter: blur(18px) saturate(180%);
       background: rgba(8,12,24,0.85);
@@ -1034,7 +1034,7 @@ const currentYear = new Date().getFullYear();
       align-items: center;
       justify-content: space-between;
       gap: 16px;
-      height: 72px;
+      height: 86px;
     }
 
     .brand-mark {
@@ -1046,9 +1046,9 @@ const currentYear = new Date().getFullYear();
     }
 
     .brand-badge {
-      width: 36px;
-      height: 36px;
-      border-radius: 9px;
+      width: 43px;
+      height: 43px;
+      border-radius: 11px;
       display: grid;
       place-items: center;
       background: linear-gradient(135deg, rgba(201,169,110,0.2), rgba(201,169,110,0.07));
@@ -1142,18 +1142,18 @@ const currentYear = new Date().getFullYear();
     ═══════════════════════════════════════════ */
     .scroll-dots {
       position: fixed;
-      right: 20px;
+      right: 24px;
       top: 50%;
       transform: translateY(-50%);
       display: flex;
       flex-direction: column;
-      gap: 9px;
+      gap: 11px;
       z-index: 150;
     }
 
     .scroll-dot {
-      width: 7px;
-      height: 7px;
+      width: 8px;
+      height: 8px;
       border-radius: 50%;
       background: rgba(201,169,110,0.2);
       border: 1px solid rgba(201,169,110,0.25);
@@ -1178,7 +1178,7 @@ const currentYear = new Date().getFullYear();
        HERO PANEL
     ═══════════════════════════════════════════ */
     .hero-panel {
-      padding-top: 72px; /* exact nav height — hero is centered differently */
+      padding-top: 86px; /* exact nav height — hero is centered differently */
       justify-content: center;
     }
 
@@ -2370,8 +2370,8 @@ const currentYear = new Date().getFullYear();
     }
 
     .badge-card img {
-      width: clamp(48px,6dvh,80px);
-      height: clamp(48px,6dvh,80px);
+      width: clamp(58px,6dvh,96px);
+      height: clamp(58px,6dvh,96px);
       object-fit: contain;
       filter: drop-shadow(0 4px 12px rgba(0,0,0,0.4));
       flex-shrink: 0;
