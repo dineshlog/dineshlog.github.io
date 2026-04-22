@@ -407,7 +407,7 @@ const currentYear = new Date().getFullYear();
             improving operational clarity, and reducing unnecessary tooling overhead.
           </p>
           <div class="hero-actions hero-anim" style="animation-delay:0.7s">
-            <a href="#projects" data-scroll="projects" class="action-primary">View Selected Programs</a>
+            <a href="#projects" data-scroll="projects" class="action-primary">View Projects Delivered</a>
             <a href="#contact"  data-scroll="contact"  class="action-secondary">Start a Conversation</a>
           </div>
           <div class="hero-tags hero-anim" style="animation-delay:0.84s" aria-label="Key expertise">
@@ -1048,6 +1048,14 @@ const currentYear = new Date().getFullYear();
       0%,100% { transform: scaleY(1); opacity:0.4; }
       50%     { transform: scaleY(0.35); opacity:1; }
     }
+    @keyframes badge-pulse {
+      0%,100% { box-shadow: 0 0 0 1px rgba(201,169,110,0.22), 0 0 16px rgba(201,169,110,0.06); }
+      50%      { box-shadow: 0 0 0 1px rgba(201,169,110,0.42), 0 0 28px rgba(201,169,110,0.16); }
+    }
+    @keyframes panel-glow-in {
+      from { opacity: 0; transform: translateY(-10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
 
     /* ═══════════════════════════════════════════
        SNAP CONTAINER
@@ -1078,12 +1086,9 @@ const currentYear = new Date().getFullYear();
     }
 
     .tint-panel {
-      background: linear-gradient(180deg,
-        rgba(201,169,110,0.02) 0%,
-        rgba(201,169,110,0.04) 40%,
-        rgba(201,169,110,0.02) 100%);
-      border-top: 1px solid var(--line-subtle);
-      border-bottom: 1px solid var(--line-subtle);
+      background: rgba(201,169,110,0.026);
+      border-top: 1px solid rgba(201,169,110,0.07);
+      border-bottom: 1px solid rgba(201,169,110,0.07);
     }
 
     /* Panel shell — flex column, fills snap-panel interior */
@@ -1096,7 +1101,23 @@ const currentYear = new Date().getFullYear();
     .panel-head {
       flex-shrink: 0;
       margin-bottom: clamp(10px,1.5dvh,18px);
+      position: relative;
     }
+
+    .panel-head::before {
+      content: '';
+      position: absolute;
+      top: -80px;
+      left: -60px;
+      width: 480px;
+      height: 320px;
+      border-radius: 50%;
+      background: radial-gradient(ellipse at 30% 40%, rgba(201,169,110,0.055), transparent 68%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .panel-head > * { position: relative; z-index: 1; }
 
     /* ═══════════════════════════════════════════
        FIXED NAV
@@ -1136,13 +1157,14 @@ const currentYear = new Date().getFullYear();
       border-radius: 11px;
       display: grid;
       place-items: center;
-      background: linear-gradient(135deg, rgba(201,169,110,0.2), rgba(201,169,110,0.07));
-      border: 1px solid rgba(201,169,110,0.25);
+      background: linear-gradient(135deg, rgba(201,169,110,0.18), rgba(201,169,110,0.06));
+      border: 1px solid rgba(201,169,110,0.28);
       color: var(--brand);
       font-weight: 700;
       font-size: 0.84rem;
       letter-spacing: 0.05em;
       flex-shrink: 0;
+      animation: badge-pulse 5s ease-in-out infinite;
     }
 
     .brand-text strong {
@@ -1175,14 +1197,35 @@ const currentYear = new Date().getFullYear();
       padding: 6px 11px;
       border-radius: 7px;
       letter-spacing: 0.01em;
-      transition: color 0.2s, background 0.2s;
+      transition: color 0.25s;
       cursor: pointer;
+      position: relative;
+    }
+
+    .primary-nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 3px;
+      left: 11px;
+      right: 11px;
+      height: 1px;
+      background: var(--brand);
+      transform: scaleX(0);
+      transform-origin: left center;
+      transition: transform 0.3s cubic-bezier(0.16,1,0.3,1);
+      border-radius: 1px;
     }
 
     .primary-nav a:hover {
       color: var(--brand);
-      background: rgba(201,169,110,0.07);
+      background: transparent;
     }
+
+    .primary-nav a:hover::after {
+      transform: scaleX(1);
+    }
+
+    .primary-nav .nav-cta::after { display: none; }
 
     .nav-cta {
       background: rgba(201,169,110,0.1) !important;
@@ -1227,36 +1270,43 @@ const currentYear = new Date().getFullYear();
     ═══════════════════════════════════════════ */
     .scroll-dots {
       position: fixed;
-      right: 24px;
+      right: 22px;
       top: 50%;
       transform: translateY(-50%);
       display: flex;
       flex-direction: column;
-      gap: 11px;
+      align-items: center;
+      gap: 9px;
       z-index: 150;
     }
 
     .scroll-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: rgba(201,169,110,0.2);
-      border: 1px solid rgba(201,169,110,0.25);
+      width: 5px;
+      height: 14px;
+      border-radius: 3px;
+      background: rgba(201,169,110,0.18);
+      border: none;
       cursor: pointer;
       padding: 0;
-      transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1);
+      transition: height 0.38s cubic-bezier(0.34,1.56,0.64,1),
+                  width 0.38s cubic-bezier(0.34,1.56,0.64,1),
+                  background 0.28s ease,
+                  box-shadow 0.28s ease;
     }
 
     .scroll-dot.active {
       background: var(--brand);
-      border-color: var(--brand);
-      box-shadow: 0 0 10px rgba(201,169,110,0.45);
-      transform: scale(1.5);
+      height: 36px;
+      width: 4px;
+      border-radius: 2px;
+      box-shadow: 0 0 14px rgba(201,169,110,0.42), 0 0 32px rgba(201,169,110,0.12);
     }
 
     .scroll-dot:hover:not(.active) {
-      background: rgba(201,169,110,0.4);
-      transform: scale(1.25);
+      background: rgba(201,169,110,0.48);
+      height: 22px;
+      width: 4px;
+      border-radius: 2px;
     }
 
     /* ═══════════════════════════════════════════
@@ -1524,6 +1574,7 @@ const currentYear = new Date().getFullYear();
       justify-content: center;
       position: relative;
       overflow: hidden;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.03);
       transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
     }
 
@@ -1537,7 +1588,7 @@ const currentYear = new Date().getFullYear();
       transition: opacity 0.3s;
     }
 
-    .metric-card:hover { border-color: rgba(201,169,110,0.24); box-shadow: var(--glow-hover); transform: translateY(-3px); }
+    .metric-card:hover { border-color: rgba(201,169,110,0.28); box-shadow: var(--glow-hover); transform: translateY(-3px); }
     .metric-card:hover::before { opacity: 1; }
 
     .metric-value {
@@ -1755,10 +1806,11 @@ const currentYear = new Date().getFullYear();
       display: flex;
       flex-direction: column;
       overflow: hidden;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.03);
       transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
     }
 
-    .expertise-card:hover { border-color: rgba(201,169,110,0.2); box-shadow: var(--glow-hover); transform: translateY(-2px); }
+    .expertise-card:hover { border-color: rgba(201,169,110,0.28); box-shadow: var(--glow-hover); transform: translateY(-3px); }
 
     .expertise-top {
       display: flex;
@@ -1770,13 +1822,18 @@ const currentYear = new Date().getFullYear();
 
     .expertise-num {
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(1.8rem,3dvh,2.4rem);
-      font-weight: 400;
-      color: rgba(201,169,110,0.18);
+      font-size: clamp(3rem,5dvh,4.8rem);
+      font-weight: 300;
+      color: var(--brand);
+      opacity: 0.13;
       line-height: 1;
       flex-shrink: 0;
-      margin-top: -3px;
+      margin-top: -10px;
+      letter-spacing: -0.04em;
+      transition: opacity 0.3s;
     }
+
+    .expertise-card:hover .expertise-num { opacity: 0.26; }
 
     .expertise-card h3 {
       margin: 0;
@@ -1811,11 +1868,13 @@ const currentYear = new Date().getFullYear();
       position: relative;
       padding-left: 14px;
       color: var(--muted-lt);
-      font-size: clamp(0.74rem,0.95vw,0.84rem);
+      font-size: clamp(0.72rem,0.92vw,0.82rem);
       font-weight: 500;
-      white-space: nowrap;
+      line-height: 1.55;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
       overflow: hidden;
-      text-overflow: ellipsis;
     }
 
     .expertise-card li::before {
@@ -1872,8 +1931,9 @@ const currentYear = new Date().getFullYear();
     .exp-tab:hover:not(.active) { background: rgba(201,169,110,0.04); }
 
     .exp-tab.active {
-      background: rgba(201,169,110,0.07);
+      background: linear-gradient(90deg, rgba(201,169,110,0.1), rgba(201,169,110,0.04));
       border-left-color: var(--brand);
+      box-shadow: inset 0 0 24px rgba(201,169,110,0.03);
     }
 
     .exp-tab-arrow {
@@ -2029,6 +2089,7 @@ const currentYear = new Date().getFullYear();
       gap: 6px;
       overflow: hidden;
       position: relative;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.03);
       transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
     }
 
@@ -2042,7 +2103,7 @@ const currentYear = new Date().getFullYear();
       transition: opacity 0.3s;
     }
 
-    .project-card:hover { border-color: rgba(201,169,110,0.22); box-shadow: var(--glow-hover); transform: translateY(-3px); }
+    .project-card:hover { border-color: rgba(201,169,110,0.28); box-shadow: var(--glow-hover); transform: translateY(-3px); }
     .project-card:hover::before { opacity: 1; }
 
     .project-card h3 {
@@ -2115,9 +2176,9 @@ const currentYear = new Date().getFullYear();
     }
 
     .sol-tab.active {
-      background: rgba(201,169,110,0.12);
+      background: rgba(201,169,110,0.13);
       color: var(--brand);
-      box-shadow: 0 0 0 1px rgba(201,169,110,0.2) inset;
+      box-shadow: 0 0 0 1px rgba(201,169,110,0.24) inset, 0 2px 12px rgba(201,169,110,0.06);
     }
 
     .sol-tab:not(.active):hover {
@@ -2188,7 +2249,7 @@ const currentYear = new Date().getFullYear();
     }
 
     .sol-card:hover {
-      border-color: rgba(201,169,110,0.24);
+      border-color: rgba(201,169,110,0.28);
       box-shadow: var(--glow-hover);
       transform: translateY(-3px);
     }
@@ -2275,9 +2336,9 @@ const currentYear = new Date().getFullYear();
     .wallet-tab svg { flex-shrink: 0; opacity: 0.7; transition: opacity 0.25s; }
 
     .wallet-tab.active {
-      background: rgba(201,169,110,0.12);
+      background: rgba(201,169,110,0.13);
       color: var(--brand);
-      box-shadow: 0 0 0 1px rgba(201,169,110,0.2) inset;
+      box-shadow: 0 0 0 1px rgba(201,169,110,0.24) inset, 0 2px 12px rgba(201,169,110,0.06);
     }
 
     .wallet-tab.active svg { opacity: 1; }
@@ -2505,9 +2566,9 @@ const currentYear = new Date().getFullYear();
     }
 
     .badge-card:hover {
-      border-color: rgba(201,169,110,0.32);
-      box-shadow: 0 0 0 1px rgba(201,169,110,0.08), 0 16px 40px rgba(0,0,0,0.3);
-      transform: translateY(-4px);
+      border-color: rgba(201,169,110,0.28);
+      box-shadow: var(--glow-hover);
+      transform: translateY(-3px);
       background: rgba(201,169,110,0.04);
     }
 
@@ -2562,7 +2623,23 @@ const currentYear = new Date().getFullYear();
       gap: clamp(32px,5vw,64px);
       align-items: center;
       height: 100%;
+      position: relative;
     }
+
+    .contact-grid::before {
+      content: '';
+      position: absolute;
+      top: -120px;
+      left: -80px;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(ellipse at center, rgba(201,169,110,0.07), transparent 65%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .contact-left, .contact-right { position: relative; z-index: 1; }
 
     .contact-right {
       display: flex;
