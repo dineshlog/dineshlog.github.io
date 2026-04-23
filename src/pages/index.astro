@@ -606,52 +606,82 @@ const currentYear = new Date().getFullYear();
           <h2 class="section-title">Solutions &amp; Systems Built</h2>
         </header>
 
-        <!-- Solution tab bar -->
-        <div class="sol-tabbar reveal" style="transition-delay:0.06s">
-          <div class="sol-tabs" role="tablist" aria-label="Solution categories">
-            {solutionTabs.map((tab, i) => (
-              <button
-                class={`sol-tab${i === 0 ? ' active' : ''}`}
-                role="tab"
-                data-sol={tab.id}
-                id={`sol-btn-${tab.id}`}
-                aria-selected={String(i === 0)}
-                aria-controls={`sol-pane-${tab.id}`}
-              >
-                {tab.label}
-                <span class="tab-count">{tab.items.length}</span>
-              </button>
-            ))}
-          </div>
-        </div>
+        <div class="sol-layout reveal" style="transition-delay:0.06s">
 
-        <!-- Solution panes -->
-        {solutionTabs.map((tab, i) => (
-          <div
-            class={`sol-pane${i === 0 ? ' active' : ''}`}
-            id={`sol-pane-${tab.id}`}
-            role="tabpanel"
-            aria-labelledby={`sol-btn-${tab.id}`}
-            aria-hidden={String(i !== 0)}
-          >
-            <div class="sol-scroll">
-              <div class={`sol-grid sol-cols-${tab.items.length <= 3 ? 3 : 2}`}>
-                {tab.items.map((item, j) => (
-                  <article class="sol-card" style={`animation-delay:${0.04 + j * 0.07}s`}>
-                    <h3 class="sol-name">{item.name}</h3>
-                    <p class="sol-desc">{item.desc}</p>
-                    <div class="sol-tags">
-                      {item.tags.map((tag) => (
-                        <span class="sol-tag">{tag}</span>
+          <!-- Left: category nav + item list -->
+          <div class="sol-sidebar">
+
+            <nav class="sol-cat-bar" role="tablist" aria-label="Solution categories">
+              {solutionTabs.map((tab, i) => (
+                <button
+                  class={`sol-cat-btn${i === 0 ? ' active' : ''}`}
+                  data-cat={tab.id}
+                  role="tab"
+                  aria-selected={String(i === 0)}
+                >{tab.label}<span class="sol-cat-count">{tab.items.length}</span></button>
+              ))}
+            </nav>
+
+            {solutionTabs.map((tab, ci) => (
+              <div class={`sol-item-list${ci === 0 ? ' active' : ''}`} data-cat-list={tab.id}>
+                {tab.items.map((item, ii) => (
+                  <button
+                    class={`sol-item-tab${ci === 0 && ii === 0 ? ' active' : ''}`}
+                    data-cat={tab.id}
+                    data-idx={String(ii)}
+                    aria-selected={String(ci === 0 && ii === 0)}
+                    aria-controls={`sol-det-${tab.id}-${ii}`}
+                  >
+                    <span class="sol-item-name">{item.name}</span>
+                    <div class="sol-item-tags">
+                      {item.tags.slice(0, 2).map(tag => (
+                        <span class="sol-item-tag">{tag}</span>
                       ))}
                     </div>
-                  </article>
+                    <span class="sol-item-arrow" aria-hidden="true">›</span>
+                  </button>
                 ))}
               </div>
-            </div>
-          </div>
-        ))}
+            ))}
 
+          </div>
+
+          <!-- Right: solution detail -->
+          <div class="sol-detail-wrap">
+            {solutionTabs.map((tab, ci) => (
+              tab.items.map((item, ii) => (
+                <div
+                  class={`sol-det-panel${ci === 0 && ii === 0 ? ' active' : ''}`}
+                  id={`sol-det-${tab.id}-${ii}`}
+                  aria-hidden={String(!(ci === 0 && ii === 0))}
+                >
+                  <div class="sol-det-inner">
+                    <header class="sol-det-header">
+                      <span class="sol-det-eyebrow">{tab.label}</span>
+                      <h3 class="sol-det-title">{item.name}</h3>
+                      <div class="sol-det-tags">
+                        {item.tags.map(tag => <span class="sol-tag">{tag}</span>)}
+                      </div>
+                    </header>
+                    <div class="sol-screenshot">
+                      <div class="sol-screenshot-ph">
+                        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                          <rect x="3" y="3" width="18" height="18" rx="2.5"/>
+                          <circle cx="8.5" cy="8.5" r="1.5"/>
+                          <polyline points="21 15 16 10 5 21"/>
+                        </svg>
+                        <p>{item.name}</p>
+                        <small>Screenshot preview — add image to activate</small>
+                      </div>
+                    </div>
+                    <p class="sol-det-desc">{item.desc}</p>
+                  </div>
+                </div>
+              ))
+            ))}
+          </div>
+
+        </div>
       </div>
     </section>
 
@@ -916,22 +946,52 @@ const currentYear = new Date().getFullYear();
       });
     });
 
-    /* ── Solution tab switching ── */
-    document.querySelectorAll('.sol-tab').forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        var target = btn.getAttribute('data-sol');
-        document.querySelectorAll('.sol-tab').forEach(function (t) {
-          var isActive = t.getAttribute('data-sol') === target;
-          t.classList.toggle('active', isActive);
-          t.setAttribute('aria-selected', String(isActive));
+    /* ── Solutions: category + item two-level switching ── */
+    (function () {
+      function activateDet(cat, idx) {
+        var detId = 'sol-det-' + cat + '-' + idx;
+        document.querySelectorAll('.sol-det-panel').forEach(function (p) {
+          var show = p.id === detId;
+          p.classList.toggle('active', show);
+          p.setAttribute('aria-hidden', String(!show));
         });
-        document.querySelectorAll('.sol-pane').forEach(function (pane) {
-          var show = pane.id === 'sol-pane-' + target;
-          pane.classList.toggle('active', show);
-          pane.setAttribute('aria-hidden', String(!show));
+      }
+
+      document.querySelectorAll('.sol-cat-btn').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var cat = btn.getAttribute('data-cat');
+          document.querySelectorAll('.sol-cat-btn').forEach(function (b) {
+            var on = b.getAttribute('data-cat') === cat;
+            b.classList.toggle('active', on);
+            b.setAttribute('aria-selected', String(on));
+          });
+          document.querySelectorAll('.sol-item-list').forEach(function (l) {
+            l.classList.toggle('active', l.getAttribute('data-cat-list') === cat);
+          });
+          var first = document.querySelector('.sol-item-tab[data-cat="' + cat + '"]');
+          if (first) {
+            document.querySelectorAll('.sol-item-tab').forEach(function (t) {
+              t.classList.toggle('active', t === first);
+              t.setAttribute('aria-selected', String(t === first));
+            });
+            activateDet(cat, '0');
+          }
         });
       });
-    });
+
+      document.querySelectorAll('.sol-item-tab').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var cat = btn.getAttribute('data-cat');
+          var idx = btn.getAttribute('data-idx');
+          document.querySelectorAll('.sol-item-tab[data-cat="' + cat + '"]').forEach(function (t) {
+            var on = t === btn;
+            t.classList.toggle('active', on);
+            t.setAttribute('aria-selected', String(on));
+          });
+          activateDet(cat, idx);
+        });
+      });
+    })();
 
     /* ── Skill Matrix hover interactions ── */
     (function () {
@@ -2140,146 +2200,279 @@ const currentYear = new Date().getFullYear();
     }
 
     /* ═══════════════════════════════════════════
-       SOLUTIONS & SYSTEMS BUILT
+       SOLUTIONS — Vertical split-panel
     ═══════════════════════════════════════════ */
-    .sol-tabbar {
-      flex-shrink: 0;
-      margin-bottom: clamp(10px,1.4dvh,16px);
+    .sol-layout {
+      flex: 1;
+      min-height: 0;
+      display: grid;
+      grid-template-columns: clamp(230px, 30%, 300px) 1fr;
+      gap: 0;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      overflow: hidden;
     }
 
-    .sol-tabs {
+    /* ── Left sidebar ── */
+    .sol-sidebar {
+      display: flex;
+      flex-direction: column;
+      border-right: 1px solid var(--line);
+      overflow: hidden;
+      background: rgba(255,255,255,0.012);
+    }
+
+    .sol-cat-bar {
       display: flex;
       flex-wrap: wrap;
-      gap: 4px;
-      background: rgba(255,255,255,0.03);
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      padding: 4px;
+      gap: 3px;
+      padding: 8px;
+      border-bottom: 1px solid var(--line);
+      flex-shrink: 0;
+      background: rgba(255,255,255,0.01);
     }
 
-    .sol-tab {
+    .sol-cat-btn {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      padding: 7px 14px;
-      border-radius: 8px;
+      gap: 4px;
+      padding: 4px 9px;
       border: none;
+      border-radius: 6px;
       background: transparent;
       color: var(--muted);
       font-family: 'DM Sans', sans-serif;
-      font-size: clamp(0.72rem,0.95vw,0.82rem);
-      font-weight: 600;
-      letter-spacing: 0.02em;
+      font-size: clamp(0.58rem, 0.76vw, 0.68rem);
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
       cursor: pointer;
       white-space: nowrap;
-      transition: color 0.22s, background 0.22s, box-shadow 0.22s;
+      transition: color 0.2s, background 0.2s;
     }
 
-    .sol-tab.active {
-      background: rgba(201,169,110,0.13);
+    .sol-cat-btn.active {
+      background: rgba(201,169,110,0.15);
       color: var(--brand);
-      box-shadow: 0 0 0 1px rgba(201,169,110,0.24) inset, 0 2px 12px rgba(201,169,110,0.06);
     }
 
-    .sol-tab:not(.active):hover {
+    .sol-cat-btn:not(.active):hover {
       color: var(--muted-lt);
       background: rgba(255,255,255,0.04);
     }
 
-    /* Solution panes */
-    .sol-pane {
-      flex: 1;
-      min-height: 0;
+    .sol-cat-count {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(201,169,110,0.1);
+      color: var(--brand);
+      border-radius: 999px;
+      font-size: 0.54rem;
+      font-weight: 700;
+      padding: 1px 5px;
+      min-width: 15px;
+      line-height: 1.5;
+    }
+
+    /* Solution item lists */
+    .sol-item-list {
       display: none;
       flex-direction: column;
-      opacity: 0;
-      transform: translateY(8px);
-      transition: opacity 0.32s cubic-bezier(0.16,1,0.3,1), transform 0.32s cubic-bezier(0.16,1,0.3,1);
-      pointer-events: none;
-    }
-
-    .sol-pane.active {
-      display: flex;
-      opacity: 1;
-      transform: translateY(0);
-      pointer-events: auto;
-    }
-
-    .sol-scroll {
       flex: 1;
       min-height: 0;
       overflow-y: auto;
       scrollbar-width: none;
-      -ms-overflow-style: none;
     }
 
-    .sol-scroll::-webkit-scrollbar { display: none; }
+    .sol-item-list.active { display: flex; }
+    .sol-item-list::-webkit-scrollbar { display: none; }
 
-    .sol-grid {
-      display: grid;
-      gap: clamp(10px,1.3dvh,16px);
-      height: 100%;
-      align-content: start;
-    }
-
-    .sol-cols-3 { grid-template-columns: repeat(3, 1fr); }
-    .sol-cols-2 { grid-template-columns: repeat(2, 1fr); }
-
-    .sol-card {
-      background: var(--surface);
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      padding: clamp(14px,1.8dvh,22px) clamp(14px,1.4vw,20px);
+    .sol-item-tab {
       display: flex;
       flex-direction: column;
-      gap: clamp(8px,1dvh,12px);
+      gap: 5px;
+      padding: clamp(10px,1.3dvh,15px) clamp(12px,1.4vw,18px);
+      border: none;
+      border-left: 3px solid transparent;
+      border-bottom: 1px solid var(--line-subtle);
+      background: transparent;
+      text-align: left;
+      cursor: pointer;
+      position: relative;
+      transition: background 0.2s, border-left-color 0.2s;
+    }
+
+    .sol-item-tab:last-child { border-bottom: none; }
+
+    .sol-item-tab:hover:not(.active) { background: rgba(201,169,110,0.04); }
+
+    .sol-item-tab.active {
+      background: linear-gradient(90deg, rgba(201,169,110,0.09), rgba(201,169,110,0.025));
+      border-left-color: var(--brand);
+    }
+
+    .sol-item-name {
+      display: block;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(0.88rem, 1.1vw, 1.0rem);
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.25;
+    }
+
+    .sol-item-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+    }
+
+    .sol-item-tag {
+      display: inline-flex;
+      align-items: center;
+      background: rgba(201,169,110,0.05);
+      border: 1px solid rgba(201,169,110,0.12);
+      color: var(--brand);
+      border-radius: 999px;
+      padding: 1px 6px;
+      font-size: clamp(0.5rem, 0.65vw, 0.58rem);
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      white-space: nowrap;
+      opacity: 0.7;
+    }
+
+    .sol-item-tab.active .sol-item-tag { opacity: 1; }
+
+    .sol-item-arrow {
+      position: absolute;
+      right: 11px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--brand);
+      opacity: 0;
+      font-size: 1rem;
+      transition: opacity 0.2s;
+    }
+
+    .sol-item-tab.active .sol-item-arrow { opacity: 0.65; }
+
+    /* ── Right detail panel ── */
+    .sol-detail-wrap {
       position: relative;
       overflow: hidden;
-      transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
+      background: var(--surface);
     }
 
-    .sol-card::before {
-      content: '';
+    .sol-det-panel {
       position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--brand), transparent);
+      inset: 0;
+      display: none;
+      flex-direction: column;
+      overflow-y: auto;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(201,169,110,0.15) transparent;
       opacity: 0;
-      transition: opacity 0.3s;
+      transform: translateX(10px);
+      transition: opacity 0.26s cubic-bezier(0.16,1,0.3,1), transform 0.26s cubic-bezier(0.16,1,0.3,1);
     }
 
-    .sol-card:hover {
-      border-color: rgba(201,169,110,0.28);
-      box-shadow: var(--glow-hover);
-      transform: translateY(-3px);
+    .sol-det-panel.active {
+      display: flex;
+      opacity: 1;
+      transform: translateX(0);
     }
 
-    .sol-card:hover::before { opacity: 1; }
+    .sol-det-inner {
+      padding: clamp(16px,2dvh,24px) clamp(18px,2.2vw,28px);
+      display: flex;
+      flex-direction: column;
+      gap: clamp(12px,1.6dvh,18px);
+      min-height: 100%;
+    }
 
-    .sol-name {
-      margin: 0;
+    .sol-det-header { flex-shrink: 0; }
+
+    .sol-det-eyebrow {
+      display: block;
+      font-size: 0.57rem;
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      font-weight: 700;
+      color: var(--brand);
+      opacity: 0.75;
+      margin-bottom: 5px;
+    }
+
+    .sol-det-title {
+      margin: 0 0 10px;
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(0.95rem,1.3vw,1.15rem);
+      font-size: clamp(1.25rem, 2vw, 1.8rem);
       font-weight: 600;
-      line-height: 1.2;
+      line-height: 1.15;
       color: var(--text);
     }
 
-    .sol-desc {
-      margin: 0;
-      color: var(--muted);
-      font-size: clamp(0.72rem,0.95vw,0.84rem);
-      line-height: 1.65;
-      flex: 1;
-    }
-
-    .sol-tags {
+    .sol-det-tags {
       display: flex;
       flex-wrap: wrap;
       gap: 5px;
+    }
+
+    /* Screenshot */
+    .sol-screenshot {
+      flex-shrink: 0;
+      background: rgba(255,255,255,0.013);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      overflow: hidden;
+      min-height: clamp(120px,16dvh,190px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .sol-screenshot-ph {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 24px;
+      text-align: center;
+    }
+
+    .sol-screenshot-ph svg {
+      color: var(--brand);
+      opacity: 0.18;
       flex-shrink: 0;
     }
 
+    .sol-screenshot-ph p {
+      margin: 0;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(0.88rem,1.1vw,1.0rem);
+      font-weight: 500;
+      color: var(--muted);
+      opacity: 0.45;
+    }
+
+    .sol-screenshot-ph small {
+      font-size: 0.54rem;
+      color: var(--muted);
+      opacity: 0.22;
+      letter-spacing: 0.06em;
+    }
+
+    .sol-det-desc {
+      margin: 0;
+      color: var(--muted);
+      font-size: clamp(0.78rem, 1vw, 0.9rem);
+      line-height: 1.75;
+    }
+
+    /* sol-tag: shared by item list + detail header */
     .sol-tag {
       display: inline-flex;
       align-items: center;
@@ -2299,29 +2492,27 @@ const currentYear = new Date().getFullYear();
     ═══════════════════════════════════════════ */
     .wallet-tabbar {
       display: flex;
-      align-items: center;
+      align-items: flex-end;
       justify-content: space-between;
       gap: 12px;
-      margin-bottom: clamp(10px,1.4dvh,16px);
       flex-shrink: 0;
+      border-bottom: 1px solid var(--line);
+      margin-bottom: clamp(10px,1.4dvh,16px);
     }
 
     .wallet-tabs {
       display: flex;
-      gap: 4px;
-      background: rgba(255,255,255,0.03);
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      padding: 4px;
+      gap: 0;
     }
 
     .wallet-tab {
       display: inline-flex;
       align-items: center;
       gap: 7px;
-      padding: 8px 16px;
-      border-radius: 9px;
+      padding: clamp(8px,1dvh,11px) clamp(12px,1.3vw,17px);
       border: none;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -1px;
       background: transparent;
       color: var(--muted);
       font-family: 'DM Sans', sans-serif;
@@ -2329,42 +2520,43 @@ const currentYear = new Date().getFullYear();
       font-weight: 600;
       letter-spacing: 0.02em;
       cursor: pointer;
-      transition: color 0.25s, background 0.25s, box-shadow 0.25s;
+      transition: color 0.22s, border-bottom-color 0.22s;
+      border-radius: 0;
       position: relative;
     }
 
-    .wallet-tab svg { flex-shrink: 0; opacity: 0.7; transition: opacity 0.25s; }
+    .wallet-tab svg { flex-shrink: 0; opacity: 0.55; transition: opacity 0.22s; }
 
     .wallet-tab.active {
-      background: rgba(201,169,110,0.13);
       color: var(--brand);
-      box-shadow: 0 0 0 1px rgba(201,169,110,0.24) inset, 0 2px 12px rgba(201,169,110,0.06);
+      border-bottom-color: var(--brand);
+      background: transparent;
     }
 
     .wallet-tab.active svg { opacity: 1; }
 
     .wallet-tab:not(.active):hover {
       color: var(--muted-lt);
-      background: rgba(255,255,255,0.04);
+      background: transparent;
     }
 
     .tab-count {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      background: rgba(201,169,110,0.12);
+      background: rgba(201,169,110,0.1);
       color: var(--brand);
       border-radius: 999px;
-      font-size: 0.68rem;
+      font-size: 0.65rem;
       font-weight: 700;
       padding: 1px 7px;
-      min-width: 22px;
+      min-width: 20px;
       line-height: 1.6;
-      transition: background 0.25s;
+      transition: background 0.22s;
     }
 
     .wallet-tab.active .tab-count {
-      background: rgba(201,169,110,0.22);
+      background: rgba(201,169,110,0.18);
     }
 
     .wallet-ext-links {
@@ -2783,7 +2975,9 @@ const currentYear = new Date().getFullYear();
       .project-grid { grid-template-columns: repeat(2, 1fr); grid-template-rows: none; }
       .badge-grid-3, .badge-grid-4 { grid-template-columns: repeat(2, 1fr); grid-template-rows: none; }
       .skill-scroll { grid-template-columns: 1fr; }
-      .wallet-tabbar { flex-wrap: wrap; gap: 8px; }
+      .wallet-tabbar { flex-wrap: wrap; gap: 8px; border-bottom: none; }
+      .wallet-tabs { border-bottom: 1px solid var(--line); width: 100%; }
+      .wallet-tab { border-radius: 0; }
       .wallet-ext-links { width: 100%; }
       .contact-grid { grid-template-columns: 1fr; }
       .profile-card { grid-template-columns: 1fr; }
@@ -2797,8 +2991,12 @@ const currentYear = new Date().getFullYear();
       .testimonials-block { flex: none; min-height: 220px; }
       .testim-cards { grid-template-columns: 1fr; }
       .matrix-svg-wrap { min-height: 260px; }
+      .sol-layout { grid-template-columns: 1fr; border-radius: 12px; }
+      .sol-sidebar { border-right: none; border-bottom: 1px solid var(--line); max-height: 220px; }
+      .sol-detail-wrap { min-height: 300px; }
+      .sol-det-panel { position: relative; inset: auto; min-height: 300px; opacity: 1; transform: none; }
+      .sol-det-panel:not(.active) { display: none; }
       .wallet-tabs { flex-wrap: wrap; }
-      .sol-cols-3, .sol-cols-2 { grid-template-columns: 1fr; }
     }
 
     @media (max-width: 400px) {
