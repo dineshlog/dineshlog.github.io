@@ -849,18 +849,18 @@ const currentYear = new Date().getFullYear();
   <!-- ── Scripts ── -->
   <script is:inline>
   (function () {
-    var scroll = document.getElementById('page-scroll');
     var panels = Array.from(document.querySelectorAll('.snap-panel'));
     var dots   = Array.from(document.querySelectorAll('.scroll-dot'));
     var toggle = document.getElementById('menu-toggle');
     var nav    = document.getElementById('primary-nav');
+    var NAV_H  = 86;
 
-    /* ── Scroll to panel by id ── */
+    /* ── Scroll to section by id (window-based) ── */
     function scrollTo(id) {
       var el = document.getElementById(id);
-      if (el && scroll) {
-        scroll.scrollTo({ top: el.offsetTop, behavior: 'smooth' });
-      }
+      if (!el) return;
+      var top = el.getBoundingClientRect().top + window.pageYOffset;
+      window.scrollTo({ top: id === 'top' ? 0 : Math.max(0, top - NAV_H), behavior: 'smooth' });
     }
 
     /* ── Nav link clicks ── */
@@ -882,8 +882,8 @@ const currentYear = new Date().getFullYear();
       });
     });
 
-    /* ── Active dot tracking via IntersectionObserver on scroll container ── */
-    if ('IntersectionObserver' in window && scroll) {
+    /* ── Active dot tracking — viewport-based, trigger in middle band ── */
+    if ('IntersectionObserver' in window) {
       var dotObs = new IntersectionObserver(function (entries) {
         entries.forEach(function (entry) {
           if (entry.isIntersecting) {
@@ -893,13 +893,13 @@ const currentYear = new Date().getFullYear();
             });
           }
         });
-      }, { root: scroll, threshold: 0.5 });
+      }, { root: null, rootMargin: '-38% 0px -38% 0px', threshold: 0 });
       panels.forEach(function (p) { dotObs.observe(p); });
     }
 
-    /* ── Reveal animations via IntersectionObserver on scroll container ── */
+    /* ── Reveal animations — viewport-based ── */
     var revealEls = document.querySelectorAll('.reveal');
-    if ('IntersectionObserver' in window && scroll) {
+    if ('IntersectionObserver' in window) {
       var revObs = new IntersectionObserver(function (entries) {
         entries.forEach(function (entry) {
           if (entry.isIntersecting) {
@@ -907,7 +907,7 @@ const currentYear = new Date().getFullYear();
             revObs.unobserve(entry.target);
           }
         });
-      }, { root: scroll, threshold: 0.08 });
+      }, { root: null, threshold: 0.06 });
       revealEls.forEach(function (el) { revObs.observe(el); });
     } else {
       revealEls.forEach(function (el) { el.classList.add('in-view'); });
@@ -1118,31 +1118,19 @@ const currentYear = new Date().getFullYear();
     }
 
     /* ═══════════════════════════════════════════
-       SNAP CONTAINER
+       PAGE WRAPPER — free scroll
     ═══════════════════════════════════════════ */
     .page-scroll {
-      height: 100dvh;
-      overflow-y: scroll;
-      scroll-snap-type: y mandatory;
-      scrollbar-width: none;
-      -ms-overflow-style: none;
+      /* plain wrapper — scrolling is on window */
     }
-    .page-scroll::-webkit-scrollbar { display: none; }
 
     /* ═══════════════════════════════════════════
-       SNAP PANELS — base
+       SECTION PANELS — natural height
     ═══════════════════════════════════════════ */
     .snap-panel {
-      height: 100dvh;
-      scroll-snap-align: start;
-      scroll-snap-stop: always;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
       position: relative;
       overflow: hidden;
-      /* top pad = nav height (86px) + breathing space */
-      padding: clamp(96px,9dvh,120px) 0 clamp(20px,2.5dvh,34px);
+      padding: clamp(100px,11vh,130px) 0 clamp(72px,9vh,110px);
     }
 
     .tint-panel {
@@ -1151,16 +1139,14 @@ const currentYear = new Date().getFullYear();
       border-bottom: 1px solid rgba(201,169,110,0.07);
     }
 
-    /* Panel shell — flex column, fills snap-panel interior */
+    /* Panel shell */
     .panel-shell {
       display: flex;
       flex-direction: column;
-      height: 100%;
     }
 
     .panel-head {
-      flex-shrink: 0;
-      margin-bottom: clamp(10px,1.5dvh,18px);
+      margin-bottom: clamp(28px,3.5vh,48px);
       position: relative;
     }
 
@@ -1373,8 +1359,11 @@ const currentYear = new Date().getFullYear();
        HERO PANEL
     ═══════════════════════════════════════════ */
     .hero-panel {
-      padding-top: 86px; /* exact nav height — hero is centered differently */
-      justify-content: center;
+      min-height: 100dvh;
+      display: flex;
+      align-items: center;
+      padding-top: 86px;
+      padding-bottom: clamp(48px,6vh,72px);
     }
 
     .hero-bg {
@@ -1619,9 +1608,8 @@ const currentYear = new Date().getFullYear();
     .metric-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: clamp(8px,1dvh,12px);
-      flex-shrink: 0;
-      margin-bottom: clamp(10px,1.4dvh,16px);
+      gap: clamp(12px,1.5vw,20px);
+      margin-bottom: clamp(32px,4vh,52px);
     }
 
     .metric-card {
@@ -1672,11 +1660,10 @@ const currentYear = new Date().getFullYear();
        SKILL MATRIX
     ═══════════════════════════════════════════ */
     .matrix-outer {
-      flex: 1;
-      min-height: 0;
       display: flex;
       flex-direction: column;
-      gap: clamp(6px,0.9dvh,12px);
+      gap: clamp(6px,0.9vw,14px);
+      height: clamp(380px, 50vh, 520px);
     }
 
     .matrix-svg-wrap {
@@ -1745,14 +1732,12 @@ const currentYear = new Date().getFullYear();
        TESTIMONIALS — 3-card grid
     ═══════════════════════════════════════════ */
     .testimonials-block {
-      flex: 1;
-      min-height: 0;
       display: flex;
       flex-direction: column;
-      gap: clamp(6px,0.8dvh,10px);
+      gap: clamp(8px,1vw,14px);
     }
 
-    .testim-head { flex-shrink: 0; }
+    .testim-head { }
 
     .testim-tagline {
       margin: 2px 0 0;
@@ -1764,11 +1749,9 @@ const currentYear = new Date().getFullYear();
     }
 
     .testim-cards {
-      flex: 1;
-      min-height: 0;
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: clamp(8px,1.2dvh,14px);
+      gap: clamp(12px,1.5vw,20px);
     }
 
     .testim-card {
@@ -1788,8 +1771,7 @@ const currentYear = new Date().getFullYear();
     }
 
     .testim-frame {
-      flex: 1;
-      min-height: 0;
+      height: clamp(190px,24vh,280px);
       position: relative;
       overflow: hidden;
       background: rgba(0,0,0,0.2);
@@ -1852,20 +1834,16 @@ const currentYear = new Date().getFullYear();
     .expertise-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      grid-template-rows: repeat(2, 1fr);
-      gap: clamp(10px,1.2dvh,14px);
-      flex: 1;
-      min-height: 0;
+      gap: clamp(16px,2vw,24px);
     }
 
     .expertise-card {
       background: var(--surface);
       border: 1px solid var(--line);
       border-radius: 14px;
-      padding: clamp(14px,1.8dvh,22px);
+      padding: clamp(22px,2.8vw,36px);
       display: flex;
       flex-direction: column;
-      overflow: hidden;
       box-shadow: inset 0 1px 0 rgba(255,255,255,0.03);
       transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
     }
@@ -1930,11 +1908,7 @@ const currentYear = new Date().getFullYear();
       color: var(--muted-lt);
       font-size: clamp(0.72rem,0.92vw,0.82rem);
       font-weight: 500;
-      line-height: 1.55;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
+      line-height: 1.6;
     }
 
     .expertise-card li::before {
@@ -1952,11 +1926,10 @@ const currentYear = new Date().getFullYear();
        EXPERIENCE — Vertical Tabs Split Panel
     ═══════════════════════════════════════════ */
     .exp-layout {
-      flex: 1;
-      min-height: 0;
       display: grid;
       grid-template-columns: clamp(200px,28%,300px) 1fr;
       gap: 0;
+      height: clamp(460px, 60vh, 600px);
       border: 1px solid var(--line);
       border-radius: 16px;
       overflow: hidden;
@@ -2133,10 +2106,7 @@ const currentYear = new Date().getFullYear();
     .project-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      grid-template-rows: repeat(3, 1fr);
-      gap: clamp(8px,1dvh,12px);
-      flex: 1;
-      min-height: 0;
+      gap: clamp(12px,1.5vw,18px);
     }
 
     .project-card {
@@ -2180,12 +2150,8 @@ const currentYear = new Date().getFullYear();
       margin: 0;
       color: var(--muted);
       font-size: clamp(0.7rem,0.9vw,0.8rem);
-      line-height: 1.55;
+      line-height: 1.6;
       flex: 1;
-      overflow: hidden;
-      display: -webkit-box;
-      -webkit-line-clamp: 3;
-      -webkit-box-orient: vertical;
     }
 
     .project-stack {
@@ -2203,10 +2169,9 @@ const currentYear = new Date().getFullYear();
        SOLUTIONS — Vertical split-panel
     ═══════════════════════════════════════════ */
     .sol-layout {
-      flex: 1;
-      min-height: 0;
       display: grid;
       grid-template-columns: clamp(230px, 30%, 300px) 1fr;
+      height: clamp(500px, 65vh, 680px);
       gap: 0;
       border: 1px solid var(--line);
       border-radius: 16px;
@@ -2567,10 +2532,7 @@ const currentYear = new Date().getFullYear();
 
     /* ── Wallet Panes ── */
     .wallet-pane {
-      flex: 1;
-      min-height: 0;
       display: none;
-      flex-direction: column;
       opacity: 0;
       transform: translateY(8px);
       transition: opacity 0.32s cubic-bezier(0.16,1,0.3,1), transform 0.32s cubic-bezier(0.16,1,0.3,1);
@@ -2578,22 +2540,15 @@ const currentYear = new Date().getFullYear();
     }
 
     .wallet-pane.active {
-      display: flex;
+      display: block;
       opacity: 1;
       transform: translateY(0);
       pointer-events: auto;
     }
 
     .wallet-scroll {
-      flex: 1;
-      min-height: 0;
-      overflow-y: auto;
-      scrollbar-width: none;
-      -ms-overflow-style: none;
       padding-right: 4px;
     }
-
-    .wallet-scroll::-webkit-scrollbar { display: none; }
 
     .wallet-group-label {
       margin: 0 0 clamp(8px,1dvh,12px);
@@ -2620,8 +2575,9 @@ const currentYear = new Date().getFullYear();
     .skill-scroll {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: clamp(10px,1.4dvh,18px);
+      gap: clamp(12px,1.6vw,20px);
       align-content: start;
+      margin-top: 2px;
     }
 
     .skill-category {
@@ -2726,20 +2682,17 @@ const currentYear = new Date().getFullYear();
     .cred-btn:hover { background: rgba(201,169,110,0.1); border-color: rgba(201,169,110,0.38); transform: translateY(-1px); }
 
     .badge-grid {
-      flex: 1;
-      min-height: 0;
-      gap: clamp(8px,1dvh,12px);
+      gap: clamp(10px,1.3vw,16px);
       display: grid;
+      margin-bottom: clamp(20px,2.5vh,32px);
     }
 
     .badge-grid-3 {
       grid-template-columns: repeat(3, 1fr);
-      grid-template-rows: repeat(3, 1fr);
     }
 
     .badge-grid-4 {
       grid-template-columns: repeat(4, 1fr);
-      grid-auto-rows: 1fr;
     }
 
     .badge-card {
@@ -2814,7 +2767,6 @@ const currentYear = new Date().getFullYear();
       grid-template-columns: 1fr 1fr;
       gap: clamp(32px,5vw,64px);
       align-items: center;
-      height: 100%;
       position: relative;
     }
 
@@ -2896,13 +2848,17 @@ const currentYear = new Date().getFullYear();
     }
 
     /* ═══════════════════════════════════════════
-       RESPONSIVE — tablet
+       RESPONSIVE — large tablet
     ═══════════════════════════════════════════ */
     @media (max-width: 1100px) {
       .metric-grid { grid-template-columns: repeat(2, 1fr); }
-      .project-grid { grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(4, 1fr); }
+      .project-grid { grid-template-columns: repeat(3, 1fr); }
+      .badge-grid-3 { grid-template-columns: repeat(3, 1fr); }
     }
 
+    /* ═══════════════════════════════════════════
+       RESPONSIVE — tablet
+    ═══════════════════════════════════════════ */
     @media (max-width: 900px) {
       .menu-toggle { display: flex; }
 
@@ -2923,19 +2879,18 @@ const currentYear = new Date().getFullYear();
       }
 
       .primary-nav.is-open { display: flex; }
-
       .primary-nav a { border-radius: 8px; padding: 10px 14px; }
       .nav-cta { text-align: center; margin-top: 4px; margin-left: 0 !important; }
 
-      .expertise-grid { grid-template-columns: 1fr; grid-template-rows: repeat(4, 1fr); }
-      .badge-grid-3 { grid-template-columns: repeat(3, 1fr); }
-      .badge-grid-4 { grid-template-columns: repeat(4, 1fr); }
-      .contact-grid { grid-template-columns: 1fr; gap: 20px; }
+      .expertise-grid { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: 1fr; gap: 32px; }
       .scroll-dots { display: none; }
+      .exp-layout { height: clamp(380px, 55vh, 520px); }
+      .sol-layout { height: clamp(440px, 58vh, 580px); }
     }
 
     @media (max-width: 860px) {
-      .hero-inner { grid-template-columns: 1fr; gap: 20px; }
+      .hero-inner { grid-template-columns: 1fr; gap: 24px; }
       .profile-card {
         display: grid;
         grid-template-columns: 160px 1fr;
@@ -2948,55 +2903,43 @@ const currentYear = new Date().getFullYear();
     }
 
     /* ═══════════════════════════════════════════
-       RESPONSIVE — mobile: disable snap, normal scroll
+       RESPONSIVE — mobile
     ═══════════════════════════════════════════ */
     @media (max-width: 640px) {
-      html, body { height: auto; overflow: auto; }
-
-      .page-scroll {
-        height: auto;
-        overflow-y: visible;
-        scroll-snap-type: none;
-      }
-
-      .snap-panel {
-        height: auto;
-        min-height: 100dvh;
-        scroll-snap-align: none;
-        scroll-snap-stop: normal;
-        padding: 80px 0 40px;
-        justify-content: flex-start;
-      }
-
-      .panel-shell { height: auto; }
+      .snap-panel { padding: 80px 0 52px; }
+      .hero-panel { padding-top: 80px; padding-bottom: 40px; }
 
       .metric-grid { grid-template-columns: repeat(2, 1fr); }
-      .expertise-grid { grid-template-columns: 1fr; grid-template-rows: none; gap: 12px; }
-      .project-grid { grid-template-columns: repeat(2, 1fr); grid-template-rows: none; }
-      .badge-grid-3, .badge-grid-4 { grid-template-columns: repeat(2, 1fr); grid-template-rows: none; }
+      .expertise-grid { grid-template-columns: 1fr; gap: 14px; }
+      .project-grid { grid-template-columns: repeat(2, 1fr); }
+      .badge-grid-3, .badge-grid-4 { grid-template-columns: repeat(2, 1fr); }
       .skill-scroll { grid-template-columns: 1fr; }
+      .testim-cards { grid-template-columns: 1fr; }
+
       .wallet-tabbar { flex-wrap: wrap; gap: 8px; border-bottom: none; }
-      .wallet-tabs { border-bottom: 1px solid var(--line); width: 100%; }
+      .wallet-tabs { border-bottom: 1px solid var(--line); width: 100%; flex-wrap: wrap; }
       .wallet-tab { border-radius: 0; }
       .wallet-ext-links { width: 100%; }
+
       .contact-grid { grid-template-columns: 1fr; }
       .profile-card { grid-template-columns: 1fr; }
       .profile-dl { grid-template-columns: 1fr; }
       .hero-h1 { font-size: clamp(2.2rem,8vw,3.2rem); }
       .hero-actions { flex-direction: column; }
       .action-primary, .action-secondary { width: 100%; justify-content: center; }
-      .exp-layout { grid-template-columns: 1fr; }
-      .exp-detail { position: relative; min-height: 320px; }
+
+      .exp-layout { grid-template-columns: 1fr; height: auto; }
+      .exp-tabs { max-height: 200px; overflow-y: auto; }
+      .exp-detail { position: relative; min-height: 340px; }
       .exp-panel { position: relative; }
-      .testimonials-block { flex: none; min-height: 220px; }
-      .testim-cards { grid-template-columns: 1fr; }
-      .matrix-svg-wrap { min-height: 260px; }
-      .sol-layout { grid-template-columns: 1fr; border-radius: 12px; }
-      .sol-sidebar { border-right: none; border-bottom: 1px solid var(--line); max-height: 220px; }
-      .sol-detail-wrap { min-height: 300px; }
-      .sol-det-panel { position: relative; inset: auto; min-height: 300px; opacity: 1; transform: none; }
+
+      .sol-layout { grid-template-columns: 1fr; height: auto; border-radius: 12px; }
+      .sol-sidebar { border-right: none; border-bottom: 1px solid var(--line); max-height: 200px; overflow-y: auto; }
+      .sol-detail-wrap { min-height: 320px; }
+      .sol-det-panel { position: relative; inset: auto; opacity: 1; transform: none; min-height: 320px; }
       .sol-det-panel:not(.active) { display: none; }
-      .wallet-tabs { flex-wrap: wrap; }
+
+      .matrix-outer { height: clamp(300px, 45vh, 420px); }
     }
 
     @media (max-width: 400px) {
