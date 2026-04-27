@@ -3,99 +3,526 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Automated Microsoft 365 Lifecycle Management System | Author: Dinesh Loganathan</title>
+  <title>Automated Microsoft 365 Lifecycle Management System | Dinesh Loganathan</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --navy: #18324a;
-      --blue: #1f4e79;
-      --soft-blue: #eef5ff;
-      --green: #2d6a4f;
-      --soft-green: #f1faf4;
-      --amber: #a46a00;
-      --soft-amber: #fff8ec;
-      --rose: #9f294c;
-      --soft-rose: #fff2f6;
-      --purple: #4d3b8f;
-      --soft-purple: #f4f1ff;
-      --border: #d7e0ea;
-      --text: #1f2937;
-      --muted: #64748b;
-      --bg: #f6f8fb;
-      --card: #ffffff;
-      --shadow: 0 18px 40px rgba(24, 50, 74, .10);
+      --bg:           #080c18;
+      --surface:      #0e1420;
+      --surface-alt:  #111826;
+      --text:         #e2e8f2;
+      --muted:        #7a869e;
+      --muted-lt:     #9aa3b8;
+      --brand:        #c9a96e;
+      --brand-strong: #d4af7a;
+      --line:         rgba(201,169,110,0.1);
+      --line-subtle:  rgba(255,255,255,0.05);
+      --shadow:       0 24px 64px rgba(0,0,0,0.5);
+      --glow:         0 0 0 1px rgba(201,169,110,0.2), 0 8px 32px rgba(201,169,110,0.08);
+      --radius:       16px;
+
+      --c-blue:   #4d9bbf;
+      --c-green:  #5fad8e;
+      --c-amber:  #c9a96e;
+      --c-rose:   #bf7575;
+      --c-purple: #9b7dd4;
     }
-    * { box-sizing: border-box; }
-    body { margin: 0; font-family: "Segoe UI", Arial, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
-    .hero { background: linear-gradient(135deg, #17314a, #1f4e79 55%, #5b7fb4); color: white; padding: 42px 46px 34px; }
-    .hero .eyebrow { letter-spacing: .13em; text-transform: uppercase; opacity: .78; font-weight: 700; font-size: 13px; }
-    h1 { margin: 10px 0 8px; font-size: clamp(32px, 5vw, 58px); line-height: 1.05; }
-    .subtitle { font-size: 19px; max-width: 1050px; opacity: .93; }
-    .meta { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 24px; }
-    .pill { background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.26); border-radius: 999px; padding: 9px 14px; font-weight: 600; }
-    .layout { display: grid; grid-template-columns: 290px 1fr; min-height: calc(100vh - 220px); }
-    .tabs { background: #0f2335; color: #dbeafe; padding: 22px 16px; position: sticky; top: 0; height: 100vh; overflow: auto; }
-    .tabs h2 { font-size: 15px; text-transform: uppercase; letter-spacing: .12em; color: #93c5fd; margin: 0 0 14px 10px; }
-    .tab-btn { display: block; width: 100%; background: transparent; color: #dbeafe; border: 0; border-radius: 12px; padding: 13px 14px; text-align: left; cursor: pointer; font-size: 15px; margin-bottom: 6px; }
-    .tab-btn:hover, .tab-btn.active { background: #1f4e79; color: #fff; }
-    main { padding: 30px; }
-    .tab-panel { display: none; animation: fade .25s ease; }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { font-size: 100%; scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; }
+
+    /* ── HERO ─────────────────────────────────── */
+    .hero {
+      background: linear-gradient(135deg, #040810 0%, #080c18 55%, #0c1524 100%);
+      border-bottom: 1px solid rgba(201,169,110,0.12);
+      padding: 40px 52px 36px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(201,169,110,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(201,169,110,0.025) 1px, transparent 1px);
+      background-size: 72px 72px;
+      pointer-events: none;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(201,169,110,0.5);
+      text-decoration: none;
+      margin-bottom: 24px;
+      position: relative;
+      transition: color 0.2s;
+    }
+    .back-link:hover { color: var(--brand); }
+    .back-link::before { content: '←'; font-size: 0.85rem; }
+
+    .hero .eyebrow {
+      display: block;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      font-weight: 700;
+      font-size: 0.62rem;
+      color: var(--brand);
+      opacity: 0.82;
+      position: relative;
+      margin-bottom: 10px;
+    }
+
+    h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 4.5vw, 3.6rem);
+      line-height: 1.06;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: #ffffff;
+      position: relative;
+      margin-bottom: 12px;
+    }
+
+    .subtitle {
+      font-size: 0.95rem;
+      max-width: 900px;
+      color: rgba(255,255,255,0.68);
+      line-height: 1.75;
+      position: relative;
+    }
+
+    .meta {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 22px;
+      position: relative;
+    }
+
+    .pill {
+      background: rgba(201,169,110,0.1);
+      border: 1px solid rgba(201,169,110,0.24);
+      border-radius: 999px;
+      padding: 6px 14px;
+      font-weight: 600;
+      font-size: 0.7rem;
+      color: var(--brand);
+      letter-spacing: 0.04em;
+    }
+
+    /* ── LAYOUT ───────────────────────────────── */
+    .layout {
+      display: grid;
+      grid-template-columns: 272px 1fr;
+      min-height: calc(100vh - 210px);
+    }
+
+    /* ── SIDEBAR ──────────────────────────────── */
+    .tabs {
+      background: #07101e;
+      border-right: 1px solid rgba(201,169,110,0.08);
+      padding: 28px 12px;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(201,169,110,0.15) transparent;
+    }
+
+    .tabs h2 {
+      font-size: 0.58rem;
+      text-transform: uppercase;
+      letter-spacing: 0.24em;
+      color: var(--brand);
+      opacity: 0.55;
+      margin: 0 0 14px 14px;
+      font-weight: 700;
+    }
+
+    .tab-btn {
+      display: block;
+      width: 100%;
+      background: transparent;
+      color: var(--muted);
+      border: 0;
+      border-left: 3px solid transparent;
+      border-radius: 0 10px 10px 0;
+      padding: 10px 14px;
+      text-align: left;
+      cursor: pointer;
+      font-size: 0.8rem;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+      margin-bottom: 3px;
+      line-height: 1.4;
+      transition: background 0.2s, color 0.2s, border-color 0.2s;
+    }
+
+    .tab-btn:hover {
+      background: rgba(201,169,110,0.06);
+      color: var(--muted-lt);
+    }
+
+    .tab-btn.active {
+      background: linear-gradient(90deg, rgba(201,169,110,0.12), rgba(201,169,110,0.03));
+      border-left-color: var(--brand);
+      color: var(--brand);
+      font-weight: 600;
+    }
+
+    /* ── MAIN ─────────────────────────────────── */
+    main {
+      padding: 32px 38px;
+      background: var(--bg);
+    }
+
+    .tab-panel { display: none; animation: fade .28s ease; }
     .tab-panel.active { display: block; }
-    @keyframes fade { from { opacity: .3; transform: translateY(6px);} to { opacity: 1; transform: none; } }
-    .card { background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 26px; margin-bottom: 24px; box-shadow: var(--shadow); }
-    h2.section-title { color: var(--navy); font-size: 31px; margin: 0 0 14px; }
-    h3 { color: var(--blue); margin-top: 28px; font-size: 22px; }
-    h4 { color: var(--navy); font-size: 18px; margin-bottom: 6px; }
-    .lead { font-size: 18px; color: #334155; }
-    .grid { display: grid; gap: 18px; }
-    .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-    .grid-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-    .mini { border-radius: 16px; border: 1px solid var(--border); padding: 18px; background: #fff; }
-    .mini.blue { background: var(--soft-blue); }
-    .mini.green { background: var(--soft-green); }
-    .mini.amber { background: var(--soft-amber); }
-    .mini.rose { background: var(--soft-rose); }
-    .mini.purple { background: var(--soft-purple); }
-    .kpi { font-size: 34px; font-weight: 800; color: var(--blue); margin-bottom: 4px; }
-    table { width: 100%; border-collapse: collapse; margin: 16px 0; background: #fff; border-radius: 14px; overflow: hidden; }
-    th { background: #18324a; color: white; text-align: left; padding: 13px; font-size: 14px; position: sticky; top: 0; }
-    td { padding: 12px 13px; border-bottom: 1px solid #e5e7eb; vertical-align: top; font-size: 14px; }
-    tr:nth-child(even) td { background: #f9fbfd; }
-    .table-wrap { max-height: 640px; overflow: auto; border: 1px solid var(--border); border-radius: 14px; }
-    .diagram { width: 100%; border: 1px solid var(--border); border-radius: 18px; background: white; margin: 15px 0; }
-    .flow { display: flex; gap: 12px; flex-wrap: wrap; align-items: stretch; }
-    .flow-step { flex: 1 1 170px; background: white; border: 1px solid var(--border); border-radius: 16px; padding: 16px; position: relative; }
-    .flow-step:not(:last-child)::after { content: "→"; position: absolute; right: -14px; top: 45%; color: var(--blue); font-weight: 900; font-size: 20px; }
-    .badge { display: inline-block; border-radius: 999px; padding: 4px 9px; font-weight: 700; font-size: 12px; background: var(--soft-blue); color: var(--blue); }
-    .bar { height: 16px; background: #dbeafe; border-radius: 999px; overflow: hidden; }
-    .bar > span { display: block; height: 100%; background: linear-gradient(90deg, #1f4e79, #8ab6e6); border-radius: 999px; }
-    .chart-row { display: grid; grid-template-columns: 210px 1fr 60px; gap: 12px; align-items: center; margin: 14px 0; }
-    .callout { border-left: 6px solid var(--blue); background: #f8fbff; padding: 16px 18px; border-radius: 12px; margin: 18px 0; }
+
+    @keyframes fade {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: none; }
+    }
+
+    /* ── CARDS ────────────────────────────────── */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 28px 30px;
+      margin-bottom: 20px;
+      box-shadow: var(--shadow), inset 0 1px 0 rgba(255,255,255,0.03);
+    }
+
+    /* ── HEADINGS ─────────────────────────────── */
+    h2.section-title {
+      font-family: 'Cormorant Garamond', serif;
+      color: var(--text);
+      font-size: clamp(1.55rem, 2.4vw, 2.1rem);
+      font-weight: 600;
+      margin: 0 0 18px;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+    }
+
+    h3 {
+      color: var(--brand);
+      margin-top: 22px;
+      margin-bottom: 8px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+    }
+
+    h4 {
+      color: var(--text);
+      font-size: 0.88rem;
+      margin-bottom: 6px;
+      font-weight: 600;
+    }
+
+    p { color: var(--muted-lt); font-size: 0.88rem; line-height: 1.7; margin-bottom: 10px; }
+    p:last-child { margin-bottom: 0; }
+
+    .lead {
+      font-size: 0.96rem;
+      color: var(--muted-lt);
+      line-height: 1.78;
+      margin-bottom: 18px;
+    }
+
+    strong { color: var(--text); font-weight: 600; }
+
+    /* ── GRID ─────────────────────────────────── */
+    .grid   { display: grid; gap: 14px; }
+    .grid-2 { grid-template-columns: repeat(2, minmax(0,1fr)); }
+    .grid-3 { grid-template-columns: repeat(3, minmax(0,1fr)); }
+    .grid-4 { grid-template-columns: repeat(4, minmax(0,1fr)); }
+
+    /* ── MINI CARDS ───────────────────────────── */
+    .mini {
+      border-radius: 13px;
+      border: 1px solid var(--line);
+      padding: 17px;
+      background: var(--surface-alt);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.03);
+    }
+
+    .mini h3 { margin-top: 0; font-size: 0.88rem; }
+    .mini p  { font-size: 0.82rem; }
+    .mini ul { font-size: 0.8rem; padding-left: 18px; }
+
+    .mini.blue   { border-left: 3px solid var(--c-blue);   }
+    .mini.green  { border-left: 3px solid var(--c-green);  }
+    .mini.amber  { border-left: 3px solid var(--c-amber);  }
+    .mini.rose   { border-left: 3px solid var(--c-rose);   }
+    .mini.purple { border-left: 3px solid var(--c-purple); }
+
+    .mini.blue   h3 { color: var(--c-blue);   }
+    .mini.green  h3 { color: var(--c-green);  }
+    .mini.amber  h3 { color: var(--c-amber);  }
+    .mini.rose   h3 { color: var(--c-rose);   }
+    .mini.purple h3 { color: var(--c-purple); }
+
+    .kpi {
+      font-size: 2rem;
+      font-weight: 800;
+      font-family: 'Cormorant Garamond', serif;
+      margin-bottom: 5px;
+      line-height: 1;
+      letter-spacing: -0.02em;
+    }
+
+    .mini.blue   .kpi { color: var(--c-blue);   }
+    .mini.green  .kpi { color: var(--c-green);  }
+    .mini.amber  .kpi { color: var(--c-amber);  }
+    .mini.rose   .kpi { color: var(--c-rose);   }
+    .mini.purple .kpi { color: var(--c-purple); }
+
+    /* ── TABLES ───────────────────────────────── */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 14px 0;
+      background: var(--surface);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    th {
+      background: #05090f;
+      color: var(--brand);
+      text-align: left;
+      padding: 11px 14px;
+      font-size: 0.66rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      position: sticky;
+      top: 0;
+      border-bottom: 1px solid rgba(201,169,110,0.12);
+    }
+
+    td {
+      padding: 10px 14px;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      vertical-align: top;
+      font-size: 0.82rem;
+      color: var(--muted-lt);
+      line-height: 1.6;
+    }
+
+    tr:last-child td { border-bottom: none; }
+    tr:nth-child(even) td { background: rgba(255,255,255,0.018); }
+    tr:hover td { background: rgba(201,169,110,0.04); color: var(--text); }
+
+    .table-wrap {
+      max-height: 620px;
+      overflow: auto;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(201,169,110,0.2) transparent;
+    }
+
+    /* ── DIAGRAMS ─────────────────────────────── */
+    .diagram {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255,255,255,0.02);
+      margin: 14px 0;
+      display: block;
+    }
+
+    /* ── FLOW STEPS ───────────────────────────── */
+    .flow {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: stretch;
+      margin-top: 14px;
+    }
+
+    .flow-step {
+      flex: 1 1 160px;
+      background: var(--surface-alt);
+      border: 1px solid var(--line);
+      border-radius: 13px;
+      padding: 16px;
+      position: relative;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.03);
+    }
+
+    .flow-step:not(:last-child)::after {
+      content: "›";
+      position: absolute;
+      right: -13px;
+      top: 44%;
+      color: var(--brand);
+      font-weight: 900;
+      font-size: 22px;
+      opacity: 0.55;
+    }
+
+    .badge {
+      display: inline-block;
+      border-radius: 999px;
+      padding: 3px 10px;
+      font-weight: 700;
+      font-size: 0.62rem;
+      background: rgba(201,169,110,0.1);
+      color: var(--brand);
+      border: 1px solid rgba(201,169,110,0.22);
+      letter-spacing: 0.06em;
+      margin-bottom: 8px;
+    }
+
+    /* ── BAR CHART ────────────────────────────── */
+    .bar {
+      height: 13px;
+      background: rgba(201,169,110,0.08);
+      border-radius: 999px;
+      overflow: hidden;
+      border: 1px solid rgba(201,169,110,0.06);
+    }
+
+    .bar > span {
+      display: block;
+      height: 100%;
+      background: linear-gradient(90deg, var(--brand), var(--brand-strong));
+      border-radius: 999px;
+    }
+
+    .chart-row {
+      display: grid;
+      grid-template-columns: 210px 1fr 52px;
+      gap: 12px;
+      align-items: center;
+      margin: 11px 0;
+      font-size: 0.82rem;
+      color: var(--muted-lt);
+    }
+
+    /* ── CALLOUT ──────────────────────────────── */
+    .callout {
+      border-left: 3px solid var(--brand);
+      background: rgba(201,169,110,0.05);
+      padding: 14px 18px;
+      border-radius: 0 12px 12px 0;
+      margin: 16px 0;
+      color: var(--muted-lt);
+      font-size: 0.86rem;
+      line-height: 1.72;
+    }
+
+    .callout strong { color: var(--brand); }
+
     .muted { color: var(--muted); }
-    code, pre { background: #0f172a; color: #e2e8f0; border-radius: 14px; padding: 14px; display: block; overflow: auto; }
-    ul { padding-left: 22px; }
-    .tag-row { display:flex; gap:8px; flex-wrap:wrap; margin:12px 0; }
-    .tag { background:#edf2f7; color:#334155; padding:6px 10px; border-radius:999px; font-size:13px; font-weight:700; }
-    footer { color:#64748b; padding:28px; text-align:center; }
+
+    /* ── CODE / PRE ───────────────────────────── */
+    code, pre {
+      background: #04080f;
+      color: #e2e8f0;
+      border-radius: 12px;
+      padding: 16px 18px;
+      display: block;
+      overflow: auto;
+      border: 1px solid rgba(201,169,110,0.08);
+      font-size: 0.78rem;
+      line-height: 1.75;
+      font-family: 'Consolas', 'Monaco', monospace;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(201,169,110,0.15) transparent;
+    }
+
+    /* ── LIST ─────────────────────────────────── */
+    ul {
+      padding-left: 20px;
+      color: var(--muted);
+      font-size: 0.84rem;
+      line-height: 1.72;
+    }
+
+    ul li { margin-bottom: 3px; }
+
+    /* ── TAGS ─────────────────────────────────── */
+    .tag-row { display: flex; gap: 7px; flex-wrap: wrap; margin: 12px 0; }
+
+    .tag {
+      background: rgba(201,169,110,0.07);
+      border: 1px solid rgba(201,169,110,0.16);
+      color: var(--brand);
+      padding: 5px 12px;
+      border-radius: 999px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+
+    /* ── FOOTER ───────────────────────────────── */
+    footer {
+      color: var(--muted);
+      padding: 26px 36px;
+      text-align: center;
+      border-top: 1px solid rgba(201,169,110,0.08);
+      font-size: 0.75rem;
+      letter-spacing: 0.05em;
+    }
+
+    /* ── RESPONSIVE ───────────────────────────── */
     @media (max-width: 980px) {
       .layout { grid-template-columns: 1fr; }
-      .tabs { position: relative; height: auto; display: flex; flex-wrap: wrap; gap: 6px; }
-      .tabs h2 { width: 100%; }
-      .tab-btn { width: auto; }
+      .tabs {
+        position: relative;
+        height: auto;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px;
+        padding: 14px 12px;
+      }
+      .tabs h2 { width: 100%; margin: 0 0 8px 4px; }
+      .tab-btn { width: auto; border-left: none; border-bottom: 2px solid transparent; border-radius: 8px; padding: 8px 12px; font-size: 0.76rem; }
+      .tab-btn.active { border-left-color: transparent; border-bottom-color: var(--brand); }
       .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
-      main { padding: 18px; }
-      .flow-step:not(:last-child)::after { display:none; }
+      main { padding: 20px 16px; }
+      .flow-step:not(:last-child)::after { display: none; }
+      .hero { padding: 30px 22px 26px; }
     }
+
     @media print {
       .tabs { display: none; }
       .layout { display: block; }
-      .tab-panel { display:block !important; page-break-after: always; }
+      .tab-panel { display: block !important; page-break-after: always; }
       .card { box-shadow: none; }
     }
   </style>
 </head>
 <body>
   <header class="hero">
+    <a class="back-link" href="https://dineshlog.github.io">Portfolio</a>
     <div class="eyebrow">Enterprise Architecture Documentation</div>
     <h1>Automated Microsoft 365 Lifecycle Management System</h1>
     <div class="subtitle">A governance-led target architecture for identity lifecycle, data lifecycle, collaboration/resource lifecycle, access governance, automation, and compliance across Microsoft 365.</div>
@@ -357,14 +784,14 @@ HRIS
           <div class="chart-row"><strong>Data governance</strong><div class="bar"><span style="width:82%"></span></div><div>82%</div></div>
           <div class="chart-row"><strong>Collaboration governance</strong><div class="bar"><span style="width:76%"></span></div><div>76%</div></div>
           <div class="chart-row"><strong>Compliance evidence</strong><div class="bar"><span style="width:86%"></span></div><div>86%</div></div>
-          <p class="muted">Illustrative maturity targets for a highly automated enterprise environment.</p>
+          <p class="muted" style="margin-top:10px;font-size:0.78rem;">Illustrative maturity targets for a highly automated enterprise environment.</p>
         </div>
         <div class="card">
-          <h3>Risk Heatmap</h3>
+          <h3 style="margin-top:0">Risk Heatmap</h3>
           <img class="diagram" src="assets/risk_heatmap.svg" alt="Lifecycle governance risk heatmap">
         </div>
         <div class="card">
-          <h3>Manual vs Automated Lifecycle Management</h3>
+          <h3 style="margin-top:0">Manual vs Automated Lifecycle Management</h3>
           <div class="table-wrap">
             <table>
               <thead><tr><th>Dimension</th><th>Manual</th><th>Automated</th></tr></thead>
@@ -384,7 +811,7 @@ HRIS
       <section id="scenario" class="tab-panel">
         <div class="card">
           <h2 class="section-title">Real-World End-to-End Scenario</h2>
-          <h3>Employee Onboarding → Role Change → Offboarding</h3>
+          <h3 style="margin-top:0">Employee Onboarding → Role Change → Offboarding</h3>
           <div class="flow">
             <div class="flow-step"><span class="badge">Onboard</span><h4>Financial Analyst joins</h4><p>HR creates employee record. Entra ID provisions account, groups, license, MFA requirements, and baseline Finance access. Teams and SharePoint memberships are assigned.</p></div>
             <div class="flow-step"><span class="badge">Govern</span><h4>Active employee</h4><p>Conditional Access, DLP, retention policies, sensitivity labels, audit, and access reviews operate continuously.</p></div>
@@ -393,7 +820,7 @@ HRIS
           </div>
         </div>
         <div class="card">
-          <h3>Scenario Outcome Map</h3>
+          <h3 style="margin-top:0">Scenario Outcome Map</h3>
           <div class="table-wrap">
             <table>
               <thead><tr><th>Stage</th><th>Systems</th><th>Automation</th><th>Outcome</th></tr></thead>
@@ -419,7 +846,7 @@ HRIS
           </div>
         </div>
         <div class="card">
-          <h3>Target Operating Model</h3>
+          <h3 style="margin-top:0">Target Operating Model</h3>
           <div class="table-wrap">
             <table>
               <thead><tr><th>Governance Body</th><th>Responsibilities</th></tr></thead>
@@ -435,7 +862,7 @@ HRIS
           </div>
         </div>
         <div class="card">
-          <h3>Key Metrics</h3>
+          <h3 style="margin-top:0">Key Metrics</h3>
           <div class="tag-row">
             <span class="tag">Onboarding completion time</span>
             <span class="tag">Terminated users with active sessions</span>
@@ -453,19 +880,19 @@ HRIS
   </div>
 
   <footer>
-    Automated Microsoft 365 Lifecycle Management System • Author: Dinesh Loganathan
+    Automated Microsoft 365 Lifecycle Management System &nbsp;·&nbsp; Author: Dinesh Loganathan &nbsp;·&nbsp; <a href="https://dineshlog.github.io" style="color:var(--brand);text-decoration:none;">dineshlog.github.io</a>
   </footer>
 
   <script>
     const buttons = document.querySelectorAll('.tab-btn');
-    const panels = document.querySelectorAll('.tab-panel');
+    const panels  = document.querySelectorAll('.tab-panel');
     buttons.forEach(btn => {
       btn.addEventListener('click', () => {
         buttons.forEach(b => b.classList.remove('active'));
-        panels.forEach(p => p.classList.remove('active'));
+        panels.forEach(p  => p.classList.remove('active'));
         btn.classList.add('active');
         document.getElementById(btn.dataset.tab).classList.add('active');
-        window.scrollTo({top: 0, behavior: 'smooth'});
+        window.scrollTo({ top: 0, behavior: 'smooth' });
       });
     });
   </script>
