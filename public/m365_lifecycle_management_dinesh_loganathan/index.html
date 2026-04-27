@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Automated Microsoft 365 Lifecycle Management System | Author: Dinesh Loganathan</title>
+  <style>
+    :root {
+      --navy: #18324a;
+      --blue: #1f4e79;
+      --soft-blue: #eef5ff;
+      --green: #2d6a4f;
+      --soft-green: #f1faf4;
+      --amber: #a46a00;
+      --soft-amber: #fff8ec;
+      --rose: #9f294c;
+      --soft-rose: #fff2f6;
+      --purple: #4d3b8f;
+      --soft-purple: #f4f1ff;
+      --border: #d7e0ea;
+      --text: #1f2937;
+      --muted: #64748b;
+      --bg: #f6f8fb;
+      --card: #ffffff;
+      --shadow: 0 18px 40px rgba(24, 50, 74, .10);
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: "Segoe UI", Arial, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+    .hero { background: linear-gradient(135deg, #17314a, #1f4e79 55%, #5b7fb4); color: white; padding: 42px 46px 34px; }
+    .hero .eyebrow { letter-spacing: .13em; text-transform: uppercase; opacity: .78; font-weight: 700; font-size: 13px; }
+    h1 { margin: 10px 0 8px; font-size: clamp(32px, 5vw, 58px); line-height: 1.05; }
+    .subtitle { font-size: 19px; max-width: 1050px; opacity: .93; }
+    .meta { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 24px; }
+    .pill { background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.26); border-radius: 999px; padding: 9px 14px; font-weight: 600; }
+    .layout { display: grid; grid-template-columns: 290px 1fr; min-height: calc(100vh - 220px); }
+    .tabs { background: #0f2335; color: #dbeafe; padding: 22px 16px; position: sticky; top: 0; height: 100vh; overflow: auto; }
+    .tabs h2 { font-size: 15px; text-transform: uppercase; letter-spacing: .12em; color: #93c5fd; margin: 0 0 14px 10px; }
+    .tab-btn { display: block; width: 100%; background: transparent; color: #dbeafe; border: 0; border-radius: 12px; padding: 13px 14px; text-align: left; cursor: pointer; font-size: 15px; margin-bottom: 6px; }
+    .tab-btn:hover, .tab-btn.active { background: #1f4e79; color: #fff; }
+    main { padding: 30px; }
+    .tab-panel { display: none; animation: fade .25s ease; }
+    .tab-panel.active { display: block; }
+    @keyframes fade { from { opacity: .3; transform: translateY(6px);} to { opacity: 1; transform: none; } }
+    .card { background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 26px; margin-bottom: 24px; box-shadow: var(--shadow); }
+    h2.section-title { color: var(--navy); font-size: 31px; margin: 0 0 14px; }
+    h3 { color: var(--blue); margin-top: 28px; font-size: 22px; }
+    h4 { color: var(--navy); font-size: 18px; margin-bottom: 6px; }
+    .lead { font-size: 18px; color: #334155; }
+    .grid { display: grid; gap: 18px; }
+    .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .grid-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .mini { border-radius: 16px; border: 1px solid var(--border); padding: 18px; background: #fff; }
+    .mini.blue { background: var(--soft-blue); }
+    .mini.green { background: var(--soft-green); }
+    .mini.amber { background: var(--soft-amber); }
+    .mini.rose { background: var(--soft-rose); }
+    .mini.purple { background: var(--soft-purple); }
+    .kpi { font-size: 34px; font-weight: 800; color: var(--blue); margin-bottom: 4px; }
+    table { width: 100%; border-collapse: collapse; margin: 16px 0; background: #fff; border-radius: 14px; overflow: hidden; }
+    th { background: #18324a; color: white; text-align: left; padding: 13px; font-size: 14px; position: sticky; top: 0; }
+    td { padding: 12px 13px; border-bottom: 1px solid #e5e7eb; vertical-align: top; font-size: 14px; }
+    tr:nth-child(even) td { background: #f9fbfd; }
+    .table-wrap { max-height: 640px; overflow: auto; border: 1px solid var(--border); border-radius: 14px; }
+    .diagram { width: 100%; border: 1px solid var(--border); border-radius: 18px; background: white; margin: 15px 0; }
+    .flow { display: flex; gap: 12px; flex-wrap: wrap; align-items: stretch; }
+    .flow-step { flex: 1 1 170px; background: white; border: 1px solid var(--border); border-radius: 16px; padding: 16px; position: relative; }
+    .flow-step:not(:last-child)::after { content: "→"; position: absolute; right: -14px; top: 45%; color: var(--blue); font-weight: 900; font-size: 20px; }
+    .badge { display: inline-block; border-radius: 999px; padding: 4px 9px; font-weight: 700; font-size: 12px; background: var(--soft-blue); color: var(--blue); }
+    .bar { height: 16px; background: #dbeafe; border-radius: 999px; overflow: hidden; }
+    .bar > span { display: block; height: 100%; background: linear-gradient(90deg, #1f4e79, #8ab6e6); border-radius: 999px; }
+    .chart-row { display: grid; grid-template-columns: 210px 1fr 60px; gap: 12px; align-items: center; margin: 14px 0; }
+    .callout { border-left: 6px solid var(--blue); background: #f8fbff; padding: 16px 18px; border-radius: 12px; margin: 18px 0; }
+    .muted { color: var(--muted); }
+    code, pre { background: #0f172a; color: #e2e8f0; border-radius: 14px; padding: 14px; display: block; overflow: auto; }
+    ul { padding-left: 22px; }
+    .tag-row { display:flex; gap:8px; flex-wrap:wrap; margin:12px 0; }
+    .tag { background:#edf2f7; color:#334155; padding:6px 10px; border-radius:999px; font-size:13px; font-weight:700; }
+    footer { color:#64748b; padding:28px; text-align:center; }
+    @media (max-width: 980px) {
+      .layout { grid-template-columns: 1fr; }
+      .tabs { position: relative; height: auto; display: flex; flex-wrap: wrap; gap: 6px; }
+      .tabs h2 { width: 100%; }
+      .tab-btn { width: auto; }
+      .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+      main { padding: 18px; }
+      .flow-step:not(:last-child)::after { display:none; }
+    }
+    @media print {
+      .tabs { display: none; }
+      .layout { display: block; }
+      .tab-panel { display:block !important; page-break-after: always; }
+      .card { box-shadow: none; }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="eyebrow">Enterprise Architecture Documentation</div>
+    <h1>Automated Microsoft 365 Lifecycle Management System</h1>
+    <div class="subtitle">A governance-led target architecture for identity lifecycle, data lifecycle, collaboration/resource lifecycle, access governance, automation, and compliance across Microsoft 365.</div>
+    <div class="meta">
+      <div class="pill">Author: Dinesh Loganathan</div>
+      <div class="pill">Microsoft 365 Governance</div>
+      <div class="pill">Enterprise Cloud Architecture</div>
+      <div class="pill">Offline HTML Package</div>
+    </div>
+  </header>
+
+  <div class="layout">
+    <nav class="tabs" aria-label="Document tabs">
+      <h2>Navigation</h2>
+      <button class="tab-btn active" data-tab="whitepaper">1. Full Detail</button>
+      <button class="tab-btn" data-tab="automations">2. Automations Breakdown</button>
+      <button class="tab-btn" data-tab="matrix">3. Enterprise Matrix</button>
+      <button class="tab-btn" data-tab="architecture">4. Architecture Layers</button>
+      <button class="tab-btn" data-tab="wire">5. Connection Wire Diagrams</button>
+      <button class="tab-btn" data-tab="charts">6. Charts and Visuals</button>
+      <button class="tab-btn" data-tab="scenario">7. End-to-End Scenario</button>
+      <button class="tab-btn" data-tab="recommendations">8. Best Practices</button>
+    </nav>
+
+    <main>
+      <section id="whitepaper" class="tab-panel active">
+        <div class="card">
+          <h2 class="section-title">Executive Overview</h2>
+          <p class="lead">An <strong>Automated Microsoft 365 Lifecycle Management System</strong> is an enterprise governance architecture that manages identities, data, collaboration spaces, access, and compliance obligations from creation through retirement.</p>
+          <p>It replaces ad hoc manual administration with <strong>policy-driven, event-driven, and auditable automation</strong> across Microsoft Entra ID, Microsoft Purview, Microsoft Teams, SharePoint Online, Exchange Online, Power Platform, Microsoft Graph, and service management systems.</p>
+          <div class="grid grid-4">
+            <div class="mini blue"><div class="kpi">JML</div><strong>Identity lifecycle</strong><br><span class="muted">Join, Move, Leave</span></div>
+            <div class="mini green"><div class="kpi">Data</div><strong>Information lifecycle</strong><br><span class="muted">Create, retain, archive, delete</span></div>
+            <div class="mini amber"><div class="kpi">Collab</div><strong>Workspace lifecycle</strong><br><span class="muted">Teams, SharePoint, Groups</span></div>
+            <div class="mini rose"><div class="kpi">GRC</div><strong>Governance</strong><br><span class="muted">Access, compliance, audit</span></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2 class="section-title">Core Themes</h2>
+          <div class="grid grid-2">
+            <div class="mini blue">
+              <h3>Identity Management</h3>
+              <p>Controls employee, contractor, guest, and privileged identity state through Microsoft Entra ID, Lifecycle Workflows, dynamic groups, licensing, Conditional Access, PIM, entitlement management, and access reviews.</p>
+              <ul><li>HR-driven user provisioning</li><li>Joiner, mover, leaver workflows</li><li>Least privilege and role-based access</li><li>Guest and external identity governance</li></ul>
+            </div>
+            <div class="mini green">
+              <h3>Data Governance</h3>
+              <p>Controls business data from creation to final disposition using Microsoft Purview sensitivity labels, retention labels, records management, DLP, audit, eDiscovery, and auto-classification.</p>
+              <ul><li>Classify sensitive and regulated data</li><li>Retain records defensibly</li><li>Delete obsolete data under policy</li><li>Support legal holds and investigations</li></ul>
+            </div>
+            <div class="mini amber">
+              <h3>Collaboration Governance</h3>
+              <p>Manages lifecycle and ownership of Teams, SharePoint sites, Microsoft 365 Groups, OneDrive content, Planner, and related collaboration resources.</p>
+              <ul><li>Controlled workspace creation</li><li>Owner accountability</li><li>Group expiration and renewal</li><li>Archive or delete inactive resources</li></ul>
+            </div>
+            <div class="mini rose">
+              <h3>Security and Compliance</h3>
+              <p>Continuously validates access and data controls with Conditional Access, PIM, Access Reviews, DLP, Insider Risk, Purview Audit, eDiscovery, and Compliance Manager.</p>
+              <ul><li>Reduce excessive privilege</li><li>Monitor risky activities</li><li>Produce audit evidence</li><li>Meet regulatory obligations</li></ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2 class="section-title">Technology Mapping</h2>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Theme</th><th>Microsoft Technology</th><th>Enterprise Role</th></tr></thead>
+              <tbody>
+                <tr><td>Identity lifecycle</td><td>Microsoft Entra ID</td><td>Central identity provider for users, groups, devices, apps, service principals, authentication, authorization, and Conditional Access.</td></tr>
+                <tr><td>JML automation</td><td>Microsoft Entra Lifecycle Workflows</td><td>Automates joiner, mover, and leaver tasks based on employment state, dates, and identity attributes.</td></tr>
+                <tr><td>Access governance</td><td>Microsoft Entra ID Governance</td><td>Provides lifecycle workflows, entitlement management, access packages, approvals, expirations, and access reviews.</td></tr>
+                <tr><td>Privileged access</td><td>Microsoft Entra Privileged Identity Management</td><td>Reduces standing admin access using just-in-time activation, approval, justification, MFA, and review.</td></tr>
+                <tr><td>Data lifecycle</td><td>Microsoft Purview Data Lifecycle Management</td><td>Applies retention policies and labels to preserve required content and delete obsolete information.</td></tr>
+                <tr><td>Records</td><td>Microsoft Purview Records Management</td><td>Supports record declaration, disposition review, immutable retention, and retention schedule enforcement.</td></tr>
+                <tr><td>Information protection</td><td>Microsoft Purview Information Protection</td><td>Applies sensitivity labels, encryption, content markings, container labels, and auto-labeling rules.</td></tr>
+                <tr><td>Collaboration</td><td>Microsoft Teams, SharePoint Online, Microsoft 365 Groups</td><td>Provides team workspaces, file storage, group-based access, channels, and content collaboration.</td></tr>
+                <tr><td>Workflow</td><td>Power Automate, Logic Apps, Azure Automation</td><td>Orchestrates approvals, notifications, lifecycle actions, remediation, and cross-system integration.</td></tr>
+                <tr><td>Programmability</td><td>Microsoft Graph API / Graph PowerShell</td><td>Automates lifecycle operations for users, groups, Teams, sites, licenses, roles, and reporting.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2 class="section-title">Lifecycle Stages Breakdown</h2>
+          <div class="flow">
+            <div class="flow-step"><span class="badge">1</span><h4>Join / Create</h4><p>HR creates worker, project is approved, file is created, Team or site is requested. Baseline policies, labels, and access are applied.</p></div>
+            <div class="flow-step"><span class="badge">2</span><h4>Move / Modify</h4><p>Role, department, manager, sensitivity, ownership, or project status changes. Access and governance state are recalculated.</p></div>
+            <div class="flow-step"><span class="badge">3</span><h4>Active / Governed</h4><p>Conditional Access, access reviews, DLP, retention, audit, guest review, renewal, and ownership attestation operate continuously.</p></div>
+            <div class="flow-step"><span class="badge">4</span><h4>End-of-Life</h4><p>Disable, revoke, archive, retain, disposition, delete, and preserve audit evidence according to policy and legal obligations.</p></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2 class="section-title">Benefits and Risks</h2>
+          <div class="grid grid-2">
+            <div class="mini green">
+              <h3>Benefits</h3>
+              <ul>
+                <li>Faster onboarding and fewer service desk tickets.</li>
+                <li>Reduced orphaned accounts, ownerless workspaces, and residual access.</li>
+                <li>Consistent retention, classification, records management, and audit evidence.</li>
+                <li>Improved external sharing and guest governance.</li>
+                <li>Better operational scalability for large Microsoft 365 tenants.</li>
+              </ul>
+            </div>
+            <div class="mini rose">
+              <h3>Risks Without Lifecycle Management</h3>
+              <ul>
+                <li>Former employees retain access after departure.</li>
+                <li>Users accumulate permissions over time.</li>
+                <li>Unmanaged Teams and SharePoint sprawl increases cost and risk.</li>
+                <li>Data is retained too long, deleted too early, or not discoverable.</li>
+                <li>Audit, eDiscovery, and compliance evidence is incomplete.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="automations" class="tab-panel">
+        <div class="card">
+          <h2 class="section-title">Automation Mechanisms Breakdown</h2>
+          <img class="diagram" src="assets/automation_triggers.svg" alt="Automation mechanisms diagram">
+          <div class="grid grid-2">
+            <div class="mini blue">
+              <h3>Event-Driven Automation</h3>
+              <p>Triggered by authoritative business events: HR joins, role changes, terminations, project approvals, legal holds, or workspace requests.</p>
+              <ul><li>New hire creates Entra account</li><li>Termination disables account</li><li>Project approval creates Team/site</li><li>Legal matter applies hold</li></ul>
+            </div>
+            <div class="mini green">
+              <h3>Policy-Based Automation</h3>
+              <p>Evaluates resources against governance rules and enforces controls continuously.</p>
+              <ul><li>Conditional Access</li><li>Sensitivity labels</li><li>DLP rules</li><li>Retention labels and policies</li></ul>
+            </div>
+            <div class="mini amber">
+              <h3>Scheduled Automation</h3>
+              <p>Runs periodic governance checks and recertifications.</p>
+              <ul><li>Quarterly privileged access reviews</li><li>Monthly guest reviews</li><li>Weekly ownerless site checks</li><li>Daily terminated user remediation</li></ul>
+            </div>
+            <div class="mini purple">
+              <h3>AI-Driven Classification</h3>
+              <p>Uses sensitive information types, trainable classifiers, and risk signals to classify, protect, retain, or investigate content.</p>
+              <ul><li>Auto-labeling</li><li>Insider risk signals</li><li>Recommended access removals</li><li>Classification-driven policies</li></ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2 class="section-title">Automation Workflow Catalog</h2>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Workflow</th><th>Trigger</th><th>Primary Services</th><th>Actions</th><th>Evidence Produced</th></tr></thead>
+              <tbody>
+                <tr><td>New hire onboarding</td><td>HR record created / start date reached</td><td>HRIS, Entra ID, Lifecycle Workflows, Power Automate</td><td>Create account, assign manager, add groups, assign licenses, notify manager, require MFA.</td><td>Provisioning log, workflow log, license assignment, audit trail.</td></tr>
+                <tr><td>Role change remediation</td><td>Department, manager, job code, or location changes</td><td>Entra ID, Dynamic Groups, Entitlement Management</td><td>Remove old access, request new access, trigger access review, update team memberships.</td><td>Attribute change log, approval record, access review decision.</td></tr>
+                <tr><td>Termination/offboarding</td><td>Termination date or HR inactive status</td><td>Entra ID, Exchange, OneDrive, Teams, SharePoint, Graph</td><td>Disable account, revoke sessions, remove groups, transfer ownership, retain mailbox/OneDrive.</td><td>Leaver workflow log, access removal record, retention evidence.</td></tr>
+                <tr><td>Workspace provisioning</td><td>Approved Team/site request</td><td>Power Automate, Graph, Teams, SharePoint, Purview</td><td>Create Team/site, assign owners, apply naming, label, retention, and external sharing controls.</td><td>Request, approval, provisioning record, owner accountability record.</td></tr>
+                <tr><td>Guest access review</td><td>Scheduled quarterly or sponsor change</td><td>Entra Access Reviews, Teams, SharePoint</td><td>Ask owners/sponsors to confirm external users; remove denied or expired guests.</td><td>Reviewer decisions, removal actions, guest risk report.</td></tr>
+                <tr><td>Inactive site lifecycle</td><td>Site inactivity threshold reached</td><td>SharePoint Advanced Management, Power Automate</td><td>Notify owners, renew, archive, restrict, or delete according to policy.</td><td>Owner attestation, archive action, deletion or renewal log.</td></tr>
+                <tr><td>Data disposition</td><td>Retention period expires</td><td>Microsoft Purview Records Management</td><td>Route disposition review, approve deletion, preserve evidence, delete eligible content.</td><td>Disposition review history and retention record.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section id="matrix" class="tab-panel">
+        <div class="card">
+          <h2 class="section-title">Comprehensive Enterprise Matrix</h2>
+          <p>This table maps governance themes to lifecycle stages, technologies, automation mechanisms, examples, and business outcomes.</p>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th>Theme</th><th>Lifecycle Stage</th><th>Technology</th><th>Automation Mechanism</th><th>Example</th><th>Business Outcome</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Identity</td><td>Join</td><td>HRIS + Microsoft Entra ID</td><td>HR-driven provisioning</td><td>HR creates new employee; Entra user is created with manager, department, and job code.</td><td>Consistent day-one readiness.</td></tr>
+                <tr><td>Identity</td><td>Join</td><td>Lifecycle Workflows</td><td>Event-driven workflow</td><td>Before start date, manager receives onboarding tasks and user receives baseline access.</td><td>Reduced onboarding tickets.</td></tr>
+                <tr><td>Identity</td><td>Join</td><td>Dynamic Groups</td><td>Attribute-based rules</td><td>Finance users join Finance baseline group automatically.</td><td>Role-aligned standard access.</td></tr>
+                <tr><td>Identity</td><td>Move</td><td>Entra ID Governance</td><td>Access recalculation</td><td>Sales access removed when user transfers to Legal.</td><td>Prevents privilege accumulation.</td></tr>
+                <tr><td>Identity</td><td>Active</td><td>Conditional Access</td><td>Policy-based enforcement</td><td>Require MFA and compliant device for SharePoint access.</td><td>Reduced unauthorized access.</td></tr>
+                <tr><td>Identity</td><td>Active</td><td>PIM</td><td>Just-in-time access</td><td>Admin activates role for two hours with approval.</td><td>Minimized standing privilege.</td></tr>
+                <tr><td>Identity</td><td>Leave</td><td>Lifecycle Workflows + Graph</td><td>Leaver automation</td><td>Disable account, revoke sessions, remove groups, transfer ownership.</td><td>Prevents post-employment access.</td></tr>
+                <tr><td>Data</td><td>Create</td><td>Purview Information Protection</td><td>Sensitivity labeling</td><td>Confidential document is labeled and encrypted.</td><td>Protection begins at creation.</td></tr>
+                <tr><td>Data</td><td>Create</td><td>Purview Auto-labeling</td><td>Content-based classification</td><td>Files containing regulated identifiers are automatically labeled.</td><td>Reduced reliance on manual classification.</td></tr>
+                <tr><td>Data</td><td>Active</td><td>Purview DLP</td><td>Policy-based prevention</td><td>External email with sensitive data is blocked or warned.</td><td>Reduced data leakage.</td></tr>
+                <tr><td>Data</td><td>Active</td><td>Retention Policies</td><td>Location or label-based retention</td><td>Teams chats retained for defined business period.</td><td>Consistent compliance retention.</td></tr>
+                <tr><td>Data</td><td>Move</td><td>Records Management</td><td>Record declaration</td><td>Final contract is declared as a record.</td><td>Defensible record control.</td></tr>
+                <tr><td>Data</td><td>End-of-life</td><td>Disposition Review</td><td>Approval workflow</td><td>Expired record routed to records manager for disposal.</td><td>Defensible deletion.</td></tr>
+                <tr><td>Collaboration</td><td>Create</td><td>Teams + SharePoint + Groups</td><td>Controlled provisioning</td><td>Project approval creates Team, SharePoint site, Planner plan, owners, and labels.</td><td>Standardized collaboration.</td></tr>
+                <tr><td>Collaboration</td><td>Create</td><td>Power Automate</td><td>Approval and orchestration</td><td>Sensitive Team request routes to data owner and security.</td><td>Governance before creation.</td></tr>
+                <tr><td>Collaboration</td><td>Active</td><td>Group Expiration</td><td>Renewal policy</td><td>Owners renew or allow group expiration.</td><td>Reduced stale groups.</td></tr>
+                <tr><td>Collaboration</td><td>Active</td><td>SharePoint Advanced Management</td><td>Inactive site policy</td><td>Inactive sites require owner confirmation.</td><td>Reduced site sprawl.</td></tr>
+                <tr><td>Collaboration</td><td>End-of-life</td><td>Microsoft 365 Archive</td><td>Archive workflow</td><td>Closed project site is archived.</td><td>Lower active storage footprint.</td></tr>
+                <tr><td>Security</td><td>Active</td><td>Access Reviews</td><td>Scheduled certification</td><td>Quarterly review of privileged roles and guest access.</td><td>Audit-ready least privilege.</td></tr>
+                <tr><td>Security</td><td>Active</td><td>Defender + Purview Audit</td><td>Monitoring and investigation</td><td>Unusual download activity after resignation is investigated.</td><td>Improved insider risk response.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section id="architecture" class="tab-panel">
+        <div class="card">
+          <h2 class="section-title">Architecture Explanation</h2>
+          <img class="diagram" src="assets/architecture_layers.svg" alt="Layered architecture diagram">
+          <div class="grid grid-2">
+            <div class="mini blue"><h3>Source Systems</h3><p>HRIS, ITSM, CMDB, legal, project, CRM, and ERP systems provide authoritative lifecycle signals. Microsoft 365 should consume trusted business events rather than become the system of record for employment status, legal hold, or project approval.</p></div>
+            <div class="mini green"><h3>Identity Layer</h3><p>Microsoft Entra ID translates business events into identities, attributes, groups, licenses, access packages, Conditional Access decisions, PIM eligibility, and access reviews.</p></div>
+            <div class="mini amber"><h3>Service Layer</h3><p>Microsoft Teams, SharePoint Online, OneDrive, Exchange, Microsoft 365 Groups, Planner, and Power Platform consume identity and governance state to deliver collaboration services.</p></div>
+            <div class="mini rose"><h3>Governance Layer</h3><p>Microsoft Purview enforces sensitivity, DLP, retention, records, audit, eDiscovery, and compliance controls across content and communications.</p></div>
+          </div>
+          <div class="callout"><strong>Design principle:</strong> identity and metadata act as the control plane. When authoritative attributes are clean, automation can safely drive access, collaboration, classification, retention, and disposition.</div>
+        </div>
+      </section>
+
+      <section id="wire" class="tab-panel">
+        <div class="card">
+          <h2 class="section-title">Connection Wire Diagrams</h2>
+          <img class="diagram" src="assets/jml_flow.svg" alt="Joiner mover leaver flow diagram">
+          <img class="diagram" src="assets/lifecycle_states.svg" alt="Lifecycle state diagram">
+          <h3>Enterprise Connection Model</h3>
+          <pre>
+HRIS
+  └── authoritative worker attributes
+      └── Microsoft Entra ID
+          ├── Dynamic Groups
+          ├── Lifecycle Workflows
+          ├── Entitlement Management
+          ├── Conditional Access
+          └── PIM
+              └── Microsoft 365 Services
+                  ├── Teams
+                  ├── SharePoint Online
+                  ├── OneDrive
+                  ├── Exchange Online
+                  └── Microsoft 365 Groups
+                      └── Microsoft Purview
+                          ├── Sensitivity labels
+                          ├── Retention labels
+                          ├── Records management
+                          ├── DLP
+                          ├── Audit
+                          └── eDiscovery
+                              └── Evidence, reports, and disposition outcomes
+          </pre>
+        </div>
+      </section>
+
+      <section id="charts" class="tab-panel">
+        <div class="card">
+          <h2 class="section-title">Charts and Visuals</h2>
+          <h3>Automation Coverage by Domain</h3>
+          <div class="chart-row"><strong>Identity lifecycle</strong><div class="bar"><span style="width:94%"></span></div><div>94%</div></div>
+          <div class="chart-row"><strong>Access governance</strong><div class="bar"><span style="width:88%"></span></div><div>88%</div></div>
+          <div class="chart-row"><strong>Data governance</strong><div class="bar"><span style="width:82%"></span></div><div>82%</div></div>
+          <div class="chart-row"><strong>Collaboration governance</strong><div class="bar"><span style="width:76%"></span></div><div>76%</div></div>
+          <div class="chart-row"><strong>Compliance evidence</strong><div class="bar"><span style="width:86%"></span></div><div>86%</div></div>
+          <p class="muted">Illustrative maturity targets for a highly automated enterprise environment.</p>
+        </div>
+        <div class="card">
+          <h3>Risk Heatmap</h3>
+          <img class="diagram" src="assets/risk_heatmap.svg" alt="Lifecycle governance risk heatmap">
+        </div>
+        <div class="card">
+          <h3>Manual vs Automated Lifecycle Management</h3>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Dimension</th><th>Manual</th><th>Automated</th></tr></thead>
+              <tbody>
+                <tr><td>Onboarding</td><td>Ticket-based, inconsistent, delayed</td><td>HR-triggered, repeatable, auditable</td></tr>
+                <tr><td>Role changes</td><td>Old access often remains</td><td>Access is recalculated based on authoritative attributes</td></tr>
+                <tr><td>Offboarding</td><td>Risk of missed access and delayed removal</td><td>Account disabled, sessions revoked, memberships removed</td></tr>
+                <tr><td>Workspace creation</td><td>Uncontrolled or admin-heavy</td><td>Request, approval, template, labels, owners, retention</td></tr>
+                <tr><td>Data classification</td><td>User-dependent</td><td>Default, recommended, and automatic labeling</td></tr>
+                <tr><td>Access reviews</td><td>Spreadsheet-driven</td><td>Scheduled, system-recorded, auditable</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section id="scenario" class="tab-panel">
+        <div class="card">
+          <h2 class="section-title">Real-World End-to-End Scenario</h2>
+          <h3>Employee Onboarding → Role Change → Offboarding</h3>
+          <div class="flow">
+            <div class="flow-step"><span class="badge">Onboard</span><h4>Financial Analyst joins</h4><p>HR creates employee record. Entra ID provisions account, groups, license, MFA requirements, and baseline Finance access. Teams and SharePoint memberships are assigned.</p></div>
+            <div class="flow-step"><span class="badge">Govern</span><h4>Active employee</h4><p>Conditional Access, DLP, retention policies, sensitivity labels, audit, and access reviews operate continuously.</p></div>
+            <div class="flow-step"><span class="badge">Move</span><h4>Becomes Finance Systems Manager</h4><p>Job code changes. Old analyst access is removed. New manager-level and privileged access is approved and made eligible through PIM.</p></div>
+            <div class="flow-step"><span class="badge">Leave</span><h4>Employee exits</h4><p>Account is disabled, sessions revoked, groups removed, ownership transferred, mailbox and OneDrive retained, and compliance evidence preserved.</p></div>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Scenario Outcome Map</h3>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Stage</th><th>Systems</th><th>Automation</th><th>Outcome</th></tr></thead>
+              <tbody>
+                <tr><td>Onboarding</td><td>HRIS, Entra ID, Lifecycle Workflows, Teams, SharePoint</td><td>Create user, assign groups/licenses, notify manager, enforce MFA.</td><td>Day-one productivity with baseline security controls.</td></tr>
+                <tr><td>Role Change</td><td>HRIS, Entra ID Governance, PIM, Teams, SharePoint</td><td>Update attributes, recalculate access, remove old access, approve new elevated access.</td><td>Access follows role without privilege accumulation.</td></tr>
+                <tr><td>Governed State</td><td>Purview, Defender, Entra, SharePoint, Teams</td><td>DLP, retention, audit, access reviews, guest review, owner attestation.</td><td>Continuous compliance and least privilege.</td></tr>
+                <tr><td>Offboarding</td><td>HRIS, Entra ID, Graph, Exchange, OneDrive, Teams, SharePoint, Purview</td><td>Disable, revoke sessions, remove memberships, transfer ownership, retain data.</td><td>No post-employment access and no loss of business records.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section id="recommendations" class="tab-panel">
+        <div class="card">
+          <h2 class="section-title">Best Practices and Governance Recommendations</h2>
+          <div class="grid grid-2">
+            <div class="mini blue"><h3>1. Establish authoritative sources</h3><p>Use HRIS for employment status, legal systems for holds, project systems for workspace triggers, ITSM for approval records, and Purview for classification and records policy.</p></div>
+            <div class="mini green"><h3>2. Define policy before automation</h3><p>Automate only after defining access models, naming standards, sensitivity taxonomy, retention schedule, guest governance, owner accountability, and exception handling.</p></div>
+            <div class="mini amber"><h3>3. Use metadata as the control plane</h3><p>Department, job code, manager, location, employee type, workspace purpose, sensitivity, retention category, and owner fields should drive automation.</p></div>
+            <div class="mini rose"><h3>4. Govern owners, not just resources</h3><p>Every Team, Microsoft 365 Group, and SharePoint site should have at least two owners, business accountability, renewal date, classification, and lifecycle state.</p></div>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Target Operating Model</h3>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Governance Body</th><th>Responsibilities</th></tr></thead>
+              <tbody>
+                <tr><td>Identity Governance Board</td><td>Identity lifecycle, access reviews, privileged access, guest governance, and access package design.</td></tr>
+                <tr><td>Data Governance Council</td><td>Classification, retention, records, DLP, information protection, and data ownership policy.</td></tr>
+                <tr><td>Collaboration Governance Board</td><td>Teams, SharePoint, Microsoft 365 Groups, naming, templates, ownership, renewal, and archive rules.</td></tr>
+                <tr><td>Security Operations</td><td>Risky users, incidents, suspicious activity, privileged activity, and event monitoring.</td></tr>
+                <tr><td>Compliance and Legal</td><td>Records schedule, legal hold, eDiscovery, disposition review, and audit evidence.</td></tr>
+                <tr><td>Platform Engineering</td><td>Automation, Graph integrations, Power Automate, monitoring, error handling, and dashboards.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Key Metrics</h3>
+          <div class="tag-row">
+            <span class="tag">Onboarding completion time</span>
+            <span class="tag">Terminated users with active sessions</span>
+            <span class="tag">Ownerless Teams/sites</span>
+            <span class="tag">Guest users without sponsor</span>
+            <span class="tag">Sites with sensitivity labels</span>
+            <span class="tag">Access reviewed in last quarter</span>
+            <span class="tag">Disposition reviews completed</span>
+            <span class="tag">Privileged activations with approval</span>
+          </div>
+          <div class="callout"><strong>Final position:</strong> the target state is a tenant where users, data, access, and collaboration spaces are created with purpose, actively governed, periodically reviewed, and retired in a controlled, compliant, and auditable manner.</div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <footer>
+    Automated Microsoft 365 Lifecycle Management System • Author: Dinesh Loganathan
+  </footer>
+
+  <script>
+    const buttons = document.querySelectorAll('.tab-btn');
+    const panels = document.querySelectorAll('.tab-panel');
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        buttons.forEach(b => b.classList.remove('active'));
+        panels.forEach(p => p.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById(btn.dataset.tab).classList.add('active');
+        window.scrollTo({top: 0, behavior: 'smooth'});
+      });
+    });
+  </script>
+</body>
+</html>

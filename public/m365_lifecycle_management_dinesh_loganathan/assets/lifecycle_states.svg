@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="520" viewBox="0 0 1200 520">
+  <defs>
+    <marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#1f4e79"/></marker>
+  </defs>
+  <rect width="1200" height="520" fill="#ffffff"/>
+  <text x="55" y="58" font-family="Segoe UI, Arial" font-size="30" font-weight="700" fill="#18324a">Lifecycle State Models</text>
+  <g font-family="Segoe UI, Arial" font-size="15">
+    <text x="65" y="120" font-size="21" font-weight="700" fill="#18324a">Identity</text>
+    <text x="65" y="260" font-size="21" font-weight="700" fill="#18324a">Data</text>
+    <text x="65" y="400" font-size="21" font-weight="700" fill="#18324a">Collaboration</text>
+  </g>
+  <g font-family="Segoe UI, Arial" font-size="15" fill="#18324a">
+    <g transform="translate(180,88)">
+      <rect width="115" height="52" rx="14" fill="#eef5ff" stroke="#a9c7e8"/><text x="20" y="33">Pre-hire</text>
+      <rect x="150" width="115" height="52" rx="14" fill="#eef5ff" stroke="#a9c7e8"/><text x="188" y="33">Active</text>
+      <rect x="300" width="115" height="52" rx="14" fill="#eef5ff" stroke="#a9c7e8"/><text x="337" y="33">Mover</text>
+      <rect x="450" width="115" height="52" rx="14" fill="#eef5ff" stroke="#a9c7e8"/><text x="472" y="33">Pending</text>
+      <rect x="600" width="115" height="52" rx="14" fill="#eef5ff" stroke="#a9c7e8"/><text x="630" y="33">Disabled</text>
+      <rect x="750" width="115" height="52" rx="14" fill="#eef5ff" stroke="#a9c7e8"/><text x="782" y="33">Deleted</text>
+    </g>
+    <g transform="translate(180,228)">
+      <rect width="115" height="52" rx="14" fill="#f6fbf4" stroke="#b8d9ad"/><text x="38" y="33">Draft</text>
+      <rect x="150" width="115" height="52" rx="14" fill="#f6fbf4" stroke="#b8d9ad"/><text x="188" y="33">Active</text>
+      <rect x="300" width="115" height="52" rx="14" fill="#f6fbf4" stroke="#b8d9ad"/><text x="337" y="33">Final</text>
+      <rect x="450" width="115" height="52" rx="14" fill="#f6fbf4" stroke="#b8d9ad"/><text x="482" y="33">Record</text>
+      <rect x="600" width="115" height="52" rx="14" fill="#f6fbf4" stroke="#b8d9ad"/><text x="628" y="33">Retained</text>
+      <rect x="750" width="115" height="52" rx="14" fill="#f6fbf4" stroke="#b8d9ad"/><text x="785" y="33">Deleted</text>
+    </g>
+    <g transform="translate(180,368)">
+      <rect width="115" height="52" rx="14" fill="#fff8ec" stroke="#edc985"/><text x="24" y="33">Requested</text>
+      <rect x="150" width="115" height="52" rx="14" fill="#fff8ec" stroke="#edc985"/><text x="178" y="33">Approved</text>
+      <rect x="300" width="115" height="52" rx="14" fill="#fff8ec" stroke="#edc985"/><text x="320" y="33">Provisioned</text>
+      <rect x="450" width="115" height="52" rx="14" fill="#fff8ec" stroke="#edc985"/><text x="488" y="33">Active</text>
+      <rect x="600" width="115" height="52" rx="14" fill="#fff8ec" stroke="#edc985"/><text x="630" y="33">Archive</text>
+      <rect x="750" width="115" height="52" rx="14" fill="#fff8ec" stroke="#edc985"/><text x="785" y="33">Delete</text>
+    </g>
+  </g>
+  <g stroke="#1f4e79" stroke-width="3" marker-end="url(#a)">
+    <path d="M295 114 L325 114"/><path d="M445 114 L475 114"/><path d="M595 114 L625 114"/><path d="M745 114 L775 114"/><path d="M895 114 L925 114"/>
+    <path d="M295 254 L325 254"/><path d="M445 254 L475 254"/><path d="M595 254 L625 254"/><path d="M745 254 L775 254"/><path d="M895 254 L925 254"/>
+    <path d="M295 394 L325 394"/><path d="M445 394 L475 394"/><path d="M595 394 L625 394"/><path d="M745 394 L775 394"/><path d="M895 394 L925 394"/>
+  </g>
+</svg>

@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620">
+  <defs>
+    <marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#1f4e79"/></marker>
+    <filter id="shadow"><feDropShadow dx="0" dy="5" stdDeviation="6" flood-color="#1d3557" flood-opacity=".14"/></filter>
+  </defs>
+  <rect width="1200" height="620" fill="#ffffff"/>
+  <text x="52" y="58" font-family="Segoe UI, Arial" font-size="30" font-weight="700" fill="#18324a">Joiner - Mover - Leaver End-to-End Flow</text>
+  <g font-family="Segoe UI, Arial" filter="url(#shadow)">
+    <rect x="55" y="145" width="250" height="170" rx="20" fill="#eef5ff" stroke="#a9c7e8"/>
+    <text x="85" y="185" font-size="24" font-weight="700" fill="#18324a">Join</text>
+    <text x="85" y="220" font-size="15" fill="#45556a">HR record created</text>
+    <text x="85" y="245" font-size="15" fill="#45556a">Entra account provisioned</text>
+    <text x="85" y="270" font-size="15" fill="#45556a">License and baseline access</text>
+    <rect x="355" y="145" width="250" height="170" rx="20" fill="#f6fbf4" stroke="#b8d9ad"/>
+    <text x="385" y="185" font-size="24" font-weight="700" fill="#18324a">Active Governed</text>
+    <text x="385" y="220" font-size="15" fill="#45556a">Conditional Access</text>
+    <text x="385" y="245" font-size="15" fill="#45556a">Access reviews</text>
+    <text x="385" y="270" font-size="15" fill="#45556a">DLP and retention</text>
+    <rect x="655" y="145" width="250" height="170" rx="20" fill="#fff8ec" stroke="#edc985"/>
+    <text x="685" y="185" font-size="24" font-weight="700" fill="#18324a">Move</text>
+    <text x="685" y="220" font-size="15" fill="#45556a">Role/manager changes</text>
+    <text x="685" y="245" font-size="15" fill="#45556a">Access recalculated</text>
+    <text x="685" y="270" font-size="15" fill="#45556a">Privileged access reviewed</text>
+    <rect x="955" y="145" width="190" height="170" rx="20" fill="#fff2f6" stroke="#eeb3c6"/>
+    <text x="985" y="185" font-size="24" font-weight="700" fill="#18324a">Leave</text>
+    <text x="985" y="220" font-size="15" fill="#45556a">Disable user</text>
+    <text x="985" y="245" font-size="15" fill="#45556a">Revoke sessions</text>
+    <text x="985" y="270" font-size="15" fill="#45556a">Retain data</text>
+    <rect x="185" y="400" width="830" height="105" rx="22" fill="#f4f1ff" stroke="#c9bdf1"/>
+    <text x="220" y="445" font-size="22" font-weight="700" fill="#18324a">Control Plane</text>
+    <text x="220" y="475" font-size="16" fill="#45556a">Microsoft Entra ID Governance + Microsoft Purview + Microsoft Graph + Power Automate</text>
+  </g>
+  <g stroke="#1f4e79" stroke-width="4" marker-end="url(#a)">
+    <line x1="305" y1="230" x2="350" y2="230"/>
+    <line x1="605" y1="230" x2="650" y2="230"/>
+    <line x1="905" y1="230" x2="950" y2="230"/>
+    <line x1="600" y1="315" x2="600" y2="390"/>
+  </g>
+</svg>

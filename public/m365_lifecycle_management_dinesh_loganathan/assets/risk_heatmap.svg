@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="650" viewBox="0 0 1100 650">
+  <rect width="1100" height="650" fill="#ffffff"/>
+  <text x="55" y="58" font-family="Segoe UI, Arial" font-size="30" font-weight="700" fill="#18324a">Lifecycle Governance Risk Heatmap</text>
+  <g font-family="Segoe UI, Arial">
+    <text x="100" y="600" font-size="16" fill="#45556a">Likelihood →</text>
+    <text x="20" y="370" font-size="16" fill="#45556a" transform="rotate(-90 20,370)">Impact →</text>
+    <g transform="translate(150,110)">
+      <rect width="160" height="120" fill="#dff3df" stroke="#fff"/><rect x="160" width="160" height="120" fill="#f8efc1" stroke="#fff"/><rect x="320" width="160" height="120" fill="#f8d7b5" stroke="#fff"/><rect x="480" width="160" height="120" fill="#f2b6b6" stroke="#fff"/>
+      <rect y="120" width="160" height="120" fill="#f8efc1" stroke="#fff"/><rect x="160" y="120" width="160" height="120" fill="#f8d7b5" stroke="#fff"/><rect x="320" y="120" width="160" height="120" fill="#f2b6b6" stroke="#fff"/><rect x="480" y="120" width="160" height="120" fill="#e67b7b" stroke="#fff"/>
+      <rect y="240" width="160" height="120" fill="#f8d7b5" stroke="#fff"/><rect x="160" y="240" width="160" height="120" fill="#f2b6b6" stroke="#fff"/><rect x="320" y="240" width="160" height="120" fill="#e67b7b" stroke="#fff"/><rect x="480" y="240" width="160" height="120" fill="#c94848" stroke="#fff"/>
+      <rect y="360" width="160" height="120" fill="#f2b6b6" stroke="#fff"/><rect x="160" y="360" width="160" height="120" fill="#e67b7b" stroke="#fff"/><rect x="320" y="360" width="160" height="120" fill="#c94848" stroke="#fff"/><rect x="480" y="360" width="160" height="120" fill="#9e2f2f" stroke="#fff"/>
+      <text x="55" y="500" font-size="14" fill="#45556a">Low</text><text x="210" y="500" font-size="14" fill="#45556a">Medium</text><text x="365" y="500" font-size="14" fill="#45556a">High</text><text x="520" y="500" font-size="14" fill="#45556a">Very High</text>
+      <text x="-80" y="70" font-size="14" fill="#45556a">Very High</text><text x="-55" y="190" font-size="14" fill="#45556a">High</text><text x="-75" y="310" font-size="14" fill="#45556a">Medium</text><text x="-50" y="430" font-size="14" fill="#45556a">Low</text>
+      <circle cx="552" cy="70" r="16" fill="#18324a"/><text x="575" y="76" font-size="14" fill="#18324a">Leaver access not removed</text>
+      <circle cx="395" cy="200" r="16" fill="#18324a"/><text x="420" y="206" font-size="14" fill="#18324a">Guest access not reviewed</text>
+      <circle cx="245" cy="325" r="16" fill="#18324a"/><text x="270" y="331" font-size="14" fill="#18324a">Ownerless Teams/sites</text>
+      <circle cx="552" cy="320" r="16" fill="#18324a"/><text x="575" y="326" font-size="14" fill="#18324a">Unclassified sensitive content</text>
+      <circle cx="405" cy="455" r="16" fill="#18324a"/><text x="430" y="461" font-size="14" fill="#18324a">Retention gap</text>
+    </g>
+  </g>
+</svg>

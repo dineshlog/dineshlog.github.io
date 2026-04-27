@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760">
+  <defs>
+    <linearGradient id="g1" x1="0" x2="1"><stop offset="0" stop-color="#eef4ff"/><stop offset="1" stop-color="#f7fbff"/></linearGradient>
+    <filter id="shadow"><feDropShadow dx="0" dy="5" stdDeviation="6" flood-color="#1d3557" flood-opacity=".16"/></filter>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#1f4e79"/></marker>
+  </defs>
+  <rect width="1200" height="760" fill="#ffffff"/>
+  <text x="60" y="56" font-family="Segoe UI, Arial" font-size="30" font-weight="700" fill="#18324a">Microsoft 365 Lifecycle Management Layered Architecture</text>
+  <text x="60" y="88" font-family="Segoe UI, Arial" font-size="15" fill="#5f6b7a">Author: Dinesh Loganathan</text>
+  <g filter="url(#shadow)" font-family="Segoe UI, Arial">
+    <rect x="70" y="125" width="1060" height="95" rx="18" fill="url(#g1)" stroke="#a9c7e8"/>
+    <text x="105" y="160" font-size="22" font-weight="700" fill="#18324a">1. Business Source Systems</text>
+    <text x="105" y="190" font-size="16" fill="#45556a">HRIS • ITSM • CMDB • Legal Matter System • Project Portfolio • CRM • ERP</text>
+    <rect x="70" y="260" width="1060" height="95" rx="18" fill="#f6fbf4" stroke="#b8d9ad"/>
+    <text x="105" y="295" font-size="22" font-weight="700" fill="#18324a">2. Identity Layer</text>
+    <text x="105" y="325" font-size="16" fill="#45556a">Microsoft Entra ID • Entra ID Governance • Lifecycle Workflows • Dynamic Groups • PIM • Conditional Access</text>
+    <rect x="70" y="395" width="1060" height="95" rx="18" fill="#fff8ec" stroke="#edc985"/>
+    <text x="105" y="430" font-size="22" font-weight="700" fill="#18324a">3. Microsoft 365 Service Layer</text>
+    <text x="105" y="460" font-size="16" fill="#45556a">Teams • SharePoint Online • OneDrive • Exchange Online • Microsoft 365 Groups • Power Platform</text>
+    <rect x="70" y="530" width="1060" height="95" rx="18" fill="#fff2f6" stroke="#eeb3c6"/>
+    <text x="105" y="565" font-size="22" font-weight="700" fill="#18324a">4. Governance and Compliance Layer</text>
+    <text x="105" y="595" font-size="16" fill="#45556a">Microsoft Purview • Sensitivity Labels • Retention • Records • DLP • eDiscovery • Audit • Insider Risk</text>
+    <rect x="70" y="665" width="1060" height="70" rx="18" fill="#f3efff" stroke="#c6b8f0"/>
+    <text x="105" y="705" font-size="22" font-weight="700" fill="#18324a">5. Automation Layer: Power Automate • Logic Apps • Azure Automation • Microsoft Graph • Webhooks</text>
+  </g>
+  <g stroke="#1f4e79" stroke-width="4" marker-end="url(#arrow)">
+    <line x1="600" y1="223" x2="600" y2="252"/>
+    <line x1="600" y1="358" x2="600" y2="387"/>
+    <line x1="600" y1="493" x2="600" y2="522"/>
+    <line x1="600" y1="628" x2="600" y2="657"/>
+  </g>
+</svg>
