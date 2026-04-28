@@ -1173,20 +1173,6 @@ const currentYear = new Date().getFullYear();
 
     .panel-head {
       margin-bottom: clamp(28px,3.5vh,48px);
-      position: relative;
-    }
-
-    .panel-head::before {
-      content: '';
-      position: absolute;
-      top: -80px;
-      left: -60px;
-      width: 480px;
-      height: 320px;
-      border-radius: 50%;
-      background: radial-gradient(ellipse at 30% 40%, rgba(201,169,110,0.055), transparent 68%);
-      pointer-events: none;
-      z-index: 0;
     }
 
     .panel-head > * { position: relative; z-index: 1; }
