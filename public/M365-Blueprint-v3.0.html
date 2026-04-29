@@ -1,0 +1,1364 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>M365 Security & Compliance Blueprint v3.0</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --bg-primary:#080c18;--bg-secondary:#0e1420;--bg-card:#111826;--bg-card-hover:#131928;
+  --border:rgba(201,169,110,0.1);--border-bright:rgba(201,169,110,0.22);
+  --accent-blue:#c9a96e;--accent-cyan:#4d9bbf;--accent-violet:#9b7dd4;
+  --accent-green:#5fad8e;--accent-amber:#c9a96e;--accent-red:#bf7575;--accent-rose:#bf7595;
+  --text-primary:#e2e8f2;--text-secondary:#9aa3b8;--text-muted:#7a869e;--text-accent:#c9a96e;
+  --glow-blue:0 0 0 1px rgba(201,169,110,0.18),0 12px 40px rgba(201,169,110,0.08);
+  --glow-violet:0 0 20px rgba(155,125,212,0.12);
+  --font-display:'Cormorant Garamond',serif;--font-body:'DM Sans',sans-serif;--font-mono:'DM Sans',sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg-primary);color:var(--text-primary);font-family:var(--font-body);font-size:15px;line-height:1.65;min-height:100vh;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(201,169,110,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(201,169,110,0.025) 1px,transparent 1px);background-size:48px 48px;pointer-events:none;z-index:0}
+
+/* TOP BAR */
+.top-bar{position:sticky;top:0;z-index:200;background:rgba(8,12,24,0.97);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:0 36px;display:flex;align-items:center;justify-content:space-between;height:66px}
+.logo-area{display:flex;align-items:center;gap:12px}
+.logo-icon{width:36px;height:36px;background:rgba(201,169,110,0.12);border:1px solid rgba(201,169,110,0.28);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:17px}
+.logo-text{font-family:var(--font-display);font-size:20px;font-weight:700;letter-spacing:.01em}
+.logo-text span{color:var(--accent-blue)}
+.header-badges{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.badge{font-family:var(--font-mono);font-size:11px;font-weight:600;padding:4px 9px;border-radius:5px;letter-spacing:.04em;text-transform:uppercase;border:1px solid}
+.bb{background:rgba(201,169,110,0.1);color:var(--accent-blue);border-color:rgba(201,169,110,0.25)}
+.bv{background:rgba(155,125,212,0.1);color:var(--accent-violet);border-color:rgba(155,125,212,0.28)}
+.bg{background:rgba(95,173,142,0.1);color:var(--accent-green);border-color:rgba(95,173,142,0.28)}
+.ba{background:rgba(201,169,110,0.1);color:var(--accent-amber);border-color:rgba(201,169,110,0.25)}
+.br{background:rgba(191,117,117,0.1);color:var(--accent-red);border-color:rgba(191,117,117,0.28)}
+.bc{background:rgba(77,155,191,0.1);color:var(--accent-cyan);border-color:rgba(77,155,191,0.28)}
+.version-tag{font-family:var(--font-mono);font-size:12px;color:var(--text-muted);padding-left:16px;border-left:1px solid var(--border);white-space:nowrap}
+
+/* FRAMEWORK FILTER BAR */
+.fw-filter-bar{position:sticky;top:66px;z-index:150;background:rgba(8,12,24,.98);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:12px 36px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.fw-filter-label{font-family:var(--font-mono);font-size:12px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.1em;margin-right:4px;white-space:nowrap}
+.fw-btn{font-family:var(--font-mono);font-size:12.5px;font-weight:500;padding:6px 14px;border-radius:6px;border:1px solid var(--border);background:transparent;color:var(--text-muted);cursor:pointer;transition:all .2s;letter-spacing:.03em;white-space:nowrap}
+.fw-btn:hover{border-color:var(--border-bright);color:var(--text-secondary)}
+.fw-btn.active-nist{background:rgba(14,165,233,.15);color:var(--accent-blue);border-color:rgba(14,165,233,.4)}
+.fw-btn.active-iso{background:rgba(139,92,246,.15);color:var(--accent-violet);border-color:rgba(139,92,246,.4)}
+.fw-btn.active-cis{background:rgba(16,185,129,.15);color:var(--accent-green);border-color:rgba(16,185,129,.4)}
+.fw-btn.active-cis365{background:rgba(34,211,238,.15);color:var(--accent-cyan);border-color:rgba(34,211,238,.4)}
+.fw-btn.active-gdpr{background:rgba(245,158,11,.15);color:var(--accent-amber);border-color:rgba(245,158,11,.4)}
+.fw-btn.active-all{background:rgba(14,165,233,.08);color:var(--text-primary);border-color:var(--border-bright)}
+.fw-divider{width:1px;height:24px;background:var(--border);flex-shrink:0}
+
+/* HERO */
+.hero{position:relative;z-index:1;padding:60px 40px 44px;max-width:1400px;margin:0 auto}
+.hero-eyebrow{font-family:var(--font-mono);font-size:12px;color:var(--accent-cyan);letter-spacing:.15em;text-transform:uppercase;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.hero-eyebrow::before{content:'';width:20px;height:1px;background:var(--accent-cyan)}
+.hero-title{font-family:var(--font-display);font-size:clamp(26px,3.5vw,48px);font-weight:800;line-height:1.1;margin-bottom:18px;background:linear-gradient(135deg,#ffffff 0%,#e2e8f2 40%,#c9a96e 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-subtitle{font-size:15px;color:var(--text-secondary);max-width:760px;margin-bottom:32px;line-height:1.72}
+.framework-pills{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:32px}
+.pill{display:flex;align-items:center;gap:5px;padding:5px 12px;border-radius:999px;font-family:var(--font-mono);font-size:11px;font-weight:500;letter-spacing:.04em;border:1px solid;transition:all .2s}
+.pill-nist{background:rgba(14,165,233,.08);color:var(--accent-blue);border-color:rgba(14,165,233,.3)}
+.pill-iso{background:rgba(139,92,246,.08);color:var(--accent-violet);border-color:rgba(139,92,246,.3)}
+.pill-cis{background:rgba(16,185,129,.08);color:var(--accent-green);border-color:rgba(16,185,129,.3)}
+.pill-cis365{background:rgba(34,211,238,.08);color:var(--accent-cyan);border-color:rgba(34,211,238,.3)}
+.pill-gdpr{background:rgba(245,158,11,.08);color:var(--accent-amber);border-color:rgba(245,158,11,.3)}
+.pill-euai{background:rgba(244,63,94,.08);color:var(--accent-rose);border-color:rgba(244,63,94,.3)}
+
+/* STATS */
+.stats-row{position:relative;z-index:1;display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:14px;padding:0 40px 36px;max-width:1400px;margin:0 auto}
+.stat-card{background:var(--bg-card);border:1px solid var(--border);border-radius:14px;padding:22px 24px;transition:all .25s;cursor:default}
+.stat-card:hover{border-color:var(--accent-color,var(--border-bright));box-shadow:var(--glow-blue)}
+.stat-number{font-family:var(--font-display);font-size:42px;font-weight:700;color:var(--accent-color,var(--accent-blue));line-height:1}
+.stat-label{font-size:12px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.08em;margin-top:6px;font-family:var(--font-mono)}
+
+/* NAV TABS */
+.nav-container{position:relative;z-index:1;border-bottom:1px solid var(--border);padding:0 40px;background:rgba(7,11,20,.6);backdrop-filter:blur(8px)}
+.nav-tabs{display:flex;gap:0;overflow-x:auto;scrollbar-width:none}
+.nav-tabs::-webkit-scrollbar{display:none}
+.nav-tab{font-family:var(--font-body);font-size:13.5px;color:var(--text-muted);padding:16px 20px;background:none;border:none;border-bottom:2px solid transparent;cursor:pointer;transition:all .2s;white-space:nowrap;display:flex;align-items:center;gap:7px}
+.nav-tab:hover{color:var(--text-secondary)}
+.nav-tab.active{color:var(--accent-blue);border-bottom-color:var(--accent-blue)}
+.tab-icon{font-size:13px}
+
+/* CONTENT */
+.content-area{position:relative;z-index:1;padding:40px 40px;max-width:1400px;margin:0 auto}
+.tab-panel{display:none}.tab-panel.active{display:block}
+.section-title{font-family:var(--font-display);font-size:26px;font-weight:700;color:var(--text-primary);margin-bottom:8px;letter-spacing:-0.01em}
+.section-desc{font-size:14px;color:var(--text-secondary);margin-bottom:28px;max-width:840px;line-height:1.7}
+
+/* CARDS GRID */
+.cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px;margin-bottom:28px}
+.card{background:var(--bg-card);border:1px solid var(--border);border-radius:14px;padding:24px;transition:all .25s;position:relative;overflow:hidden}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--accent-color,var(--accent-blue)),transparent)}
+.card:hover{background:var(--bg-card-hover);border-color:var(--border-bright);box-shadow:var(--glow-blue)}
+.card-header{display:flex;align-items:flex-start;gap:14px;margin-bottom:10px}
+.card-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.card-title{font-family:var(--font-display);font-size:18px;font-weight:700;color:var(--text-primary)}
+.card-subtitle{font-family:var(--font-mono);font-size:12px;color:var(--text-muted);margin-top:3px}
+.card-body{font-size:14px;color:var(--text-secondary);line-height:1.68;margin-bottom:14px}
+.card-tags{display:flex;gap:5px;flex-wrap:wrap}
+
+/* CONTROL LIBRARY */
+.filter-bar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px;align-items:center}
+.filter-bar input,.filter-bar select{background:var(--bg-secondary);color:var(--text-primary);border:1px solid var(--border);border-radius:8px;padding:8px 12px;font-family:var(--font-body);font-size:13px;outline:none;transition:border .2s}
+.filter-bar input{min-width:220px}.filter-bar select{min-width:170px}
+.filter-bar input:focus,.filter-bar select:focus{border-color:var(--accent-blue)}
+.filter-bar select option{background:var(--bg-secondary)}
+.filter-bar .reset-btn{background:transparent;border:1px solid var(--border);color:var(--text-muted);border-radius:8px;padding:8px 14px;cursor:pointer;font-size:12px;font-family:var(--font-mono);transition:all .2s}
+.filter-bar .reset-btn:hover{border-color:var(--border-bright);color:var(--text-secondary)}
+.filter-count{font-family:var(--font-mono);font-size:11px;color:var(--text-muted);margin-left:auto}
+
+/* CONTROL CARDS (library view) */
+.ctrl-cards{display:flex;flex-direction:column;gap:10px}
+.ctrl-card{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:18px 22px;display:grid;grid-template-columns:90px 1fr auto;gap:16px;align-items:start;transition:all .2s}
+.ctrl-card:hover{border-color:var(--border-bright);background:var(--bg-card-hover)}
+.ctrl-card.dim{opacity:.25;pointer-events:none}
+.ctrl-id{font-family:var(--font-mono);font-size:12.5px;font-weight:600;color:var(--accent-blue);padding-top:2px}
+.ctrl-name{font-weight:600;color:var(--text-primary);font-size:14.5px;margin-bottom:5px}
+.ctrl-desc{font-size:13.5px;color:var(--text-secondary);line-height:1.62}
+.ctrl-tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:8px}
+.ctrl-meta{display:flex;flex-direction:column;gap:4px;align-items:flex-end;min-width:90px}
+.ctrl-evidence{font-size:11px;color:var(--text-muted);margin-top:6px;font-style:italic;border-top:1px solid var(--border);padding-top:6px}
+
+/* FRAMEWORK HIGHLIGHT CLASSES */
+.ctrl-card.hl-nist{border-left:3px solid var(--accent-blue)}
+.ctrl-card.hl-iso{border-left:3px solid var(--accent-violet)}
+.ctrl-card.hl-cis{border-left:3px solid var(--accent-green)}
+.ctrl-card.hl-cis365{border-left:3px solid var(--accent-cyan)}
+.ctrl-card.hl-gdpr{border-left:3px solid var(--accent-amber)}
+
+/* PRIORITY BADGES */
+.prio{font-family:var(--font-mono);font-size:10px;font-weight:600;padding:3px 8px;border-radius:4px;white-space:nowrap}
+.p-critical{background:rgba(239,68,68,.15);color:var(--accent-red)}
+.p-high{background:rgba(245,158,11,.15);color:var(--accent-amber)}
+.p-medium{background:rgba(14,165,233,.15);color:var(--accent-blue)}
+.p-low{background:rgba(16,185,129,.15);color:var(--accent-green)}
+
+/* TABLE */
+.tbl-wrap{overflow-x:auto;border-radius:10px;border:1px solid var(--border);margin-bottom:24px}
+table{width:100%;border-collapse:collapse;font-size:14px}
+thead{background:var(--bg-secondary);border-bottom:1px solid var(--border)}
+th{padding:13px 16px;color:var(--text-muted);font-family:var(--font-mono);font-size:11px;text-transform:uppercase;letter-spacing:.08em;text-align:left;font-weight:600;white-space:nowrap}
+td{padding:12px 16px;color:var(--text-secondary);border-bottom:1px solid var(--border);vertical-align:top}
+tbody tr:last-child td{border-bottom:none}
+tbody tr:hover{background:var(--bg-card-hover)}
+.check{color:var(--accent-green)}.partial{color:var(--accent-amber)}.cross{color:var(--text-muted)}
+.fw-nist{color:var(--accent-blue)}.fw-iso{color:var(--accent-violet)}.fw-cis{color:var(--accent-green)}.fw-cis365{color:var(--accent-cyan)}.fw-gdpr{color:var(--accent-amber)}
+
+/* ARCHITECTURE DIAGRAM */
+.arch-wrap{background:var(--bg-card);border:1px solid var(--border);border-radius:14px;padding:28px;margin-bottom:28px;overflow-x:auto}
+.arch-svg-container{min-width:800px}
+
+/* PROGRESS BARS */
+.progress-row{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.progress-label{width:220px;font-size:14px;color:var(--text-secondary);flex-shrink:0}
+.progress-track{flex:1;height:10px;background:var(--bg-secondary);border-radius:999px;overflow:hidden}
+.progress-fill{height:100%;border-radius:999px;transition:width 1.2s ease}
+.progress-pct{font-family:var(--font-mono);font-size:13px;color:var(--text-muted);width:42px;text-align:right}
+
+/* CALLOUT */
+.callout{display:flex;gap:14px;padding:14px 18px;border-radius:10px;margin-bottom:18px;border:1px solid}
+.ci{background:rgba(14,165,233,.06);border-color:rgba(14,165,233,.2)}
+.cw{background:rgba(245,158,11,.06);border-color:rgba(245,158,11,.2)}
+.cd{background:rgba(239,68,68,.06);border-color:rgba(239,68,68,.2)}
+.cs{background:rgba(16,185,129,.06);border-color:rgba(16,185,129,.2)}
+.callout-icon{font-size:16px;flex-shrink:0;padding-top:2px}
+.callout-text{font-size:14.5px;color:var(--text-secondary);line-height:1.68}
+.callout-text strong{color:var(--text-primary)}
+
+/* SUBSECTION */
+.subsection{margin-bottom:32px}
+.sub-title{font-family:var(--font-display);font-size:20px;font-weight:700;color:var(--text-primary);margin-bottom:4px;display:flex;align-items:center;gap:10px}
+.sub-title::after{content:'';flex:1;height:1px;background:var(--border)}
+.sub-desc{font-size:13.5px;color:var(--text-muted);margin-bottom:16px}
+
+/* DIVIDER */
+.divider{height:1px;background:var(--border);margin:28px 0}
+
+/* RECOMMENDATION BLOCKS */
+.rec-block{background:var(--bg-card);border:1px solid var(--border);border-left:3px solid var(--accent-blue);border-radius:0 10px 10px 0;padding:16px 18px;margin-bottom:12px;transition:all .2s}
+.rec-block:hover{background:var(--bg-card-hover)}
+.rec-block.critical{border-left-color:var(--accent-red)}
+.rec-block.high{border-left-color:var(--accent-amber)}
+.rec-block.medium{border-left-color:var(--accent-blue)}
+.rec-header{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.rec-title{font-weight:600;font-size:13px;color:var(--text-primary);flex:1}
+.rec-body{font-size:12.5px;color:var(--text-secondary);line-height:1.6}
+.rec-mappings{display:flex;gap:5px;flex-wrap:wrap;margin-top:10px}
+
+/* ZT DIAGRAM */
+.zt-diagram{display:flex;flex-direction:column;gap:10px;margin-bottom:24px}
+.zt-row{display:grid;grid-template-columns:130px 1fr;gap:14px;align-items:center}
+.zt-label{font-family:var(--font-mono);font-size:11px;color:var(--text-muted);text-align:right;text-transform:uppercase;letter-spacing:.06em}
+.zt-bar{background:var(--bg-secondary);border:1px solid var(--border);border-radius:8px;padding:10px 14px;display:flex;gap:8px;flex-wrap:wrap}
+.zt-chip{display:flex;align-items:center;gap:5px;background:var(--bg-card);border:1px solid var(--border);border-radius:5px;padding:5px 10px;font-size:12px;color:var(--text-secondary);transition:all .2s;cursor:default}
+.zt-chip:hover{border-color:var(--cc,var(--accent-blue));color:var(--cc,var(--accent-blue))}
+.chip-dot{width:5px;height:5px;border-radius:50%;background:var(--cc,var(--accent-blue));flex-shrink:0}
+
+/* PHASE ROADMAP */
+.phases{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;margin-bottom:24px}
+.phase{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:18px;transition:all .2s}
+.phase:hover{border-color:var(--border-bright)}
+.phase-head{margin-bottom:12px}
+.phase-head span{font-family:var(--font-mono);font-size:12px;color:var(--accent-blue);text-transform:uppercase;letter-spacing:.1em}
+.phase-head b{display:block;font-family:var(--font-display);font-size:18px;color:var(--text-primary);margin-top:4px}
+.phase ul{padding-left:16px;list-style:disc}
+.phase li{color:var(--text-secondary);font-size:13.5px;margin-bottom:7px;line-height:1.6}
+
+/* COMPARE CARDS */
+.compare-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;margin-bottom:24px}
+.compare-card{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;overflow:hidden;transition:all .25s}
+.compare-card:hover{border-color:var(--border-bright);transform:translateY(-2px)}
+.compare-hdr{padding:14px 18px;border-bottom:1px solid var(--border);background:var(--bg-secondary);display:flex;align-items:center;gap:10px}
+.compare-hdr-icon{font-size:18px}
+.compare-hdr-title{font-family:var(--font-display);font-size:13px;font-weight:700}
+.compare-hdr-sub{font-family:var(--font-mono);font-size:10px;color:var(--text-muted)}
+.compare-body{padding:14px 18px}
+.compare-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border);font-size:12px}
+.compare-row:last-child{border-bottom:none}
+.compare-row-lbl{color:var(--text-muted)}.compare-row-val{font-weight:500;color:var(--text-primary)}
+
+/* AUDIT TABLE */
+.audit-table td:first-child{font-weight:500;color:var(--text-primary)}
+
+/* EVIDENCE SECTION */
+.evidence-block{background:var(--bg-secondary);border:1px solid var(--border);border-radius:8px;padding:10px 14px;font-family:var(--font-mono);font-size:11px;color:var(--text-muted);margin-top:8px}
+
+/* FRAMEWORK CARD GRID */
+.fw-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;margin-bottom:24px}
+.fw-card{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:18px;transition:all .2s}
+.fw-card:hover{border-color:var(--border-bright)}
+.fw-card h3{font-family:var(--font-display);font-size:14px;font-weight:700;color:var(--text-primary);margin-bottom:8px}
+.fw-card p{font-size:12px;color:var(--text-secondary);line-height:1.6;margin-bottom:10px}
+.fw-note{background:var(--bg-secondary);border-radius:6px;padding:8px 12px;font-size:11.5px;color:var(--text-muted)}
+.fw-note b{color:var(--text-secondary)}
+
+/* FOOTER */
+.footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:22px 40px;display:flex;justify-content:space-between;align-items:center}
+.footer-l{font-family:var(--font-mono);font-size:12.5px;color:var(--text-muted)}
+.footer-r{display:flex;gap:14px;font-family:var(--font-mono);font-size:10px;color:var(--text-muted)}
+
+/* SCROLLBAR */
+::-webkit-scrollbar{width:7px;height:7px}
+::-webkit-scrollbar-track{background:var(--bg-primary)}
+::-webkit-scrollbar-thumb{background:rgba(201,169,110,0.25);border-radius:4px}
+::-webkit-scrollbar-thumb:hover{background:rgba(201,169,110,0.4)}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  .top-bar{padding:0 16px}.hero,.content-area,.stats-row{padding-left:16px;padding-right:16px}
+  .ctrl-card{grid-template-columns:1fr}.ctrl-meta{flex-direction:row;flex-wrap:wrap}
+  .zt-row{grid-template-columns:90px 1fr}.fw-filter-bar{padding:8px 16px}
+}
+</style>
+</head>
+<body>
+<!-- TOP BAR -->
+<header class="top-bar">
+  <div class="logo-area">
+    <div class="logo-icon">🛡️</div>
+    <div class="logo-text">M365 <span>Security Blueprint</span></div>
+  </div>
+  <div class="header-badges">
+    <span class="badge bb">NIST CSF 2.0</span>
+    <span class="badge bb">NIST 800-53</span>
+    <span class="badge bv">ISO 27001:2022</span>
+    <span class="badge bg">CIS Controls v8.1</span>
+    <span class="badge bc">CIS M365 Benchmark</span>
+    <span class="badge ba">GDPR</span>
+    <span class="badge br">EU AI Act</span>
+    <span class="version-tag">v3.0 · 2025</span>
+    <a href="https://dineshlog.github.io" style="display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-family:var(--font-body);font-weight:600;padding:6px 16px;border-radius:20px;border:1px solid rgba(201,169,110,0.3);background:rgba(201,169,110,0.08);color:#c9a96e;text-decoration:none;white-space:nowrap;margin-left:8px;transition:all .2s;" onmouseover="this.style.background='rgba(201,169,110,0.14)'" onmouseout="this.style.background='rgba(201,169,110,0.08)'">← Portfolio</a>
+  </div>
+</header>
+
+<!-- FRAMEWORK FILTER BAR -->
+<div class="fw-filter-bar" id="fwFilterBar">
+  <span class="fw-filter-label">Filter by Framework:</span>
+  <button class="fw-btn active-all" id="fw-all" onclick="setFramework('all')">All Frameworks</button>
+  <div class="fw-divider"></div>
+  <button class="fw-btn" id="fw-nist" onclick="setFramework('nist')">🔵 NIST CSF 2.0</button>
+  <button class="fw-btn" id="fw-nist800" onclick="setFramework('nist800')">🔵 NIST 800-53</button>
+  <button class="fw-btn" id="fw-iso" onclick="setFramework('iso')">🟣 ISO 27001</button>
+  <button class="fw-btn" id="fw-cis" onclick="setFramework('cis')">🟢 CIS Controls</button>
+  <button class="fw-btn" id="fw-cis365" onclick="setFramework('cis365')">🩵 CIS M365 Benchmark</button>
+  <button class="fw-btn" id="fw-gdpr" onclick="setFramework('gdpr')">🟡 GDPR</button>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-eyebrow">Microsoft 365 · Security &amp; Compliance Reference Architecture</div>
+  <h1 class="hero-title">Enterprise Security<br/>&amp; Compliance Blueprint</h1>
+  <p class="hero-subtitle">Comprehensive reference for implementors and auditors covering the full Microsoft 365 security stack — from identity to endpoint, cloud apps to data governance — mapped against NIST CSF 2.0, NIST SP 800-53 Rev.5, ISO 27001:2022, CIS Controls v8.1, CIS Microsoft 365 Foundations Benchmark v4.0, GDPR, and the EU AI Act. 53 deduplicated controls across 10 security domains.</p>
+  <div class="framework-pills">
+    <span class="pill pill-nist">🔵 NIST CSF 2.0</span>
+    <span class="pill pill-nist">🔵 NIST SP 800-53 Rev.5</span>
+    <span class="pill pill-iso">🟣 ISO 27001:2022</span>
+    <span class="pill pill-cis">🟢 CIS Controls v8.1</span>
+    <span class="pill pill-cis365">🩵 CIS M365 Benchmark v4.0</span>
+    <span class="pill pill-gdpr">🟡 GDPR</span>
+    <span class="pill pill-euai">🔴 EU AI Act</span>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-row">
+  <div class="stat-card" style="--accent-color:var(--accent-blue)"><div class="stat-number">53</div><div class="stat-label">Unique Controls</div></div>
+  <div class="stat-card" style="--accent-color:var(--accent-violet)"><div class="stat-number">10</div><div class="stat-label">Security Domains</div></div>
+  <div class="stat-card" style="--accent-color:var(--accent-green)"><div class="stat-number">7</div><div class="stat-label">Frameworks Mapped</div></div>
+  <div class="stat-card" style="--accent-color:var(--accent-cyan)"><div class="stat-number">6</div><div class="stat-label">ZT Pillars Covered</div></div>
+  <div class="stat-card" style="--accent-color:var(--accent-amber)"><div class="stat-number">51</div><div class="stat-label">CIS M365 Controls</div></div>
+  <div class="stat-card" style="--accent-color:var(--accent-rose)"><div class="stat-number">93</div><div class="stat-label">ISO 27001 Annex A</div></div>
+</div>
+
+<!-- NAV TABS -->
+<nav class="nav-container">
+  <div class="nav-tabs">
+    <button class="nav-tab active" onclick="switchTab('overview')" data-tab="overview"><span class="tab-icon">🗺️</span> Overview</button>
+    <button class="nav-tab" onclick="switchTab('architecture')" data-tab="architecture"><span class="tab-icon">🏗️</span> Architecture</button>
+    <button class="nav-tab" onclick="switchTab('library')" data-tab="library"><span class="tab-icon">📚</span> Control Library</button>
+    <button class="nav-tab" onclick="switchTab('identity')" data-tab="identity"><span class="tab-icon">🔐</span> Identity &amp; Access</button>
+    <button class="nav-tab" onclick="switchTab('endpoint')" data-tab="endpoint"><span class="tab-icon">💻</span> Endpoint Security</button>
+    <button class="nav-tab" onclick="switchTab('email')" data-tab="email"><span class="tab-icon">📧</span> Email &amp; Collab</button>
+    <button class="nav-tab" onclick="switchTab('casb')" data-tab="casb"><span class="tab-icon">☁️</span> CASB &amp; Cloud Apps</button>
+    <button class="nav-tab" onclick="switchTab('data')" data-tab="data"><span class="tab-icon">🗄️</span> Data Protection</button>
+    <button class="nav-tab" onclick="switchTab('tdr')" data-tab="tdr"><span class="tab-icon">🔭</span> Threat Detection</button>
+    <button class="nav-tab" onclick="switchTab('aiact')" data-tab="aiact"><span class="tab-icon">🤖</span> AI Governance</button>
+    <button class="nav-tab" onclick="switchTab('zerotrust')" data-tab="zerotrust"><span class="tab-icon">⛔</span> Zero Trust</button>
+    <button class="nav-tab" onclick="switchTab('matrix')" data-tab="matrix"><span class="tab-icon">📋</span> Compliance Matrix</button>
+    <button class="nav-tab" onclick="switchTab('roadmap')" data-tab="roadmap"><span class="tab-icon">🗓️</span> Roadmap &amp; Audit</button>
+  </div>
+</nav>
+<main class="content-area">
+
+<!-- ===== OVERVIEW ===== -->
+<section id="tab-overview" class="tab-panel active">
+
+  <div class="callout ci">
+    <div class="callout-icon">ℹ️</div>
+    <div class="callout-text"><strong>Who this is for:</strong> Security architects, compliance officers, M365 administrators, and auditors. Use the persistent Framework Filter Bar at the top to instantly highlight controls relevant to any framework. Each domain section maps configurations to control objectives with actionable guidance and evidence requirements.</div>
+  </div>
+
+  <div class="subsection">
+    <div class="sub-title">Framework Coverage Posture</div>
+    <div class="sub-desc">Coverage of M365 native controls against each compliance framework</div>
+    <div class="progress-row"><span class="progress-label">NIST CSF 2.0</span><div class="progress-track"><div class="progress-fill" style="width:88%;background:linear-gradient(90deg,var(--accent-blue),var(--accent-cyan))"></div></div><span class="progress-pct">88%</span></div>
+    <div class="progress-row"><span class="progress-label">NIST SP 800-53 Rev.5</span><div class="progress-track"><div class="progress-fill" style="width:84%;background:linear-gradient(90deg,var(--accent-blue),var(--accent-cyan))"></div></div><span class="progress-pct">84%</span></div>
+    <div class="progress-row"><span class="progress-label">ISO 27001:2022</span><div class="progress-track"><div class="progress-fill" style="width:82%;background:linear-gradient(90deg,var(--accent-violet),#b09ae0)"></div></div><span class="progress-pct">82%</span></div>
+    <div class="progress-row"><span class="progress-label">CIS Controls v8.1 (IG2)</span><div class="progress-track"><div class="progress-fill" style="width:91%;background:linear-gradient(90deg,var(--accent-green),#6ec49f)"></div></div><span class="progress-pct">91%</span></div>
+    <div class="progress-row"><span class="progress-label">CIS M365 Benchmark v4.0</span><div class="progress-track"><div class="progress-fill" style="width:89%;background:linear-gradient(90deg,var(--accent-cyan),#7bbdd4)"></div></div><span class="progress-pct">89%</span></div>
+    <div class="progress-row"><span class="progress-label">GDPR</span><div class="progress-track"><div class="progress-fill" style="width:76%;background:linear-gradient(90deg,var(--accent-amber),#d4af7a)"></div></div><span class="progress-pct">76%</span></div>
+    <div class="progress-row"><span class="progress-label">EU AI Act</span><div class="progress-track"><div class="progress-fill" style="width:64%;background:linear-gradient(90deg,var(--accent-rose),#cc7a95)"></div></div><span class="progress-pct">64%</span></div>
+  </div>
+
+  <div class="subsection">
+    <div class="sub-title">Microsoft 365 Security Solutions in Scope</div>
+    <div class="sub-desc">Core platform capabilities covered in this blueprint</div>
+    <div class="cards-grid">
+      <div class="card" style="--accent-color:var(--accent-violet)">
+        <div class="card-header"><div class="card-icon" style="background:rgba(139,92,246,.12)">🔑</div><div><div class="card-title">Microsoft Entra ID</div><div class="card-subtitle">Identity Platform · P1 / P2</div></div></div>
+        <div class="card-body">Cloud identity with Conditional Access, MFA, PIM, Identity Protection, passwordless, external identities, and access reviews.</div>
+        <div class="card-tags"><span class="badge bb">CIS M365 §1</span><span class="badge bg">CIS 5–6</span><span class="badge bv">A.8.2</span><span class="badge bb">PR.AA</span></div>
+      </div>
+      <div class="card" style="--accent-color:var(--accent-blue)">
+        <div class="card-header"><div class="card-icon" style="background:rgba(14,165,233,.12)">🛡️</div><div><div class="card-title">Microsoft Defender for Endpoint</div><div class="card-subtitle">MDE · P1 / P2</div></div></div>
+        <div class="card-body">Next-gen antivirus, EDR, Threat & Vulnerability Management, ASR rules, automated investigation, network protection.</div>
+        <div class="card-tags"><span class="badge bc">CIS M365 §5.3</span><span class="badge bg">CIS 10</span><span class="badge bv">A.8.7</span><span class="badge bb">DE.CM</span></div>
+      </div>
+      <div class="card" style="--accent-color:var(--accent-green)">
+        <div class="card-header"><div class="card-icon" style="background:rgba(16,185,129,.12)">📧</div><div><div class="card-title">Defender for Office 365</div><div class="card-subtitle">MDO · Plan 1 / Plan 2</div></div></div>
+        <div class="card-body">Email and collaboration security: Safe Links, Safe Attachments, anti-phishing, AIR, attack simulation training.</div>
+        <div class="card-tags"><span class="badge bc">CIS M365 §2</span><span class="badge bg">CIS 9</span><span class="badge bv">A.8.23</span><span class="badge bb">PR.DS</span></div>
+      </div>
+      <div class="card" style="--accent-color:var(--accent-amber)">
+        <div class="card-header"><div class="card-icon" style="background:rgba(245,158,11,.12)">☁️</div><div><div class="card-title">Defender for Cloud Apps (CASB)</div><div class="card-subtitle">MCAS · SaaS Security</div></div></div>
+        <div class="card-body">Shadow IT discovery, CAAC session control, SaaS Security Posture Management (SSPM), OAuth app governance.</div>
+        <div class="card-tags"><span class="badge bg">CIS 4</span><span class="badge bv">A.5.23</span><span class="badge bb">ID.AM</span><span class="badge ba">Art.28</span></div>
+      </div>
+      <div class="card" style="--accent-color:var(--accent-blue)">
+        <div class="card-header"><div class="card-icon" style="background:rgba(14,165,233,.12)">🏷️</div><div><div class="card-title">Microsoft Purview</div><div class="card-subtitle">DLP · AIP · Compliance · IRM</div></div></div>
+        <div class="card-body">Sensitivity labeling, DLP, retention, eDiscovery, insider risk management, audit logging, DSPM for AI, Communication Compliance.</div>
+        <div class="card-tags"><span class="badge bc">CIS M365 §3,5</span><span class="badge ba">GDPR Art.32</span><span class="badge bv">A.8.12</span><span class="badge bb">PR.DS</span></div>
+      </div>
+      <div class="card" style="--accent-color:var(--accent-cyan)">
+        <div class="card-header"><div class="card-icon" style="background:rgba(34,211,238,.12)">🔭</div><div><div class="card-title">Microsoft Sentinel / XDR</div><div class="card-subtitle">SIEM + SOAR + Extended Detection</div></div></div>
+        <div class="card-body">Cloud-native SIEM/SOAR with unified XDR, MITRE ATT&CK detection, playbooks, advanced hunting, long-term log retention.</div>
+        <div class="card-tags"><span class="badge bc">CIS M365 §5.1</span><span class="badge bg">CIS 8</span><span class="badge bv">A.8.15</span><span class="badge bb">DE.AE</span></div>
+      </div>
+      <div class="card" style="--accent-color:var(--accent-violet)">
+        <div class="card-header"><div class="card-icon" style="background:rgba(139,92,246,.12)">📱</div><div><div class="card-title">Microsoft Intune</div><div class="card-subtitle">MDM / MAM / Compliance</div></div></div>
+        <div class="card-body">Device enrollment, compliance policies, security baselines, app protection, endpoint privilege management, LAPS integration.</div>
+        <div class="card-tags"><span class="badge bc">CIS M365 §5.3</span><span class="badge bg">CIS 1,4</span><span class="badge bv">A.8.1</span><span class="badge bb">PR.PS</span></div>
+      </div>
+      <div class="card" style="--accent-color:var(--accent-rose)">
+        <div class="card-header"><div class="card-icon" style="background:rgba(244,63,94,.12)">🤖</div><div><div class="card-title">Microsoft 365 Copilot + AI</div><div class="card-subtitle">DSPM for AI · Copilot Governance</div></div></div>
+        <div class="card-body">AI governance, oversharing remediation, AI inventory, data readiness gating, DSPM for AI, prompt/response audit logging.</div>
+        <div class="card-tags"><span class="badge br">EU AI Act</span><span class="badge ba">GDPR Art.22</span><span class="badge bv">A.8.28</span><span class="badge bc">CIS M365 §3</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <div class="sub-title">CIS Microsoft 365 Benchmark v4.0 — Section Overview</div>
+    <div class="sub-desc">The CIS M365 Foundations Benchmark provides prescriptive guidance specifically for M365 tenant hardening</div>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Section</th><th>Focus Area</th><th>Key Controls</th><th>M365 Tool</th><th>Controls in Blueprint</th></tr></thead>
+        <tbody>
+          <tr><td><span class="fw-cis365">§1 — IAM</span></td><td>Identity & Account Management</td><td>MFA, PIM, admin count, Security Defaults, guest lifecycle, app consent</td><td>Entra ID, PIM</td><td>IAM-01 through IAM-09</td></tr>
+          <tr><td><span class="fw-cis365">§2 — Exchange</span></td><td>Exchange Online / Email Security</td><td>Safe Attachments, Safe Links, anti-phishing, DKIM, DMARC, SPF, auto-forwarding, SMTP AUTH</td><td>MDO, Exchange Online</td><td>EML-01 through EML-04</td></tr>
+          <tr><td><span class="fw-cis365">§3 — SharePoint</span></td><td>SharePoint Online / OneDrive</td><td>External sharing, sensitivity labels, unmanaged device blocks, public groups, link expiry</td><td>SharePoint, Purview</td><td>EML-05, DLP-01, DLP-06</td></tr>
+          <tr><td><span class="fw-cis365">§4 — Teams</span></td><td>Microsoft Teams</td><td>Retention, external access, guest restrictions, anonymous meeting join, info barriers</td><td>Teams, Purview</td><td>EML-05, EML-07</td></tr>
+          <tr><td><span class="fw-cis365">§5 — Security</span></td><td>Security & Compliance</td><td>Audit logging, DLP, Defender for Endpoint, security baselines, EDR in block mode, PIM</td><td>Purview, MDE, Sentinel</td><td>GOV-02, DLP-02, EPM-01–07, TDR-01–05</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+<!-- ===== ARCHITECTURE ===== -->
+<section id="tab-architecture" class="tab-panel">
+  <div class="section-title">Microsoft 365 Security Architecture</div>
+  <div class="section-desc">Enhanced defence-in-depth architecture showing component relationships, signal flows, and cross-layer correlations. Arrows indicate data/signal sharing between security planes.</div>
+
+  <div class="arch-wrap">
+    <div class="arch-svg-container">
+      <svg viewBox="0 0 980 720" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;font-family:'DM Sans',sans-serif">
+        <defs>
+          <marker id="arr" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="rgba(201,169,110,0.22)"/></marker>
+          <marker id="arr-blue" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#c9a96e"/></marker>
+          <marker id="arr-violet" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#9b7dd4"/></marker>
+          <marker id="arr-green" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#5fad8e"/></marker>
+          <marker id="arr-amber" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#c9a96e"/></marker>
+          <marker id="arr-cyan" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#4d9bbf"/></marker>
+          <filter id="glow-b"><feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        </defs>
+
+        <!-- GOVERNANCE BANNER (top) -->
+        <rect x="10" y="10" width="960" height="44" rx="8" fill="#111826" stroke="rgba(201,169,110,0.1)" stroke-width="1"/>
+        <text x="24" y="27" fill="#7a869e" font-size="9" letter-spacing="1.5">GOVERNANCE &amp; COMPLIANCE PLANE</text>
+        <rect x="20" y="30" width="120" height="18" rx="4" fill="#0e1420" stroke="rgba(201,169,110,0.22)"/>
+        <text x="80" y="43" fill="#9aa3b8" font-size="9" text-anchor="middle">Compliance Manager</text>
+        <rect x="148" y="30" width="100" height="18" rx="4" fill="#0e1420" stroke="rgba(201,169,110,0.22)"/>
+        <text x="198" y="43" fill="#9aa3b8" font-size="9" text-anchor="middle">Secure Score</text>
+        <rect x="256" y="30" width="100" height="18" rx="4" fill="#0e1420" stroke="rgba(201,169,110,0.22)"/>
+        <text x="306" y="43" fill="#9aa3b8" font-size="9" text-anchor="middle">Entra Access Reviews</text>
+        <rect x="364" y="30" width="90" height="18" rx="4" fill="#0e1420" stroke="rgba(201,169,110,0.22)"/>
+        <text x="409" y="43" fill="#9aa3b8" font-size="9" text-anchor="middle">Purview Audit</text>
+        <rect x="462" y="30" width="100" height="18" rx="4" fill="#0e1420" stroke="rgba(201,169,110,0.22)"/>
+        <text x="512" y="43" fill="#9aa3b8" font-size="9" text-anchor="middle">Exposure Mgmt</text>
+        <rect x="570" y="30" width="100" height="18" rx="4" fill="#0e1420" stroke="rgba(201,169,110,0.22)"/>
+        <text x="620" y="43" fill="#9aa3b8" font-size="9" text-anchor="middle">Power Platform DLP</text>
+        <rect x="678" y="30" width="90" height="18" rx="4" fill="#0e1420" stroke="rgba(201,169,110,0.22)"/>
+        <text x="723" y="43" fill="#9aa3b8" font-size="9" text-anchor="middle">Purview IRM</text>
+        <rect x="776" y="30" width="90" height="18" rx="4" fill="#0e1420" stroke="rgba(201,169,110,0.22)"/>
+        <text x="821" y="43" fill="#9aa3b8" font-size="9" text-anchor="middle">DSPM for AI</text>
+        <rect x="874" y="30" width="88" height="18" rx="4" fill="#0e1420" stroke="rgba(201,169,110,0.22)"/>
+        <text x="918" y="43" fill="#9aa3b8" font-size="9" text-anchor="middle">Threat Analytics</text>
+
+        <!-- ZERO TRUST POLICY ENGINE (centre vertical spine) -->
+        <rect x="380" y="72" width="220" height="580" rx="10" fill="rgba(201,169,110,0.025)" stroke="rgba(201,169,110,0.12)" stroke-width="1" stroke-dasharray="4 3"/>
+        <text x="490" y="92" fill="rgba(201,169,110,0.35)" font-size="9" text-anchor="middle" letter-spacing="1.5">ZERO TRUST POLICY ENGINE</text>
+        <!-- CA box -->
+        <rect x="395" y="100" width="190" height="52" rx="8" fill="#0e1420" stroke="#c9a96e" stroke-width="1.5" filter="url(#glow-b)"/>
+        <text x="490" y="119" fill="#c9a96e" font-size="10" text-anchor="middle" font-weight="bold">Conditional Access</text>
+        <text x="490" y="133" fill="#9aa3b8" font-size="9" text-anchor="middle">Verify Explicitly · Least Privilege</text>
+        <text x="490" y="145" fill="#7a869e" font-size="8" text-anchor="middle">8 Baseline CA Policies · Auth Strengths</text>
+        <!-- Named Locations -->
+        <rect x="410" y="168" width="80" height="28" rx="5" fill="#111826" stroke="rgba(201,169,110,0.22)"/>
+        <text x="450" y="182" fill="#9aa3b8" font-size="8.5" text-anchor="middle">Named Locations</text>
+        <text x="450" y="192" fill="#7a869e" font-size="7.5" text-anchor="middle">Geo Restrictions</text>
+        <!-- Auth Strength -->
+        <rect x="498" y="168" width="82" height="28" rx="5" fill="#111826" stroke="rgba(201,169,110,0.22)"/>
+        <text x="539" y="182" fill="#9aa3b8" font-size="8.5" text-anchor="middle">Auth Strengths</text>
+        <text x="539" y="192" fill="#7a869e" font-size="7.5" text-anchor="middle">FIDO2 · WHfB · CBA</text>
+        <!-- Risk Engine -->
+        <rect x="395" y="210" width="190" height="38" rx="6" fill="#111826" stroke="#9b7dd4" stroke-width="1"/>
+        <text x="490" y="228" fill="#9b7dd4" font-size="9.5" text-anchor="middle" font-weight="bold">Entra ID Protection</text>
+        <text x="490" y="242" fill="#7a869e" font-size="8" text-anchor="middle">Risk-Based Policy · Sign-in Risk · User Risk</text>
+        <!-- PIM -->
+        <rect x="395" y="258" width="90" height="34" rx="6" fill="#111826" stroke="#9b7dd4" stroke-width="1"/>
+        <text x="440" y="274" fill="#9b7dd4" font-size="9" text-anchor="middle">PIM</text>
+        <text x="440" y="285" fill="#7a869e" font-size="7.5" text-anchor="middle">JIT · Approval · 4h</text>
+        <!-- Identity Protection Alerts -->
+        <rect x="493" y="258" width="92" height="34" rx="6" fill="#111826" stroke="#9b7dd4" stroke-width="1"/>
+        <text x="539" y="274" fill="#9b7dd4" font-size="9" text-anchor="middle">Access Reviews</text>
+        <text x="539" y="285" fill="#7a869e" font-size="7.5" text-anchor="middle">Quarterly · Auto-apply</text>
+
+        <!-- LEFT COLUMN: Security Layers -->
+        <!-- 1. IDENTITY LAYER -->
+        <rect x="10" y="72" width="360" height="85" rx="8" fill="#111826" stroke="#9b7dd4" stroke-width="1.5"/>
+        <rect x="10" y="72" width="360" height="20" rx="8" fill="rgba(155,125,212,0.12)"/>
+        <rect x="10" y="84" width="360" height="8" rx="0" fill="rgba(155,125,212,0.12)"/>
+        <text x="22" y="86" fill="#9b7dd4" font-size="9" font-weight="bold" letter-spacing="1">IDENTITY &amp; ACCESS</text>
+        <g transform="translate(18,98)">
+          <rect x="0" y="0" width="74" height="22" rx="4" fill="#0e1420" stroke="rgba(201,169,110,0.22)"/><text x="37" y="15" fill="#9aa3b8" font-size="8" text-anchor="middle">Entra ID</text>
+          <rect x="80" y="0" width="74" height="22" rx="4" fill="#0e1420" stroke="rgba(201,169,110,0.22)"/><text x="117" y="15" fill="#9aa3b8" font-size="8" text-anchor="middle">MFA / Passkeys</text>
+          <rect x="160" y="0" width="74" height="22" rx="4" fill="#0e1420" stroke="rgba(201,169,110,0.22)"/><text x="197" y="15" fill="#9aa3b8" font-size="8" text-anchor="middle">External Identities</text>
+          <rect x="240" y="0" width="74" height="22" rx="4" fill="#0e1420" stroke="rgba(201,169,110,0.22)"/><text x="277" y="15" fill="#9aa3b8" font-size="8" text-anchor="middle">Password Protect</text>
+          <rect x="0" y="28" width="74" height="22" rx="4" fill="#0e1420" stroke="rgba(201,169,110,0.22)"/><text x="37" y="43" fill="#9aa3b8" font-size="8" text-anchor="middle">App Governance</text>
+          <rect x="80" y="28" width="74" height="22" rx="4" fill="#0e1420" stroke="rgba(201,169,110,0.22)"/><text x="117" y="43" fill="#9aa3b8" font-size="8" text-anchor="middle">Defender Identity</text>
+          <rect x="160" y="28" width="74" height="22" rx="4" fill="#0e1420" stroke="rgba(201,169,110,0.22)"/><text x="197" y="43" fill="#9aa3b8" font-size="8" text-anchor="middle">Lifecycle Workflows</text>
+          <rect x="240" y="28" width="74" height="22" rx="4" fill="#0e1420" stroke="rgba(201,169,110,0.22)"/><text x="277" y="43" fill="#9aa3b8" font-size="8" text-anchor="middle">B2B Cross-Tenant</text>
+        </g>
+
+        <!-- 2. ENDPOINT LAYER -->
+        <rect x="10" y="168" width="360" height="85" rx="8" fill="#111826" stroke="#c9a96e" stroke-width="1.5"/>
+        <rect x="10" y="168" width="360" height="20" rx="8" fill="rgba(201,169,110,0.1)"/>
+        <rect x="10" y="180" width="360" height="8" rx="0" fill="rgba(201,169,110,0.1)"/>
+        <text x="22" y="182" fill="#c9a96e" font-size="9" font-weight="bold" letter-spacing="1">ENDPOINTS &amp; DEVICES</text>
+        <g transform="translate(18,194)">
+          <rect x="0" y="0" width="74" height="22" rx="4" fill="#0e1420" stroke="rgba(201,169,110,0.22)"/><text x="37" y="15" fill="#9aa3b8" font-size="8" text-anchor="middle">Defender MDE</text>
+          <rect x="80" y="0" width="74" height="22" rx="4" fill="#0e1420" stroke="rgba(201,169,110,0.22)"/><text x="117" y="15" fill="#9aa3b8" font-size="8" text-anchor="middle">Intune MDM/MAM</text>
+          <rect x="160" y="0" width="74" height="22" rx="4" fill="#0e1420" stroke="rgba(201,169,110,0.22)"/><text x="197" y="15" fill="#9aa3b8" font-size="8" text-anchor="middle">ASR Rules</text>
+          <rect x="240" y="0" width="74" height="22" rx="4" fill="#0e1420" stroke="rgba(201,169,110,0.22)"/><text x="277" y="15" fill="#9aa3b8" font-size="8" text-anchor="middle">EDR in Block Mode</text>
+          <rect x="0" y="28" width="74" height="22" rx="4" fill="#0e1420" stroke="rgba(201,169,110,0.22)"/><text x="37" y="43" fill="#9aa3b8" font-size="8" text-anchor="middle">BitLocker / LAPS</text>
+          <rect x="80" y="28" width="74" height="22" rx="4" fill="#0e1420" stroke="rgba(201,169,110,0.22)"/><text x="117" y="43" fill="#9aa3b8" font-size="8" text-anchor="middle">Sec. Baselines</text>
+          <rect x="160" y="28" width="74" height="22" rx="4" fill="#0e1420" stroke="rgba(201,169,110,0.22)"/><text x="197" y="43" fill="#9aa3b8" font-size="8" text-anchor="middle">TVM / Vuln Mgmt</text>
+          <rect x="240" y="28" width="74" height="22" rx="4" fill="#0e1420" stroke="rgba(201,169,110,0.22)"/><text x="277" y="43" fill="#9aa3b8" font-size="8" text-anchor="middle">Endpoint EPM</text>
+        </g>
+
+        <!-- 3. EMAIL LAYER -->
+        <rect x="10" y="264" width="360" height="78" rx="8" fill="#111826" stroke="#5fad8e" stroke-width="1.5"/>
+        <rect x="10" y="264" width="360" height="20" rx="8" fill="rgba(95,173,142,0.12)"/>
+        <rect x="10" y="276" width="360" height="8" rx="0" fill="rgba(95,173,142,0.12)"/>
+        <text x="22" y="278" fill="#5fad8e" font-size="9" font-weight="bold" letter-spacing="1">EMAIL &amp; COLLABORATION</text>
+        <g transform="translate(18,290)">
+          <rect x="0" y="0" width="74" height="22" rx="4" fill="#0e1420" stroke="rgba(201,169,110,0.22)"/><text x="37" y="15" fill="#9aa3b8" font-size="8" text-anchor="middle">Defender O365</text>
+          <rect x="80" y="0" width="74" height="22" rx="4" fill="#0e1420" stroke="rgba(201,169,110,0.22)"/><text x="117" y="15" fill="#9aa3b8" font-size="8" text-anchor="middle">Safe Links</text>
+          <rect x="160" y="0" width="74" height="22" rx="4" fill="#0e1420" stroke="rgba(201,169,110,0.22)"/><text x="197" y="15" fill="#9aa3b8" font-size="8" text-anchor="middle">Safe Attachments</text>
+          <rect x="240" y="0" width="74" height="22" rx="4" fill="#0e1420" stroke="rgba(201,169,110,0.22)"/><text x="277" y="15" fill="#9aa3b8" font-size="8" text-anchor="middle">Anti-Phishing</text>
+          <rect x="0" y="28" width="74" height="22" rx="4" fill="#0e1420" stroke="rgba(201,169,110,0.22)"/><text x="37" y="43" fill="#9aa3b8" font-size="8" text-anchor="middle">DKIM/DMARC/SPF</text>
+          <rect x="80" y="28" width="74" height="22" rx="4" fill="#0e1420" stroke="rgba(201,169,110,0.22)"/><text x="117" y="43" fill="#9aa3b8" font-size="8" text-anchor="middle">Info Barriers</text>
+          <rect x="160" y="28" width="74" height="22" rx="4" fill="#0e1420" stroke="rgba(201,169,110,0.22)"/><text x="197" y="43" fill="#9aa3b8" font-size="8" text-anchor="middle">Teams Governance</text>
+          <rect x="240" y="28" width="74" height="22" rx="4" fill="#0e1420" stroke="rgba(201,169,110,0.22)"/><text x="277" y="43" fill="#9aa3b8" font-size="8" text-anchor="middle">Attack Simulation</text>
+        </g>
+
+        <!-- 4. CLOUD APPS / CASB -->
+        <rect x="10" y="354" width="360" height="65" rx="8" fill="#111826" stroke="#c9a96e" stroke-width="1.5"/>
+        <rect x="10" y="354" width="360" height="20" rx="8" fill="rgba(245,158,11,0.10)"/>
+        <rect x="10" y="366" width="360" height="8" rx="0" fill="rgba(245,158,11,0.10)"/>
+        <text x="22" y="368" fill="#c9a96e" font-size="9" font-weight="bold" letter-spacing="1">CLOUD APPS &amp; CASB</text>
+        <g transform="translate(18,380)">
+          <rect x="0" y="0" width="86" height="22" rx="4" fill="#0e1420" stroke="rgba(201,169,110,0.22)"/><text x="43" y="15" fill="#9aa3b8" font-size="8" text-anchor="middle">Defender Cloud Apps</text>
+          <rect x="92" y="0" width="74" height="22" rx="4" fill="#0e1420" stroke="rgba(201,169,110,0.22)"/><text x="129" y="15" fill="#9aa3b8" font-size="8" text-anchor="middle">CAAC Sessions</text>
+          <rect x="172" y="0" width="74" height="22" rx="4" fill="#0e1420" stroke="rgba(201,169,110,0.22)"/><text x="209" y="15" fill="#9aa3b8" font-size="8" text-anchor="middle">Shadow IT Discovery</text>
+          <rect x="252" y="0" width="74" height="22" rx="4" fill="#0e1420" stroke="rgba(201,169,110,0.22)"/><text x="289" y="15" fill="#9aa3b8" font-size="8" text-anchor="middle">SSPM</text>
+        </g>
+
+        <!-- 5. DATA LAYER -->
+        <rect x="10" y="430" width="360" height="65" rx="8" fill="#111826" stroke="#bf7595" stroke-width="1.5"/>
+        <rect x="10" y="430" width="360" height="20" rx="8" fill="rgba(244,63,94,0.10)"/>
+        <rect x="10" y="442" width="360" height="8" rx="0" fill="rgba(244,63,94,0.10)"/>
+        <text x="22" y="444" fill="#bf7595" font-size="9" font-weight="bold" letter-spacing="1">DATA PROTECTION &amp; PRIVACY</text>
+        <g transform="translate(18,456)">
+          <rect x="0" y="0" width="74" height="22" rx="4" fill="#0e1420" stroke="rgba(201,169,110,0.22)"/><text x="37" y="15" fill="#9aa3b8" font-size="8" text-anchor="middle">Purview DLP</text>
+          <rect x="80" y="0" width="74" height="22" rx="4" fill="#0e1420" stroke="rgba(201,169,110,0.22)"/><text x="117" y="15" fill="#9aa3b8" font-size="8" text-anchor="middle">Sensitivity Labels</text>
+          <rect x="160" y="0" width="74" height="22" rx="4" fill="#0e1420" stroke="rgba(201,169,110,0.22)"/><text x="197" y="15" fill="#9aa3b8" font-size="8" text-anchor="middle">Insider Risk Mgmt</text>
+          <rect x="240" y="0" width="74" height="22" rx="4" fill="#0e1420" stroke="rgba(201,169,110,0.22)"/><text x="277" y="15" fill="#9aa3b8" font-size="8" text-anchor="middle">DSPM for AI</text>
+        </g>
+
+        <!-- RIGHT COLUMN: Detection & Response -->
+        <rect x="610" y="72" width="360" height="85" rx="8" fill="#111826" stroke="#4d9bbf" stroke-width="1.5"/>
+        <rect x="610" y="72" width="360" height="20" rx="8" fill="rgba(34,211,238,0.10)"/>
+        <rect x="610" y="84" width="360" height="8" rx="0" fill="rgba(34,211,238,0.10)"/>
+        <text x="622" y="86" fill="#4d9bbf" font-size="9" font-weight="bold" letter-spacing="1">DETECTION &amp; RESPONSE</text>
+        <g transform="translate(618,98)">
+          <rect x="0" y="0" width="80" height="22" rx="4" fill="#0e1420" stroke="rgba(201,169,110,0.22)"/><text x="40" y="15" fill="#9aa3b8" font-size="8" text-anchor="middle">Microsoft XDR</text>
+          <rect x="86" y="0" width="80" height="22" rx="4" fill="#0e1420" stroke="rgba(201,169,110,0.22)"/><text x="126" y="15" fill="#9aa3b8" font-size="8" text-anchor="middle">Microsoft Sentinel</text>
+          <rect x="172" y="0" width="80" height="22" rx="4" fill="#0e1420" stroke="rgba(201,169,110,0.22)"/><text x="212" y="15" fill="#9aa3b8" font-size="8" text-anchor="middle">SOAR Playbooks</text>
+          <rect x="258" y="0" width="80" height="22" rx="4" fill="#0e1420" stroke="rgba(201,169,110,0.22)"/><text x="298" y="15" fill="#9aa3b8" font-size="8" text-anchor="middle">AIR Automation</text>
+          <rect x="0" y="28" width="80" height="22" rx="4" fill="#0e1420" stroke="rgba(201,169,110,0.22)"/><text x="40" y="43" fill="#9aa3b8" font-size="8" text-anchor="middle">Adv. Hunting KQL</text>
+          <rect x="86" y="28" width="80" height="22" rx="4" fill="#0e1420" stroke="rgba(201,169,110,0.22)"/><text x="126" y="43" fill="#9aa3b8" font-size="8" text-anchor="middle">Threat Intelligence</text>
+          <rect x="172" y="28" width="80" height="22" rx="4" fill="#0e1420" stroke="rgba(201,169,110,0.22)"/><text x="212" y="43" fill="#9aa3b8" font-size="8" text-anchor="middle">Incident Response</text>
+          <rect x="258" y="28" width="80" height="22" rx="4" fill="#0e1420" stroke="rgba(201,169,110,0.22)"/><text x="298" y="43" fill="#9aa3b8" font-size="8" text-anchor="middle">MITRE ATT&amp;CK</text>
+        </g>
+
+        <!-- AI GOVERNANCE (right) -->
+        <rect x="610" y="168" width="360" height="65" rx="8" fill="#111826" stroke="#bf7595" stroke-width="1.5"/>
+        <rect x="610" y="168" width="360" height="20" rx="8" fill="rgba(244,63,94,0.10)"/>
+        <rect x="610" y="180" width="360" height="8" rx="0" fill="rgba(244,63,94,0.10)"/>
+        <text x="622" y="182" fill="#bf7595" font-size="9" font-weight="bold" letter-spacing="1">AI GOVERNANCE &amp; COPILOT</text>
+        <g transform="translate(618,194)">
+          <rect x="0" y="0" width="86" height="22" rx="4" fill="#0e1420" stroke="rgba(201,169,110,0.22)"/><text x="43" y="15" fill="#9aa3b8" font-size="8" text-anchor="middle">Copilot Rollout Gate</text>
+          <rect x="92" y="0" width="80" height="22" rx="4" fill="#0e1420" stroke="rgba(201,169,110,0.22)"/><text x="132" y="15" fill="#9aa3b8" font-size="8" text-anchor="middle">AI Inventory</text>
+          <rect x="178" y="0" width="80" height="22" rx="4" fill="#0e1420" stroke="rgba(201,169,110,0.22)"/><text x="218" y="15" fill="#9aa3b8" font-size="8" text-anchor="middle">AI DLP Policies</text>
+          <rect x="264" y="0" width="80" height="22" rx="4" fill="#0e1420" stroke="rgba(201,169,110,0.22)"/><text x="304" y="15" fill="#9aa3b8" font-size="8" text-anchor="middle">Human Oversight</text>
+        </g>
+
+        <!-- NETWORK LAYER (bottom) -->
+        <rect x="10" y="506" width="960" height="52" rx="8" fill="#111826" stroke="#4d9bbf" stroke-width="1"/>
+        <rect x="10" y="506" width="960" height="18" rx="8" fill="rgba(77,155,191,0.07)"/>
+        <rect x="10" y="516" width="960" height="8" rx="0" fill="rgba(77,155,191,0.07)"/>
+        <text x="22" y="518" fill="#4d9bbf" font-size="9" letter-spacing="1">NETWORK &amp; INFRASTRUCTURE</text>
+        <g transform="translate(18,526)">
+          <rect x="0" y="0" width="110" height="22" rx="4" fill="#0e1420" stroke="rgba(201,169,110,0.22)"/><text x="55" y="15" fill="#9aa3b8" font-size="8" text-anchor="middle">Entra Global Secure Access</text>
+          <rect x="116" y="0" width="90" height="22" rx="4" fill="#0e1420" stroke="rgba(201,169,110,0.22)"/><text x="161" y="15" fill="#9aa3b8" font-size="8" text-anchor="middle">Named Locations</text>
+          <rect x="212" y="0" width="110" height="22" rx="4" fill="#0e1420" stroke="rgba(201,169,110,0.22)"/><text x="267" y="15" fill="#9aa3b8" font-size="8" text-anchor="middle">Compliant Network Check</text>
+          <rect x="328" y="0" width="90" height="22" rx="4" fill="#0e1420" stroke="rgba(201,169,110,0.22)"/><text x="373" y="15" fill="#9aa3b8" font-size="8" text-anchor="middle">Network Protection</text>
+          <rect x="424" y="0" width="90" height="22" rx="4" fill="#0e1420" stroke="rgba(201,169,110,0.22)"/><text x="469" y="15" fill="#9aa3b8" font-size="8" text-anchor="middle">Web Content Filter</text>
+          <rect x="520" y="0" width="90" height="22" rx="4" fill="#0e1420" stroke="rgba(201,169,110,0.22)"/><text x="565" y="15" fill="#9aa3b8" font-size="8" text-anchor="middle">Power Platform DLP</text>
+          <rect x="616" y="0" width="90" height="22" rx="4" fill="#0e1420" stroke="rgba(201,169,110,0.22)"/><text x="661" y="15" fill="#9aa3b8" font-size="8" text-anchor="middle">Retention Policies</text>
+          <rect x="712" y="0" width="90" height="22" rx="4" fill="#0e1420" stroke="rgba(201,169,110,0.22)"/><text x="757" y="15" fill="#9aa3b8" font-size="8" text-anchor="middle">BitLocker Encryption</text>
+          <rect x="808" y="0" width="90" height="22" rx="4" fill="#0e1420" stroke="rgba(201,169,110,0.22)"/><text x="853" y="15" fill="#9aa3b8" font-size="8" text-anchor="middle">eDiscovery / Legal Hold</text>
+        </g>
+
+        <!-- SIGNAL FLOW ARROWS (left layers → ZT engine) -->
+        <line x1="370" y1="114" x2="393" y2="125" stroke="#9b7dd4" stroke-width="1.2" stroke-dasharray="4 2" marker-end="url(#arr-violet)"/>
+        <line x1="370" y1="210" x2="393" y2="195" stroke="#c9a96e" stroke-width="1.2" stroke-dasharray="4 2" marker-end="url(#arr-blue)"/>
+        <line x1="370" y1="295" x2="393" y2="235" stroke="#5fad8e" stroke-width="1.2" stroke-dasharray="4 2" marker-end="url(#arr-green)"/>
+        <line x1="370" y1="385" x2="393" y2="280" stroke="#c9a96e" stroke-width="1.2" stroke-dasharray="4 2" marker-end="url(#arr-amber)"/>
+        <!-- ZT engine → right col -->
+        <line x1="587" y1="125" x2="608" y2="114" stroke="#4d9bbf" stroke-width="1.2" stroke-dasharray="4 2" marker-end="url(#arr-cyan)"/>
+        <line x1="587" y1="200" x2="608" y2="195" stroke="#4d9bbf" stroke-width="1.2" stroke-dasharray="4 2" marker-end="url(#arr-cyan)"/>
+        <!-- XDR spans both sides -->
+        <line x1="610" y1="114" x2="612" y2="268" stroke="#4d9bbf" stroke-width="1" stroke-dasharray="3 2" opacity="0.5"/>
+        <line x1="610" y1="268" x2="612" y2="385" stroke="#4d9bbf" stroke-width="1" stroke-dasharray="3 2" opacity="0.5"/>
+        <line x1="610" y1="385" x2="612" y2="460" stroke="#4d9bbf" stroke-width="1" stroke-dasharray="3 2" opacity="0.5"/>
+        <!-- All layers → network -->
+        <line x1="190" y1="495" x2="190" y2="504" stroke="#4d9bbf" stroke-width="1" stroke-dasharray="3 2" opacity="0.4" marker-end="url(#arr-cyan)"/>
+        <line x1="490" y1="645" x2="490" y2="504" stroke="#4d9bbf" stroke-width="1" stroke-dasharray="3 2" opacity="0.4"/>
+        <line x1="790" y1="232" x2="790" y2="504" stroke="#4d9bbf" stroke-width="1" stroke-dasharray="3 2" opacity="0.4"/>
+
+        <!-- THREAT INTELLIGENCE BANNER (bottom) -->
+        <rect x="10" y="570" width="960" height="38" rx="8" fill="#111826" stroke="rgba(201,169,110,0.1)" stroke-width="1"/>
+        <text x="24" y="584" fill="#7a869e" font-size="9" letter-spacing="1.5">THREAT INTELLIGENCE &amp; SIGNALS</text>
+        <g transform="translate(180,574)">
+          <rect x="0" y="0" width="120" height="22" rx="4" fill="#0e1420" stroke="rgba(201,169,110,0.22)"/><text x="60" y="15" fill="#9aa3b8" font-size="8.5" text-anchor="middle">Microsoft Threat Intelligence</text>
+          <rect x="126" y="0" width="100" height="22" rx="4" fill="#0e1420" stroke="rgba(201,169,110,0.22)"/><text x="176" y="15" fill="#9aa3b8" font-size="8.5" text-anchor="middle">Defender TI (MDTI)</text>
+          <rect x="232" y="0" width="100" height="22" rx="4" fill="#0e1420" stroke="rgba(201,169,110,0.22)"/><text x="282" y="15" fill="#9aa3b8" font-size="8.5" text-anchor="middle">Sentinel TI Connector</text>
+          <rect x="338" y="0" width="100" height="22" rx="4" fill="#0e1420" stroke="rgba(201,169,110,0.22)"/><text x="388" y="15" fill="#9aa3b8" font-size="8.5" text-anchor="middle">MITRE ATT&amp;CK v14</text>
+          <rect x="444" y="0" width="120" height="22" rx="4" fill="#0e1420" stroke="rgba(201,169,110,0.22)"/><text x="504" y="15" fill="#9aa3b8" font-size="8.5" text-anchor="middle">Threat Analytics Reports</text>
+          <rect x="570" y="0" width="100" height="22" rx="4" fill="#0e1420" stroke="rgba(201,169,110,0.22)"/><text x="620" y="15" fill="#9aa3b8" font-size="8.5" text-anchor="middle">Custom TI Indicators</text>
+        </g>
+
+        <!-- LEGEND -->
+        <g transform="translate(10,618)">
+          <rect x="0" y="0" width="960" height="40" rx="6" fill="#0e1420" stroke="rgba(201,169,110,0.1)"/>
+          <text x="14" y="14" fill="#7a869e" font-size="8" letter-spacing="1">LEGEND:</text>
+          <circle cx="70" cy="11" r="3" fill="#9b7dd4"/><text x="77" y="14" fill="#7a869e" font-size="8">Identity signals</text>
+          <circle cx="160" cy="11" r="3" fill="#c9a96e"/><text x="167" y="14" fill="#7a869e" font-size="8">Endpoint signals</text>
+          <circle cx="252" cy="11" r="3" fill="#5fad8e"/><text x="259" y="14" fill="#7a869e" font-size="8">Email signals</text>
+          <circle cx="330" cy="11" r="3" fill="#c9a96e"/><text x="337" y="14" fill="#7a869e" font-size="8">Cloud app signals</text>
+          <circle cx="430" cy="11" r="3" fill="#4d9bbf"/><text x="437" y="14" fill="#7a869e" font-size="8">XDR/Sentinel correlation</text>
+          <line x1="560" y1="11" x2="580" y2="11" stroke="#7a869e" stroke-width="1.5" stroke-dasharray="4 2"/><text x="586" y="14" fill="#7a869e" font-size="8">Signal flow (→ Zero Trust Engine)</text>
+          <text x="14" y="32" fill="#7a869e" font-size="8" letter-spacing="1">ZT PILLARS:</text>
+          <text x="75" y="32" fill="#9b7dd4" font-size="8">● Identity</text>
+          <text x="132" y="32" fill="#c9a96e" font-size="8">● Endpoints</text>
+          <text x="200" y="32" fill="#5fad8e" font-size="8">● Applications</text>
+          <text x="278" y="32" fill="#bf7595" font-size="8">● Data</text>
+          <text x="318" y="32" fill="#c9a96e" font-size="8">● Infrastructure</text>
+          <text x="410" y="32" fill="#4d9bbf" font-size="8">● Network</text>
+          <text x="470" y="32" fill="#9aa3b8" font-size="8">● Govern (cross-cutting)</text>
+        </g>
+      </svg>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <div class="sub-title">Architecture Layer — Framework Alignment</div>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Architecture Layer</th><th>NIST CSF 2.0</th><th>ISO 27001:2022</th><th>CIS Controls</th><th>CIS M365 Benchmark</th><th>GDPR</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Identity &amp; Access</strong></td><td>PR.AA, PR.AC</td><td>A.5.15–5.18, A.8.2, A.8.5</td><td>CIS 5, 6</td><td>§1 (1.1–1.8)</td><td>Art.25, Art.32</td></tr>
+          <tr><td><strong>Endpoints &amp; Devices</strong></td><td>PR.PS, DE.CM</td><td>A.8.1, A.8.7–8.9, A.8.19</td><td>CIS 1, 4, 7, 10</td><td>§5.3</td><td>Art.25, Art.32</td></tr>
+          <tr><td><strong>Email &amp; Collaboration</strong></td><td>PR.DS-02, DE.CM</td><td>A.8.7, A.8.20–8.23</td><td>CIS 9, 14</td><td>§2 (2.1–2.5), §4</td><td>Art.32</td></tr>
+          <tr><td><strong>Cloud Apps &amp; CASB</strong></td><td>ID.AM, PR.AA-05</td><td>A.5.19, A.5.23, A.8.16</td><td>CIS 4, 15, 16</td><td>§3 (3.3–3.7)</td><td>Art.28, Art.32</td></tr>
+          <tr><td><strong>Data Protection</strong></td><td>PR.DS-01, PR.DS-05</td><td>A.5.10–5.13, A.8.10–8.12</td><td>CIS 3</td><td>§3.1, §5.2</td><td>Art.5, 25, 32</td></tr>
+          <tr><td><strong>Detection &amp; Response</strong></td><td>DE.AE, RS.MA, RC.RP</td><td>A.5.24–5.28, A.8.15–8.16</td><td>CIS 8, 13, 17</td><td>§5.1</td><td>Art.33, Art.34</td></tr>
+          <tr><td><strong>Network &amp; Infrastructure</strong></td><td>PR.IR-04, PR.PS</td><td>A.8.20–8.22</td><td>CIS 12, 13</td><td>§1.1 (legacy block)</td><td>Art.32</td></tr>
+          <tr><td><strong>Zero Trust Policy Engine</strong></td><td>PR.AA-05</td><td>A.5.15, A.8.3, A.8.20</td><td>CIS 6.7</td><td>§1.1.2, §1.1.3</td><td>Art.25, Art.32</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+<!-- ===== CONTROL LIBRARY ===== -->
+<section id="tab-library" class="tab-panel">
+  <div class="section-title">Unified Control Library</div>
+  <div class="section-desc">53 deduplicated controls across 10 security domains. Use the Framework Filter Bar at the top or the filters below to narrow results. The active framework filter highlights relevant controls and shows their specific control references.</div>
+
+  <div class="filter-bar" id="libFilterBar">
+    <input type="text" id="libSearch" placeholder="Search controls, tools, descriptions…"/>
+    <select id="libDomain">
+      <option value="">All Domains</option>
+      <option>Governance &amp; Risk</option>
+      <option>Identity &amp; Access</option>
+      <option>Endpoint &amp; Device</option>
+      <option>Email &amp; Collaboration</option>
+      <option>Cloud Apps &amp; CASB</option>
+      <option>Data Protection &amp; Privacy</option>
+      <option>Threat Detection &amp; Response</option>
+      <option>AI &amp; Copilot Governance</option>
+      <option>Resilience &amp; Recovery</option>
+      <option>Power Platform &amp; Low Code</option>
+    </select>
+    <select id="libPriority">
+      <option value="">All Priorities</option>
+      <option>Critical</option>
+      <option>High</option>
+      <option>Medium</option>
+    </select>
+    <select id="libZT">
+      <option value="">All ZT Pillars</option>
+      <option>Identity</option>
+      <option>Endpoints</option>
+      <option>Applications</option>
+      <option>Data</option>
+      <option>Network</option>
+      <option>Govern</option>
+    </select>
+    <button class="reset-btn" id="libReset">Reset</button>
+    <span class="filter-count" id="libCount">Showing all 53 controls</span>
+  </div>
+
+  <div class="ctrl-cards" id="ctrlCards">
+    <!-- Rendered by JS -->
+  </div>
+</section>
+<!-- ===== IDENTITY ===== -->
+<section id="tab-identity" class="tab-panel">
+  <div class="section-title">Identity &amp; Access Management</div>
+  <div class="section-desc">Microsoft Entra ID configuration baselines, Conditional Access policies, PIM, MFA enforcement, and external identity controls aligned to NIST CSF, CIS Controls v8.1, CIS M365 Benchmark §1, ISO 27001, and GDPR.</div>
+  <div class="callout cd"><div class="callout-icon">🚨</div><div class="callout-text"><strong>Critical:</strong> Identity is the #1 attack vector in M365. Password spray and phishing account for 99%+ of credential compromises. MFA and phishing-resistant auth (FIDO2/Passkeys/WHfB) are P0 controls. Block legacy auth before all else.</div></div>
+  <div class="ctrl-cards" id="domCtrl-identity"></div>
+  <div class="divider"></div>
+  <div class="subsection">
+    <div class="sub-title">Conditional Access Baseline Policy Set</div>
+    <div class="sub-desc">Implement in report-only first, enforce after 2-week validation</div>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Policy</th><th>Target</th><th>Conditions</th><th>Grant Controls</th><th>CIS M365</th><th>Priority</th></tr></thead>
+      <tbody>
+        <tr><td>CA-001 — Block Legacy Auth</td><td>All Users</td><td>Legacy auth clients</td><td>Block</td><td>§1.1, §2.5</td><td><span class="prio p-critical">Critical</span></td></tr>
+        <tr><td>CA-002 — Require MFA for All</td><td>All Users</td><td>Any location, any device</td><td>Require MFA</td><td>§1.1.1, §1.1.3</td><td><span class="prio p-critical">Critical</span></td></tr>
+        <tr><td>CA-003 — Admin Phishing-Resistant MFA</td><td>Admin Roles</td><td>All cloud apps</td><td>FIDO2/WHfB + Compliant Device</td><td>§1.1.1, §5.4</td><td><span class="prio p-critical">Critical</span></td></tr>
+        <tr><td>CA-004 — Compliant Device Gate</td><td>All Users</td><td>Exchange, SharePoint, Teams</td><td>Compliant or Hybrid-joined</td><td>§1.1.2, §5.3</td><td><span class="prio p-high">High</span></td></tr>
+        <tr><td>CA-005 — High Risk Sign-In</td><td>All Users</td><td>Sign-in risk ≥ High</td><td>MFA required + block untrusted</td><td>§1.1</td><td><span class="prio p-high">High</span></td></tr>
+        <tr><td>CA-006 — High Risk User</td><td>All Users</td><td>User risk ≥ High</td><td>Change password + MFA</td><td>§1.1</td><td><span class="prio p-high">High</span></td></tr>
+        <tr><td>CA-007 — Unmanaged Device DLP</td><td>All Users</td><td>Unmanaged devices</td><td>App-enforced restrictions</td><td>§3.3, §5.3</td><td><span class="prio p-medium">Medium</span></td></tr>
+        <tr><td>CA-008 — Block Risky Countries</td><td>All Users</td><td>Named locations excluded</td><td>Block</td><td>§1.1</td><td><span class="prio p-medium">Medium</span></td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</section>
+
+<!-- ===== ENDPOINT ===== -->
+<section id="tab-endpoint" class="tab-panel">
+  <div class="section-title">Endpoint Security — MDE &amp; Intune</div>
+  <div class="section-desc">Defender for Endpoint configuration baselines, Intune compliance, ASR rules, TVM, and device hardening aligned to CIS Controls IG2, CIS M365 Benchmark §5.3, NIST CSF Protect/Detect functions.</div>
+  <div class="ctrl-cards" id="domCtrl-endpoint"></div>
+  <div class="divider"></div>
+  <div class="subsection">
+    <div class="sub-title">ASR Rules Status Matrix</div>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>ASR Rule</th><th>Mode</th><th>CIS Controls</th><th>CIS M365</th><th>NIST</th><th>ISO</th></tr></thead>
+      <tbody>
+        <tr><td>Block Office child processes</td><td><span class="prio p-critical">Block</span></td><td>CIS 10.5</td><td>§5.3.2</td><td>PR.PS-01</td><td>A.8.19</td></tr>
+        <tr><td>Block credential stealing from LSASS</td><td><span class="prio p-critical">Block</span></td><td>CIS 5.5</td><td>§5.3.2</td><td>PR.AA-01</td><td>A.8.5</td></tr>
+        <tr><td>Block Office from creating executables</td><td><span class="prio p-critical">Block</span></td><td>CIS 10.5</td><td>§5.3.2</td><td>PR.PS-01</td><td>A.8.19</td></tr>
+        <tr><td>Block JS/VBScript launching executables</td><td><span class="prio p-critical">Block</span></td><td>CIS 10.5</td><td>§5.3.2</td><td>PR.PS-01</td><td>A.8.19</td></tr>
+        <tr><td>Block obfuscated macro code</td><td><span class="prio p-critical">Block</span></td><td>CIS 2.7</td><td>§5.3.2</td><td>PR.PS-06</td><td>A.8.19</td></tr>
+        <tr><td>Block vulnerable signed driver abuse</td><td><span class="prio p-critical">Block</span></td><td>CIS 10.5</td><td>§5.3.2</td><td>PR.PS-01</td><td>A.8.8</td></tr>
+        <tr><td>Block untrusted/unsigned USB executables</td><td><span class="prio p-high">Block</span></td><td>CIS 10.3</td><td>§5.3</td><td>PR.AC-04</td><td>A.8.19</td></tr>
+        <tr><td>Use advanced ransomware protection</td><td><span class="prio p-high">Block</span></td><td>CIS 11.4</td><td>§5.3.2</td><td>PR.DS-04</td><td>A.8.7</td></tr>
+        <tr><td>Block persistence via WMI subscription</td><td><span class="prio p-medium">Audit→Block</span></td><td>CIS 10.5</td><td>§5.3</td><td>DE.CM-01</td><td>A.8.16</td></tr>
+        <tr><td>Block email/webmail executable content</td><td><span class="prio p-critical">Block</span></td><td>CIS 9.6</td><td>§2.1, §5.3.2</td><td>PR.DS-02</td><td>A.8.23</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</section>
+
+<!-- ===== EMAIL ===== -->
+<section id="tab-email" class="tab-panel">
+  <div class="section-title">Email &amp; Collaboration Security</div>
+  <div class="section-desc">Defender for Office 365 configuration baseline, MDO preset policies, email authentication, SharePoint/Teams controls, aligned to CIS M365 Benchmark §2–4 and GDPR Art.32.</div>
+  <div class="callout cw"><div class="callout-icon">⚠️</div><div class="callout-text"><strong>CIS M365 Benchmark §2 Note:</strong> The CIS M365 Benchmark requires DKIM enabled for all Exchange Online domains (§2.2.1), DMARC records with enforcement (§2.2.2), SPF hard fail (§2.2.3), and SMTP AUTH disabled by default (§2.5). These are prescriptive, testable controls — not just best practices.</div></div>
+  <div class="ctrl-cards" id="domCtrl-email"></div>
+  <div class="divider"></div>
+  <div class="subsection">
+    <div class="sub-title">Email Authentication Deployment Status Matrix</div>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Control</th><th>CIS M365</th><th>Configuration</th><th>Priority</th><th>Evidence</th></tr></thead>
+      <tbody>
+        <tr><td>SPF Record</td><td>§2.2.3</td><td>Include only required sources, -all hard fail</td><td><span class="prio p-critical">Critical</span></td><td>DNS TXT record, SPF test result</td></tr>
+        <tr><td>DKIM Signing</td><td>§2.2.1</td><td>Enabled for all Exchange Online sending domains</td><td><span class="prio p-critical">Critical</span></td><td>DKIM settings page, DNS CNAME records</td></tr>
+        <tr><td>DMARC p=reject</td><td>§2.2.2</td><td>p=none → p=quarantine → p=reject (60-day roadmap)</td><td><span class="prio p-critical">Critical</span></td><td>DNS TXT, DMARC aggregate report</td></tr>
+        <tr><td>SMTP AUTH Disabled</td><td>§2.5</td><td>Disabled tenant-wide; exceptions require approval</td><td><span class="prio p-critical">Critical</span></td><td>Org-wide SMTP AUTH settings, per-mailbox exceptions</td></tr>
+        <tr><td>Auto-Forward Block</td><td>§2.3</td><td>Remote domains: auto-forward disabled; outbound policy</td><td><span class="prio p-high">High</span></td><td>Remote domain settings, alert policy</td></tr>
+        <tr><td>Transport Rules (external)</td><td>§2.3.1</td><td>No unapproved external forwarding transport rules</td><td><span class="prio p-high">High</span></td><td>Transport rule audit log, approved list</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</section>
+
+<!-- ===== CASB ===== -->
+<section id="tab-casb" class="tab-panel">
+  <div class="section-title">Cloud App Security — CASB &amp; Defender for Cloud Apps</div>
+  <div class="section-desc">Shadow IT discovery, CAAC session policies, OAuth app governance, and SaaS Security Posture Management. Aligned to CIS Controls CIS 4, 15 and ISO 27001 A.5.23.</div>
+  <div class="ctrl-cards" id="domCtrl-casb"></div>
+</section>
+
+<!-- ===== DATA ===== -->
+<section id="tab-data" class="tab-panel">
+  <div class="section-title">Data Protection — Microsoft Purview</div>
+  <div class="section-desc">Sensitivity labeling taxonomy, DLP policies, retention, DSPM for AI, and information governance controls aligned to GDPR and ISO 27001 data classification requirements. CIS M365 Benchmark §3 prescribes specific SharePoint and OneDrive controls.</div>
+  <div class="ctrl-cards" id="domCtrl-data"></div>
+  <div class="divider"></div>
+  <div class="subsection">
+    <div class="sub-title">Sensitivity Label Taxonomy (Recommended)</div>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Label</th><th>Description</th><th>Encryption</th><th>Watermark</th><th>Sharing</th><th>GDPR</th><th>CIS M365</th><th>Examples</th></tr></thead>
+      <tbody>
+        <tr><td>Public</td><td>Non-sensitive, approved for external sharing</td><td class="cross">✗</td><td class="cross">✗</td><td>Unrestricted</td><td class="cross">—</td><td>§3.1</td><td>Press releases, public docs</td></tr>
+        <tr><td>Internal</td><td>Internal use only</td><td class="cross">✗</td><td class="partial">Optional</td><td>Internal only</td><td class="partial">~</td><td>§3.1</td><td>Policies, internal memos</td></tr>
+        <tr><td>Confidential</td><td>Sensitive business data</td><td class="check">✓</td><td class="check">✓</td><td>Auth'd partners</td><td class="check">✓ Art.32</td><td>§3.1, §3.2</td><td>Contracts, financials</td></tr>
+        <tr><td>Highly Confidential</td><td>C-suite, legal, HR only</td><td class="check">✓</td><td class="check">✓</td><td>Specific users</td><td class="check">✓ Art.32</td><td>§3.1, §3.2</td><td>M&amp;A docs, legal matters</td></tr>
+        <tr><td>Personal Data (GDPR)</td><td>Personal / special category data</td><td class="check">✓</td><td class="check">✓</td><td>Need-to-know</td><td class="check">✓ Art.5, 25, 32</td><td>§3.1, §5.2</td><td>HR records, health data</td></tr>
+        <tr><td>AI Restricted</td><td>Not for AI/Copilot processing</td><td class="check">✓</td><td class="check">✓</td><td>Named users only</td><td class="check">✓ Art.5</td><td>§3.1</td><td>Trade secrets, regulated AI data</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</section>
+
+<!-- ===== THREAT DETECTION ===== -->
+<section id="tab-tdr" class="tab-panel">
+  <div class="section-title">Threat Detection &amp; Response</div>
+  <div class="section-desc">Microsoft Defender XDR, Sentinel SIEM/SOAR, Defender for Identity, Exposure Management, and incident response governance. CIS M365 §5.1 mandates audit log retention and SIEM integration.</div>
+  <div class="ctrl-cards" id="domCtrl-tdr"></div>
+  <div class="divider"></div>
+  <div class="subsection">
+    <div class="sub-title">GDPR Breach Response Workflow</div>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Hour</th><th>Action</th><th>M365 Tool</th><th>GDPR Article</th><th>Evidence</th></tr></thead>
+      <tbody>
+        <tr><td>0–1h</td><td>Detect incident in Defender XDR / Sentinel — assess scope and severity</td><td>Defender XDR, Sentinel</td><td>Art.33</td><td>Incident ticket, initial triage notes</td></tr>
+        <tr><td>1–4h</td><td>Contain threat — isolate devices, disable accounts, block mail flow as needed</td><td>MDE, Entra ID, Exchange</td><td>Art.32, Art.33</td><td>Containment actions log, AIR report</td></tr>
+        <tr><td>4–24h</td><td>Assess personal data impact — scope of breach, affected data subjects, categories</td><td>Purview eDiscovery, Audit</td><td>Art.33(2)</td><td>Data impact assessment document</td></tr>
+        <tr><td>24–48h</td><td>Legal/DPO notification decision — does breach meet Art.33 threshold?</td><td>Compliance Manager, Legal</td><td>Art.33(1)</td><td>Breach decision log, legal advice record</td></tr>
+        <tr><td>48–72h</td><td>Supervisory authority notification (if required) — file Art.33 notification</td><td>Purview / Manual</td><td>Art.33(1)</td><td>Notification submission, timestamp</td></tr>
+        <tr><td>&gt;72h</td><td>Data subject notification if high risk (Art.34) — remediation &amp; post-incident review</td><td>Communication tools, Legal</td><td>Art.34</td><td>Data subject comms, PIR report</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</section>
+<!-- ===== AI GOVERNANCE ===== -->
+<section id="tab-aiact" class="tab-panel">
+  <div class="section-title">AI Governance &amp; EU AI Act</div>
+  <div class="section-desc">Compliance considerations for M365 Copilot, Azure OpenAI, and AI-powered features under the EU AI Act (phased enforcement) and GDPR Art.22. AI governance overlaps significantly with data protection and identity controls.</div>
+  <div class="callout cw"><div class="callout-icon">⚠️</div><div class="callout-text"><strong>Enforcement Timeline:</strong> GPAI model obligations from August 2025. High-risk AI system obligations from August 2026. Start AI inventory, DPIA/AIA assessments, and oversharing remediation now.</div></div>
+  <div class="ctrl-cards" id="domCtrl-ai"></div>
+  <div class="divider"></div>
+  <div class="subsection">
+    <div class="sub-title">AI System Classification — EU AI Act Risk Levels</div>
+    <div class="compare-grid">
+      <div class="compare-card"><div class="compare-hdr"><div class="compare-hdr-icon">🤖</div><div><div class="compare-hdr-title">M365 Copilot</div><div class="compare-hdr-sub">Risk Classification</div></div></div><div class="compare-body">
+        <div class="compare-row"><span class="compare-row-lbl">Risk Level</span><span class="compare-row-val"><span class="prio p-high">Limited Risk</span></span></div>
+        <div class="compare-row"><span class="compare-row-lbl">Primary Obligation</span><span class="compare-row-val">Transparency (Art.50)</span></div>
+        <div class="compare-row"><span class="compare-row-lbl">GPAI Category</span><span class="compare-row-val">Yes — GPT-4 based</span></div>
+        <div class="compare-row"><span class="compare-row-lbl">Data Governance</span><span class="compare-row-val">Required (DSPM for AI)</span></div>
+        <div class="compare-row"><span class="compare-row-lbl">Audit Logging</span><span class="compare-row-val">Required (Purview Audit)</span></div>
+        <div class="compare-row"><span class="compare-row-lbl">Human Oversight</span><span class="compare-row-val">Recommended (Art.14)</span></div>
+      </div></div>
+      <div class="compare-card"><div class="compare-hdr"><div class="compare-hdr-icon">🔍</div><div><div class="compare-hdr-title">AI-Powered Security</div><div class="compare-hdr-sub">Sentinel AI / XDR AI</div></div></div><div class="compare-body">
+        <div class="compare-row"><span class="compare-row-lbl">Risk Level</span><span class="compare-row-val"><span class="prio p-medium">Minimal Risk</span></span></div>
+        <div class="compare-row"><span class="compare-row-lbl">Examples</span><span class="compare-row-val">AI threat detection</span></div>
+        <div class="compare-row"><span class="compare-row-lbl">Transparency</span><span class="compare-row-val">Internal documentation</span></div>
+        <div class="compare-row"><span class="compare-row-lbl">Audit Trail</span><span class="compare-row-val">Required (Art.12)</span></div>
+        <div class="compare-row"><span class="compare-row-lbl">Override</span><span class="compare-row-val">Analyst review</span></div>
+        <div class="compare-row"><span class="compare-row-lbl">GDPR Impact</span><span class="compare-row-val">Art.22 if automated decisions</span></div>
+      </div></div>
+      <div class="compare-card"><div class="compare-hdr"><div class="compare-hdr-icon">⚡</div><div><div class="compare-hdr-title">High-Risk AI Use Cases</div><div class="compare-hdr-sub">Requires Full Compliance</div></div></div><div class="compare-body">
+        <div class="compare-row"><span class="compare-row-lbl">HR / Recruitment AI</span><span class="compare-row-val"><span class="prio p-critical">High Risk</span></span></div>
+        <div class="compare-row"><span class="compare-row-lbl">Credit / Risk Scoring</span><span class="compare-row-val"><span class="prio p-critical">High Risk</span></span></div>
+        <div class="compare-row"><span class="compare-row-lbl">CV / CV Screening</span><span class="compare-row-val"><span class="prio p-critical">High Risk</span></span></div>
+        <div class="compare-row"><span class="compare-row-lbl">Conformity Assessment</span><span class="compare-row-val">Mandatory</span></div>
+        <div class="compare-row"><span class="compare-row-lbl">EU AI DB Registration</span><span class="compare-row-val">Mandatory (Art.49)</span></div>
+        <div class="compare-row"><span class="compare-row-lbl">DPIA Required</span><span class="compare-row-val">✓ GDPR Art.35</span></div>
+      </div></div>
+    </div>
+  </div>
+  <div class="subsection">
+    <div class="sub-title">AI-Ready M365 Gating Checklist</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px">
+      <div class="callout ci" style="margin-bottom:0"><div class="callout-text"><strong>1. Data Ready</strong><br>Sensitivity labels applied. DLP policies active. Retention configured. Oversharing remediation complete (DSPM for AI).</div></div>
+      <div class="callout ci" style="margin-bottom:0"><div class="callout-text"><strong>2. Access Ready</strong><br>CA policies active. PIM configured. Access reviews running. Guest lifecycle governed. App consent restricted.</div></div>
+      <div class="callout ci" style="margin-bottom:0"><div class="callout-text"><strong>3. Monitoring Ready</strong><br>Purview Audit Premium enabled. Defender XDR active. Sentinel analytics rules live. AI DLP policies deployed.</div></div>
+      <div class="callout ci" style="margin-bottom:0"><div class="callout-text"><strong>4. Governance Ready</strong><br>AI inventory created. DPIA/AIA in progress. AI use policy published. Human oversight process defined. Training complete.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ZERO TRUST ===== -->
+<section id="tab-zerotrust" class="tab-panel">
+  <div class="section-title">Zero Trust Architecture</div>
+  <div class="section-desc">Microsoft's Zero Trust model across six pillars with M365 implementation guidance, control mapping, and framework alignment.</div>
+  <div class="callout ci"><div class="callout-icon">ℹ️</div><div class="callout-text"><strong>Zero Trust Principles:</strong> <strong>Verify Explicitly</strong> — authenticate and authorise every request. <strong>Least Privilege</strong> — limit access to what's needed. <strong>Assume Breach</strong> — segment access, encrypt, monitor everything.</div></div>
+  <div class="zt-diagram">
+    <div class="zt-row"><div class="zt-label">Identity</div><div class="zt-bar">
+      <div class="zt-chip" style="--cc:#9b7dd4"><div class="chip-dot"></div>Entra ID</div>
+      <div class="zt-chip" style="--cc:#9b7dd4"><div class="chip-dot"></div>Conditional Access</div>
+      <div class="zt-chip" style="--cc:#9b7dd4"><div class="chip-dot"></div>MFA / Passwordless</div>
+      <div class="zt-chip" style="--cc:#9b7dd4"><div class="chip-dot"></div>PIM JIT</div>
+      <div class="zt-chip" style="--cc:#9b7dd4"><div class="chip-dot"></div>Identity Protection</div>
+      <div class="zt-chip" style="--cc:#9b7dd4"><div class="chip-dot"></div>Access Reviews</div>
+      <div class="zt-chip" style="--cc:#9b7dd4"><div class="chip-dot"></div>Defender for Identity</div>
+    </div></div>
+    <div class="zt-row"><div class="zt-label">Endpoints</div><div class="zt-bar">
+      <div class="zt-chip" style="--cc:#c9a96e"><div class="chip-dot"></div>Intune Compliance</div>
+      <div class="zt-chip" style="--cc:#c9a96e"><div class="chip-dot"></div>MDE Health &amp; EDR</div>
+      <div class="zt-chip" style="--cc:#c9a96e"><div class="chip-dot"></div>Device Compliance CA</div>
+      <div class="zt-chip" style="--cc:#c9a96e"><div class="chip-dot"></div>Windows LAPS</div>
+      <div class="zt-chip" style="--cc:#c9a96e"><div class="chip-dot"></div>BitLocker / FileVault</div>
+      <div class="zt-chip" style="--cc:#c9a96e"><div class="chip-dot"></div>ASR Rules</div>
+      <div class="zt-chip" style="--cc:#c9a96e"><div class="chip-dot"></div>Security Baselines</div>
+    </div></div>
+    <div class="zt-row"><div class="zt-label">Applications</div><div class="zt-bar">
+      <div class="zt-chip" style="--cc:#5fad8e"><div class="chip-dot"></div>Defender Cloud Apps</div>
+      <div class="zt-chip" style="--cc:#5fad8e"><div class="chip-dot"></div>CAAC Session Policies</div>
+      <div class="zt-chip" style="--cc:#5fad8e"><div class="chip-dot"></div>App Governance (OAuth)</div>
+      <div class="zt-chip" style="--cc:#5fad8e"><div class="chip-dot"></div>SSPM</div>
+      <div class="zt-chip" style="--cc:#5fad8e"><div class="chip-dot"></div>Power Platform DLP</div>
+      <div class="zt-chip" style="--cc:#5fad8e"><div class="chip-dot"></div>Managed Environments</div>
+    </div></div>
+    <div class="zt-row"><div class="zt-label">Data</div><div class="zt-bar">
+      <div class="zt-chip" style="--cc:#bf7595"><div class="chip-dot"></div>Purview DLP</div>
+      <div class="zt-chip" style="--cc:#bf7595"><div class="chip-dot"></div>Sensitivity Labels</div>
+      <div class="zt-chip" style="--cc:#bf7595"><div class="chip-dot"></div>Rights Management</div>
+      <div class="zt-chip" style="--cc:#bf7595"><div class="chip-dot"></div>Insider Risk Mgmt</div>
+      <div class="zt-chip" style="--cc:#bf7595"><div class="chip-dot"></div>DSPM for AI</div>
+      <div class="zt-chip" style="--cc:#bf7595"><div class="chip-dot"></div>Retention Policies</div>
+    </div></div>
+    <div class="zt-row"><div class="zt-label">Infrastructure</div><div class="zt-bar">
+      <div class="zt-chip" style="--cc:#c9a96e"><div class="chip-dot"></div>Secure Score</div>
+      <div class="zt-chip" style="--cc:#c9a96e"><div class="chip-dot"></div>Defender for Cloud</div>
+      <div class="zt-chip" style="--cc:#c9a96e"><div class="chip-dot"></div>TVM / Vuln Mgmt</div>
+      <div class="zt-chip" style="--cc:#c9a96e"><div class="chip-dot"></div>Exposure Management</div>
+      <div class="zt-chip" style="--cc:#c9a96e"><div class="chip-dot"></div>Config Drift Mgmt</div>
+    </div></div>
+    <div class="zt-row"><div class="zt-label">Network</div><div class="zt-bar">
+      <div class="zt-chip" style="--cc:#4d9bbf"><div class="chip-dot"></div>Named Locations</div>
+      <div class="zt-chip" style="--cc:#4d9bbf"><div class="chip-dot"></div>Entra Global Secure Access</div>
+      <div class="zt-chip" style="--cc:#4d9bbf"><div class="chip-dot"></div>Compliant Network</div>
+      <div class="zt-chip" style="--cc:#4d9bbf"><div class="chip-dot"></div>Network Protection (MDE)</div>
+    </div></div>
+  </div>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th>ZT Pillar</th><th>ZT Principle</th><th>Primary M365 Control</th><th>NIST CSF</th><th>ISO 27001</th><th>CIS Controls</th><th>CIS M365</th></tr></thead>
+    <tbody>
+      <tr><td>Identity</td><td>Verify every identity with strong auth</td><td>Entra CA + MFA + PIM</td><td>PR.AA</td><td>A.8.2, A.8.5</td><td>CIS 5, 6</td><td>§1</td></tr>
+      <tr><td>Endpoints</td><td>Validate device health before granting access</td><td>Intune Compliance + MDE</td><td>PR.PS-04</td><td>A.8.1, A.8.9</td><td>CIS 1, 4, 10</td><td>§5.3</td></tr>
+      <tr><td>Applications</td><td>Discover shadow IT, control app sessions</td><td>Defender Cloud Apps + CAAC</td><td>ID.AM, PR.AA</td><td>A.5.23</td><td>CIS 4, 15</td><td>§3.3–3.7</td></tr>
+      <tr><td>Data</td><td>Classify and protect data everywhere</td><td>Purview DLP + Labels + IRM</td><td>PR.DS</td><td>A.5.12, A.8.12</td><td>CIS 3</td><td>§3.1, §5.2</td></tr>
+      <tr><td>Infrastructure</td><td>Reduce attack surface, harden configurations</td><td>MDE TVM + Secure Score + ASR</td><td>ID.RA, PR.PS</td><td>A.8.7, A.8.8</td><td>CIS 7, 10</td><td>§5.3.1</td></tr>
+      <tr><td>Network</td><td>Segment and encrypt all traffic</td><td>Global Secure Access + Named Locations</td><td>PR.IR-04</td><td>A.8.20, A.8.22</td><td>CIS 12</td><td>§1.1 (legacy block)</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<!-- ===== COMPLIANCE MATRIX ===== -->
+<section id="tab-matrix" class="tab-panel">
+  <div class="section-title">Compliance Control Matrix</div>
+  <div class="section-desc">Cross-framework control mapping — M365 solution vs. all compliance framework requirements. Filter by framework using the top filter bar.</div>
+  <div style="display:flex;gap:14px;flex-wrap:wrap;margin-bottom:16px;font-family:var(--font-mono);font-size:11px;color:var(--text-muted)">
+    <span><span class="check">✓</span> Directly covered</span>
+    <span><span class="partial">~</span> Partially covered</span>
+    <span><span class="cross">—</span> Not applicable</span>
+  </div>
+  <div class="tbl-wrap"><table id="complianceMatrix">
+    <thead><tr><th>M365 Control Area</th><th>NIST CSF 2.0</th><th>NIST 800-53</th><th>ISO 27001:2022</th><th>CIS Controls v8.1</th><th>CIS M365 §</th><th>GDPR</th><th>EU AI Act</th><th>Priority</th></tr></thead>
+    <tbody>
+      <tr><td><strong>MFA / Passwordless Auth</strong></td><td>PR.AA-02,03</td><td>IA-2, IA-5</td><td>A.8.5</td><td>CIS 6.3, 6.5</td><td class="fw-cis365">§1.1.1, §1.1.3</td><td><span class="check">✓</span> Art.32</td><td><span class="partial">~</span> Art.15</td><td><span class="prio p-critical">Critical</span></td></tr>
+      <tr><td><strong>Block Legacy Auth</strong></td><td>PR.AA-05</td><td>IA-2, AC-17</td><td>A.8.20</td><td>CIS 4.2</td><td class="fw-cis365">§1.1, §2.5</td><td><span class="check">✓</span> Art.32</td><td><span class="cross">—</span></td><td><span class="prio p-critical">Critical</span></td></tr>
+      <tr><td><strong>Privileged Identity Mgmt (PIM)</strong></td><td>PR.AA-05</td><td>AC-2, AC-5, AC-6</td><td>A.8.2, A.5.15</td><td>CIS 5.4</td><td class="fw-cis365">§1.1.1, §5.4</td><td><span class="partial">~</span> Art.32</td><td><span class="check">✓</span> Art.17</td><td><span class="prio p-critical">Critical</span></td></tr>
+      <tr><td><strong>Entra ID Protection (Risk-CA)</strong></td><td>DE.CM-06</td><td>AC-2, SI-4</td><td>A.8.16</td><td>CIS 17.3</td><td class="fw-cis365">§1.1</td><td><span class="check">✓</span> Art.32</td><td><span class="partial">~</span> Art.15</td><td><span class="prio p-critical">Critical</span></td></tr>
+      <tr><td><strong>Intune Device Compliance</strong></td><td>PR.PS-04</td><td>AC-19, CM-8</td><td>A.8.1, A.8.9</td><td>CIS 1, 4</td><td class="fw-cis365">§5.3</td><td><span class="partial">~</span> Art.32</td><td><span class="cross">—</span></td><td><span class="prio p-critical">Critical</span></td></tr>
+      <tr><td><strong>MDE — EDR + Cloud Protection</strong></td><td>DE.CM-04, RS.MA</td><td>SI-3, SI-4</td><td>A.8.7</td><td>CIS 10</td><td class="fw-cis365">§5.3, §5.3.2</td><td><span class="partial">~</span> Art.32</td><td><span class="cross">—</span></td><td><span class="prio p-critical">Critical</span></td></tr>
+      <tr><td><strong>ASR Rules</strong></td><td>PR.PS-01</td><td>CM-7, SI-3</td><td>A.8.19</td><td>CIS 10.5</td><td class="fw-cis365">§5.3.2</td><td><span class="partial">~</span></td><td><span class="cross">—</span></td><td><span class="prio p-critical">Critical</span></td></tr>
+      <tr><td><strong>MDO — Safe Attach / Links</strong></td><td>PR.DS-02, DE.CM</td><td>SI-3, SI-4</td><td>A.8.7, A.8.23</td><td>CIS 9</td><td class="fw-cis365">§2.1, §2.1.2, §2.1.3</td><td><span class="partial">~</span></td><td><span class="cross">—</span></td><td><span class="prio p-critical">Critical</span></td></tr>
+      <tr><td><strong>SPF / DKIM / DMARC</strong></td><td>PR.DS-02</td><td>SC-8, SI-4</td><td>A.8.23</td><td>CIS 9.1</td><td class="fw-cis365">§2.2.1, §2.2.2, §2.2.3</td><td><span class="check">✓</span> Art.32</td><td><span class="cross">—</span></td><td><span class="prio p-critical">Critical</span></td></tr>
+      <tr><td><strong>Purview DLP</strong></td><td>PR.DS-01, PR.DS-05</td><td>AC-4, SC-28</td><td>A.8.12</td><td>CIS 3.6</td><td class="fw-cis365">§5.2, §5.2.1</td><td><span class="check">✓</span> Art.5,32</td><td><span class="check">✓</span> Art.10</td><td><span class="prio p-critical">Critical</span></td></tr>
+      <tr><td><strong>Sensitivity Labels</strong></td><td>PR.DS-01</td><td>AC-4, RA-2</td><td>A.5.12, A.5.13</td><td>CIS 3.2</td><td class="fw-cis365">§3.1, §3.2</td><td><span class="check">✓</span> Art.25</td><td><span class="check">✓</span> Art.10</td><td><span class="prio p-high">High</span></td></tr>
+      <tr><td><strong>Microsoft Sentinel (SIEM)</strong></td><td>DE.AE, RS.MA</td><td>AU-6, SI-4</td><td>A.8.15, A.8.16</td><td>CIS 8</td><td class="fw-cis365">§5.1, §5.1.1</td><td><span class="check">✓</span> Art.30</td><td><span class="check">✓</span> Art.12</td><td><span class="prio p-high">High</span></td></tr>
+      <tr><td><strong>Defender XDR / SOAR</strong></td><td>RS.MA-01</td><td>IR-4, IR-5</td><td>A.5.24–5.26</td><td>CIS 13, 17</td><td class="fw-cis365">§5.3</td><td><span class="check">✓</span> Art.33</td><td><span class="check">✓</span> Art.72</td><td><span class="prio p-critical">Critical</span></td></tr>
+      <tr><td><strong>CASB / Cloud App Control</strong></td><td>ID.AM, PR.AA-05</td><td>SA-9, AC-3</td><td>A.5.23</td><td>CIS 4, 15</td><td class="fw-cis365">§3.3, §3.5</td><td><span class="partial">~</span> Art.28</td><td><span class="cross">—</span></td><td><span class="prio p-high">High</span></td></tr>
+      <tr><td><strong>Insider Risk Management</strong></td><td>DE.CM-03</td><td>AU-6, PM-12</td><td>A.6.4</td><td>CIS 3, 8</td><td class="fw-cis365">§5.1, §5.2</td><td><span class="check">✓</span> Art.5</td><td><span class="cross">—</span></td><td><span class="prio p-high">High</span></td></tr>
+      <tr><td><strong>BitLocker / Disk Encryption</strong></td><td>PR.DS-01</td><td>SC-28</td><td>A.8.24</td><td>CIS 3.11</td><td class="fw-cis365">§5.3.1</td><td><span class="check">✓</span> Art.32</td><td><span class="cross">—</span></td><td><span class="prio p-high">High</span></td></tr>
+      <tr><td><strong>Purview Audit Premium</strong></td><td>DE.AE-02</td><td>AU-2, AU-3, AU-9</td><td>A.8.15</td><td>CIS 8.2</td><td class="fw-cis365">§5.1, §5.1.2</td><td><span class="check">✓</span> Art.30</td><td><span class="check">✓</span> Art.12</td><td><span class="prio p-high">High</span></td></tr>
+      <tr><td><strong>Retention Policies</strong></td><td>PR.DS-11</td><td>AU-11, SI-12</td><td>A.5.33, A.5.34</td><td>CIS 3.5</td><td class="fw-cis365">§4.1, §5.1.2</td><td><span class="check">✓</span> Art.5(1)(e)</td><td><span class="partial">~</span> Art.18</td><td><span class="prio p-medium">Medium</span></td></tr>
+      <tr><td><strong>DSPM for AI</strong></td><td>GV.RM, PR.DS</td><td>PM-9, AC-4</td><td>A.8.12, A.8.28</td><td>CIS 3, 15</td><td class="fw-cis365">§3.1, §5.2</td><td><span class="check">✓</span> Art.5,25</td><td><span class="check">✓</span> Art.9,10</td><td><span class="prio p-high">High</span></td></tr>
+      <tr><td><strong>Compliance Manager</strong></td><td>GV.RM</td><td>PM-9, CA-5</td><td>A.5.35</td><td>CIS 16, 17</td><td class="fw-cis365">§5.1</td><td><span class="check">✓</span> Multiple</td><td><span class="check">✓</span> Chapter III</td><td><span class="prio p-medium">Medium</span></td></tr>
+      <tr><td><strong>Power Platform DLP</strong></td><td>PR.DS-01, ID.AM</td><td>SA-8, AC-4</td><td>A.5.8, A.5.23</td><td>CIS 2, 3, 15</td><td class="fw-cis365">§5.2</td><td><span class="check">✓</span> Art.25,32</td><td><span class="partial">~</span> Art.17</td><td><span class="prio p-high">High</span></td></tr>
+      <tr><td><strong>Defender for Identity</strong></td><td>DE.CM, ID.AM</td><td>AC-2, SI-4</td><td>A.8.5, A.8.16</td><td>CIS 5, 6, 13</td><td class="fw-cis365">§1.1</td><td><span class="partial">~</span> Art.32</td><td><span class="cross">—</span></td><td><span class="prio p-high">High</span></td></tr>
+    </tbody>
+  </table></div>
+</section>
+<!-- ===== ROADMAP & AUDIT ===== -->
+<section id="tab-roadmap" class="tab-panel">
+  <div class="section-title">Implementation Roadmap &amp; Audit Evidence</div>
+  <div class="section-desc">Phased implementation approach, operating cadence, audit evidence pack, and source references.</div>
+
+  <div class="subsection">
+    <div class="sub-title">Prioritised Recommendations — Critical (Implement Immediately)</div>
+    <div class="rec-block critical">
+      <div class="rec-header"><span class="prio p-critical">Critical</span><span class="rec-title">R-01 · Enforce MFA for 100% of users with phishing-resistant methods</span></div>
+      <div class="rec-body">Deploy CA policies requiring MFA for all users. Migrate admins to FIDO2/WHfB. Disable legacy per-user MFA. Target: 0% admin exemptions.</div>
+      <div class="rec-mappings"><span class="badge bb">NIST PR.AA-02</span><span class="badge bv">ISO A.8.5</span><span class="badge bg">CIS 6.3</span><span class="badge bc">CIS M365 §1.1.1</span><span class="badge ba">GDPR Art.32</span></div>
+    </div>
+    <div class="rec-block critical">
+      <div class="rec-header"><span class="prio p-critical">Critical</span><span class="rec-title">R-02 · Block legacy authentication protocols globally</span></div>
+      <div class="rec-body">CA policy to block all legacy auth. Run sign-in logs filtered by legacy client first. 2-week report-only, then enforce. SMTP AUTH disabled tenant-wide.</div>
+      <div class="rec-mappings"><span class="badge bb">NIST PR.AA-05</span><span class="badge bv">ISO A.8.20</span><span class="badge bg">CIS 4.2</span><span class="badge bc">CIS M365 §1.1, §2.5</span></div>
+    </div>
+    <div class="rec-block critical">
+      <div class="rec-header"><span class="prio p-critical">Critical</span><span class="rec-title">R-03 · Deploy DMARC at p=reject for all sending domains</span></div>
+      <div class="rec-body">Audit all sending domains. Configure SPF (hard fail), DKIM, DMARC progression (none → quarantine → reject over 60 days). Register with DMARC reporting service.</div>
+      <div class="rec-mappings"><span class="badge bb">NIST PR.DS-02</span><span class="badge bv">ISO A.8.23</span><span class="badge bg">CIS 9.1</span><span class="badge bc">CIS M365 §2.2.1–2.2.3</span><span class="badge ba">GDPR Art.32</span></div>
+    </div>
+    <div class="rec-block critical">
+      <div class="rec-header"><span class="prio p-critical">Critical</span><span class="rec-title">R-04 · Enable Purview Audit Premium + export to Sentinel</span></div>
+      <div class="rec-body">Upgrade to Audit Premium. Retain ≥1 year. Enable MailItemsAccessed, Send, SearchQueryInitiatedExchange. Export to Sentinel for SIEM. Maps to GDPR Art.30 records obligation.</div>
+      <div class="rec-mappings"><span class="badge bb">NIST DE.AE-02</span><span class="badge bv">ISO A.8.15</span><span class="badge bg">CIS 8.2</span><span class="badge bc">CIS M365 §5.1</span><span class="badge ba">GDPR Art.30</span></div>
+    </div>
+    <div class="rec-block critical">
+      <div class="rec-header"><span class="prio p-critical">Critical</span><span class="rec-title">R-05 · Run DSPM for AI + remediate oversharing before Copilot</span></div>
+      <div class="rec-body">Before any Copilot expansion: run DSPM for AI reports, remediate "Anyone" sharing links, label all confidential content, restrict overshared SharePoint sites. Copilot respects existing permissions — over-permissioned data becomes AI-accessible.</div>
+      <div class="rec-mappings"><span class="badge bb">NIST PR.DS</span><span class="badge bv">ISO A.8.12</span><span class="badge bc">CIS M365 §3.1</span><span class="badge ba">GDPR Art.5</span><span class="badge br">EU AI Act Art.10</span></div>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <div class="sub-title">Implementation Roadmap — Phased Approach</div>
+    <div class="phases">
+      <div class="phase">
+        <div class="phase-head"><span>0–30 days</span><b>Stabilise</b></div>
+        <ul>
+          <li>Enable Purview Audit Premium + export to Sentinel</li>
+          <li>Block legacy auth; enforce MFA for admins</li>
+          <li>Configure PIM and emergency access accounts</li>
+          <li>Onboard priority endpoints to MDE</li>
+          <li>Deploy MDO Strict policy to executives/admins</li>
+          <li>Disable SMTP AUTH tenant-wide</li>
+          <li>Restrict external sharing defaults</li>
+          <li>Set Secure Score &amp; Compliance Manager baselines</li>
+        </ul>
+      </div>
+      <div class="phase">
+        <div class="phase-head"><span>31–60 days</span><b>Harden</b></div>
+        <ul>
+          <li>Enroll all devices in Intune; enforce compliance CA</li>
+          <li>Deploy Intune security baselines</li>
+          <li>Roll out Safe Links/Attachments broadly</li>
+          <li>SPF hard fail, DKIM, DMARC p=quarantine</li>
+          <li>Connect Defender for Cloud Apps; sanction apps</li>
+          <li>Pilot sensitivity label taxonomy + auto-labeling</li>
+          <li>Enable ASR rules in audit mode</li>
+          <li>Deploy Defender for Identity on DCs</li>
+        </ul>
+      </div>
+      <div class="phase">
+        <div class="phase-head"><span>61–90 days</span><b>Evidence</b></div>
+        <ul>
+          <li>DMARC p=reject for all domains</li>
+          <li>ASR rules to Block mode after tuning</li>
+          <li>Pilot DLP → enforcement for high-risk data</li>
+          <li>AI readiness: oversharing remediation + DSPM</li>
+          <li>Run first phishing simulation + access reviews</li>
+          <li>Enable Sentinel analytics rules &amp; playbooks</li>
+          <li>Map evidence to ISO/NIST/CIS/GDPR</li>
+          <li>Run ransomware/BEC tabletop exercise</li>
+        </ul>
+      </div>
+      <div class="phase">
+        <div class="phase-head"><span>Quarterly</span><b>Improve</b></div>
+        <ul>
+          <li>Review Secure Score &amp; Compliance Manager</li>
+          <li>Run access reviews for privileged, guest, AI groups</li>
+          <li>Refresh security baselines &amp; exception register</li>
+          <li>Test break-glass, IR, and data recovery procedures</li>
+          <li>Update DPIA/AIA records &amp; AI inventory</li>
+          <li>Run phishing simulation and measure improvements</li>
+          <li>Review config drift against approved baseline</li>
+          <li>Report posture to governance board</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <div class="sub-title">Audit Evidence Pack</div>
+    <div class="sub-desc">Evidence types, sources, cadence, and auditor questions answered</div>
+    <div class="tbl-wrap"><table class="audit-table">
+      <thead><tr><th>Evidence Type</th><th>Microsoft Source</th><th>Cadence</th><th>Framework</th><th>Auditor Question</th></tr></thead>
+      <tbody>
+        <tr><td>Policy exports</td><td>Entra CA, Intune, Defender, Exchange, SharePoint, Teams, Purview</td><td>Monthly + after major change</td><td>All</td><td>What is configured? Who approved deviations?</td></tr>
+        <tr><td>Posture metrics</td><td>Secure Score, Exposure Score, Compliance Manager</td><td>Monthly governance review</td><td>NIST GV, ISO 5.35, CIS 16</td><td>Is control maturity improving or degrading?</td></tr>
+        <tr><td>Access recertification</td><td>PIM activations, Access Reviews, guest reviews, app consent</td><td>Quarterly; privileged monthly</td><td>ISO 5.18, CIS 5/6, GDPR Art.32</td><td>Is least privilege maintained?</td></tr>
+        <tr><td>Incident records</td><td>Defender XDR, Sentinel, Purview DLP, IR tickets</td><td>Per incident; quarterly tabletop</td><td>NIST RS/RC, ISO 5.24–5.28, GDPR Art.33</td><td>Can the org detect, respond, and notify in 72h?</td></tr>
+        <tr><td>Data governance</td><td>Purview labels, DLP, retention, eDiscovery, DSPM for AI</td><td>Monthly DLP; quarterly taxonomy</td><td>GDPR Art.5,30,32, CIS 3, ISO 8.12</td><td>Is sensitive data classified, protected, retained lawfully?</td></tr>
+        <tr><td>Email auth</td><td>DNS records, DMARC reports, MDO threat reports</td><td>Monthly DMARC; quarterly MDO</td><td>CIS M365 §2.2, CIS 9.1, ISO A.8.23</td><td>Are all sending domains authenticated?</td></tr>
+        <tr><td>Device compliance</td><td>Intune compliance reports, MDE sensor health, LAPS status</td><td>Monthly</td><td>CIS M365 §5.3, CIS 1/4, ISO 8.1</td><td>What % of devices are compliant and enrolled?</td></tr>
+        <tr><td>Training &amp; awareness</td><td>Attack Simulation Training, LMS, AI policy attestation</td><td>Quarterly + onboarding</td><td>CIS 14, ISO A.6.3, GDPR Art.39</td><td>Are users trained on phishing, privacy, and AI use?</td></tr>
+        <tr><td>AI governance</td><td>AI inventory, DPIA/AIA, DSPM for AI, Copilot audit logs</td><td>Quarterly</td><td>EU AI Act Art.9,49, GDPR Art.35</td><td>Are AI systems inventoried, risk-classified, and governed?</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <div class="subsection">
+    <div class="sub-title">Operating Cadence</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px">
+      <div class="callout ci" style="margin-bottom:0"><div class="callout-text"><strong>Weekly</strong><br>High-severity incidents, risky users, active mail campaigns, critical CVEs, exposure changes.</div></div>
+      <div class="callout cw" style="margin-bottom:0"><div class="callout-text"><strong>Monthly</strong><br>Secure Score, DLP incidents, DMARC reports, baseline drift, external sharing, risky apps, evidence completeness.</div></div>
+      <div class="callout cd" style="margin-bottom:0"><div class="callout-text"><strong>Quarterly</strong><br>Access reviews, tabletop exercise, framework assessment, AI inventory refresh, risk register update, board posture report.</div></div>
+      <div class="callout cs" style="margin-bottom:0"><div class="callout-text"><strong>Annually</strong><br>Full ISMS review (ISO), NIST CSF assessment, GDPR DPO review, AI risk register and DPIA refresh, user awareness training.</div></div>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <div class="sub-title">Source References</div>
+    <div class="card" style="padding:18px 22px">
+      <ol style="padding-left:18px;list-style:decimal;display:grid;grid-template-columns:repeat(auto-fill,minmax(400px,1fr));gap:4px 24px">
+        <li style="margin:5px 0;font-size:12px;color:var(--text-secondary)">NIST Cybersecurity Framework CSF 2.0 — nist.gov/cyberframework</li>
+        <li style="margin:5px 0;font-size:12px;color:var(--text-secondary)">NIST SP 800-53 Rev.5 — csrc.nist.gov</li>
+        <li style="margin:5px 0;font-size:12px;color:var(--text-secondary)">CIS Controls v8.1 — cisecurity.org/controls</li>
+        <li style="margin:5px 0;font-size:12px;color:var(--text-secondary)">CIS Microsoft 365 Foundations Benchmark v4.0 — cisecurity.org/benchmark/microsoft_365</li>
+        <li style="margin:5px 0;font-size:12px;color:var(--text-secondary)">ISO/IEC 27001:2022 — iso.org</li>
+        <li style="margin:5px 0;font-size:12px;color:var(--text-secondary)">EU AI Act Regulation (EU) 2024/1689 — eur-lex.europa.eu</li>
+        <li style="margin:5px 0;font-size:12px;color:var(--text-secondary)">GDPR Regulation (EU) 2016/679 — eur-lex.europa.eu</li>
+        <li style="margin:5px 0;font-size:12px;color:var(--text-secondary)">Microsoft Zero Trust deployment with M365 — learn.microsoft.com</li>
+        <li style="margin:5px 0;font-size:12px;color:var(--text-secondary)">Microsoft Defender XDR — learn.microsoft.com/defender-xdr</li>
+        <li style="margin:5px 0;font-size:12px;color:var(--text-secondary)">Defender for Endpoint deployment — learn.microsoft.com/defender-endpoint</li>
+        <li style="margin:5px 0;font-size:12px;color:var(--text-secondary)">Defender for Office 365 — learn.microsoft.com/defender-office-365</li>
+        <li style="margin:5px 0;font-size:12px;color:var(--text-secondary)">Defender for Cloud Apps — learn.microsoft.com/defender-cloud-apps</li>
+        <li style="margin:5px 0;font-size:12px;color:var(--text-secondary)">Microsoft Entra security defaults — learn.microsoft.com/entra</li>
+        <li style="margin:5px 0;font-size:12px;color:var(--text-secondary)">Intune security baselines — learn.microsoft.com/intune</li>
+        <li style="margin:5px 0;font-size:12px;color:var(--text-secondary)">Microsoft Purview DLP — learn.microsoft.com/purview</li>
+        <li style="margin:5px 0;font-size:12px;color:var(--text-secondary)">DSPM for AI — learn.microsoft.com/purview/ai-microsoft-purview</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="footer">
+    <div class="footer-l">Dinesh Loganathan · M365 Security &amp; Compliance Blueprint v3.0 · 53 Controls · 7 Frameworks · 2025</div>
+    <div class="footer-r"><span>NIST CSF 2.0</span><span>NIST 800-53</span><span>ISO 27001:2022</span><span>CIS v8.1</span><span>CIS M365 v4.0</span><span>GDPR</span><span>EU AI Act</span><span style="border-left:1px solid rgba(201,169,110,0.15);padding-left:14px;"><a href="https://dineshlog.github.io" style="color:#c9a96e;text-decoration:none;">dineshlog.github.io</a></span></div>
+  </div>
+</footer>
+<script>
+// ── CONTROLS DATA ─────────────────────────────────────────────────────────
+const CONTROLS=[
+{id:"GOV-01",domain:"Governance & Risk",zt:"Govern",tool:"Purview Compliance Manager",name:"Compliance Manager — Framework Assessments",desc:"Create framework assessments for ISO 27001, GDPR, NIST CSF/800-53, and CIS; assign control owners, due dates, test status, and evidence links. Track improvement score over time as an executive KPI.",priority:"Critical",nist_csf:["GV.RM","GV.PO"],nist_800_53:["PM-9","CA-5","CA-7"],iso:["A.5.1","A.5.4","A.5.23","A.5.36"],cis_ctrl:["17","18"],cis_m365:["5.1","5.1.2"],gdpr:["Art.5","Art.24","Art.25","Art.32"],eu_ai:["Art.9","Art.17","Art.72"],evidence:"Assessment export, control test history, owner attestation, Secure Score trend"},
+{id:"GOV-02",domain:"Governance & Risk",zt:"Govern",tool:"Purview Audit / Defender XDR",name:"Unified Audit Logging — Tamper-Resistant",desc:"Enable Purview Audit Premium for all users. Retain ≥1 year. Enable MailItemsAccessed, Send, SearchQuery events. Export to Sentinel for GDPR Art.30 compliance.",priority:"Critical",nist_csf:["DE.AE-02"],nist_800_53:["AU-2","AU-3","AU-6","AU-9","CA-7"],iso:["A.8.15","A.8.16","A.5.28"],cis_ctrl:["8","17"],cis_m365:["5.1","5.1.1","5.1.2"],gdpr:["Art.30","Art.32","Art.33"],eu_ai:["Art.12","Art.19","Art.72"],evidence:"Audit configuration, log retention policy, Sentinel connector status"},
+{id:"GOV-03",domain:"Governance & Risk",zt:"Govern",tool:"Entra ID / PIM",name:"Least Privilege Governance — Privileged Role Inventory",desc:"Establish privileged role inventory, emergency access accounts, PIM approval, justification requirements, and access reviews. Monitor break-glass account usage with real-time alerts.",priority:"Critical",nist_csf:["PR.AA-05"],nist_800_53:["AC-2","AC-5","AC-6","IA-12"],iso:["A.5.15","A.5.16","A.5.18","A.8.2"],cis_ctrl:["5","6"],cis_m365:["1.1","1.1.1","5.4"],gdpr:["Art.25","Art.32"],eu_ai:["Art.9","Art.17"],evidence:"PIM settings export, role assignment review, break-glass test record"},
+{id:"GOV-04",domain:"Governance & Risk",zt:"Govern",tool:"M365 Admin Center / Entra",name:"Tenant Governance — Restrict Unmanaged Expansion",desc:"Restrict tenant creation, guest access, app consent, external sharing, and admin portal access to governed groups. Document and approve all exceptions.",priority:"High",nist_csf:["GV.RM","ID.AM"],nist_800_53:["AC-2","AC-3","CM-7","SA-9"],iso:["A.5.15","A.5.23","A.8.9"],cis_ctrl:["4","6","15"],cis_m365:["1.5","1.6","3.4"],gdpr:["Art.25","Art.28","Art.32"],eu_ai:["Art.17"],evidence:"Tenant settings export, governance policy document"},
+{id:"GOV-05",domain:"Governance & Risk",zt:"Govern",tool:"Service Health / Message Center",name:"Change-Aware Operations — Advisory Tracking",desc:"Track Microsoft service changes, security advisories, and retirement notices. Log impact assessment decisions and trigger CAB reviews for security-impacting changes.",priority:"Medium",nist_csf:["GV.RM"],nist_800_53:["CM-3","SI-5","PM-4"],iso:["A.5.8","A.8.8","A.8.32"],cis_ctrl:["7","17"],cis_m365:["5.3"],gdpr:["Art.24","Art.32"],eu_ai:["Art.17"],evidence:"Change log, CAB record, advisories reviewed and disposition"},
+{id:"IAM-01",domain:"Identity & Access",zt:"Identity",tool:"Entra Conditional Access",name:"MFA — Enforce Organisation-Wide with Phishing-Resistant Methods",desc:"Require MFA for all users via CA. Disable legacy per-user MFA. Prefer phishing-resistant methods: FIDO2/passkeys, Windows Hello for Business, CBA. 0% admin exemptions.",priority:"Critical",nist_csf:["PR.AA-02","PR.AA-03"],nist_800_53:["AC-2","IA-2","IA-5","IA-12"],iso:["A.5.16","A.5.17","A.8.5"],cis_ctrl:["6.3","6.5"],cis_m365:["1.1.1","1.1.2","1.1.3"],gdpr:["Art.25","Art.32"],eu_ai:["Art.15","Art.17"],evidence:"CA policy export, sign-in logs, MFA registration report"},
+{id:"IAM-02",domain:"Identity & Access",zt:"Identity",tool:"Entra Conditional Access",name:"Block Legacy Authentication Protocols — Tenant-Wide",desc:"Block all legacy auth (IMAP, POP3, SMTP AUTH, Basic Auth) via CA. 2-week report-only period first. Legacy auth bypasses MFA and causes 97% of credential stuffing.",priority:"Critical",nist_csf:["PR.AA-05"],nist_800_53:["IA-2","AC-17","SC-8"],iso:["A.8.5","A.8.20","A.8.21"],cis_ctrl:["4.2","6"],cis_m365:["1.1","2.5"],gdpr:["Art.32"],eu_ai:["Art.15"],evidence:"Sign-in logs legacy filter, CA policy, SMTP AUTH disabled confirmation"},
+{id:"IAM-03",domain:"Identity & Access",zt:"Identity",tool:"Entra PIM",name:"PIM — Just-In-Time Privileged Access",desc:"All privileged roles must be eligible (not permanent). Require MFA, approval, justification. Max duration: 4h Global Admin, 8h other admins. Roles: Global Admin, Security Admin, Exchange Admin, SharePoint Admin, Compliance Admin.",priority:"Critical",nist_csf:["PR.AA-05"],nist_800_53:["AC-2","AC-5","AC-6","AC-17"],iso:["A.5.15","A.5.18","A.8.2"],cis_ctrl:["5.4"],cis_m365:["1.1.1","5.4"],gdpr:["Art.25","Art.32"],eu_ai:["Art.17"],evidence:"PIM role settings, activation history, standing access report"},
+{id:"IAM-04",domain:"Identity & Access",zt:"Identity",tool:"Entra ID Protection",name:"Identity Protection — Risk-Based Conditional Access",desc:"Configure risk-based CA. Sign-in risk ≥ Medium → require MFA. User risk ≥ High → require password change + MFA. Enable risky user reports and automated remediation.",priority:"Critical",nist_csf:["DE.CM-06"],nist_800_53:["AC-2","IA-2","SI-4"],iso:["A.5.16","A.8.5","A.8.16"],cis_ctrl:["6","13"],cis_m365:["1.1","1.1.3"],gdpr:["Art.32"],eu_ai:["Art.15","Art.17"],evidence:"Risk policy export, risky user remediation report"},
+{id:"IAM-05",domain:"Identity & Access",zt:"Identity",tool:"Entra PIM / Access Reviews",name:"Access Reviews — Continuous Recertification",desc:"Quarterly access reviews for privileged roles, guest users, high-risk groups, app owners, and AI/Copilot-enabled groups. Auto-apply to remove/downgrade access on non-response.",priority:"High",nist_csf:["PR.AA-05"],nist_800_53:["AC-2","AC-3","CA-7"],iso:["A.5.18","A.5.20","A.8.2"],cis_ctrl:["5","6"],cis_m365:["1.8","1.1.1"],gdpr:["Art.5","Art.24","Art.32"],eu_ai:["Art.9","Art.17"],evidence:"Review completion report, remediation logs, auto-apply configuration"},
+{id:"IAM-06",domain:"Identity & Access",zt:"Identity",tool:"Entra App Governance",name:"OAuth App Governance — Admin Consent Control",desc:"Restrict user app consent; require admin consent workflow. Alert on risky OAuth apps: unused permissions, high-privilege scopes, unverified publishers, anomalous data access.",priority:"High",nist_csf:["PR.AA-05","ID.AM"],nist_800_53:["AC-3","SA-9","SC-7"],iso:["A.5.19","A.5.23","A.8.2"],cis_ctrl:["4.8","6","15"],cis_m365:["1.5","1.5.1"],gdpr:["Art.28","Art.32"],eu_ai:["Art.9","Art.17"],evidence:"Consent settings export, app governance dashboard, app inventory"},
+{id:"IAM-07",domain:"Identity & Access",zt:"Identity",tool:"Entra External Identities",name:"Guest Access — External Collaboration Controls",desc:"Restrict guest invitations to admins. Set B2B cross-tenant access policies. Require MFA for guests. Configure guest expiration. Remove stale guests >90 days inactive.",priority:"High",nist_csf:["PR.AA-05"],nist_800_53:["AC-2","AC-3","PS-7"],iso:["A.5.19","A.5.20","A.5.22"],cis_ctrl:["5","6","15"],cis_m365:["1.6","1.8","3.6"],gdpr:["Art.28","Art.32","Art.44"],eu_ai:["Art.17"],evidence:"External collaboration settings, guest review completion, stale guest report"},
+{id:"IAM-08",domain:"Identity & Access",zt:"Identity",tool:"Entra Auth Methods",name:"Phishing-Resistant Auth Roadmap — Disable Weak Methods",desc:"Disable SMS/voice OTP. Migrate to Authenticator (number matching), FIDO2/passkeys, or CBA. Enable registration campaigns. Enforce Auth Strengths in CA policies.",priority:"High",nist_csf:["PR.AA-02"],nist_800_53:["IA-2","IA-5"],iso:["A.8.5"],cis_ctrl:["6"],cis_m365:["1.1.1","1.2","1.2.1"],gdpr:["Art.32"],eu_ai:["Art.15"],evidence:"Auth methods policy, registration campaign report, weak method usage"},
+{id:"IAM-09",domain:"Identity & Access",zt:"Identity",tool:"Entra Password Protection",name:"Password Protection — Custom Banned List & Smart Lockout",desc:"Enable Password Protection with custom banned list. Enforce smart lockout (threshold: 10, duration: 60s). Deploy on-premises proxy for AD-synced accounts.",priority:"High",nist_csf:["PR.AA-02"],nist_800_53:["IA-5"],iso:["A.5.17"],cis_ctrl:["5.2"],cis_m365:["1.4","1.4.1"],gdpr:["Art.32"],eu_ai:[],evidence:"Password protection policy, banned password list, lockout event logs"},
+{id:"EPM-01",domain:"Endpoint & Device",zt:"Endpoints",tool:"Microsoft Intune",name:"Intune — Device Enrollment & Compliance-Gated Access",desc:"Enroll all corporate endpoints. Require Intune compliance for M365 access. Block unmanaged devices from sensitive workloads via CA. Deploy compliance policies: OS version, encryption, antivirus, screen lock.",priority:"Critical",nist_csf:["PR.PS-04"],nist_800_53:["AC-19","CM-8","SI-3"],iso:["A.5.10","A.8.1","A.8.9"],cis_ctrl:["1","4","12"],cis_m365:["5.3","5.3.1"],gdpr:["Art.25","Art.32"],eu_ai:["Art.15","Art.17"],evidence:"Device enrollment report, compliance policy export, CA policy, non-compliant device list"},
+{id:"EPM-02",domain:"Endpoint & Device",zt:"Endpoints",tool:"Defender for Endpoint",name:"MDE — EDR Onboarding & Cloud Protection",desc:"Onboard all Windows, macOS, Linux, iOS, Android to MDE. Verify sensor health. Enable cloud protection at 'High', Block at First Sight, EDR in Block mode, Tamper Protection, Network Protection.",priority:"Critical",nist_csf:["DE.CM-04","RS.MA"],nist_800_53:["SI-3","SI-4","CM-7"],iso:["A.8.7","A.8.15","A.8.16"],cis_ctrl:["10","13"],cis_m365:["5.3","5.3.2"],gdpr:["Art.32","Art.33"],eu_ai:["Art.15"],evidence:"MDE device inventory, sensor health, cloud protection settings, AIR policy"},
+{id:"EPM-03",domain:"Endpoint & Device",zt:"Endpoints",tool:"Intune / Defender",name:"Security Baselines — Microsoft Recommended Config",desc:"Deploy Windows, Edge, Defender, M365 Apps security baselines via Intune. Document all deviations with compensating controls and risk acceptance. Review baseline updates quarterly.",priority:"Critical",nist_csf:["PR.PS-01"],nist_800_53:["CM-2","CM-6","SI-2"],iso:["A.8.8","A.8.9","A.8.19"],cis_ctrl:["4","7"],cis_m365:["5.3.1"],gdpr:["Art.25","Art.32"],eu_ai:["Art.15","Art.17"],evidence:"Baseline policy assignments, deviation register, compliance trend report"},
+{id:"EPM-04",domain:"Endpoint & Device",zt:"Endpoints",tool:"Defender for Endpoint",name:"ASR Rules — Block Mode Deployment",desc:"Enable all ASR rules in Block mode after audit period. Key: Block Office macros, LSASS credential theft, JS/VBScript executables, obfuscated macros, vulnerable signed drivers. Maintain exception register.",priority:"Critical",nist_csf:["PR.PS-01"],nist_800_53:["CM-7","SI-3","SI-4"],iso:["A.8.7","A.8.8","A.8.19"],cis_ctrl:["10.5","12","13"],cis_m365:["5.3","5.3.2"],gdpr:["Art.32"],eu_ai:["Art.15"],evidence:"ASR policy export, event trend, exception register"},
+{id:"EPM-05",domain:"Endpoint & Device",zt:"Endpoints",tool:"Defender TVM",name:"Threat & Vulnerability Management (TVM)",desc:"Enable TVM. SLA targets: Critical CVEs ≤14 days, High ≤30 days. Integrate with Intune for remediation. Review Security Recommendations weekly. Track software inventory and certificates.",priority:"High",nist_csf:["ID.RA"],nist_800_53:["RA-5","SI-2","CM-8"],iso:["A.8.8","A.8.9","A.8.19"],cis_ctrl:["1","2","7"],cis_m365:["5.3"],gdpr:["Art.32"],eu_ai:["Art.15"],evidence:"TVM reports, remediation SLA metrics, exposure score trend"},
+{id:"EPM-06",domain:"Endpoint & Device",zt:"Endpoints",tool:"Intune / Windows",name:"Device Hardening — BitLocker, Secure Boot, LAPS",desc:"Require BitLocker/FileVault, Secure Boot, TPM, firewall, OS update compliance. Deploy Windows LAPS (Entra-integrated) — rotate local admin passwords every 30 days. Restrict LAPS retrieval to privileged roles only.",priority:"High",nist_csf:["PR.DS-01"],nist_800_53:["SC-28","SI-2","CM-6"],iso:["A.8.1","A.8.24","A.8.7"],cis_ctrl:["3.11","4","7","10"],cis_m365:["5.3","5.3.1"],gdpr:["Art.32"],eu_ai:["Art.15"],evidence:"Compliance policy status, encryption report, LAPS deployment status"},
+{id:"EPM-07",domain:"Endpoint & Device",zt:"Endpoints",tool:"Intune EPM",name:"Endpoint Privilege Management — Remove Local Admin",desc:"Remove local admin rights by default. Elevation workflow with approval, justification, time limit, and audit logging via Intune EPM. Monitor elevation events for abuse.",priority:"High",nist_csf:["PR.AA-05"],nist_800_53:["AC-6","CM-5"],iso:["A.8.2","A.8.18"],cis_ctrl:["5","6"],cis_m365:["5.4"],gdpr:["Art.25","Art.32"],eu_ai:["Art.17"],evidence:"Local admin report, EPM policy, elevation event logs"},
+{id:"EML-01",domain:"Email & Collaboration",zt:"Applications",tool:"Defender for Office 365",name:"MDO — Strict Preset Security Policy",desc:"Apply Strict preset policy to all users. Covers Safe Links with click-through block, Safe Attachments Dynamic Delivery, anti-phishing aggressive threshold, spoof intelligence. Document all exceptions.",priority:"Critical",nist_csf:["PR.DS-02","DE.CM"],nist_800_53:["SI-3","SI-4","SC-7"],iso:["A.8.7","A.8.15","A.8.16"],cis_ctrl:["9","10","13"],cis_m365:["2.1","2.1.2","2.1.3","2.4"],gdpr:["Art.32","Art.33"],eu_ai:["Art.15"],evidence:"Preset policy assignments, quarantine metrics, threat reports"},
+{id:"EML-02",domain:"Email & Collaboration",zt:"Applications",tool:"Defender for Office 365",name:"Anti-Phishing — Impersonation & Spoof Protection",desc:"Enable impersonation protection for executives and key domains. Set phishing threshold to '2-Aggressive'. Enable mailbox intelligence. Quarantine for impersonation, Junk for spoof.",priority:"Critical",nist_csf:["PR.DS-02"],nist_800_53:["SI-3","SI-4","SC-5"],iso:["A.8.23"],cis_ctrl:["9.5"],cis_m365:["2.2","2.1.5"],gdpr:["Art.32"],eu_ai:["Art.15"],evidence:"Anti-phishing policy, spoof intelligence report, impersonation detections"},
+{id:"EML-03",domain:"Email & Collaboration",zt:"Applications",tool:"Exchange Online / DNS",name:"Email Authentication — SPF, DKIM, DMARC at Enforcement",desc:"SPF hard fail (-all). DKIM signing for all sending domains. DMARC: p=none → p=quarantine → p=reject over 60 days. DMARC reporting (rua). Block outbound mail failing DMARC.",priority:"Critical",nist_csf:["PR.DS-02"],nist_800_53:["SC-8","SI-4"],iso:["A.8.20","A.8.21","A.8.23"],cis_ctrl:["9.1"],cis_m365:["2.2.1","2.2.2","2.2.3"],gdpr:["Art.32"],eu_ai:["Art.15"],evidence:"DNS records, DMARC aggregate reports, SMTP connector config"},
+{id:"EML-04",domain:"Email & Collaboration",zt:"Applications",tool:"Exchange Online",name:"Forwarding & Exfiltration Controls",desc:"Disable auto-forwarding to external domains via remote domain and outbound spam policy. Alert on new inbox rules that redirect/delete mail. Block transport rules that forward externally without approval.",priority:"High",nist_csf:["PR.DS-02","DE.CM"],nist_800_53:["AC-4","SC-7","SI-4"],iso:["A.8.12","A.8.15","A.8.16"],cis_ctrl:["9","13"],cis_m365:["2.3","2.3.1"],gdpr:["Art.32","Art.33"],eu_ai:["Art.15"],evidence:"Remote domain settings, outbound spam policy, alert policy, transport rule audit"},
+{id:"EML-05",domain:"Email & Collaboration",zt:"Applications",tool:"Teams / SharePoint / OneDrive",name:"Collaboration Least Exposure — External Sharing Controls",desc:"Restrict anonymous/anyone links. Default sharing to 'Specific people'. Expire external links (30 days max). Block unmanaged device downloads for sensitive sites. Restrict Teams anonymous meeting join.",priority:"High",nist_csf:["PR.AA-05","PR.DS-01"],nist_800_53:["AC-3","AC-4","SC-7"],iso:["A.5.10","A.5.15","A.8.12"],cis_ctrl:["3","6","15"],cis_m365:["3.3","3.4","3.5","3.6","4.2","4.3"],gdpr:["Art.5","Art.25","Art.32"],eu_ai:["Art.17"],evidence:"SharePoint sharing settings, anonymous link report, site sensitivity labels"},
+{id:"EML-06",domain:"Email & Collaboration",zt:"Applications",tool:"MDO Attack Simulation Training",name:"Attack Simulation Training — Quarterly Phishing Exercises",desc:"Quarterly phishing simulations for all users. Track click rates, credential submission, report-to-phish rates. Assign mandatory training to clickers. Target high-risk groups with spear-phishing.",priority:"Medium",nist_csf:["PR.AT"],nist_800_53:["AT-2","AT-3"],iso:["A.6.3","A.5.7"],cis_ctrl:["14"],cis_m365:["2.4"],gdpr:["Art.39","Art.32"],eu_ai:["Art.4"],evidence:"Simulation reports, training completion rates, click rate trend"},
+{id:"EML-07",domain:"Email & Collaboration",zt:"Applications",tool:"Teams / Purview",name:"Information Barriers — Segregated Collaboration",desc:"Sensitivity labels and Purview Information Barriers for regulated departments (legal, finance, M&A, board, AI-sensitive). Prevent cross-department information leakage in Teams, SharePoint, Exchange.",priority:"Medium",nist_csf:["PR.DS-01"],nist_800_53:["AC-4","AC-6"],iso:["A.5.10","A.8.3","A.8.12"],cis_ctrl:["3","6"],cis_m365:["3.1","3.7"],gdpr:["Art.5","Art.25","Art.32"],eu_ai:["Art.10","Art.17"],evidence:"IB policy export, Teams label policies, Teams settings export"},
+{id:"CASB-01",domain:"Cloud Apps & CASB",zt:"Applications",tool:"Defender for Cloud Apps",name:"Cloud Discovery — Shadow IT Visibility",desc:"Connect MDE as data source for Cloud Discovery. Review Cloud App Catalog risk scores. Sanction approved apps, unsanction/block high-risk apps. Set automated alerts for new high-risk cloud app usage.",priority:"High",nist_csf:["ID.AM"],nist_800_53:["CM-8","RA-5","CA-7"],iso:["A.5.23","A.8.9","A.8.16"],cis_ctrl:["1","2","4","15"],cis_m365:["5.3"],gdpr:["Art.28","Art.32"],eu_ai:["Art.9","Art.17"],evidence:"Cloud discovery dashboard, sanctioned/unsanctioned app list"},
+{id:"CASB-02",domain:"Cloud Apps & CASB",zt:"Applications",tool:"Defender for Cloud Apps / Entra CA",name:"Conditional Access App Control — Session Policies",desc:"Deploy CAAC via Entra CA. Session policies: block download on unmanaged devices, block upload of sensitive files, monitor all activities in sensitive apps. Integrate with Purview sensitivity labels.",priority:"High",nist_csf:["PR.AA-05"],nist_800_53:["AC-3","AC-17","SC-7"],iso:["A.8.16","A.8.20","A.8.23"],cis_ctrl:["3.7","6","12","15"],cis_m365:["3.3","5.3"],gdpr:["Art.25","Art.32"],eu_ai:["Art.15","Art.17"],evidence:"Session policy export, activity log matches, policy violation trends"},
+{id:"CASB-03",domain:"Cloud Apps & CASB",zt:"Applications",tool:"App Governance",name:"OAuth App Governance — Supply Chain Security",desc:"Enable App Governance. Alert and remediate OAuth apps with unused permissions, high-privilege scopes, unverified publishers, or anomalous data access. Review OAuth apps quarterly.",priority:"High",nist_csf:["ID.AM","PR.AA-05"],nist_800_53:["SA-9","AC-3","SI-4"],iso:["A.5.19","A.5.23","A.8.16"],cis_ctrl:["4.8","6","15"],cis_m365:["1.5","1.5.1"],gdpr:["Art.28","Art.32"],eu_ai:["Art.17"],evidence:"App governance dashboard, remediation actions, OAuth app inventory"},
+{id:"CASB-04",domain:"Cloud Apps & CASB",zt:"Applications",tool:"Defender XDR / Cloud Apps",name:"SSPM & Advanced Hunting — Behavioural Detection",desc:"Enable SSPM for M365, Salesforce, GitHub, Zoom. Review posture recommendations weekly. Create advanced hunting detections for: impossible travel, mass downloads, unusual OAuth grants, mailbox exfiltration.",priority:"Medium",nist_csf:["ID.RA","DE.CM"],nist_800_53:["RA-5","CA-7","SI-4"],iso:["A.5.23","A.8.9","A.8.16"],cis_ctrl:["4","8","13","15","16"],cis_m365:["5.3"],gdpr:["Art.32","Art.33"],eu_ai:["Art.12","Art.15"],evidence:"SSPM score, posture recommendations, custom detection rules, incidents"},
+{id:"DLP-01",domain:"Data Protection & Privacy",zt:"Data",tool:"Purview Information Protection",name:"Sensitivity Label Taxonomy — Classify & Protect",desc:"Define 5-tier label taxonomy: Public / Internal / Confidential / Highly Confidential / Regulated (Personal Data / AI Restricted). Apply encryption and visual markings. Enable mandatory labeling and auto-labeling.",priority:"Critical",nist_csf:["PR.DS-01"],nist_800_53:["AC-4","SC-28","RA-2"],iso:["A.5.10","A.5.12","A.5.13","A.8.12","A.8.24"],cis_ctrl:["3","3.2"],cis_m365:["3.1","3.2"],gdpr:["Art.5","Art.25","Art.32"],eu_ai:["Art.10","Art.17"],evidence:"Label policy export, label analytics, auto-labeling policy"},
+{id:"DLP-02",domain:"Data Protection & Privacy",zt:"Data",tool:"Purview DLP",name:"DLP — GDPR & Sensitive Data Egress Prevention",desc:"Deploy DLP for Exchange, SharePoint, OneDrive, Teams, Endpoint, browsers. Start audit-only, review false positives for 2 weeks, then enforce high-risk scenarios. Include GDPR personal data and Highly Confidential label blocking.",priority:"Critical",nist_csf:["PR.DS-01","PR.DS-05"],nist_800_53:["AC-4","SC-7","SC-28"],iso:["A.8.12","A.8.16","A.8.23"],cis_ctrl:["3","3.6","13"],cis_m365:["5.2","5.2.1"],gdpr:["Art.5","Art.25","Art.32","Art.33"],eu_ai:["Art.10","Art.15","Art.17"],evidence:"DLP policy export, incidents, false-positive review, enforcement mode status"},
+{id:"DLP-03",domain:"Data Protection & Privacy",zt:"Data",tool:"Purview Data Lifecycle",name:"Data Lifecycle — Retention, Minimisation & Legal Hold",desc:"Implement retention policies by data class, jurisdiction, and legal hold requirements. Align with GDPR storage limitation (Art.5(1)(e)). Configure litigation hold for regulated users. Disposition review for records.",priority:"High",nist_csf:["PR.DS-11"],nist_800_53:["MP-6","SI-12","AU-11"],iso:["A.5.33","A.5.34","A.8.10"],cis_ctrl:["3","3.5"],cis_m365:["3.2","4.1"],gdpr:["Art.5","Art.17","Art.30"],eu_ai:["Art.18","Art.19"],evidence:"Retention schedule mapping, policy export, disposition review, legal hold status"},
+{id:"DLP-04",domain:"Data Protection & Privacy",zt:"Data",tool:"Purview eDiscovery / Audit Premium",name:"eDiscovery & Advanced Audit — Investigation Readiness",desc:"Enable Purview Audit Premium. Enable MailItemsAccessed, Send, SearchQueryInitiatedExchange. Configure eDiscovery roles and legal hold. Retain audit logs ≥1 year. Export to Sentinel.",priority:"High",nist_csf:["DE.AE-02"],nist_800_53:["AU-2","AU-3","IR-5","MP-3"],iso:["A.5.28","A.5.33","A.8.15"],cis_ctrl:["8","17"],cis_m365:["5.1","5.1.1","5.1.2"],gdpr:["Art.30","Art.33","Art.34"],eu_ai:["Art.12","Art.19"],evidence:"Audit Premium status, advanced audit events, eDiscovery case logs"},
+{id:"DLP-05",domain:"Data Protection & Privacy",zt:"Data",tool:"Purview Insider Risk Management",name:"Insider Risk Management — Privacy-Preserving Policies",desc:"Define privacy-reviewed insider risk policies for data theft, departing users, security violations, and AI data movement. Integrate with HR system for departure signals. Configure escalation to eDiscovery.",priority:"Medium",nist_csf:["DE.CM-03"],nist_800_53:["AU-6","SI-4","PM-12"],iso:["A.5.7","A.6.4","A.8.16"],cis_ctrl:["3","8","13"],cis_m365:["5.1","5.2"],gdpr:["Art.5","Art.24","Art.25","Art.32"],eu_ai:["Art.9","Art.10"],evidence:"Insider risk policy approvals, alert workflow, privacy review documentation"},
+{id:"DLP-06",domain:"Data Protection & Privacy",zt:"Data",tool:"Purview DSPM for AI",name:"DSPM for AI — AI-Ready Data Governance",desc:"Discover sensitive data accessible via Copilot and AI apps. Restrict overshared sites before Copilot rollout. Label AI-ready repositories. Audit AI prompts/responses where licensed. Address 'Anyone' sharing links.",priority:"High",nist_csf:["GV.RM","PR.DS","ID.AM"],nist_800_53:["AC-4","SC-28","PM-5"],iso:["A.5.12","A.5.23","A.8.12","A.8.28"],cis_ctrl:["3","15"],cis_m365:["3.1","3.2","5.2"],gdpr:["Art.5","Art.25","Art.32"],eu_ai:["Art.9","Art.10","Art.13","Art.15","Art.17"],evidence:"DSPM for AI reports, oversharing remediation log, label coverage metrics"},
+{id:"TDR-01",domain:"Threat Detection & Response",zt:"Network",tool:"Microsoft Defender XDR",name:"Defender XDR — Unified Incident Management",desc:"Unify incidents across Endpoint, Office, Identity, and Cloud Apps. Configure automatic attack disruption for ransomware and BEC. Enable AIR for Medium+ alerts. SLAs: Critical ≤1h triage, ≤4h containment.",priority:"Critical",nist_csf:["DE.CM","RS.MA"],nist_800_53:["IR-4","IR-5","IR-6"],iso:["A.5.24","A.5.25","A.5.26","A.8.16"],cis_ctrl:["13","17"],cis_m365:["5.3","5.3.2"],gdpr:["Art.32","Art.33","Art.34"],eu_ai:["Art.15","Art.72"],evidence:"Incident queue, AIR actions, response SLA metrics, disruption events"},
+{id:"TDR-02",domain:"Threat Detection & Response",zt:"Network",tool:"Microsoft Sentinel",name:"Sentinel — SIEM/SOAR & Long-Term Retention",desc:"Deploy Sentinel workspace. Connect: M365 Defender XDR, Entra ID, Purview, Defender for Cloud Apps, Defender for Identity. Configure MITRE ATT&CK-aligned analytics rules. Define SOC playbooks. Retain logs ≥90 days hot, ≥1 year cold.",priority:"High",nist_csf:["DE.AE","RS.MA"],nist_800_53:["AU-6","SI-4","IR-4"],iso:["A.8.15","A.8.16","A.5.26"],cis_ctrl:["8","13","17"],cis_m365:["5.1","5.1.1"],gdpr:["Art.32","Art.33"],eu_ai:["Art.12","Art.15"],evidence:"Connector status, analytic rules, playbook run history, log retention proof"},
+{id:"TDR-03",domain:"Threat Detection & Response",zt:"Identity",tool:"Defender for Identity",name:"Defender for Identity — Hybrid Identity Protection",desc:"Deploy DFI sensors on all domain controllers. Configure honeytokens. Monitor lateral movement, DCsync, Kerberoasting, suspicious LDAP queries, and Golden/Silver Ticket attacks.",priority:"High",nist_csf:["DE.CM","ID.AM"],nist_800_53:["AC-2","IA-2","SI-4"],iso:["A.8.5","A.8.16","A.8.20"],cis_ctrl:["5","6","13"],cis_m365:["1.1","5.3"],gdpr:["Art.32","Art.33"],eu_ai:["Art.15"],evidence:"Sensor health, DFI alert history, identity posture report"},
+{id:"TDR-04",domain:"Threat Detection & Response",zt:"Govern",tool:"Exposure Management / Threat Analytics",name:"Exposure Management — Threat-Informed Defence",desc:"Review Threat Analytics for active campaigns weekly. Use Exposure Management to review critical assets, attack paths, and prioritised recommendations. Track exposure score as board-level KPI.",priority:"Medium",nist_csf:["ID.RA","DE.CM"],nist_800_53:["RA-5","SI-5"],iso:["A.5.7","A.8.8","A.8.16"],cis_ctrl:["7","13"],cis_m365:["5.3"],gdpr:["Art.32"],eu_ai:["Art.9","Art.15"],evidence:"Weekly threat review, exposure score trend, attack path remediation backlog"},
+{id:"TDR-05",domain:"Threat Detection & Response",zt:"Govern",tool:"Purview / Defender / Legal",name:"Incident Response Governance — GDPR 72-Hour Breach Workflow",desc:"Define and test GDPR 72-hour breach assessment workflow. Map Defender incident severity to legal/privacy assessment triggers. Define EU AI Act serious incident escalation. Run tabletop exercises bi-annually.",priority:"Critical",nist_csf:["RS.MA"],nist_800_53:["IR-4","IR-6","IR-8"],iso:["A.5.24","A.5.25","A.5.26","A.5.28"],cis_ctrl:["17"],cis_m365:["5.1"],gdpr:["Art.33","Art.34"],eu_ai:["Art.73","Art.72"],evidence:"IR plan, breach decision log, tabletop results, notification timeline"},
+{id:"AI-01",domain:"AI & Copilot Governance",zt:"Govern",tool:"M365 Copilot / Purview / Entra",name:"Copilot Controlled Rollout — Gated AI Deployment",desc:"Gate Copilot rollout by Entra group. Before expansion: validate data readiness, DLP policies, oversharing remediation (DSPM for AI), and user training. Document rollout decisions.",priority:"High",nist_csf:["GV.RM","PR.DS"],nist_800_53:["PM-9","AC-4","CM-7"],iso:["A.5.23","A.8.12","A.8.28"],cis_ctrl:["3","6","15"],cis_m365:["3.1","3.2","5.2"],gdpr:["Art.5","Art.25","Art.32"],eu_ai:["Art.4","Art.9","Art.10","Art.13","Art.17"],evidence:"Copilot readiness report, rollout approvals, site permission cleanup log"},
+{id:"AI-02",domain:"AI & Copilot Governance",zt:"Data",tool:"Purview Communication Compliance / DLP",name:"AI Data Leakage Control — Unsanctioned AI Prevention",desc:"Create DLP and Comm Compliance policies for prohibited data disclosure to AI tools. Monitor sanctioned and unsanctioned AI apps via Defender for Cloud Apps. Block access to unsanctioned AI services.",priority:"High",nist_csf:["PR.DS-01","DE.CM"],nist_800_53:["AC-4","SC-7","SI-4"],iso:["A.5.10","A.8.12","A.8.16"],cis_ctrl:["3","13","15"],cis_m365:["5.2","5.2.1"],gdpr:["Art.5","Art.25","Art.32"],eu_ai:["Art.10","Art.15","Art.17"],evidence:"AI DLP incidents, MCAS AI app discovery, policy tuning log"},
+{id:"AI-03",domain:"AI & Copilot Governance",zt:"Govern",tool:"App Governance / Purview",name:"AI Inventory — Register All AI Systems & DPIA",desc:"Maintain register of all AI systems: M365 Copilot, Azure OpenAI, third-party AI tools, Copilot agents, data sources, owners, risk classification, and DPIA/AIA status. Review quarterly.",priority:"High",nist_csf:["ID.AM","GV.RM"],nist_800_53:["PM-5","PM-9","AC-4"],iso:["A.5.9","A.5.23","A.8.28"],cis_ctrl:["1","2","15"],cis_m365:["1.5","5.1"],gdpr:["Art.30","Art.35"],eu_ai:["Art.6","Art.9","Art.11","Art.49"],evidence:"AI inventory register, risk classification records, DPIA/AIA documentation"},
+{id:"AI-04",domain:"AI & Copilot Governance",zt:"Govern",tool:"Purview / Policy",name:"AI Transparency & Human Oversight",desc:"Require disclosure when AI-generated content is used externally. Configure Purview Comm Compliance. For material AI-assisted decisions (HR, access, financial), implement mandatory human review checkpoints. Map to GDPR Art.22.",priority:"High",nist_csf:["GV.PO","GV.RM"],nist_800_53:["AT-2","PM-9"],iso:["A.6.3","A.5.1","A.8.15"],cis_ctrl:["14"],cis_m365:["5.1"],gdpr:["Art.5","Art.12","Art.22"],eu_ai:["Art.13","Art.14","Art.50"],evidence:"AI transparency policy, human review checkpoints, Comm Compliance policy"},
+{id:"AI-05",domain:"AI & Copilot Governance",zt:"Govern",tool:"Training / Policy",name:"AI Literacy & Acceptable Use Training",desc:"Train all users on AI acceptable use, prompt hygiene, sensitive data handling, output validation, and human oversight responsibilities. Require annual attestation.",priority:"Medium",nist_csf:["PR.AT"],nist_800_53:["AT-2","AT-3"],iso:["A.6.3","A.5.1","A.5.34"],cis_ctrl:["14"],cis_m365:["5.1"],gdpr:["Art.5","Art.12","Art.24"],eu_ai:["Art.4","Art.13","Art.14"],evidence:"Training completion records, AI use policy, attestation log"},
+{id:"RES-01",domain:"Resilience & Recovery",zt:"Govern",tool:"Exchange / SharePoint / Purview",name:"Data Backup & Recovery — Collaboration Data Protection",desc:"Define backup/recovery requirements for Exchange, SharePoint, OneDrive. Configure litigation hold and retention. Test restore procedures quarterly. Maintain immutable audit logs.",priority:"High",nist_csf:["RC.RP"],nist_800_53:["CP-2","CP-9","CP-10"],iso:["A.5.29","A.5.30","A.8.13","A.8.14"],cis_ctrl:["11"],cis_m365:["5.1"],gdpr:["Art.32"],eu_ai:["Art.15"],evidence:"Recovery test record, retention policy export, backup coverage report"},
+{id:"RES-02",domain:"Resilience & Recovery",zt:"Govern",tool:"Tabletop / IR Plan",name:"Business Continuity — Tabletop Exercises",desc:"Bi-annual ransomware and BEC tabletop exercises. Validate isolation, account disablement, mail purge, legal notification, and restore procedures. Document lessons learned.",priority:"High",nist_csf:["RC.RP","RS.MA"],nist_800_53:["IR-3","CP-4","RA-3"],iso:["A.5.24","A.5.29","A.5.30"],cis_ctrl:["11","17"],cis_m365:["5.1"],gdpr:["Art.33","Art.34"],eu_ai:["Art.73"],evidence:"Tabletop exercise report, lessons learned, corrective action plan"},
+{id:"RES-03",domain:"Resilience & Recovery",zt:"Govern",tool:"Git / PowerShell / Graph API",name:"Configuration Drift Management — Automated Baseline Comparison",desc:"Automate periodic export of CA, Intune, Defender, Purview, Exchange, SharePoint, Teams, Power Platform settings. Diff against approved baseline. Alert on unexpected changes.",priority:"Medium",nist_csf:["PR.PS","ID.AM"],nist_800_53:["CM-3","CM-6","CA-7"],iso:["A.8.9","A.8.32","A.5.37"],cis_ctrl:["4","8"],cis_m365:["5.3"],gdpr:["Art.24","Art.32"],eu_ai:["Art.17"],evidence:"Git baseline repo, monthly diff report, change approval records"},
+{id:"PPL-01",domain:"Power Platform & Low Code",zt:"Applications",tool:"Power Platform Admin Center",name:"Power Platform DLP — Connector Governance",desc:"Segment environments by purpose. Set DLP policies blocking risky connectors in default environment. Block high-risk connectors (personal email, social media, unapproved storage). Require maker governance.",priority:"High",nist_csf:["PR.DS-01","ID.AM"],nist_800_53:["SA-8","AC-4","CM-7"],iso:["A.5.8","A.5.23","A.8.28"],cis_ctrl:["2","3","15","16"],cis_m365:["5.2"],gdpr:["Art.25","Art.28","Art.32"],eu_ai:["Art.17"],evidence:"Environment inventory, connector DLP policy, app owner registry"},
+{id:"PPL-02",domain:"Power Platform & Low Code",zt:"Applications",tool:"Power Platform Managed Environments",name:"Managed Environments — Lifecycle Control for Business Apps",desc:"Enable managed environments for all non-default environments. Require solution checker for production deployments. Implement pipeline governance. Enable activity logging. Conduct quarterly app ownership recertification.",priority:"Medium",nist_csf:["PR.PS","GV.RM"],nist_800_53:["CM-7","SA-10","AU-2"],iso:["A.8.25","A.8.27","A.8.32"],cis_ctrl:["16"],cis_m365:["5.1"],gdpr:["Art.25","Art.32"],eu_ai:["Art.17"],evidence:"Managed environment report, solution checker results, app review logs"}
+];
+
+// ── STATE ─────────────────────────────────────────────────────────────────
+let activeFramework = 'all';
+
+// ── FRAMEWORK FILTER ──────────────────────────────────────────────────────
+function setFramework(fw) {
+  activeFramework = fw;
+  // Update button states
+  document.querySelectorAll('.fw-btn').forEach(b => {
+    b.className = 'fw-btn';
+    if (b.id === 'fw-' + fw) b.classList.add('active-' + fw);
+  });
+  if (fw === 'all') document.getElementById('fw-all').className = 'fw-btn active-all';
+  // Re-render control library
+  renderControls();
+  // Re-render domain tabs
+  renderDomainTabs();
+}
+
+function getFwLabel(ctrl) {
+  const fw = activeFramework;
+  if (fw === 'all') return '';
+  if (fw === 'nist' && ctrl.nist_csf?.length) return ctrl.nist_csf.join(', ');
+  if (fw === 'nist800' && ctrl.nist_800_53?.length) return ctrl.nist_800_53.join(', ');
+  if (fw === 'iso' && ctrl.iso?.length) return ctrl.iso.join(', ');
+  if (fw === 'cis' && ctrl.cis_ctrl?.length) return ctrl.cis_ctrl.join(', ');
+  if (fw === 'cis365' && ctrl.cis_m365?.length) return ctrl.cis_m365.join(', ');
+  if (fw === 'gdpr' && ctrl.gdpr?.length) return ctrl.gdpr.join(', ');
+  return null;
+}
+
+function hasFramework(ctrl) {
+  const fw = activeFramework;
+  if (fw === 'all') return true;
+  if (fw === 'nist') return ctrl.nist_csf?.length > 0;
+  if (fw === 'nist800') return ctrl.nist_800_53?.length > 0;
+  if (fw === 'iso') return ctrl.iso?.length > 0;
+  if (fw === 'cis') return ctrl.cis_ctrl?.length > 0;
+  if (fw === 'cis365') return ctrl.cis_m365?.length > 0;
+  if (fw === 'gdpr') return ctrl.gdpr?.length > 0;
+  return true;
+}
+
+function fwBadgeClass(fw) {
+  const map = {nist:'bb',nist800:'bb',iso:'bv',cis:'bg',cis365:'bc',gdpr:'ba',all:''};
+  return map[fw] || 'bb';
+}
+
+function buildCtrlCard(ctrl) {
+  const fwLabel = getFwLabel(ctrl);
+  const hlClass = activeFramework !== 'all' ? 'hl-' + (activeFramework === 'nist800' ? 'nist' : activeFramework) : '';
+  const dimClass = !hasFramework(ctrl) ? 'dim' : '';
+  const prioClass = 'p-' + ctrl.priority.toLowerCase();
+  
+  let fwTagHtml = '';
+  if (fwLabel) {
+    fwTagHtml = `<span class="badge ${fwBadgeClass(activeFramework)}" style="font-size:10px">${fwLabel}</span>`;
+  } else {
+    // Show all framework tags
+    let tags = [];
+    if (ctrl.nist_csf?.length) tags.push(`<span class="badge bb">${ctrl.nist_csf.slice(0,2).join(', ')}${ctrl.nist_csf.length>2?'…':''}</span>`);
+    if (ctrl.iso?.length) tags.push(`<span class="badge bv">${ctrl.iso.slice(0,2).join(', ')}${ctrl.iso.length>2?'…':''}</span>`);
+    if (ctrl.cis_ctrl?.length) tags.push(`<span class="badge bg">CIS ${ctrl.cis_ctrl.slice(0,2).join(', ')}</span>`);
+    if (ctrl.cis_m365?.length) tags.push(`<span class="badge bc">M365 ${ctrl.cis_m365.slice(0,2).join(', ')}</span>`);
+    if (ctrl.gdpr?.length) tags.push(`<span class="badge ba">${ctrl.gdpr.slice(0,2).join(', ')}</span>`);
+    if (ctrl.eu_ai?.length) tags.push(`<span class="badge br">${ctrl.eu_ai.slice(0,1).join(', ')}</span>`);
+    fwTagHtml = tags.join('');
+  }
+  
+  return `<div class="ctrl-card ${hlClass} ${dimClass}" id="card-${ctrl.id}">
+    <div class="ctrl-id">${ctrl.id}<br/><span style="font-size:9px;color:var(--text-muted);font-weight:400">${ctrl.zt}</span></div>
+    <div>
+      <div class="ctrl-name">${ctrl.name}</div>
+      <div class="ctrl-desc">${ctrl.desc}</div>
+      <div class="ctrl-tags">${fwTagHtml}</div>
+      <div class="ctrl-evidence">📋 Evidence: ${ctrl.evidence}</div>
+    </div>
+    <div class="ctrl-meta">
+      <span class="prio ${prioClass}">${ctrl.priority}</span>
+      <span style="font-size:10px;color:var(--text-muted)">${ctrl.tool}</span>
+    </div>
+  </div>`;
+}
+
+// ── RENDER CONTROL LIBRARY ────────────────────────────────────────────────
+function renderControls() {
+  const q = (document.getElementById('libSearch')?.value || '').toLowerCase();
+  const domain = document.getElementById('libDomain')?.value || '';
+  const priority = document.getElementById('libPriority')?.value || '';
+  const zt = document.getElementById('libZT')?.value || '';
+  
+  let filtered = CONTROLS.filter(c => {
+    const text = (c.name + c.desc + c.tool + c.id + c.domain).toLowerCase();
+    const matchQ = !q || text.includes(q);
+    const matchDomain = !domain || c.domain === domain;
+    const matchPriority = !priority || c.priority === priority;
+    const matchZT = !zt || c.zt === zt;
+    return matchQ && matchDomain && matchPriority && matchZT;
+  });
+  
+  const container = document.getElementById('ctrlCards');
+  if (!container) return;
+  container.innerHTML = filtered.map(buildCtrlCard).join('');
+  const countEl = document.getElementById('libCount');
+  if (countEl) countEl.textContent = `Showing ${filtered.length} of ${CONTROLS.length} controls`;
+}
+
+// ── RENDER DOMAIN TABS ────────────────────────────────────────────────────
+const DOMAIN_MAP = {
+  'identity': 'Identity & Access',
+  'endpoint': 'Endpoint & Device',
+  'email': 'Email & Collaboration',
+  'casb': 'Cloud Apps & CASB',
+  'data': 'Data Protection & Privacy',
+  'tdr': 'Threat Detection & Response',
+  'ai': 'AI & Copilot Governance'
+};
+
+function renderDomainTabs() {
+  Object.entries(DOMAIN_MAP).forEach(([tabId, domainName]) => {
+    const container = document.getElementById('domCtrl-' + tabId);
+    if (!container) return;
+    const domControls = CONTROLS.filter(c => c.domain === domainName);
+    container.innerHTML = domControls.map(buildCtrlCard).join('');
+  });
+}
+
+// ── TAB SWITCHING ─────────────────────────────────────────────────────────
+function switchTab(tabId) {
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelector(`[data-tab="${tabId}"]`).classList.add('active');
+  document.getElementById(`tab-${tabId}`).classList.add('active');
+  if (tabId === 'library') renderControls();
+}
+
+// ── LIBRARY FILTERS ───────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  ['libSearch','libDomain','libPriority','libZT'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.addEventListener('input', renderControls);
+  });
+  document.getElementById('libReset')?.addEventListener('click', () => {
+    ['libSearch','libDomain','libPriority','libZT'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.value = '';
+    });
+    renderControls();
+  });
+  // Initial render
+  renderDomainTabs();
+  renderControls();
+});
+</script>
+</body>
+</html>
